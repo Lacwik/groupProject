@@ -5,6 +5,7 @@ create table user(
 	company text
 );
 
+
 create table vegetable(
     id integer primary key auto_increment,
 	name text,
@@ -12,12 +13,14 @@ create table vegetable(
 	foreign key (user_id) references user(id),
 );
 
+
 create table resource(
     id integer primary key auto_increment,
 	water float,
 	diesel float,
 	lpg float
 );
+
 
 create table module(
     id integer primary key auto_increment,
