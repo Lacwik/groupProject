@@ -1,0 +1,3 @@
+Projekt bazy danych
+create'y tabel w bazie
+Fajnie by by³o, gdyby by³a te¿ wyeksportowana do pliku baza (wygodniej dla zespo³u j¹ postawiæ)
