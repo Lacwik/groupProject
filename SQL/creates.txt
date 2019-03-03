@@ -1,0 +1,78 @@
+create table user(
+    id integer primary key auto_increment,
+	username text,
+	password text,
+	company text
+);
+
+create table vegetable(
+    id integer primary key auto_increment,
+	name text,
+	user_id integer,
+	foreign key (user_id) references user(id),
+);
+
+create table resource(
+    id integer primary key auto_increment,
+	water float,
+	diesel float,
+	lpg float
+);
+
+create table module(
+    id integer primary key auto_increment,
+	name text,
+	loss float,
+	power float,
+	time integer,
+	outsourced integer,
+	resource_id integer,
+	user_id integer,
+	foreign key (resource_id) references resource(id),
+	foreign key (user_id) references user(id)
+);
+
+
+create table module_vegetable(
+    id integer primary key auto_increment,
+	module_id integer,
+	vegetable_id integer,
+	foreign key (module_id) references module(id),
+	foreign key (vegetable_id) references vegetable(id)
+);
+
+
+create table stage(
+    id integer primary key auto_increment,
+	name text,
+	outsourced integer,
+	user_id integer,
+	foreign key (user_id) references user(id)
+);
+
+
+create table stage_module(
+    id integer primary key auto_increment,
+	stage_id integer,
+	module_id integer,
+	foreign key (stage_id) references stage(id),
+	foreign key (module_id) references module(id)
+);
+
+
+create table line(
+    id integer primary key auto_increment,
+	name text,
+	outsourced integer,
+	user_id integer,
+	foreign key (user_id) references user(id)
+);
+
+
+create table line_stage(
+    id integer primary key auto_increment,
+	line_id integer,
+	stage_id integer,
+	foreign key (line_id) references line(id),
+	foreign key (stage_id) references stage(id)
+);
