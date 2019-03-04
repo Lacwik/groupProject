@@ -1,5 +1,5 @@
 Gant
 Wymagania funkcjonalne i niefunkcjonalne
 User Story
-Analiza SWAT
-wizualizacja+funkcjonalnoœæ_kalkulatora.pdf (czyli CHYBA po prostu instrukcja korzystania z kalkulatora)
+Analiza SWOT
+wizualizacja+funkcjonalnoÅ›Ä‡_kalkulatora.pdf (czyli CHYBA po prostu instrukcja korzystania z kalkulatora)
