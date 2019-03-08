@@ -7,13 +7,12 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.List;
 
-
 @Entity
-@Table(name = "USER")
+@Table(name = "COMPANY")
 @Getter
 @Setter
 @NoArgsConstructor
-public class User {
+public class Company {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,5 +23,6 @@ public class User {
     private String password;
 
     @OneToMany(mappedBy = "company",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<UserCompany> userCompanies;
+    private List<UserCompany> workers;
+
 }

@@ -1,10 +1,39 @@
 create table user(
     id integer primary key auto_increment,
 	username text,
-	password text,
-	company text
+    email text,
+	password text
 );
 
+create table expert(
+    id integer primary key auto_increment,
+	username text,
+    email text,
+	password text
+);
+
+create table company(
+    id integer primary key auto_increment,
+	username text,
+    email text,
+	password text
+);
+
+create table user_company(
+    id integer primary key auto_increment,
+	user_id integer,
+	company_id integer,
+	foreign key (user_id) references user(id),
+	foreign key (company_id) references company(id)
+);
+
+create table company_expert(
+    id integer primary key auto_increment,
+	company_id integer,
+    expert_id integer,
+	foreign key (company_id) references company(id),
+	foreign key (expert_id) references expert(id)
+);
 
 create table vegetable(
     id integer primary key auto_increment,

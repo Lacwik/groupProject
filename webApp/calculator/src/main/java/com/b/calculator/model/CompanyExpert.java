@@ -5,24 +5,23 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
-
 
 @Entity
-@Table(name = "USER")
+@Table(name = "COMPANY_EXPERT")
 @Getter
 @Setter
 @NoArgsConstructor
-public class User {
-
+public class CompanyExpert {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
 
-    private String password;
+    @OneToOne
+    @JoinColumn(name = "expert_id")
+    private Expert expert;
 
-    @OneToMany(mappedBy = "company",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<UserCompany> userCompanies;
+    @OneToOne
+    @JoinColumn(name = "company_id")
+    private Company company;
 }
