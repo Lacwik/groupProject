@@ -24,10 +24,6 @@ public class MvcConfig implements WebMvcConfigurer {
         return bean;
     }
 
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/index");
-    }
 
 }
 
