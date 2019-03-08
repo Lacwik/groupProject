@@ -28,9 +28,9 @@ public class Stage {
     @OneToMany(mappedBy = "stage",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<StageModule> stageModules;
 
-    @JoinColumn(name = "outsourced_company")
+    @Column(name = "outsourced_company")
     private long outsourcedCompany;
 
-    @JoinColumn(name = "outsourced_company")
+    @Column(name = "outsourced_all")
     private long outsourcedAll;
 }

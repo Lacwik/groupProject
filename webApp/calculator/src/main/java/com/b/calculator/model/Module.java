@@ -24,18 +24,21 @@ public class Module {
     private BigDecimal power;
     private long time;
 
+    @OneToOne
     @JoinColumn(name = "resource_id")
     private Resource resource;
 
+    @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
 
     @OneToMany(mappedBy = "module",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<ModuleVegetable> moduleVegetables;
 
-    @JoinColumn(name = "outsourced_company")
+
+    @Column(name = "outsourced_company")
     private long outsourcedCompany;
 
-    @JoinColumn(name = "outsourced_company")
+    @Column(name = "outsourced_all")
     private long outsourcedAll;
 }
