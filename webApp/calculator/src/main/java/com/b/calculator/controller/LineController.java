@@ -44,7 +44,7 @@ public class LineController {
         Line line = lineRepository.findById(id).get();
         model.addAttribute("line", line);
         model.addAttribute("availableStages", stageRepository.findStagesByCompany(line.getCompany()));
-        model.addAttribute("outsourcedStages", stageRepository.findStagesByOutsourced(1));
+        model.addAttribute("outsourcedStages", stageRepository.findStagesByOutsourced(1l));
         return "/Line/editLine";
     }
 
