@@ -1,6 +1,7 @@
 package com.b.calculator.controller;
 
 import com.b.calculator.model.Line;
+import com.b.calculator.repository.CompanyRepository;
 import com.b.calculator.repository.LineRepository;
 import com.b.calculator.repository.StageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,21 @@ public class LineController {
     @Autowired
     StageRepository stageRepository;
 
-    @GetMapping("/lines")
-    public String lines(Model model, @PathVariable Long id)
-    {
-        model.addAttribute("line", lineRepository.findById(id).get());
+    @Autowired
+    CompanyRepository companyRepository;
+
+    @GetMapping("/selectCompany")
+    public String selectCompany(Model model) {
+        //if (Rozpoznanie typu konta == (User || Expert)){
+        //  return "/Line/selectCompany"
+        //}
+        //long id = Company Id
+        //return "redirect:/Line/companyLines/"+id;
+    }
+
+    @GetMapping("/companyLines/{id}")
+    public String companyLines(Model model, @PathVariable Long id) {
+        model.addAttribute("lines", lineRepository.findLinesByCompany(companyRepository.findById(id).get()));
         return "/Line/lines";
     }
 
