@@ -1,3 +1,16 @@
+drop database calculator;
+
+create database calculator;
+
+use calculator;
+
+create table company(
+    id integer primary key auto_increment,
+	username text,
+    email text,
+	password text
+);
+
 create table user(
     id integer primary key auto_increment,
 	username text,
@@ -6,13 +19,6 @@ create table user(
 );
 
 create table expert(
-    id integer primary key auto_increment,
-	username text,
-    email text,
-	password text
-);
-
-create table company(
     id integer primary key auto_increment,
 	username text,
     email text,
@@ -38,8 +44,8 @@ create table company_expert(
 create table vegetable(
     id integer primary key auto_increment,
 	name text,
-	user_id integer,
-	foreign key (user_id) references user(id)
+	company_id integer,
+	foreign key (company_id) references company(id)
 );
 
 
@@ -57,12 +63,11 @@ create table module(
 	loss float,
 	power float,
 	time integer,
-	outsourced_company integer,
-	outsourced_all integer,
+	outsourced integer,
 	resource_id integer,
-	user_id integer,
+	company_id integer,
 	foreign key (resource_id) references resource(id),
-	foreign key (user_id) references user(id)
+	foreign key (company_id) references company(id)
 );
 
 
@@ -78,10 +83,9 @@ create table module_vegetable(
 create table stage(
     id integer primary key auto_increment,
 	name text,
-	outsourced_company integer,
-	outsourced_all integer,
-	user_id integer,
-	foreign key (user_id) references user(id)
+	outsourced integer,
+	company_id integer,
+	foreign key (company_id) references company(id)
 );
 
 
@@ -97,10 +101,9 @@ create table stage_module(
 create table line(
     id integer primary key auto_increment,
 	name text,
-	outsourced_company integer,
-	outsourced_all integer,
-	user_id integer,
-	foreign key (user_id) references user(id)
+	outsourced integer,
+	company_id integer,
+	foreign key (company_id) references company(id)
 );
 
 
