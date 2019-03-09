@@ -61,6 +61,7 @@ create table module(
     id integer primary key auto_increment,
 	name text,
 	loss float,
+    waste float,
 	power float,
 	time integer,
 	outsourced integer,
