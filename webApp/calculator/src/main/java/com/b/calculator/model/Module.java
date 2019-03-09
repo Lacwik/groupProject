@@ -21,6 +21,7 @@ public class Module {
 
     private String name;
     private BigDecimal loss;
+    private BigDecimal waste;
     private BigDecimal power;
     private long time;
 
