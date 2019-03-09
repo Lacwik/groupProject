@@ -21,8 +21,8 @@ public class Line {
     private String name;
 
     @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "company_id")
+    private Company company;
 
     @OneToMany(mappedBy = "line",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<LineStage> lineStages;

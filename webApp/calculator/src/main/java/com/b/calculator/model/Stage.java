@@ -22,8 +22,8 @@ public class Stage {
     private String name;
 
     @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "company_id")
+    private Company company;
 
     @OneToMany(mappedBy = "stage",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<StageModule> stageModules;

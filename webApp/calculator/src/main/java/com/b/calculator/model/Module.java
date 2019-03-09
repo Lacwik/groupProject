@@ -29,8 +29,8 @@ public class Module {
     private Resource resource;
 
     @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "company_id")
+    private Company company;
 
     @OneToMany(mappedBy = "module",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<ModuleVegetable> moduleVegetables;
