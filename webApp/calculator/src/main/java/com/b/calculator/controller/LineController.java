@@ -62,4 +62,11 @@ public class LineController {
         lineRepository.deleteById(id);
         return "redirect:/lines";
     }
+
+    @GetMapping("/line/create")
+    public String lineCreate(Model model)
+    {
+        model.addAttribute("line", new Line());
+        return "/Line/createLine";
+    }
 }
