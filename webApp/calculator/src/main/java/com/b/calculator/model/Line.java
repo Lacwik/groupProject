@@ -27,9 +27,6 @@ public class Line {
     @OneToMany(mappedBy = "line",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<LineStage> lineStages;
 
-    @Column(name = "outsourced_company")
-    private long outsourcedCompany;
-
-    @Column(name = "outsourced_all")
-    private long outsourcedAll;
+    @Column(name = "outsourced")
+    private long outsourced;
 }

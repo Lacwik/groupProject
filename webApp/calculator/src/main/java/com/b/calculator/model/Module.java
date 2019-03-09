@@ -35,10 +35,6 @@ public class Module {
     @OneToMany(mappedBy = "module",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<ModuleVegetable> moduleVegetables;
 
-
-    @Column(name = "outsourced_company")
-    private long outsourcedCompany;
-
-    @Column(name = "outsourced_all")
-    private long outsourcedAll;
+    @Column(name = "outsourced")
+    private long outsourced;
 }

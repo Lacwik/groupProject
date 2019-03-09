@@ -41,8 +41,10 @@ public class LineController {
     @GetMapping("/line/edit/{id}")
     public String lineEdit(Model model, @PathVariable Long id)
     {
-        model.addAttribute("line", lineRepository.findById(id).get());
-        //model.addAttribute("availableStages", stageRepository.???);
+        Line line = lineRepository.findById(id).get();
+        model.addAttribute("line", line);
+        model.addAttribute("availableStages", stageRepository.findStagesByCompany(line.getCompany()));
+        model.addAttribute("outsourcedStages", stageRepository.findStagesByOutsourced(1));
         return "/Line/editLine";
     }
 
