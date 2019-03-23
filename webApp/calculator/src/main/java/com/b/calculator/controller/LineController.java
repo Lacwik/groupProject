@@ -25,7 +25,7 @@ public class LineController {
     @GetMapping("/selectCompany")
     public String selectCompany(Model model) {
         //if (Rozpoznanie typu konta == (User || Expert)){
-        //  return "/Line/selectCompany"
+          return "/Line/selectCompany";
         //}
         //long id = Company Id
         //return "redirect:/Line/companyLines/"+id;
