@@ -11,11 +11,12 @@ create table company(
 	password text
 );
 
-create table user(
+create table worker(
     id integer primary key auto_increment,
 	username text,
     email text,
-	password text
+	password text,
+    privileges_ text
 );
 
 create table expert(
@@ -25,11 +26,11 @@ create table expert(
 	password text
 );
 
-create table user_company(
+create table company_worker(
     id integer primary key auto_increment,
-	user_id integer,
+	worker_id integer,
 	company_id integer,
-	foreign key (user_id) references user(id),
+	foreign key (worker_id) references worker(id),
 	foreign key (company_id) references company(id)
 );
 
@@ -43,11 +44,8 @@ create table company_expert(
 
 create table vegetable(
     id integer primary key auto_increment,
-	name text,
-	company_id integer,
-	foreign key (company_id) references company(id)
+	name text
 );
-
 
 create table resource(
     id integer primary key auto_increment,
@@ -71,6 +69,13 @@ create table module(
 	foreign key (company_id) references company(id)
 );
 
+create table outsourced_module(
+    id integer primary key auto_increment,
+	module_id integer,
+	company_id integer,
+	foreign key (module_id) references module(id),
+	foreign key (company_id) references company(id)
+);
 
 create table module_vegetable(
     id integer primary key auto_increment,
@@ -87,6 +92,22 @@ create table stage(
 	outsourced integer,
 	company_id integer,
 	foreign key (company_id) references company(id)
+);
+
+create table outsourced_stage(
+    id integer primary key auto_increment,
+	stage_id integer,
+	company_id integer,
+	foreign key (stage_id) references stage(id),
+	foreign key (company_id) references company(id)
+);
+
+create table stage_vegetable(
+    id integer primary key auto_increment,
+	stage_id integer,
+	vegetable_id integer,
+	foreign key (stage_id) references stage(id),
+	foreign key (vegetable_id) references vegetable(id)
 );
 
 
@@ -107,11 +128,28 @@ create table line(
 	foreign key (company_id) references company(id)
 );
 
-
-create table line_stage(
+create table outsourced_line(
     id integer primary key auto_increment,
 	line_id integer,
-	stage_id integer,
+	company_id integer,
 	foreign key (line_id) references line(id),
-	foreign key (stage_id) references stage(id)
+	foreign key (company_id) references company(id)
+);
+
+create table line_vegetable(
+    id integer primary key auto_increment,
+	line_id integer,
+	vegetable_id integer,
+	foreign key (line_id) references line(id),
+	foreign key (vegetable_id) references vegetable(id)
+);
+
+CREATE TABLE line_stage (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    line_id INTEGER,
+    stage_id INTEGER,
+    FOREIGN KEY (line_id)
+        REFERENCES line (id),
+    FOREIGN KEY (stage_id)
+        REFERENCES stage (id)
 );
