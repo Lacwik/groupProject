@@ -1,5 +1,6 @@
 package com.b.calculator.controller;
 
+import com.b.calculator.model.Company;
 import com.b.calculator.repository.ModuleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,7 @@ public class ModuleColtroller {
     public String modules(Model model)
     {
         Company company = new Company();
-        model.addAttribute("modules", moduleRepository.findModulesByCompany(company));
+        //model.addAttribute("modules", moduleRepository.findModulesByCompany(company));
         return "/Line/lines";
     }
 }

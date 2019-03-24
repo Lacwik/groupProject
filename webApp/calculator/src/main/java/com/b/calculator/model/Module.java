@@ -32,6 +32,9 @@ public class Module {
     @OneToMany(mappedBy = "module",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<ModuleVegetable> moduleVegetables;
 
+    @OneToMany(mappedBy = "module",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<OutsourcedModule> companies;
+
     @Column(name = "outsourced")
     private long outsourced;
 }
