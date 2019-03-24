@@ -21,8 +21,13 @@ public class User {
 
     private String name;
 
+    private String email;
+
     private String password;
 
-    @OneToMany(mappedBy = "company",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<UserCompany> userCompanies;
+    private char role;
+
+    @OneToOne
+    @JoinColumn(name = "privileges_")
+    private char privileges;
 }

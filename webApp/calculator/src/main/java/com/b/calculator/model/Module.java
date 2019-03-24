@@ -29,10 +29,6 @@ public class Module {
     @JoinColumn(name = "resource_id")
     private Resource resource;
 
-    @OneToOne
-    @JoinColumn(name = "company_id")
-    private Company company;
-
     @OneToMany(mappedBy = "module",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<ModuleVegetable> moduleVegetables;
 

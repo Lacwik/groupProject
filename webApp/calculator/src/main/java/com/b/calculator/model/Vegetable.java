@@ -19,8 +19,4 @@ public class Vegetable {
     private Long id;
 
     private String name;
-
-    @OneToOne
-    @JoinColumn(name = "company_id")
-    private Company company;
 }
