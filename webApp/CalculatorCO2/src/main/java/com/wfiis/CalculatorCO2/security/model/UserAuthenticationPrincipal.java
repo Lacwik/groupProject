@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 
-@RequiredArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 public class UserAuthenticationPrincipal implements UserDetails {
