@@ -1,6 +1,6 @@
-package com.wfiis.CalculatorCO2.security.authorization;
+package com.wfiis.CalculatorCO2.user.security.authorization;
 
-import com.wfiis.CalculatorCO2.security.AppUserDetailsService;
+import com.wfiis.CalculatorCO2.user.security.AppUserDetailsService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;

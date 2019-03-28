@@ -1,4 +1,4 @@
-package com.wfiis.CalculatorCO2.security.exception;
+package com.wfiis.CalculatorCO2.user.exception;
 
 public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException(String email) {

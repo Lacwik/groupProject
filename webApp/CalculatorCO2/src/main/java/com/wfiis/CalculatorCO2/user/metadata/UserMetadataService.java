@@ -1,10 +1,11 @@
-package com.wfiis.CalculatorCO2.metadata;
+package com.wfiis.CalculatorCO2.user.metadata;
 
-import com.wfiis.CalculatorCO2.metadata.entity.User;
-import com.wfiis.CalculatorCO2.metadata.repository.UserRepository;
-import com.wfiis.CalculatorCO2.security.exception.UserNotFoundException;
+import com.wfiis.CalculatorCO2.user.exception.UserNotFoundException;
+import com.wfiis.CalculatorCO2.user.metadata.entity.User;
+import com.wfiis.CalculatorCO2.user.metadata.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
 
 @Component
 @RequiredArgsConstructor
@@ -22,4 +23,7 @@ public class UserMetadataService {
     }
 
 
+    public User saveUser(User user) {
+        return userRepository.save(user);
+    }
 }

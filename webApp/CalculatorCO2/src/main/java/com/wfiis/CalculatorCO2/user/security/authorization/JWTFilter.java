@@ -1,4 +1,4 @@
-package com.wfiis.CalculatorCO2.security.authorization;
+package com.wfiis.CalculatorCO2.user.security.authorization;
 
 
 import io.jsonwebtoken.ExpiredJwtException;

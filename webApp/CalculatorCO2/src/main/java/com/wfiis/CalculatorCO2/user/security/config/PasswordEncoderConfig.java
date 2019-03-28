@@ -1,4 +1,4 @@
-package com.wfiis.CalculatorCO2.security.config;
+package com.wfiis.CalculatorCO2.user.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,6 +1,6 @@
-package com.wfiis.CalculatorCO2.security.config;
+package com.wfiis.CalculatorCO2.user.security.config;
 
-import com.wfiis.CalculatorCO2.security.authorization.TokenProvider;
+import com.wfiis.CalculatorCO2.user.security.authorization.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

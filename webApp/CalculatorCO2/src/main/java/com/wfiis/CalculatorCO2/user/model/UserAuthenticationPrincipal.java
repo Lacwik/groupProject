@@ -1,10 +1,9 @@
-package com.wfiis.CalculatorCO2.security.model;
+package com.wfiis.CalculatorCO2.user.model;
 
-import com.wfiis.CalculatorCO2.metadata.entity.Role;
+import com.wfiis.CalculatorCO2.user.metadata.entity.Role;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

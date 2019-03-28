@@ -1,7 +1,7 @@
-package com.wfiis.CalculatorCO2.security.config;
+package com.wfiis.CalculatorCO2.user.security.config;
 
-import com.wfiis.CalculatorCO2.security.authorization.JWTFilter;
-import com.wfiis.CalculatorCO2.security.authorization.TokenProvider;
+import com.wfiis.CalculatorCO2.user.security.authorization.JWTFilter;
+import com.wfiis.CalculatorCO2.user.security.authorization.TokenProvider;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

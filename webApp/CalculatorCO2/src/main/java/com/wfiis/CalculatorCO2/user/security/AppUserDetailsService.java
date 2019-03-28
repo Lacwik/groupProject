@@ -1,8 +1,8 @@
-package com.wfiis.CalculatorCO2.security;
+package com.wfiis.CalculatorCO2.user.security;
 
-import com.wfiis.CalculatorCO2.metadata.UserMetadataService;
-import com.wfiis.CalculatorCO2.metadata.entity.User;
-import com.wfiis.CalculatorCO2.security.assembler.UserAuthenticationPrincipalAssembler;
+import com.wfiis.CalculatorCO2.user.metadata.UserMetadataService;
+import com.wfiis.CalculatorCO2.user.metadata.entity.User;
+import com.wfiis.CalculatorCO2.user.assembler.UserAssembler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class AppUserDetailsService implements UserDetailsService {
     private final UserMetadataService userMetadataService;
-    private final UserAuthenticationPrincipalAssembler assembler;
+    private final UserAssembler assembler;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -28,6 +28,6 @@ public class AppUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("User with email: " + email + " doesn't exist.");
         }
 
-        return assembler.convertToModel(user);
+        return assembler.convertAuthenticationToModel(user);
     }
 }
