@@ -4,6 +4,7 @@ import com.wfiis.CalculatorCO2.user.exception.UserNotFoundException;
 import com.wfiis.CalculatorCO2.user.metadata.entity.User;
 import com.wfiis.CalculatorCO2.user.metadata.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class UserMetadataService {
     private final UserRepository userRepository;
+    private final PasswordEncoder encoder;
 
     public User findUser(String email) {
         return userRepository.findByEmail(email)
@@ -24,6 +26,12 @@ public class UserMetadataService {
 
 
     public User saveUser(User user) {
+        encodeUserPassword(user);
         return userRepository.save(user);
+    }
+
+    private void encodeUserPassword(User user) {
+        String encodedPassword = encoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
     }
 }

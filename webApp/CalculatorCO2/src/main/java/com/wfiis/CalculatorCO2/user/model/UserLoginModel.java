@@ -1,11 +1,13 @@
 package com.wfiis.CalculatorCO2.user.model;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@RequiredArgsConstructor
+@NoArgsConstructor
+@Setter
 @Getter
 public class UserLoginModel {
-    private final String email;
-    private final String password;
+    private String email;
+    private String password;
 }

@@ -26,7 +26,8 @@ public class UserAssembler {
                 .lastName(userRegisterModel.getLastName())
                 .name(userRegisterModel.getName())
                 .password(userRegisterModel.getPassword())
-                .isActive(false)
+                // TODO: Change while implementing do request on register
+                .isActive(true)
                 .role(Role.USER)
                 .build();
     }

@@ -4,13 +4,17 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
+@Setter
+@NoArgsConstructor
 @Builder
 public class UserRegisterModel {
-    private final String name;
-    private final String lastName;
-    private final String email;
-    private final String password;
+    private String name;
+    private String lastName;
+    private String email;
+    private String password;
 }
