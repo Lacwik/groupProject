@@ -1,5 +1,8 @@
 package com.wfiis.CalculatorCO2.controllers;
 
+import com.wfiis.CalculatorCO2.company.CompanyFacade;
+import com.wfiis.CalculatorCO2.company.model.CompanyModel;
+import com.wfiis.CalculatorCO2.company.model.CompanyRegisterModel;
 import com.wfiis.CalculatorCO2.user.UserFacade;
 import com.wfiis.CalculatorCO2.user.model.UserLoginModel;
 import com.wfiis.CalculatorCO2.user.model.UserProfileModel;
@@ -23,9 +26,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class AuthorizationController {
     private final UserFacade userFacade;
+    private final CompanyFacade companyFacade;
 
     @PostMapping(
-            value = "/register",
+            value = "/register/user",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserProfileModel> registerUser(@RequestBody UserRegisterModel model) {
@@ -37,6 +41,21 @@ public class AuthorizationController {
             throw e;
         }
     }
+
+    @PostMapping(
+            value = "/register/company",
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CompanyModel> registerCompany(@RequestBody CompanyRegisterModel model) {
+
+        try {
+            return ResponseEntity.ok(companyFacade.registerCompany(model));
+        } catch (Exception e) {
+            log.error("Caught exception: {} while try to register new user: {}.", e.getMessage(), model);
+            throw e;
+        }
+    }
+
 
     @PostMapping(
             value ="/login",

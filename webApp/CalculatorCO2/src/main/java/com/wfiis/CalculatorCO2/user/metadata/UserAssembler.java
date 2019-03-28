@@ -1,12 +1,16 @@
-package com.wfiis.CalculatorCO2.user.assembler;
+package com.wfiis.CalculatorCO2.user.metadata;
 
 import com.wfiis.CalculatorCO2.user.metadata.entity.User;
 import com.wfiis.CalculatorCO2.user.model.Role;
 import com.wfiis.CalculatorCO2.user.model.UserAuthenticationPrincipal;
 import com.wfiis.CalculatorCO2.user.model.UserProfileModel;
 import com.wfiis.CalculatorCO2.user.model.UserRegisterModel;
+import com.wfiis.CalculatorCO2.user.model.UserSimpleModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -38,5 +42,18 @@ public class UserAssembler {
                 .name(user.getName())
                 .lastName(user.getLastName())
                 .build();
+    }
+
+    public UserSimpleModel convertEntityToSimpleModel(User user) {
+        return UserSimpleModel.builder()
+                .name(user.getName())
+                .lastName(user.getLastName())
+                .build();
+    }
+
+    public List<UserSimpleModel> convertEntitiesToSimpleModel(List<User> users) {
+        return users.stream()
+                .map(this::convertEntityToSimpleModel)
+                .collect(Collectors.toList());
     }
 }

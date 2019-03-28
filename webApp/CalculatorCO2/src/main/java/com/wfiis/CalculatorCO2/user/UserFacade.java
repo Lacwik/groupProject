@@ -1,6 +1,6 @@
 package com.wfiis.CalculatorCO2.user;
 
-import com.wfiis.CalculatorCO2.user.assembler.UserAssembler;
+import com.wfiis.CalculatorCO2.user.metadata.UserAssembler;
 import com.wfiis.CalculatorCO2.user.metadata.UserMetadataService;
 import com.wfiis.CalculatorCO2.user.metadata.entity.User;
 import com.wfiis.CalculatorCO2.user.model.UserAuthenticatedModel;

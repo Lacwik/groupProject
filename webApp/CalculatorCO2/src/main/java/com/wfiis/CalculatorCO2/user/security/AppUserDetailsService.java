@@ -1,8 +1,8 @@
 package com.wfiis.CalculatorCO2.user.security;
 
+import com.wfiis.CalculatorCO2.user.metadata.UserAssembler;
 import com.wfiis.CalculatorCO2.user.metadata.UserMetadataService;
 import com.wfiis.CalculatorCO2.user.metadata.entity.User;
-import com.wfiis.CalculatorCO2.user.assembler.UserAssembler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
