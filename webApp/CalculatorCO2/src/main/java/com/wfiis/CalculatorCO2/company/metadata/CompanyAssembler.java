@@ -20,7 +20,7 @@ public class CompanyAssembler {
                 .name(registerModel.getName())
                 .workers(Collections.emptyList())
                 .administrators(Collections.singletonList(user))
-                .experts(Collections.emptyList())
+                .experts(Collections.singletonList(user))
                 .build();
     }
 
@@ -28,8 +28,8 @@ public class CompanyAssembler {
         return CompanyModel.builder()
                 .name(company.getName())
                 .administrators(userAssembler.convertEntitiesToSimpleModel(company.getAdministrators()))
-                .experts(userAssembler.convertEntitiesToSimpleModel(company.getWorkers()))
-                .workers(userAssembler.convertEntitiesToSimpleModel(company.getExperts()))
+                .experts(userAssembler.convertEntitiesToSimpleModel(company.getExperts()))
+                .workers(userAssembler.convertEntitiesToSimpleModel(company.getWorkers()))
                 .build();
     }
 }

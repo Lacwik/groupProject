@@ -15,6 +15,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.util.List;
@@ -31,15 +33,30 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
-    @ManyToMany(mappedBy = "companiesWorker", cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinTable(
+            name = "COMPANIES_WORKERS",
+            inverseJoinColumns = @JoinColumn(name = "user_id"),
+            joinColumns = @JoinColumn(name = "company_id")
+    )
     private List<User> workers;
 
-    @ManyToMany(mappedBy = "companiesExpert", cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinTable(
+            name = "COMPANIES_EXPERTS",
+            inverseJoinColumns = @JoinColumn(name = "user_id"),
+            joinColumns = @JoinColumn(name = "company_id")
+    )
     private List<User> experts;
 
-    @ManyToMany(mappedBy = "companiesAdmin", cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinTable(
+            name = "COMPANIES_ADMIN",
+            inverseJoinColumns = @JoinColumn(name = "user_id"),
+            joinColumns = @JoinColumn(name = "company_id")
+    )
     private List<User> administrators;
 }

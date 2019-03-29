@@ -1,5 +1,6 @@
 package com.wfiis.CalculatorCO2.company.metadata;
 
+import com.wfiis.CalculatorCO2.company.exceptions.CompanyNotCouldBeFound;
 import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
 import com.wfiis.CalculatorCO2.company.metadata.repository.CompanyRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,5 +15,10 @@ public class CompanyService {
 
 
         return companyRepository.save(company);
+    }
+
+    public Company findCompany(Long companyId) {
+        return companyRepository.findById(companyId)
+                .orElseThrow(() -> new CompanyNotCouldBeFound(companyId));
     }
 }

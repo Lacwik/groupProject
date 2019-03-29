@@ -24,7 +24,6 @@ public class UserMetadataService {
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
 
-
     public User saveUser(User user) {
         encodeUserPassword(user);
         return userRepository.save(user);

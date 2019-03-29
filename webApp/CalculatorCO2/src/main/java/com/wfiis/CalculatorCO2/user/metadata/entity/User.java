@@ -52,27 +52,12 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "COMPANIES_WORKERS",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "company_id")
-    )
+    @ManyToMany(mappedBy = "workers")
     private List<Company> companiesWorker;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "COMPANIES_EXPERTS",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "company_id")
-    )
+    @ManyToMany(mappedBy = "experts")
     private List<Company> companiesExpert;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "COMPANIES_ADMIN",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "company_id")
-    )
+    @ManyToMany(mappedBy = "administrators")
     private List<Company> companiesAdmin;
 }

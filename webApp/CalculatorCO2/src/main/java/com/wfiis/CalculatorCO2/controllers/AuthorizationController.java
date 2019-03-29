@@ -46,6 +46,7 @@ public class AuthorizationController {
             value = "/register/company",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
+    // TODO: Returning model should contains also user's data instead of only company
     public ResponseEntity<CompanyModel> registerCompany(@RequestBody CompanyRegisterModel model) {
 
         try {
