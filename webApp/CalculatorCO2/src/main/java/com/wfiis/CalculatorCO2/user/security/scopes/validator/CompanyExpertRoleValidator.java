@@ -4,11 +4,13 @@ import com.wfiis.CalculatorCO2.company.metadata.CompanyService;
 import com.wfiis.CalculatorCO2.company.model.CompanyIdentity;
 import com.wfiis.CalculatorCO2.user.model.CompanyRole;
 import com.wfiis.CalculatorCO2.user.model.UserAuthenticationPrincipal;
-import com.wfiis.CalculatorCO2.user.security.scopes.SecureCompanyScope;
+import com.wfiis.CalculatorCO2.user.security.authorization.UnauthorizedException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 @Component
+@Slf4j
 @RequiredArgsConstructor
 public class CompanyExpertRoleValidator implements CompanyRoleValidator {
     private final CompanyService companyService;
@@ -18,7 +20,8 @@ public class CompanyExpertRoleValidator implements CompanyRoleValidator {
         boolean exist = companyService.isExpertOfCompany(principal.getId(), companyIdentity.getCompanyId());
 
         if (!exist) {
-            throw new RuntimeException();
+            log.warn("User: {} is unauthorized due to he's not a company expert. Company: {}", principal, companyIdentity);
+            throw new UnauthorizedException("You are not an expert of this company.");
         }
     }
 
