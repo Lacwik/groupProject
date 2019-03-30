@@ -18,6 +18,7 @@ public class UserAssembler {
     public UserAuthenticationPrincipal convertAuthenticationToModel(User user) {
         return UserAuthenticationPrincipal.builder()
                 .email(user.getEmail())
+                .id(user.getId())
                 .password(user.getPassword())
                 .isActive(user.getIsActive())
                 .role(user.getRole())

@@ -1,15 +1,12 @@
 package com.wfiis.CalculatorCO2.user.security.scopes;
 
-import com.wfiis.CalculatorCO2.company.CompanyFacade;
-import com.wfiis.CalculatorCO2.company.metadata.CompanyService;
 import com.wfiis.CalculatorCO2.company.model.CompanyIdentity;
 import com.wfiis.CalculatorCO2.user.model.UserAuthenticationPrincipal;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
 
 @Aspect
@@ -18,27 +15,37 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ScopeAuthenticationAspect {
     private final UserAuthenticationProvider provider;
-    private final CompanyFacade companyFacade;
+    private final CompanyRoleValidatorService validatorService;
+    // TODO: Add Unauthorized Exception and add @ExceptionHandler spring to return 401 status code
 
-    @Around("@annotation(CompanyExpert)")
-    public void validateCompanyScopeForExpert(ProceedingJoinPoint pjp) throws Throwable {
+    @Before("@annotation(scope)")
+    public void validateCompanyScope(JoinPoint pjp, SecureCompanyScope scope) {
         CompanyIdentity companyIdentity = findCompanyIdentity(pjp);
 
         UserAuthenticationPrincipal principal = provider.getUserAuthenticalPrincipal();
 
-        if (principal == null) {
-            log.error("Cannot find a logged principal using @CompanyExpert annotation.");
-            throw new RuntimeException();
-        }
+        validatePrincipal(principal);
 
-        if (!companyFacade.isExpertOfCompany(principal.getUsername(), companyIdentity.getCompanyId())) {
-            throw new RuntimeException();
-        }
-
-        pjp.proceed();
+        validateScope(principal, companyIdentity, scope);
     }
 
-    private CompanyIdentity findCompanyIdentity(ProceedingJoinPoint pjp) {
+    private void validatePrincipal(UserAuthenticationPrincipal principal) {
+        if (principal == null) {
+            log.error("Cannot find a logged principal using @SecureCompanyScope annotation.");
+            throw new RuntimeException();
+        }
+    }
+
+    private void validateScope(UserAuthenticationPrincipal principal, CompanyIdentity companyIdentity, SecureCompanyScope scope) {
+        try {
+            validatorService.validateScope(principal, companyIdentity, scope.role());
+        } catch (Exception e) {
+            log.error("msg");
+            throw e;
+        }
+    }
+
+    private CompanyIdentity findCompanyIdentity(JoinPoint pjp) {
         for(Object arg : pjp.getArgs()) {
             if (arg instanceof CompanyIdentity) {
                 return (CompanyIdentity) arg;

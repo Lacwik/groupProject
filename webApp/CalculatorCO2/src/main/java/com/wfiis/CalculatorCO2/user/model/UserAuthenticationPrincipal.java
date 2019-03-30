@@ -13,6 +13,7 @@ import java.util.Collections;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 public class UserAuthenticationPrincipal implements UserDetails {
+    private final Long id;
     private final String email;
     private final String password;
     private final Role role;
@@ -21,6 +22,10 @@ public class UserAuthenticationPrincipal implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singletonList(new SimpleGrantedAuthority(role.name()));
+    }
+
+    public Long getId() {
+        return id;
     }
 
     @Override
