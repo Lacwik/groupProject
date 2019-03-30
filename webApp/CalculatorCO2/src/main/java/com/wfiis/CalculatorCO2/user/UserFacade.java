@@ -2,6 +2,7 @@ package com.wfiis.CalculatorCO2.user;
 
 import com.wfiis.CalculatorCO2.user.metadata.UserAssembler;
 import com.wfiis.CalculatorCO2.user.metadata.UserMetadataService;
+import com.wfiis.CalculatorCO2.user.metadata.UserRegisterRequestAssembler;
 import com.wfiis.CalculatorCO2.user.metadata.entity.User;
 import com.wfiis.CalculatorCO2.user.model.UserAuthenticatedModel;
 import com.wfiis.CalculatorCO2.user.model.UserLoginModel;
@@ -13,6 +14,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class UserFacade {
@@ -20,13 +23,10 @@ public class UserFacade {
     private final UserAssembler userAssembler;
     private final AuthenticationManager authenticationManager;
     private final TokenProvider tokenProvider;
+    private final UserRegisterRequestAssembler registerRequestAssembler;
 
     public UserProfileModel registerUser(UserRegisterModel userRegisterModel) {
-        // add validation before register user
-
-        User user = userAssembler.convertRegisterToModel(userRegisterModel);
-
-        return userAssembler.convertEntityToModel(userMetadataService.saveUser(user));
+        return userAssembler.convertEntityToModel(userMetadataService.saveUser(userRegisterModel));
     }
 
     public UserAuthenticatedModel loginUser(UserLoginModel userLoginModel) {
@@ -47,4 +47,7 @@ public class UserFacade {
         authenticationManager.authenticate(authenticationToken);
     }
 
+    public List<UserProfileModel> getUserRegisterRequests() {
+        return registerRequestAssembler.convertEntityToModel(userMetadataService.getUserRegisterRequests());
+    }
 }

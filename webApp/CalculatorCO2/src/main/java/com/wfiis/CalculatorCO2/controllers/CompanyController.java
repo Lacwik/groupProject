@@ -24,6 +24,5 @@ public class CompanyController {
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CompanyModel> getCompany(@PathVariable(name = "id") Long companyId) {
         return ResponseEntity.ok(companyFacade.getCompany(CompanyIdentity.of(companyId)));
-
     }
 }

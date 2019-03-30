@@ -3,9 +3,9 @@ package com.wfiis.CalculatorCO2.user.security;
 import com.wfiis.CalculatorCO2.user.metadata.UserAssembler;
 import com.wfiis.CalculatorCO2.user.metadata.UserMetadataService;
 import com.wfiis.CalculatorCO2.user.metadata.entity.User;
+import com.wfiis.CalculatorCO2.user.model.UserAuthenticationPrincipal;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
@@ -18,7 +18,7 @@ public class AppUserDetailsService implements UserDetailsService {
     private final UserAssembler assembler;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public UserAuthenticationPrincipal loadUserByUsername(String email) throws UsernameNotFoundException {
         User user;
 
         try {

@@ -25,7 +25,7 @@ public class UserAssembler {
                 .build();
     }
 
-    public User convertRegisterToModel(UserRegisterModel userRegisterModel) {
+    public User convertRegisterToEntity(UserRegisterModel userRegisterModel) {
         return User.builder()
                 .email(userRegisterModel.getEmail())
                 .lastName(userRegisterModel.getLastName())

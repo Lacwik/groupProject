@@ -1,0 +1,161 @@
+databaseChangeLog:
+  - changeSet:
+      id: addCalcUsersTable
+      author: klimekk
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                  autoIncrement: true
+              - column:
+                  name: name
+                  type: varchar(255)
+              - column:
+                  name: last_name
+                  type: varchar(255)
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(255)
+              - column:
+                  name: is_active
+                  type: bit
+              - column:
+                  name: role
+                  type: varchar(255)
+            tableName: calc_users
+        - addUniqueConstraint:
+            columnNames: email
+            tableName: calc_users
+            constraintName: users_unique_email
+  - changeSet:
+      id: addCalcCompanyTable
+      author: klimekk
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                  autoIncrement: true
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+            tableName: calc_companies
+        - addUniqueConstraint:
+            columnNames: name
+            tableName: calc_companies
+            constraintName: companies_unique_name
+  - changeSet:
+      id: addCompanyMembersTable1
+      author: klimekk
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: user_id
+                  type: int
+              - column:
+                  name: company_id
+                  type: int
+            tableName: companies_workers
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: companies_workers
+            referencedColumnNames: id
+            referencedTableName: calc_users
+            constraintName: cw_fore_u
+        - addForeignKeyConstraint:
+            baseColumnNames: company_id
+            baseTableName: companies_workers
+            referencedColumnNames: id
+            constraintName: cw_fore_c
+            referencedTableName: calc_companies
+        - createTable:
+            columns:
+              - column:
+                  name: user_id
+                  type: int
+              - column:
+                  name: company_id
+                  type: int
+            tableName: companies_experts
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: companies_experts
+            referencedColumnNames: id
+            constraintName: ce_fore_u
+            referencedTableName: calc_users
+        - addForeignKeyConstraint:
+            baseColumnNames: company_id
+            baseTableName: companies_experts
+            constraintName: ce_fore_e
+            referencedColumnNames: id
+            referencedTableName: calc_companies
+        - createTable:
+            columns:
+              - column:
+                  name: user_id
+                  type: int
+              - column:
+                  name: company_id
+                  type: int
+            tableName: companies_admin
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: companies_admin
+            referencedColumnNames: id
+            constraintName: ca_fore_u
+            referencedTableName: calc_users
+        - addForeignKeyConstraint:
+            baseColumnNames: company_id
+            baseTableName: companies_admin
+            referencedColumnNames: id
+            constraintName: ca_fore_c
+            referencedTableName: calc_companies
+  - changeSet:
+      id: addCompanyRegisterRequestTable1
+      author: klimekk
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                  autoIncrement: true
+              - column:
+                  name: company_id
+                  type: int
+              - column:
+                  name: user_id
+                  type: int
+              - column:
+                  name: is_accepted
+                  type: bit
+            tableName: calc_company_register_requests
+        - addForeignKeyConstraint:
+            baseColumnNames: company_id
+            baseTableName: calc_company_register_requests
+            referencedColumnNames: id
+            referencedTableName: calc_companies
+            constraintName: foreign_company_request_id
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            constraintName: foreign_user_request_id
+            baseTableName: calc_company_register_requests
+            referencedColumnNames: id
+            referencedTableName: calc_users

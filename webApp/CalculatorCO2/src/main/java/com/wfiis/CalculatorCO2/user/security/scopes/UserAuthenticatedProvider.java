@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class UserAuthenticationProvider {
+public class UserAuthenticatedProvider {
     public UserAuthenticationPrincipal getUserAuthenticalPrincipal() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         try {

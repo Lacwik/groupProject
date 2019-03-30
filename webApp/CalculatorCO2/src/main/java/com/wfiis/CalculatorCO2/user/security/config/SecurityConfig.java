@@ -1,5 +1,6 @@
 package com.wfiis.CalculatorCO2.user.security.config;
 
+import com.wfiis.CalculatorCO2.user.model.Role;
 import com.wfiis.CalculatorCO2.user.security.authorization.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -39,8 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/v2/**").permitAll()
                 .antMatchers("/webjars/**").permitAll()
                 .antMatchers("/swagger-ui.html").permitAll()
+                .antMatchers("/request/**").hasAuthority(Role.SUPER_ADMIN.name())
                 .anyRequest().authenticated()
                 .and()
-                .apply(new JWTConfigurer(tokenProvider));
+                .apply(new BearerConfigurer(tokenProvider));
     }
 }

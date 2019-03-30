@@ -2,7 +2,7 @@ package com.wfiis.CalculatorCO2.user.security.scopes;
 
 import com.wfiis.CalculatorCO2.company.model.CompanyIdentity;
 import com.wfiis.CalculatorCO2.user.model.UserAuthenticationPrincipal;
-import com.wfiis.CalculatorCO2.user.security.authorization.UnauthorizedException;
+import com.wfiis.CalculatorCO2.user.security.authorization.ForbiddenException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -14,8 +14,8 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class ScopeAuthenticationAspect {
-    private final UserAuthenticationProvider provider;
+public class ScopeAuthorizationAspect {
+    private final UserAuthenticatedProvider provider;
     private final CompanyRoleValidatorService validatorService;
 
     @Before("@annotation(scope)")
@@ -32,7 +32,7 @@ public class ScopeAuthenticationAspect {
     private void validatePrincipal(UserAuthenticationPrincipal principal, SecureCompanyScope scope) {
         if (principal == null) {
             log.error("Cannot find a logged principal using @SecureCompanyScope annotation.");
-            throw new UnauthorizedException("Couldn't authorize principal due to is null to scope: " + scope.role().name());
+            throw new ForbiddenException("Couldn't authorize principal due to is null to scope: " + scope.role().name());
         }
     }
 
@@ -53,7 +53,7 @@ public class ScopeAuthenticationAspect {
         }
 
         log.error("Can't find a CompanyIdentity args in: {} while using a @SecureCompanyScope to secure method.", pjp.getArgs());
-        throw new UnauthorizedException("You are not able to see this company resources.");
+        throw new ForbiddenException("You are not able to see this company resources.");
     }
 
 

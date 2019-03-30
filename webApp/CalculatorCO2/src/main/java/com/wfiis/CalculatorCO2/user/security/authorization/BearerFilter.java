@@ -23,10 +23,10 @@ import java.io.IOException;
 
 @Component
 @RequiredArgsConstructor
-public class JWTFilter implements Filter {
+public class BearerFilter implements Filter {
     private final TokenProvider tokenProvider;
     private final static String AUTHORIZATION_HEADER = "Authorization";
-    private final static String AUTHORIZATION_VALUE_PREFIX = "JWT ";
+    private final static String AUTHORIZATION_VALUE_PREFIX = "Bearer ";
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
