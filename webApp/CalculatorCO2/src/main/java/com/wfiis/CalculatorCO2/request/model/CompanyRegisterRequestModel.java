@@ -1,6 +1,7 @@
-package com.wfiis.CalculatorCO2.company.model;
+package com.wfiis.CalculatorCO2.request.model;
 
 
+import com.wfiis.CalculatorCO2.company.model.CompanyModel;
 import com.wfiis.CalculatorCO2.user.model.UserProfileModel;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

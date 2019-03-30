@@ -1,5 +1,6 @@
-package com.wfiis.CalculatorCO2.company.metadata.entity;
+package com.wfiis.CalculatorCO2.request.metadata.entity;
 
+import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
 import com.wfiis.CalculatorCO2.user.metadata.entity.User;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -23,7 +24,7 @@ import javax.persistence.Table;
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Table(name = "calc_company_register_requests")
-public class CompanyRegisterRequest {
+public class UserCompanyRegisterRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

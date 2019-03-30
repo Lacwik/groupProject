@@ -1,6 +1,6 @@
-package com.wfiis.CalculatorCO2.user.metadata.repository;
+package com.wfiis.CalculatorCO2.request.metadata.repository;
 
-import com.wfiis.CalculatorCO2.user.metadata.entity.UserRegisterRequestView;
+import com.wfiis.CalculatorCO2.request.metadata.entity.UserRegisterRequestView;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRegisterRequestViewRepository extends JpaRepository<UserRegisterRequestView, Long> {

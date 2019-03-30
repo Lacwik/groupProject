@@ -1,4 +1,4 @@
-package com.wfiis.CalculatorCO2.user.metadata.entity;
+package com.wfiis.CalculatorCO2.request.metadata.entity;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
