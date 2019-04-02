@@ -1,10 +1,12 @@
 package com.wfiis.CalculatorCO2.user.metadata;
 
+import com.wfiis.CalculatorCO2.request.metadata.entity.UserRegisterRequestView;
 import com.wfiis.CalculatorCO2.user.metadata.entity.User;
 import com.wfiis.CalculatorCO2.user.model.Role;
 import com.wfiis.CalculatorCO2.user.model.UserAuthenticationPrincipal;
 import com.wfiis.CalculatorCO2.user.model.UserProfileModel;
 import com.wfiis.CalculatorCO2.user.model.UserRegisterModel;
+import com.wfiis.CalculatorCO2.user.model.UserRegisterRequestModel;
 import com.wfiis.CalculatorCO2.user.model.UserSimpleModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -31,8 +33,7 @@ public class UserAssembler {
                 .lastName(userRegisterModel.getLastName())
                 .name(userRegisterModel.getName())
                 .password(userRegisterModel.getPassword())
-                // TODO: Change while implementing do request on register
-                .isActive(true)
+                .isActive(false)
                 .role(Role.USER)
                 .build();
     }
@@ -56,5 +57,20 @@ public class UserAssembler {
         return users.stream()
                 .map(this::convertEntityToSimpleModel)
                 .collect(Collectors.toList());
+    }
+
+    public List<UserProfileModel> convertEntityToModel(List<UserRegisterRequestView> all) {
+        return all.stream()
+                .map(this::convertEntityToModel)
+                .collect(Collectors.toList());
+    }
+
+    private UserRegisterRequestModel convertEntityToModel(UserRegisterRequestView userRegisterRequestView) {
+        return UserRegisterRequestModel.registerModelBuilder()
+                .email(userRegisterRequestView.getEmail())
+                .lastName(userRegisterRequestView.getLastName())
+                .name(userRegisterRequestView.getName())
+                .id(userRegisterRequestView.getId())
+                .build();
     }
 }

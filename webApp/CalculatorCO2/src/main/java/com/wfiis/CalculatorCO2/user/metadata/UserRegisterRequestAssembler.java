@@ -1,6 +1,6 @@
 package com.wfiis.CalculatorCO2.user.metadata;
 
-import com.wfiis.CalculatorCO2.user.metadata.entity.UserRegisterRequestView;
+import com.wfiis.CalculatorCO2.request.metadata.entity.UserRegisterRequestView;
 import com.wfiis.CalculatorCO2.user.model.UserProfileModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

@@ -2,8 +2,6 @@ package com.wfiis.CalculatorCO2.user;
 
 import com.wfiis.CalculatorCO2.user.metadata.UserAssembler;
 import com.wfiis.CalculatorCO2.user.metadata.UserMetadataService;
-import com.wfiis.CalculatorCO2.user.metadata.UserRegisterRequestAssembler;
-import com.wfiis.CalculatorCO2.user.metadata.entity.User;
 import com.wfiis.CalculatorCO2.user.model.UserAuthenticatedModel;
 import com.wfiis.CalculatorCO2.user.model.UserLoginModel;
 import com.wfiis.CalculatorCO2.user.model.UserProfileModel;
@@ -14,8 +12,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 @RequiredArgsConstructor
 public class UserFacade {
@@ -23,9 +19,9 @@ public class UserFacade {
     private final UserAssembler userAssembler;
     private final AuthenticationManager authenticationManager;
     private final TokenProvider tokenProvider;
-    private final UserRegisterRequestAssembler registerRequestAssembler;
 
     public UserProfileModel registerUser(UserRegisterModel userRegisterModel) {
+
         return userAssembler.convertEntityToModel(userMetadataService.saveUser(userRegisterModel));
     }
 
@@ -45,9 +41,5 @@ public class UserFacade {
                 model.getEmail(), model.getPassword());
 
         authenticationManager.authenticate(authenticationToken);
-    }
-
-    public List<UserProfileModel> getUserRegisterRequests() {
-        return registerRequestAssembler.convertEntityToModel(userMetadataService.getUserRegisterRequests());
     }
 }

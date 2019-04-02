@@ -17,10 +17,10 @@ public class CompanyAssembler {
 
     public Company convertRegisterModelToEntity(CompanyRegisterModel registerModel, User user) {
         return Company.builder()
-                .name(registerModel.getName())
+                .name(registerModel.getCompanyName())
+                .experts(Collections.emptyList())
                 .workers(Collections.emptyList())
                 .administrators(Collections.singletonList(user))
-                .experts(Collections.singletonList(user))
                 .build();
     }
 

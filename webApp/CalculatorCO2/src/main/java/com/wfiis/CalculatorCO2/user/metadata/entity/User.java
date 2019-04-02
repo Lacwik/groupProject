@@ -1,5 +1,6 @@
 package com.wfiis.CalculatorCO2.user.metadata.entity;
 
+import com.wfiis.CalculatorCO2.user.metadata.BooleanConvert;
 import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
 import com.wfiis.CalculatorCO2.user.model.Role;
 import lombok.AccessLevel;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -17,7 +19,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.util.List;
 
@@ -45,6 +46,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Convert(converter = BooleanConvert.class)
     private Boolean isActive;
 
     @Enumerated(EnumType.STRING)
@@ -58,4 +60,5 @@ public class User {
 
     @ManyToMany(mappedBy = "administrators")
     private List<Company> companiesAdmin;
+
 }

@@ -159,3 +159,13 @@ databaseChangeLog:
             baseTableName: calc_company_register_requests
             referencedColumnNames: id
             referencedTableName: calc_users
+
+  - changeSet:
+      id: addViewForUserRegisterRequests
+      author: klimekk
+      changes:
+        - createView:
+            viewName: calc_users_register_requests
+            replaceIfExists: true
+            selectQuery: select uu.id, email, last_name, name from calc_users uu left join calc_company_register_requests rr on uu.id = user_id where rr.is_accepted = false and rr.company_id is null;
+
