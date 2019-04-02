@@ -30,3 +30,27 @@
   ```
   Czyli: znajdź usera o podanym id - jeśli nie istnieje to rzuć wyjątek UserNotFoundException
 18. Najlepiej dla tasków stwórzcie brancha na githubie od mastera i po zaimplementowaniu zadania zróbcie pusha + pull requesta z waszego brancha do mastera na githubie - będzie można przejrzeć wszystkie zmiany jakie ktoś wprowadził na danym branchu
+19. @RequestBody - parsuje body zapytania http do podanego obiektu jako argument w end-poincie np.:
+  ```
+  @PostMapping(
+            value = "/register/user",
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UserProfileModel> registerUser(@RequestBody UserRegisterModel model) {
+  ```
+  Podczas wysłania zapytania z frontendu z jsonem(body) - json jest automatycznie mapowany do obiektu userRegisterModel
+  
+20. @PathVariable - zczytuje ciągi znaków z zapytania i wrzuca do zmiennej np.:
+  ```
+      @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CompanyModel> getCompany(@PathVariable(name = "id") Long companyId) {
+  ```
+  Czyli pod companyId jest wrzucane to ID, które jest podane podczas wysłania zapytania.
+  
+21. Aby dostać się do aktualnie zalogowanego użytkownika wystarczy w controllerze do listy argumentów metody dodać obiekt UsernamePasswordAuthenticationToken i Spring automatycznie nam go wstrzyknie np.:
+  ```
+  @DeleteMapping(value = "/unjoin/{id}")
+    public ResponseEntity<Void> unjoinEvent(UsernamePasswordAuthenticationToken principal, @PathVariable(name = "id") Long eventId) {
+  ```
+  
+  Pod principal.getPrincipal() mamy obiekt naszego zalogowanego usera
