@@ -4,7 +4,7 @@ import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
 import com.wfiis.CalculatorCO2.request.exception.NotFoundRegisterRequest;
 import com.wfiis.CalculatorCO2.request.metadata.entity.UserCompanyRegisterRequest;
 import com.wfiis.CalculatorCO2.request.metadata.repository.UserCompanyRegisterRequestRepository;
-import com.wfiis.CalculatorCO2.request.metadata.repository.UserRegisterRequestViewRepository;
+import com.wfiis.CalculatorCO2.request.metadata.repository.UserRegisterRequestsViewRepository;
 import com.wfiis.CalculatorCO2.request.model.CompanyRegisterRequestModel;
 import com.wfiis.CalculatorCO2.user.metadata.UserAssembler;
 import com.wfiis.CalculatorCO2.user.metadata.UserMetadataService;
@@ -20,7 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RegisterRequestService {
     private final UserCompanyRegisterRequestRepository registerRequestRepository;
-    private final UserRegisterRequestViewRepository userRegisterRequestViewRepository;
+    private final UserRegisterRequestsViewRepository userRegisterRequestViewRepository;
     private final UserCompanyRegisterRequestAssembler userCompanyRegisterRequestAssembler;
     private final UserAssembler userAssembler;
     private final UserMetadataService userMetadataService;
