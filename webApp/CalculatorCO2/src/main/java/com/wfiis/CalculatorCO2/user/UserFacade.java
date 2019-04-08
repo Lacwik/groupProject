@@ -2,6 +2,7 @@ package com.wfiis.CalculatorCO2.user;
 
 import com.wfiis.CalculatorCO2.user.metadata.UserAssembler;
 import com.wfiis.CalculatorCO2.user.metadata.UserMetadataService;
+import com.wfiis.CalculatorCO2.user.metadata.entity.User;
 import com.wfiis.CalculatorCO2.user.model.UserAuthenticatedModel;
 import com.wfiis.CalculatorCO2.user.model.UserLoginModel;
 import com.wfiis.CalculatorCO2.user.model.UserProfileModel;
@@ -30,8 +31,11 @@ public class UserFacade {
 
         String token = tokenProvider.createToken(userLoginModel.getEmail());
 
+        final User user = userMetadataService.findUser(userLoginModel.getEmail());
+
         return UserAuthenticatedModel.builder()
                 .email(userLoginModel.getEmail())
+                .role(user.getRole())
                 .JWT(token)
                 .build();
     }
