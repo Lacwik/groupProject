@@ -1,0 +1,13 @@
+.login-form {
+    width: 15%;
+}
+
+.login-form > * {
+    display:block !important;
+    width: 100%;
+    margin-bottom: .5em !important;
+}
+
+.form-login__button {
+    margin-top: .5em !important;
+}
