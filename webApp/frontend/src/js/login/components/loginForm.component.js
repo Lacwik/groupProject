@@ -49,7 +49,7 @@ class LoginForm extends Component {
                 >Email
                 </TextField>
                 <TextField
-                    label="Password"
+                    label="Hasło"
                     fullWidth
                     value={password}
                     onChange={this.onChangePassword}

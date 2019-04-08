@@ -16,7 +16,8 @@ export default class AuthenticationRepository {
             body: JSON.stringify({
                 email, password,
             })
-        }).then(JSON.parse)
+        })
+        .then(response => response.json())
         .catch(err => console.warn("Caught error while trying to login user. ", err));
     }    
 
@@ -26,7 +27,7 @@ export default class AuthenticationRepository {
             headers: this.getHeaders(),
             body: JSON.stringify(user),
         })
-        .then(JSON.parse)
+        .then(response => response.json())
         .catch(err => console.warn("Caught error while trying to register user", err));
     }
 
@@ -36,7 +37,7 @@ export default class AuthenticationRepository {
             headers: this.getHeaders(),
             body: JSON.stringify(company),
         })
-        .then(JSON.parse)
+        .then(response => response.json())
         .catch(err => console.warn("Caught error while trying to register company", err));
     }
 }

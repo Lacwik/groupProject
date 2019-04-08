@@ -3,7 +3,9 @@ import logger from 'redux-logger';
 import reducer from './app.reducer';
 
 const initialState = {
-    mock: 'QWE',
+    JWT: '',
+    userEmail: '',
+    isUserLogged: false,
 };
 
 export const store = createStore(reducer, initialState, applyMiddleware(logger));
