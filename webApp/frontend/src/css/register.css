@@ -1,23 +1,16 @@
 .register-form {
-    width: 20%;
 }
 
 .register-form > * {
-    display:block;
     margin-bottom: .5em !important;
 }
 
 .register-forms-container {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
 }
 
 .register__button {
-    margin-top: .5em !important;
+    margin-top: 1em !important;
 }
 
 .register-forms-container > * {
-    margin: 0 5em;
 }

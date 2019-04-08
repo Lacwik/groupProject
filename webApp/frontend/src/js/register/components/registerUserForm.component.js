@@ -56,7 +56,6 @@ class RegisterUserForm extends Component {
 
         return (
             <form id="register-user-form" className="register-form" onSubmit={e => e.preventDefault()}>
-                <h2 className="register-form__title">Zarejestruj się jako użytkownik</h2>
                 <TextField
                     label="Imię"
                     value={name}
@@ -82,7 +81,7 @@ class RegisterUserForm extends Component {
                 >Email
                 </TextField>
                 <TextField
-                    label="Password"
+                    label="Hasło"
                     fullWidth
                     value={password}
                     onChange={this.onChangePassword}
@@ -94,7 +93,6 @@ class RegisterUserForm extends Component {
                     color="primary"
                     className="register__button"
                     onClick={this.onSubmit}
-                    fullWidth
                 >Zarejestruj się</Button>
             </form>                
         );

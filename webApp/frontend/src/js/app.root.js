@@ -1,16 +1,21 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import RouterNavigation from './router/routerNavigation.container';
 import HeaderContainer from './header/header.container';
-import FooterContainer from './footer/footer.container';
+import '../css/app.css';
 
 class App extends Component {
   render() {
     return (
-      <>
-        <HeaderContainer />
-        <RouterNavigation />
-        <FooterContainer />
-      </>
+      <div class="main-wrapper">
+        <aside class="main-wrapper__sidebar">
+          e
+        </aside>
+        <main class="main-wrapper__container">
+          <div class="wrapper-content">
+            <RouterNavigation />
+          </div>
+        </main>
+      </div>
     );
   }
 }

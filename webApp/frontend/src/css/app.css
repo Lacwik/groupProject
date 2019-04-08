@@ -1,0 +1,25 @@
+body {
+    background: #F1F1F1;
+}
+.main-wrapper__sidebar {
+    width: 10%;
+    height: 100vh;
+    position:fixed;
+    left: 0;
+    top: 0;
+    background: black;
+}
+
+.main-wrapper__container {
+    width: 90%;
+    margin-left: 10%;
+    
+}
+
+.wrapper-content {
+    background: #ffffff;
+    padding: 2em 2em 8em 2em;
+    box-sizing: border-box;
+    margin: 6em 6em;
+    width: 50%;
+}
