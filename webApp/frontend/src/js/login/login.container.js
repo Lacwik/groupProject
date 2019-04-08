@@ -5,16 +5,17 @@ import PropTypes from 'prop-types';
 import LoginForm from './components/loginForm.component';
 import { authenticationRepository } from '../factory/authenticationRepository.factory';
 import '../../css/login.css';
-import { setCurrentLoggedUserEmail, setJWT, setIsUserLogged } from '../redux/app.service';
+import { setCurrentLoggedUserEmail, setJWT, setIsUserLogged, setApplicationUserRole } from '../redux/app.service';
 
 
 class LoginContainer extends Component {
     onLoginUser(email, password) {
         return authenticationRepository.loginUser(email, password)
-            .then(({ email, JWT }) => {
+            .then(({ email, JWT, role }) => {
                 setCurrentLoggedUserEmail(email);
                 setJWT(JWT);
                 setIsUserLogged(true);
+                setApplicationUserRole(role);
                 return { email, JWT };
             })
             .catch(console.warn);

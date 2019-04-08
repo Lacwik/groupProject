@@ -19,6 +19,11 @@ const toReducer = (state = {}, action) => {
                 ...state,
                 isUserLogged: action.value,
             };
+        case Types.SET_USER_APP_ROLE:
+            return {
+                ...state,
+                appUserRole: action.role,
+            }
 
         default:
             return state;

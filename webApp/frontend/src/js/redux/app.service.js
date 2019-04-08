@@ -22,6 +22,13 @@ export const setIsUserLogged = value => {
     });
 }
 
+export const setApplicationUserRole = role => {
+    store.dispatch({
+        action: Types.SET_USER_APP_ROLE,
+        role,
+    });
+}
+
 export const isUserLogged = () => {
     const value = store.getState().isUserLogged;
 }
