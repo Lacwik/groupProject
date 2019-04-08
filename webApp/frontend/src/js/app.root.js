@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import RouterNavigation from './router/routerNavigation.container';
-import HeaderContainer from './header/header.container';
+import RouterNavigation from './navigation/routerNavigation.container';
 import '../css/app.css';
+import NavigationContainer from './navigation/navigation.container';
 
 class App extends Component {
   render() {
     return (
       <div class="main-wrapper">
-        <aside class="main-wrapper__sidebar">
-          e
-        </aside>
+        <NavigationContainer />
         <main class="main-wrapper__container">
           <div class="wrapper-content">
             <RouterNavigation />
