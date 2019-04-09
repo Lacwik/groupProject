@@ -5,13 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.util.List;
-
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 @Getter
-public class UserAuthenticatedModel {
-    private String email;
-    private String JWT;
-    private Role role;
+public class CompanyRoleModel {
+    private final Long id;
+    private final String name;
+    private final CompanyRole role;
 }
