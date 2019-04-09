@@ -6,12 +6,10 @@ import NavigationContainer from './navigation/navigation.container';
 class App extends Component {
   render() {
     return (
-      <div class="main-wrapper">
+      <div className="main-wrapper">
         <NavigationContainer />
-        <main class="main-wrapper__container">
-          <div class="wrapper-content">
-            <RouterNavigation />
-          </div>
+        <main className="main-wrapper__container">
+          <RouterNavigation />
         </main>
       </div>
     );

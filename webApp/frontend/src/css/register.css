@@ -1,16 +1,15 @@
-.register-form {
-}
-
 .register-form > * {
     margin-bottom: .5em !important;
 }
 
-.register-forms-container {
-}
 
 .register__button {
     margin-top: 1em !important;
 }
 
-.register-forms-container > * {
+.error-box {
+    padding: 1em;
+    box-sizing: border-box;
+    background: #f50057 !important;
+    color: white;
 }

@@ -1,0 +1,20 @@
+.user-request-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-requests {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.user-requests span {
+    font-weight: bold;
+}
+
+.user-request-box {
+    padding: 1em;
+    box-sizing: border-box;
+}

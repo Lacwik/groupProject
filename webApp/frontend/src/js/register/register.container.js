@@ -12,18 +12,23 @@ class RegisterContainer extends Component {
 
         this.state = {
             registerForm: REGISTER_FORMS_SWITCH_STATES.USER,
+            error: '',
         }
     }
     onRegisterUser = user => {
         return authenticationRepository.registerUser(user)
             .then(res => console.log('registered user'))
-            .catch(console.warn);
+            .catch(err => this.setErrorMessage(err));
+    }
+
+    setErrorMessage = error => {
+        this.setState(state => ({ ...state, error }));
     }
 
     onRegisterCompany = company => {
         return authenticationRepository.registerCompany(company)
             .then(res => console.log('registered company'))
-            .catch(console.warn);
+            .catch(err => this.setErrorMessage(err));
     }
 
     onSwitchForm = registerForm => {
@@ -31,15 +36,15 @@ class RegisterContainer extends Component {
     }
 
     renderNeccessaryForm = () => {
-        const { registerForm } = this.state;
+        const { registerForm, error } = this.state;
         const { USER, COMPANY } = REGISTER_FORMS_SWITCH_STATES;
 
         switch (registerForm) {
             case USER:
-                return <RegisterUserForm onSubmit={user => this.onRegisterUser(user)} />;
+                return <RegisterUserForm onSubmit={user => this.onRegisterUser(user)} errorMessage={error} />;
 
             case COMPANY:
-                return <RegisterCompanyForm onSubmit={company => this.onRegisterCompany(company)} />;
+                return <RegisterCompanyForm onSubmit={company => this.onRegisterCompany(company)} errorMessage={error} />;
 
             default:
                 console.error("Unknow register form state: " + registerForm);    
@@ -49,11 +54,13 @@ class RegisterContainer extends Component {
 
     render() {
         return (
-            <div class="register-forms-container">
-                <h2>Zarejestruj się jako</h2>
-                <RegisterFormsSwitch switchForms={value => this.onSwitchForm(value)} defaultValue={this.state.registerForm} />
-                {this.renderNeccessaryForm()}                
-            </div>                
+            <div className="wrapper-content">
+                <div className="register-forms-container">
+                    <h2>Zarejestruj się jako</h2>
+                    <RegisterFormsSwitch switchForms={value => this.onSwitchForm(value)} defaultValue={this.state.registerForm} />
+                    {this.renderNeccessaryForm()}                
+                </div>  
+            </div>              
         );
     }
 }

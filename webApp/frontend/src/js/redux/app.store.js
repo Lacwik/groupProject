@@ -8,6 +8,8 @@ const initialState = {
     userEmail: '',
     isUserLogged: false,
     appUserRole: APPLICATION_ROLES.USER,
+    userRegisterRequests: [],
+    companyRegisterRequests: [],
 };
 
 export const store = createStore(reducer, initialState, applyMiddleware(logger));

@@ -9,6 +9,16 @@ export default class AuthenticationRepository {
         };
     }
 
+    handleError = response => {
+        if (!response)
+            throw Error(response.message);
+            
+        if (response.status >= 300) {
+            throw Error(response.message)
+        }    
+        return response;
+    }
+    
     loginUser = (email, password) => {
         return fetch('http://localhost:8090/auth/login', {
             method: 'POST',
@@ -17,6 +27,7 @@ export default class AuthenticationRepository {
                 email, password,
             })
         })
+        .then(response => this.handleError(response))
         .then(response => response.json())
         .catch(err => console.warn("Caught error while trying to login user. ", err));
     }    
@@ -27,6 +38,7 @@ export default class AuthenticationRepository {
             headers: this.getHeaders(),
             body: JSON.stringify(user),
         })
+        .then(response => this.handleError(response))
         .then(response => response.json())
         .catch(err => console.warn("Caught error while trying to register user", err));
     }
@@ -37,6 +49,7 @@ export default class AuthenticationRepository {
             headers: this.getHeaders(),
             body: JSON.stringify(company),
         })
+        .then(response => this.handleError(response))
         .then(response => response.json())
         .catch(err => console.warn("Caught error while trying to register company", err));
     }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
 
 class RegisterUserForm extends Component {
     constructor(props) {
@@ -46,6 +47,21 @@ class RegisterUserForm extends Component {
         this.props.onSubmit({ password, email, name, lastName });
     }
 
+    renderErrorMessageIfExists = () => {
+        const { errorMessage } = this.props;
+
+        if (errorMessage) {
+            return (
+                <Paper elevation={1} className="error-box">
+                    <b>Błąd: </b>
+                    {errorMessage}
+                </Paper>
+            );
+        }
+
+        return undefined;
+    }
+
     render() {
         const {
             email,
@@ -56,6 +72,7 @@ class RegisterUserForm extends Component {
 
         return (
             <form id="register-user-form" className="register-form" onSubmit={e => e.preventDefault()}>
+                {this.renderErrorMessageIfExists()}
                 <TextField
                     label="Imię"
                     value={name}
@@ -101,6 +118,7 @@ class RegisterUserForm extends Component {
 
 RegisterUserForm.propTypes = {
     onSubmit: PropTypes.func.isRequired,
+    errorMessage: PropTypes.string.isRequired,
 };
 
 export default RegisterUserForm;

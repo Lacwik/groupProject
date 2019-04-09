@@ -5,7 +5,7 @@ const toReducer = (state = {}, action) => {
         case Types.SET_JWT:
             return {
                 ...state,
-                jwt: action.jwt,
+                JWT: action.JWT,
             };
         
         case Types.SET_EMAIL:
@@ -23,8 +23,19 @@ const toReducer = (state = {}, action) => {
             return {
                 ...state,
                 appUserRole: action.role,
-            }
+            };
 
+        case Types.SET_REGISTER_USER_REQUESTS:
+            return {
+                ...state,
+                userRegisterRequests: action.requests,
+            };
+
+        case Types.SET_REGISTER_COMPANY_REQUESTS:
+            return {
+                ...state,
+                companyRegisterRequests: action.requests,
+            };
         default:
             return state;
     }

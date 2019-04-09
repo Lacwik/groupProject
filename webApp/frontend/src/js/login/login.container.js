@@ -11,12 +11,12 @@ import { setCurrentLoggedUserEmail, setJWT, setIsUserLogged, setApplicationUserR
 class LoginContainer extends Component {
     onLoginUser(email, password) {
         return authenticationRepository.loginUser(email, password)
-            .then(({ email, JWT, role }) => {
+            .then(({ email, jwt, role }) => {
                 setCurrentLoggedUserEmail(email);
-                setJWT(JWT);
+                setJWT(jwt);
                 setIsUserLogged(true);
                 setApplicationUserRole(role);
-                return { email, JWT };
+                return { email, jwt, role };
             })
             .catch(console.warn);
     }
@@ -27,7 +27,9 @@ class LoginContainer extends Component {
         }
 
         return (
-            <LoginForm onSubmit={(email, password) => this.onLoginUser(email, password)} />                
+            <div className="wrapper-content">
+                <LoginForm onSubmit={(email, password) => this.onLoginUser(email, password)} /> 
+            </div>               
         );
     }
 }

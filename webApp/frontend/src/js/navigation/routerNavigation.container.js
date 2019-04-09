@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import WelcomeContainer from '../welcome/welcome.container';
 import LoginContainer from '../login/login.container';
 import RegisterContainer from '../register/register.container';
+import RegisterRequestsContainer from '../registerRequests/registerRequests.container';
 
 class RouterNavigation extends Component {
   render() {
@@ -11,6 +12,7 @@ class RouterNavigation extends Component {
         <Route exact path='/' component={WelcomeContainer} />
         <Route path='/login' component={LoginContainer} />
         <Route path='/register' component={RegisterContainer} />
+        <Route path='/admin/requests' component={RegisterRequestsContainer} />
       </Switch>
     );
   }
