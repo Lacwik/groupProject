@@ -6,6 +6,7 @@ import LoginForm from './components/loginForm.component';
 import { authenticationRepository } from '../factory/authenticationRepository.factory';
 import '../../css/login.css';
 import { setCurrentLoggedUserEmail, setJWT, setIsUserLogged, setApplicationUserRole } from '../redux/app.service';
+import { AUTH_KEYS } from '../constants/authentication.constants';
 
 
 class LoginContainer extends Component {
@@ -16,6 +17,11 @@ class LoginContainer extends Component {
                 setJWT(jwt);
                 setIsUserLogged(true);
                 setApplicationUserRole(role);
+
+                localStorage.setItem(AUTH_KEYS.ACCESS_TOKEN, jwt);
+                localStorage.setItem(AUTH_KEYS.EMAIL, email);
+                localStorage.setItem(AUTH_KEYS.ROLE, role);
+                
                 return { email, jwt, role };
             })
             .catch(console.warn);

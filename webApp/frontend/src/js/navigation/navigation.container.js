@@ -63,8 +63,8 @@ class NavigationContainer extends Component {
                         <Link to="/">Strona główna</Link>
                     </li>
                     {this.renderLinksIfNotLogged()}
-                    {this.renderLinksIfLogged()}
                     {this.renderLinksIfSuperAdminLogged()}
+                    {this.renderLinksIfLogged()}
                 </ul>
             </aside>
         );
