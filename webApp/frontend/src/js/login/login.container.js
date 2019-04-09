@@ -10,7 +10,17 @@ import { AUTH_KEYS } from '../constants/authentication.constants';
 
 
 class LoginContainer extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            error: '',
+        };
+    }
+
     onLoginUser(email, password) {
+        this.setState(state => ({ ...state, error: '' }))
+
         return authenticationRepository.loginUser(email, password)
             .then(({ email, jwt, role }) => {
                 setCurrentLoggedUserEmail(email);
@@ -21,10 +31,10 @@ class LoginContainer extends Component {
                 localStorage.setItem(AUTH_KEYS.ACCESS_TOKEN, jwt);
                 localStorage.setItem(AUTH_KEYS.EMAIL, email);
                 localStorage.setItem(AUTH_KEYS.ROLE, role);
-                
+
                 return { email, jwt, role };
             })
-            .catch(console.warn);
+            .catch(err => this.setState(state => ({ ...state, error: err })));
     }
 
     render() {
@@ -34,7 +44,7 @@ class LoginContainer extends Component {
 
         return (
             <div className="wrapper-content">
-                <LoginForm onSubmit={(email, password) => this.onLoginUser(email, password)} /> 
+                <LoginForm onSubmit={(email, password) => this.onLoginUser(email, password)} errorMessage={this.state.error} /> 
             </div>               
         );
     }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
 
 class LoginForm extends Component {
     constructor(props) {
@@ -40,6 +41,7 @@ class LoginForm extends Component {
         return (
             <form id="login-form" className="login-form" onSubmit={e => e.preventDefault()}>
                 <h2 className="login-form__title">Zaloguj się</h2>
+                {this.props.errorMessage && <Paper className="error-box">{this.props.errorMessage}</Paper>}
                 <TextField
                     label="Email"
                     value={email}
@@ -69,6 +71,7 @@ class LoginForm extends Component {
 
 LoginForm.propTypes = {
     onSubmit: PropTypes.func.isRequired,
+    errorMessage: PropTypes.string.isRequired,
 };
 
 export default LoginForm;

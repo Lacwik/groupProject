@@ -23,3 +23,11 @@ body {
     margin: 6em 6em;
     width: 50%;
 }
+
+
+.error-box {
+    padding: 1em;
+    box-sizing: border-box;
+    background: #f50057 !important;
+    color: white;
+}
