@@ -48,7 +48,10 @@ export default class AuthenticationRepository {
         })
         .then(response => this.handleError(response))
         .then(response => response.json())
-        .catch(err => console.warn("Caught error while trying to register user", err));
+        .catch(err => {
+            console.warn("Caught error while trying to register user. ", err);
+            return Promise.reject(err);
+        });
     }
 
     registerCompany = company => {
@@ -59,6 +62,9 @@ export default class AuthenticationRepository {
         })
         .then(response => this.handleError(response))
         .then(response => response.json())
-        .catch(err => console.warn("Caught error while trying to register company", err));
+        .catch(err => {
+            console.warn("Caught error while trying to register company. ", err);
+            return Promise.reject(err);
+        });
     }
 }

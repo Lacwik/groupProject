@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import { authenticationRepository } from '../factory/authenticationRepository.factory';
 import '../../css/register.css';
 import RegisterUserForm from './components/registerUserForm.component';
@@ -13,11 +14,12 @@ class RegisterContainer extends Component {
         this.state = {
             registerForm: REGISTER_FORMS_SWITCH_STATES.USER,
             error: '',
+            redirect: false,
         }
     }
     onRegisterUser = user => {
         return authenticationRepository.registerUser(user)
-            .then(res => console.log('registered user'))
+            .then(() => this.setState(state => ({ ...state, redirect: true })))
             .catch(err => this.setErrorMessage(err));
     }
 
@@ -27,7 +29,7 @@ class RegisterContainer extends Component {
 
     onRegisterCompany = company => {
         return authenticationRepository.registerCompany(company)
-            .then(res => console.log('registered company'))
+            .then(() => this.setState(state => ({ ...state, redirect: true })))
             .catch(err => this.setErrorMessage(err));
     }
 
@@ -52,11 +54,19 @@ class RegisterContainer extends Component {
         }
     }
 
+    redirectAfterRegister() {
+        if (this.state.redirect) {
+            return <Redirect to='/login' />
+        }
+    }
+
     render() {
+        console.log('Props: ', this.props);
         return (
             <div className="wrapper-content">
                 <div className="register-forms-container">
                     <h2>Zarejestruj się jako</h2>
+                    {this.redirectAfterRegister()}
                     <RegisterFormsSwitch switchForms={value => this.onSwitchForm(value)} defaultValue={this.state.registerForm} />
                     {this.renderNeccessaryForm()}                
                 </div>  
@@ -64,5 +74,6 @@ class RegisterContainer extends Component {
         );
     }
 }
+
 
 export default RegisterContainer;
