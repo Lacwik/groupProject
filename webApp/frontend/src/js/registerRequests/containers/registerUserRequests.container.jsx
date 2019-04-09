@@ -7,7 +7,7 @@ import { registerRequestRepository } from '../../factory/registerRequestReposito
 class RegisterUserRequestsContainer extends Component {
     onActiveUser(id) {
         registerRequestRepository.activeUserRegisterRequest(id)
-            .then(result => console.log('Udalo sie', result))
+            .then(() => this.props.update())
             .catch(err => console.error('No i mamy error: ', err));
     }
 
@@ -38,6 +38,7 @@ class RegisterUserRequestsContainer extends Component {
 
 RegisterUserRequestsContainer.propTypes = {
     userRegisterRequests: PropTypes.array.isRequired,
+    update: PropTypes.func.isRequired,
 }
 
 

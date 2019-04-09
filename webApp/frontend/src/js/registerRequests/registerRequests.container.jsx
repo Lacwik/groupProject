@@ -10,6 +10,10 @@ import '../../css/request.css';
 
 class RegisterRequestsContainer extends Component {
     componentDidUpdate() {
+        this.fetchData();
+    }
+
+    fetchData() {
         if (this.shouldRenderRequests()) {
             const { getUserRegisterRequests, getCompanyRegisterRequests } = registerRequestRepository;
 
@@ -25,8 +29,6 @@ class RegisterRequestsContainer extends Component {
     shouldRenderRequests() {
         const { isUserLogged, appUserRole } = this.props;
 
-        console.log('Props: ', this.props);
-
         return isUserLogged && appUserRole === APPLICATION_ROLES.SUPER_ADMIN;
     }
 
@@ -34,8 +36,8 @@ class RegisterRequestsContainer extends Component {
         if (this.shouldRenderRequests()) {
             return (
                 <div className="requests-container">
-                    <RegisterUserRequestsContainer />
-                    <RegisterCompanyRequestsContainer />
+                    <RegisterUserRequestsContainer update={() => this.fetchData()} />
+                    <RegisterCompanyRequestsContainer update={() => this.fetchData()} />
                 </div>
             );
         }

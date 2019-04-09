@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import RegisterCompanyRequest from '../components/registerCompanyRequest.component.1';
+import { registerRequestRepository } from '../../factory/registerRequestRepository.factory';
 
 class RegisterCompanyRequestsContainer extends Component {
     onActiveCompany = id => {
-        console.log('Active company: ', id);
+        registerRequestRepository.activeCompanyRegisterRequest(id)
+            .then(() => this.props.update())
+            .catch(err => console.error('No i mamy error: ', err));
     }
 
     renderListOfCompanyRequests() {
@@ -36,6 +39,7 @@ class RegisterCompanyRequestsContainer extends Component {
 
 RegisterCompanyRequestsContainer.propTypes = {
     companyRegisterRequests: PropTypes.array.isRequired,
+    update: PropTypes.func.isRequired,
 }
 
 

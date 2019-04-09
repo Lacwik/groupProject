@@ -46,8 +46,16 @@ export default class RegisterRequestRepository {
             headers: this.getHeaders(),
         })
         .then(response => this.handleError(response))
-        .then(response => response.json())
         .catch(err => console.warn("Caught error while trying to active user's register request. ", err));
+    }
+   
+    activeCompanyRegisterRequest = id => {
+        return fetch(`http://localhost:8090/request/company/${id}`, {
+            method: 'PUT',
+            headers: this.getHeaders(),
+        })
+        .then(response => this.handleError(response))
+        .catch(err => console.warn("Caught error while trying to active company's register request. ", err));
     }
    
 }
