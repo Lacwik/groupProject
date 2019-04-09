@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';    
 import { authenticationRepository } from '../factory/authenticationRepository.factory';
 import '../../css/register.css';
 import RegisterUserForm from './components/registerUserForm.component';

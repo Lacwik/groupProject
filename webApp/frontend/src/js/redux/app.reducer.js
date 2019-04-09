@@ -36,6 +36,12 @@ const toReducer = (state = {}, action) => {
                 ...state,
                 companyRegisterRequests: action.requests,
             };
+
+        case Types.SET_COMPANY_ROLES:
+            return {
+                ...state,
+                companyRoles: action.roles,
+            };
         default:
             return state;
     }

@@ -43,6 +43,13 @@ export const setCompanyRegisterRequests = requests => {
     });
 }
 
+export const setCompanyRoles = roles => {
+    store.dispatch({
+        type: Types.SET_COMPANY_ROLES,
+        roles,
+    });
+}
+
 export const isUserLogged = () => {
     return store.getState().isUserLogged;
 }
