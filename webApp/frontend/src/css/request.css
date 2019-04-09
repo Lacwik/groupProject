@@ -17,4 +17,14 @@
 .user-request-box {
     padding: 1em;
     box-sizing: border-box;
+    margin-bottom: 1em;
+}
+
+.requests-container {
+    display: flex;
+    margin-right: 5em;
+}
+
+.requests-container .wrapper-content {
+    margin: 6em 2em;
 }

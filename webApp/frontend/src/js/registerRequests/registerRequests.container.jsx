@@ -9,7 +9,7 @@ import { setUserRegisterRequests, setCompanyRegisterRequests } from '../redux/ap
 import '../../css/request.css';
 
 class RegisterRequestsContainer extends Component {
-    componentDidMount() {
+    componentDidUpdate() {
         if (this.shouldRenderRequests()) {
             const { getUserRegisterRequests, getCompanyRegisterRequests } = registerRequestRepository;
 
@@ -25,16 +25,18 @@ class RegisterRequestsContainer extends Component {
     shouldRenderRequests() {
         const { isUserLogged, appUserRole } = this.props;
 
+        console.log('Props: ', this.props);
+
         return isUserLogged && appUserRole === APPLICATION_ROLES.SUPER_ADMIN;
     }
 
     renderRequestsListOrForbiddenMessage() {
         if (this.shouldRenderRequests()) {
             return (
-                <Fragment>
+                <div className="requests-container">
                     <RegisterUserRequestsContainer />
                     <RegisterCompanyRequestsContainer />
-                </Fragment>
+                </div>
             );
         }
 

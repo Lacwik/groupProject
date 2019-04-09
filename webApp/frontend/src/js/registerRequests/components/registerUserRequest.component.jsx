@@ -14,7 +14,7 @@ class RegisterUserRequest extends Component {
         return (
             <Paper className="user-request-box">
                 <div className="user-request-container">
-                    <ul class="user-requests">
+                    <ul className="user-requests">
                         <li>
                             <span>Imię: </span>{name}
                         </li>

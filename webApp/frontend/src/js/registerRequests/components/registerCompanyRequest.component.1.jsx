@@ -14,8 +14,8 @@ class RegisterCompanyRequest extends Component {
 
         return (
             <Paper className="user-request-box">
-                <div class="user-request-container">
-                    <ul class="user-requests">
+                <div className="user-request-container">
+                    <ul className="user-requests">
                         <li>
                             <span>Nazwa firmy: </span>{companyName}
                         </li>

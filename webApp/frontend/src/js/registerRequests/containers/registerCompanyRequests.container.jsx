@@ -13,12 +13,12 @@ class RegisterCompanyRequestsContainer extends Component {
         
         return companyRegisterRequests.map(({ companyModel, userProfileModel }) => (
             <RegisterCompanyRequest
-                key={userProfileModel.id}
+                key={companyModel.id}
                 name={userProfileModel.name}
                 lastName={userProfileModel.lastName}
                 email={userProfileModel.email}
                 companyName={companyModel.name}
-                onActive={() => this.onActiveCompany(userProfileModel.id)}
+                onActive={() => this.onActiveCompany(companyModel.id)}
             />
         ));
     }
@@ -26,6 +26,7 @@ class RegisterCompanyRequestsContainer extends Component {
     render() {
         return (
             <div className="wrapper-content">
+            <h2>Lista nieaktywnych firm</h2>
                 {this.renderListOfCompanyRequests()}
             </div>
         );               

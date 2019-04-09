@@ -37,7 +37,7 @@ class LogoutContainer extends Component {
     render() {
         return (
             <div className="wrapper-content">
-                Zostałeś wylogowany. Za chwilę zostaniesz przekierowane na stronę główną.
+                Zostałeś wylogowany. Za chwilę zostaniesz przekierowany na stronę główną.
                 {this.state.shouldRedirect && this.redirect()}
             </div>            
         );
