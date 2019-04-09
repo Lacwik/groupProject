@@ -13,6 +13,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class UserProfileModel {
+    private Long id;
     private String name;
     private String lastName;
     private String email;

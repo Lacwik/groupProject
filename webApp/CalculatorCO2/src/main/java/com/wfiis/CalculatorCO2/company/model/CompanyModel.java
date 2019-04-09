@@ -13,6 +13,7 @@ import java.util.List;
 @Getter
 public class CompanyModel {
     private final String name;
+    private final Long id;
     private List<UserSimpleModel> workers;
     private List<UserSimpleModel> experts;
     private List<UserSimpleModel> administrators;

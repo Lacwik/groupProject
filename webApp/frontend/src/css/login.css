@@ -1,0 +1,7 @@
+.login-form > * {
+    margin-bottom: .5em !important;
+}
+
+.form-login__button {
+    margin-top: 1em !important;
+}

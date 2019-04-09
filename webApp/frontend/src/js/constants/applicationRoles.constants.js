@@ -1,0 +1,4 @@
+export const APPLICATION_ROLES = {
+    SUPER_ADMIN: 'SUPER_ADMIN',
+    USER: 'USER',
+};

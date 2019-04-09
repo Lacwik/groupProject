@@ -1,9 +1,16 @@
 import { createStore, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
 import reducer from './app.reducer';
+import { APPLICATION_ROLES } from '../constants/applicationRoles.constants';
 
 const initialState = {
-    mock: 'QWE',
+    JWT: '',
+    userEmail: '',
+    isUserLogged: false,
+    appUserRole: APPLICATION_ROLES.USER,
+    userRegisterRequests: [],
+    companyRegisterRequests: [],
+    companyRoles: [],
 };
 
 export const store = createStore(reducer, initialState, applyMiddleware(logger));

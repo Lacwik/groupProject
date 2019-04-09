@@ -27,6 +27,7 @@ public class CompanyAssembler {
     public CompanyModel convertEntityToModel(Company company) {
         return CompanyModel.builder()
                 .name(company.getName())
+                .id(company.getId())
                 .administrators(userAssembler.convertEntitiesToSimpleModel(company.getAdministrators()))
                 .experts(userAssembler.convertEntitiesToSimpleModel(company.getExperts()))
                 .workers(userAssembler.convertEntitiesToSimpleModel(company.getWorkers()))
