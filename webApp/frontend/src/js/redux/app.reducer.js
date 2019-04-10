@@ -61,6 +61,12 @@ const toReducer = (state = {}, action) => {
                 isWorkingForCompany: action.value,
             };
 
+        case Types.REMOVE_USER_BY_ID:
+            return {
+                ...state,
+                users: state.users.filter(({ id }) => id !== action.id),
+            };
+
         default:
             return state;
     }

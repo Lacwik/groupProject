@@ -5,7 +5,7 @@ import AddUsersSearchbar from './components/addUsersSearchbar.component';
 import { usersRepository } from '../factory/usersRepository.factory';
 import { companyRepository } from '../factory/companyRepository.factory';
 import '../../css/company.css';
-import { setUsers } from '../redux/app.service';
+import { setUsers, removeUserById } from '../redux/app.service';
 import AddUsers from './components/addUsers.component';
 import AddUserForm from './components/addUserForm.component';
 
@@ -24,7 +24,7 @@ class AddUsersContainer extends Component {
 
     onAddMemberToCompany = (id, role) => {
         companyRepository.addUserToCompany(id, role)
-            .then(() => console.log("Added user to company."));
+            .then(() => removeUserById(id));
     }
 
     onCreateCompanyMember = user => {

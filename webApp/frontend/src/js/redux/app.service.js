@@ -71,6 +71,13 @@ export const setCompanyRoles = roles => {
     });
 }
 
+export const removeUserById = id => {
+    store.dispatch({
+        type: Types.REMOVE_USER_BY_ID,
+        id,
+    });
+}
+
 export const isUserLogged = () => {
     return store.getState().isUserLogged;
 }
