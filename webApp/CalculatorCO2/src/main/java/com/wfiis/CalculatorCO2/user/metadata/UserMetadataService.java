@@ -95,4 +95,12 @@ public class UserMetadataService {
             throw new ForbiddenException("User is not member of company.");
         }
     }
+
+    public boolean canUserWorkingForCompanyAsRole(Long userId, Long companyId, CompanyRole companyRole) {
+        return companyJobRepository.existsByUserIdAndCompanyIdAndRole(userId, companyId, companyRole);
+    }
+
+    public boolean canUserWorkingForCompany(Long userId, Long companyId) {
+        return companyJobRepository.existsByUserIdAndCompanyId(userId, companyId);
+    }
 }

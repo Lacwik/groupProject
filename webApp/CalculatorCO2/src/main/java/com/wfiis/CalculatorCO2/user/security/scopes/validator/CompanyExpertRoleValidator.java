@@ -1,7 +1,7 @@
 package com.wfiis.CalculatorCO2.user.security.scopes.validator;
 
-import com.wfiis.CalculatorCO2.company.metadata.CompanyService;
 import com.wfiis.CalculatorCO2.company.model.CompanyIdentity;
+import com.wfiis.CalculatorCO2.user.metadata.UserMetadataService;
 import com.wfiis.CalculatorCO2.user.model.CompanyRole;
 import com.wfiis.CalculatorCO2.user.model.UserAuthenticationPrincipal;
 import com.wfiis.CalculatorCO2.user.security.authorization.ForbiddenException;
@@ -13,13 +13,13 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @RequiredArgsConstructor
 public class CompanyExpertRoleValidator implements CompanyRoleValidator {
-    private final CompanyService companyService;
+    private final UserMetadataService userMetadataService;
 
     @Override
     public void validateScope(UserAuthenticationPrincipal principal, CompanyIdentity companyIdentity) {
-        boolean exist = companyService.isExpertOfCompany(principal.getId(), companyIdentity.getCompanyId());
+        boolean exists = userMetadataService.canUserWorkingForCompanyAsRole(principal.getId(), companyIdentity.getCompanyId(), CompanyRole.EXPERT);
 
-        if (!exist) {
+        if (!exists) {
             log.warn("User: {} is unauthorized due to he's not a company expert. Company: {}", principal, companyIdentity);
             throw new ForbiddenException("You are not an expert of this company.");
         }
