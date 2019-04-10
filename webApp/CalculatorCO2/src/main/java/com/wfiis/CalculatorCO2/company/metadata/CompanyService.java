@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class CompanyService {
     private final CompanyRepository companyRepository;
-    private final UserMetadataService userMetadataService;
 
     public Company saveCompany(Company company) {
         return companyRepository.save(company);
@@ -45,9 +44,8 @@ public class CompanyService {
     }
 
     @Transactional
-    public void addMemberToCompany(CompanyIdentity companyIdentity, CompanyMember companyMember) {
+    public void addMemberToCompany(CompanyIdentity companyIdentity, CompanyMember companyMember, User user) {
         final Company company = findCompany(companyIdentity.getCompanyId());
-        final User user = userMetadataService.findUser(companyMember.getUserId());
 
         addUserToRole(company, user, companyMember);
     }

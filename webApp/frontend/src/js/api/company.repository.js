@@ -1,6 +1,6 @@
 import { handleError } from './handleErrors.service';
 
-export default class UsersRepository {
+export default class CompanyRepository {
     constructor(store) {
         this.store = store;
     }
@@ -13,15 +13,13 @@ export default class UsersRepository {
         };
     }
 
-    getUsersBy = (searchValue = '') => {
-        return fetch(`http://localhost:8090/user?search=${searchValue}&companyId=${this.store.getState().companyWorkingFor.id}`, {
-            method: 'GET',
+    addUserToCompany = (userId, role) => {
+        return fetch(`http://localhost:8090/company/${this.store.getState().companyWorkingFor.id}`, {
+            method: 'POST',
             headers: this.getHeaders(),
+            body: JSON.stringify({ userId, companyRole: role.toUpperCase() }),
         })
             .then(response => handleError(response))
-            .then(response => response.json())
-            .catch(err => console.warn("Caught error while trying to get users by search value. ", err));
+            .catch(err => console.warn("Caught error while trying to add member to company. ", err));   
     }
-
-    
 }

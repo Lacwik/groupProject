@@ -63,8 +63,8 @@ public class UserFacade {
         authenticationManager.authenticate(authenticationToken);
     }
 
-    public List<UserProfileModel> getUsersBySearchValue(String searchValue) {
-        return userAssembler.convertEntitiesToModels(userMetadataService.findUsersBy(searchValue));
+    public List<UserProfileModel> getUsersBySearchValue(String searchValue, Long companyId) {
+        return userAssembler.convertEntitiesToModels(userMetadataService.findUsersBy(searchValue, companyId));
     }
 
     public void startUserJobForCompanyAsRole(Long userId, Long companyId, CompanyRole role) {

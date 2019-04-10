@@ -4,7 +4,7 @@ import AddUser from './addUser.component';
 
 class AddUsers extends Component {
     onAdd = (id, role) => {
-        console.log("Add user: ", id, role);
+        this.props.onAddMemberToCompany(id, role);
     }
 
 
@@ -28,6 +28,7 @@ class AddUsers extends Component {
 
 AddUsers.propTypes = {
     users: PropTypes.array.isRequired,
+    onAddMemberToCompany: PropTypes.func.isRequired,
 }
 
 export default AddUsers;

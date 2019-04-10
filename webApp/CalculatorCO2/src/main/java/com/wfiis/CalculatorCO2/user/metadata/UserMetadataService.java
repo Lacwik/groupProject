@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Component
@@ -40,8 +41,12 @@ public class UserMetadataService {
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
 
-    public List<User> findUsersBy(String searchValue) {
-        return userRepository.findUsersByNameOrLastNameOrEmail(searchValue, searchValue, searchValue);
+    public List<User> findUsersBy(String searchValue, Long companyId) {
+        List<User> users = userRepository.findUsersByNameOrLastNameOrEmail(searchValue, searchValue, searchValue);
+
+        return users.stream()
+                .filter(user -> !companyService.isMemberOfCompany(user.getId(), companyId))
+                .collect(Collectors.toList());
     }
 
     public User saveUser(UserRegisterModel userRegisterModel) {

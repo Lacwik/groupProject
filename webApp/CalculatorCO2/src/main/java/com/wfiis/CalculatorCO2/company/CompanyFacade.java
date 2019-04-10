@@ -50,8 +50,10 @@ public class CompanyFacade {
         return companyAssembler.convertEntityToModel(companyService.findCompany(company.getCompanyId()));
     }
 
+    @Transactional
     @SecureCompanyScope(role = CompanyRole.ADMIN)
     public void addMemberToCompany(CompanyIdentity companyIdentity, CompanyMember companyMember) {
-        companyService.addMemberToCompany(companyIdentity, companyMember);
+        final User user = userMetadataService.findUser(companyMember.getUserId());
+        companyService.addMemberToCompany(companyIdentity, companyMember, user);
     }
 }

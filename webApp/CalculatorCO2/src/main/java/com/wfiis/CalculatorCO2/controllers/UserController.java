@@ -23,7 +23,7 @@ public class UserController {
     private final UserFacade userFacade;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<UserProfileModel>> getUsersBy(@RequestParam(name="search") String searchValue) {
-        return ResponseEntity.ok(userFacade.getUsersBySearchValue(searchValue));
+    public ResponseEntity<List<UserProfileModel>> getUsersBy(@RequestParam(name="search") String searchValue, @RequestParam(name="companyId") Long companyId) {
+        return ResponseEntity.ok(userFacade.getUsersBySearchValue(searchValue, companyId));
     }
 }
