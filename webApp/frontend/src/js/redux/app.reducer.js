@@ -42,6 +42,13 @@ const toReducer = (state = {}, action) => {
                 ...state,
                 companyRoles: action.roles,
             };
+
+        case Types.SET_USERS:
+            return {
+                ...state,
+                users: action.users,
+            };
+
         default:
             return state;
     }

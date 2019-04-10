@@ -8,6 +8,7 @@ import RegisterContainer from '../register/register.container';
 import RegisterRequestsContainer from '../registerRequests/registerRequests.container';
 import LogoutContainer from '../login/logout.container';
 import DashboardContainer from '../dashboard/dashboard.container';
+import AddUsersContainer from '../company/addUsers.container';
 
 class RouterNavigation extends Component {
   render() {
@@ -18,6 +19,7 @@ class RouterNavigation extends Component {
         <Route path='/register' component={RegisterContainer} />
         <Route path='/admin/requests' component={RegisterRequestsContainer} />
         <Route path='/logout' component={LogoutContainer} />
+        <Route path='/company/add-member' component={AddUsersContainer} />
       </Switch>
     );
   }

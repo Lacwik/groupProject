@@ -1,0 +1,14 @@
+.add-user-search-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1em;
+}
+
+.add-user-search-bar__input {
+    flex: 5;
+}
+
+.add-user-search-bar__button {
+    flex: 1;
+}

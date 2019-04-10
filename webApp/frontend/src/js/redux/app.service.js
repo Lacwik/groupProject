@@ -29,6 +29,13 @@ export const setApplicationUserRole = role => {
     });
 }
 
+export const setUsers = users => {
+    store.dispatch({
+        type: Types.SET_USERS,
+        users,
+    });
+}
+
 export const setUserRegisterRequests = requests => {
     store.dispatch({
         type: Types.SET_REGISTER_USER_REQUESTS,

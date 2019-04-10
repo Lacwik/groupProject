@@ -37,6 +37,20 @@ class NavigationContainer extends Component {
         }
     }
 
+
+    renderLinksIfUserIsLoggedAsJobRole() {
+        if (this.props.isUserLogged && true) { // role company
+            return (
+                <React.Fragment>
+                    <li key="nav-company-add-user">
+                        <List style={{ color: '#aaaaaa' }} fontSize="large" />
+                        <Link to="/company/add-member">Dodaj pracownika</Link>
+                    </li>
+                </React.Fragment>
+            ) 
+        }
+    }
+
     isCurrentLoggedUserHasRoleSuperAdmin() {
         return this.props.appUserRole === APPLICATION_ROLES.SUPER_ADMIN && this.props.isUserLogged;
     }
@@ -62,6 +76,7 @@ class NavigationContainer extends Component {
                         <Home style={{ color: '#aaaaaa' }} fontSize="large" />
                         <Link to="/">Strona główna</Link>
                     </li>
+                    {this.renderLinksIfUserIsLoggedAsJobRole()}
                     {this.renderLinksIfNotLogged()}
                     {this.renderLinksIfSuperAdminLogged()}
                     {this.renderLinksIfLogged()}
