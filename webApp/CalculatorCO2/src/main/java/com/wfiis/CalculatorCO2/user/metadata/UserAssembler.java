@@ -63,6 +63,13 @@ public class UserAssembler {
                 .collect(Collectors.toList());
     }
 
+
+    public List<UserProfileModel> convertEntitiesToModels(List<User> users) {
+        return users.stream()
+                .map(this::convertEntityToModel)
+                .collect(Collectors.toList());
+    }
+
     public List<UserProfileModel> convertEntityToModel(List<UserRegisterRequestView> all) {
         return all.stream()
                 .map(this::convertEntityToModel)

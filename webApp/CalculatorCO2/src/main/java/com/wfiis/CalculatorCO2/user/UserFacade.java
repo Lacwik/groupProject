@@ -62,4 +62,8 @@ public class UserFacade {
 
         authenticationManager.authenticate(authenticationToken);
     }
+
+    public List<UserProfileModel> getUsersBySearchValue(String searchValue) {
+        return userAssembler.convertEntitiesToModels(userMetadataService.findUsersBy(searchValue));
+    }
 }
