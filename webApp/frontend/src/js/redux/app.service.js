@@ -43,6 +43,20 @@ export const setUserRegisterRequests = requests => {
     });
 }
 
+export const setCompanyWorkingFor = company => {
+    store.dispatch({
+        type: Types.SET_COMPANY_WORKING_FOR,
+        company,
+    })
+}
+
+export const setIsWorkingForCompany = value => {
+    store.dispatch({
+        type: Types.SET_IS_WORKING_FOR_COMPANY,
+        value,
+    })
+}
+
 export const setCompanyRegisterRequests = requests => {
     store.dispatch({
         type: Types.SET_REGISTER_COMPANY_REQUESTS,

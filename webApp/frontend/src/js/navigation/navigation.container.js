@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Home, GroupAdd, AccountBox, ExitToApp, List } from '@material-ui/icons';
+import { Home, GroupAdd, AccountBox, ExitToApp, List, Add } from '@material-ui/icons';
 import '../../css/navigation.css';
 import { APPLICATION_ROLES } from '../constants/applicationRoles.constants';
+import { COMPANY_ROLES } from '../constants/companyRoles.constants';
 
 class NavigationContainer extends Component {
     renderLinksIfNotLogged() {
@@ -39,11 +40,11 @@ class NavigationContainer extends Component {
 
 
     renderLinksIfUserIsLoggedAsJobRole() {
-        if (this.props.isUserLogged && true) { // role company
+        if (this.props.isUserLogged && this.props.isWorkingForCompany && this.props.companyWorkingFor.role === 'ADMIN') {
             return (
                 <React.Fragment>
                     <li key="nav-company-add-user">
-                        <List style={{ color: '#aaaaaa' }} fontSize="large" />
+                        <Add style={{ color: '#aaaaaa' }} fontSize="large" />
                         <Link to="/company/add-member">Dodaj pracownika</Link>
                     </li>
                 </React.Fragment>
@@ -88,12 +89,16 @@ class NavigationContainer extends Component {
 
 NavigationContainer.propTypes = {
     isUserLogged: PropTypes.bool.isRequired,
+    isWorkingForCompany: PropTypes.bool.isRequired,
+    companyWorkingFor: PropTypes.object.isRequired,
     appUserRole: PropTypes.oneOf(Object.values(APPLICATION_ROLES)),
 }
 
 const mapStateToProps = state => ({
     isUserLogged: state.isUserLogged,
     appUserRole: state.appUserRole,
+    isWorkingForCompany: state.isWorkingForCompany,
+    companyWorkingFor: state.companyWorkingFor,
 });
 
 export default connect(mapStateToProps)(NavigationContainer);

@@ -5,6 +5,7 @@ import AddUsersSearchbar from './components/addUsersSearchbar.component';
 import { usersRepository } from '../factory/usersRepository.factory';
 import '../../css/company.css';
 import { setUsers } from '../redux/app.service';
+import AddUsers from './components/addUsers.component';
 
 class AddUsersContainer extends Component {
     onSearchUser = value => {
@@ -13,11 +14,11 @@ class AddUsersContainer extends Component {
     }
 
     render() {
-        console.log("users: ", this.props.users);
         return (
             <div className="wrapper-content">
                 <h2>Dodaj pracownika do firmy</h2>
                 <AddUsersSearchbar onSearch={value => this.onSearchUser(value)} />
+                <AddUsers users={this.props.users} />
             </div>
         );
     }

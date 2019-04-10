@@ -18,12 +18,17 @@ class DashboardCard extends Component {
             <Card className="dashboard-card">
                 <CardContent>
                     <h4 className="dashboard-card__title">{name}</h4>
-                    <p className="dashboard-card__role">{this.mapRoleToName()}</p>     
+                    <p className="dashboard-card__role">{this.mapRoleToName()}</p>
                 </CardContent>
                 <CardActions>
-                    <Button size="small" 
-                    variant="contained"
-                    color="primary">Rozpocznij pracę</Button>
+                    <Button size="small"
+                        variant="contained"
+                        color="primary"
+                        disabled={this.props.isWorkingFor}
+                        onClick={() => this.props.onLoginAsCompanyRole(id, role, name)}
+                    >
+                        {this.props.isWorkingFor ? 'Aktualnie pracujesz' : 'Rozpocznij pracę'}
+                    </Button>
                 </CardActions>
             </Card>
         );
@@ -34,6 +39,8 @@ DashboardCard.propTypes = {
     name: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
     role: PropTypes.string.isRequired,
+    onLoginAsCompanyRole: PropTypes.func.isRequired,
+    isWorkingFor: PropTypes.bool.isRequired,
 }
 
 export default DashboardCard;

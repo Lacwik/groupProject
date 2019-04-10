@@ -12,6 +12,8 @@ class Dashboard extends Component {
                 role={role}
                 name={name}
                 id={id}
+                onLoginAsCompanyRole={(id, role, name) => this.props.onLoginAsCompanyRole(id, role, name)}
+                isWorkingFor={this.props.companyWorkingFor.id === id}
             />
         ));
     }
@@ -28,6 +30,8 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
     companyRoles: PropTypes.array.isRequired,
+    onLoginAsCompanyRole: PropTypes.func.isRequired,
+    companyWorkingFor: PropTypes.object.isRequired,
 }
 
 export default Dashboard;

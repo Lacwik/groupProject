@@ -49,6 +49,18 @@ const toReducer = (state = {}, action) => {
                 users: action.users,
             };
 
+        case Types.SET_COMPANY_WORKING_FOR:
+            return {
+                ...state,
+                companyWorkingFor: action.company,
+            };
+
+        case Types.SET_IS_WORKING_FOR_COMPANY:
+            return {
+                ...state,
+                isWorkingForCompany: action.value,
+            };
+
         default:
             return state;
     }

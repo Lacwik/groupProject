@@ -3,6 +3,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 1em;
+    margin-bottom: 2em;
 }
 
 .add-user-search-bar__input {
@@ -11,4 +12,18 @@
 
 .add-user-search-bar__button {
     flex: 1;
+}
+
+.add-user-row {
+    margin-bottom: .5em;
+    padding: .5em;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.add-user-row p {
+    margin:0;
+    padding:0;
 }

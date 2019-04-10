@@ -12,6 +12,12 @@ const initialState = {
     companyRegisterRequests: [],
     companyRoles: [],
     users: [],
+    companyWorkingFor: {
+        id: undefined,
+        role: undefined,
+        name: '',
+    },
+    isWorkingForCompany: false,
 };
 
 export const store = createStore(reducer, initialState, applyMiddleware(logger));
