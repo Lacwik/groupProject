@@ -4,6 +4,7 @@ import com.wfiis.CalculatorCO2.company.metadata.CompanyAssembler;
 import com.wfiis.CalculatorCO2.company.metadata.CompanyService;
 import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
 import com.wfiis.CalculatorCO2.company.model.CompanyIdentity;
+import com.wfiis.CalculatorCO2.company.model.CompanyMember;
 import com.wfiis.CalculatorCO2.company.model.CompanyModel;
 import com.wfiis.CalculatorCO2.company.model.CompanyRegisterModel;
 import com.wfiis.CalculatorCO2.request.metadata.RegisterRequestService;
@@ -44,8 +45,13 @@ public class CompanyFacade {
         return userMetadataService.saveUser(registerModel);
     }
 
-    @SecureCompanyScope(role = CompanyRole.EXPERT)
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
     public CompanyModel getCompany(CompanyIdentity company) {
         return companyAssembler.convertEntityToModel(companyService.findCompany(company.getCompanyId()));
+    }
+
+    @SecureCompanyScope(role = CompanyRole.ADMIN)
+    public void addMemberToCompany(CompanyIdentity companyIdentity, CompanyMember companyMember) {
+        companyService.addMemberToCompany(companyIdentity, companyMember);
     }
 }
