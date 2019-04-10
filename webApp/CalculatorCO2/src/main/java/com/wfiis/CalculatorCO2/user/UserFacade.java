@@ -66,4 +66,8 @@ public class UserFacade {
     public List<UserProfileModel> getUsersBySearchValue(String searchValue) {
         return userAssembler.convertEntitiesToModels(userMetadataService.findUsersBy(searchValue));
     }
+
+    public void startUserJobForCompanyAsRole(Long userId, Long companyId, CompanyRole role) {
+        userMetadataService.startJobForCompanyAsRole(userId, companyId, role);
+    }
 }
