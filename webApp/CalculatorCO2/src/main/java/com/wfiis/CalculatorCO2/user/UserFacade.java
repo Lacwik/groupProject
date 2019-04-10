@@ -1,19 +1,25 @@
 package com.wfiis.CalculatorCO2.user;
 
+import com.wfiis.CalculatorCO2.company.metadata.CompanyService;
+import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
+import com.wfiis.CalculatorCO2.company.model.CompanyIdentity;
 import com.wfiis.CalculatorCO2.user.metadata.UserAssembler;
 import com.wfiis.CalculatorCO2.user.metadata.UserMetadataService;
 import com.wfiis.CalculatorCO2.user.metadata.entity.User;
 import com.wfiis.CalculatorCO2.user.model.CompanyRole;
 import com.wfiis.CalculatorCO2.user.model.CompanyRoleModel;
 import com.wfiis.CalculatorCO2.user.model.UserAuthenticatedModel;
+import com.wfiis.CalculatorCO2.user.model.UserCompanyMember;
 import com.wfiis.CalculatorCO2.user.model.UserLoginModel;
 import com.wfiis.CalculatorCO2.user.model.UserProfileModel;
 import com.wfiis.CalculatorCO2.user.model.UserRegisterModel;
 import com.wfiis.CalculatorCO2.user.security.authorization.TokenProvider;
+import com.wfiis.CalculatorCO2.user.security.scopes.SecureCompanyScope;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -25,6 +31,7 @@ public class UserFacade {
     private final UserAssembler userAssembler;
     private final AuthenticationManager authenticationManager;
     private final TokenProvider tokenProvider;
+    private final CompanyService companyService;
 
     public UserProfileModel registerUser(UserRegisterModel userRegisterModel) {
 
@@ -69,5 +76,27 @@ public class UserFacade {
 
     public void startUserJobForCompanyAsRole(Long userId, Long companyId, CompanyRole role) {
         userMetadataService.startJobForCompanyAsRole(userId, companyId, role);
+    }
+
+    @SecureCompanyScope(role = CompanyRole.ADMIN)
+    @Transactional
+    public void registerUserForCompany(CompanyIdentity companyIdentity, UserCompanyMember userCompanyMember) {
+        final User user = userAssembler.convertCompanyMemberToUser(userCompanyMember);
+
+        final Company company = companyService.findCompany(companyIdentity.getCompanyId());
+
+        userMetadataService.saveUser(user);
+
+        switch (userCompanyMember.getCompanyRole()) {
+            case ADMIN:
+                company.getAdministrators().add(user);
+                break;
+            case EXPERT:
+                company.getExperts().add(user);
+                break;
+            case WORKER:
+                company.getWorkers().add(user);
+                break;
+        }
     }
 }

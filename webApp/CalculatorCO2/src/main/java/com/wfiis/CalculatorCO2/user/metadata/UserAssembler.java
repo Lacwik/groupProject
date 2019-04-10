@@ -1,12 +1,14 @@
 package com.wfiis.CalculatorCO2.user.metadata;
 
 import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
+import com.wfiis.CalculatorCO2.company.model.CompanyMember;
 import com.wfiis.CalculatorCO2.request.metadata.entity.UserRegisterRequestView;
 import com.wfiis.CalculatorCO2.user.metadata.entity.User;
 import com.wfiis.CalculatorCO2.user.model.CompanyRole;
 import com.wfiis.CalculatorCO2.user.model.CompanyRoleModel;
 import com.wfiis.CalculatorCO2.user.model.Role;
 import com.wfiis.CalculatorCO2.user.model.UserAuthenticationPrincipal;
+import com.wfiis.CalculatorCO2.user.model.UserCompanyMember;
 import com.wfiis.CalculatorCO2.user.model.UserProfileModel;
 import com.wfiis.CalculatorCO2.user.model.UserRegisterModel;
 import com.wfiis.CalculatorCO2.user.model.UserRegisterRequestModel;
@@ -97,5 +99,16 @@ public class UserAssembler {
         return companies.stream()
                 .map(company -> this.convertCompanyToCompanyRoleModel(company, role))
                 .collect(Collectors.toList());
+    }
+
+    public User convertCompanyMemberToUser(UserCompanyMember userCompanyMember) {
+        return User.builder()
+                .isActive(true)
+                .password(userCompanyMember.getPassword())
+                .lastName(userCompanyMember.getLastName())
+                .name(userCompanyMember.getName())
+                .email(userCompanyMember.getEmail())
+                .role(Role.USER)
+                .build();
     }
 }

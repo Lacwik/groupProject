@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import { Add } from '@material-ui/icons';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { COMPANY_ROLES } from '../../constants/companyRoles.constants';
 
@@ -13,7 +11,7 @@ class AddUser extends Component {
         super(props);
 
         this.state = {
-            role: COMPANY_ROLES.EXPERT,
+            role: "EXPERT",
         }
 
     }

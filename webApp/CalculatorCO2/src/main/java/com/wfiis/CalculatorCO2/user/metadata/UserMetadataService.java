@@ -55,6 +55,11 @@ public class UserMetadataService {
         return userRepository.save(user);
     }
 
+    public User saveUser(User user) {
+        encodeUserPassword(user);
+        return userRepository.save(user);
+    }
+
     private void encodeUserPassword(User user) {
         String encodedPassword = encoder.encode(user.getPassword());
         user.setPassword(encodedPassword);

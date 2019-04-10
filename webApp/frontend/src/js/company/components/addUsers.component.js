@@ -7,7 +7,6 @@ class AddUsers extends Component {
         this.props.onAddMemberToCompany(id, role);
     }
 
-
     renderUsers = () => {
         return this.props.users.map(({ name, id, lastName, email }) => (
             <AddUser

@@ -20,6 +20,20 @@ export default class CompanyRepository {
             body: JSON.stringify({ userId, companyRole: role.toUpperCase() }),
         })
             .then(response => handleError(response))
-            .catch(err => console.warn("Caught error while trying to add member to company. ", err));   
+            .catch(err => console.warn("Caught error while trying to add member to company. ", err));
+    }
+
+    createMemberToCompany = user => {
+        return fetch(`http://localhost:8090/user/member`, {
+            method: 'POST',
+            headers: this.getHeaders(),
+            body: JSON.stringify({
+                ...user,
+                companyRole: user.role.toUpperCase(),
+                companyId: this.store.getState().companyWorkingFor.id,
+            }),
+        })
+            .then(response => handleError(response))
+            .catch(err => console.warn("Caught error while trying to create member for company. ", err));
     }
 }

@@ -7,8 +7,16 @@ import { companyRepository } from '../factory/companyRepository.factory';
 import '../../css/company.css';
 import { setUsers } from '../redux/app.service';
 import AddUsers from './components/addUsers.component';
+import AddUserForm from './components/addUserForm.component';
 
 class AddUsersContainer extends Component {
+    constructor() {
+        super();
+
+        this.state = {
+            revisionClear: 0,
+        }
+    }
     onSearchUser = value => {
         usersRepository.getUsersBy(value)
             .then(users => setUsers(users));
@@ -19,12 +27,23 @@ class AddUsersContainer extends Component {
             .then(() => console.log("Added user to company."));
     }
 
+    onCreateCompanyMember = user => {
+        companyRepository.createMemberToCompany(user)
+            .then(() => this.setState(state => ({ ...state, revisionClear: state.revisionClear + 1 })))
+    }
+
     render() {
         return (
-            <div className="wrapper-content">
-                <h2>Dodaj pracownika do firmy</h2>
-                <AddUsersSearchbar onSearch={value => this.onSearchUser(value)} />
-                <AddUsers users={this.props.users} onAddMemberToCompany={(id, role) => this.onAddMemberToCompany(id, role)} />
+            <div className="requests-container">
+                <div className="wrapper-content">
+                    <h2>Utwórz pracownika dla firmy</h2>
+                    <AddUserForm onSubmit={user => this.onCreateCompanyMember(user)} errorMessage="" revision={this.state.revisionClear} />
+                </div>
+                <div className="wrapper-content">
+                    <h2>Dodaj pracownika do firmy</h2>
+                    <AddUsersSearchbar onSearch={value => this.onSearchUser(value)} />
+                    <AddUsers users={this.props.users} onAddMemberToCompany={(id, role) => this.onAddMemberToCompany(id, role)} />
+                </div>
             </div>
         );
     }
