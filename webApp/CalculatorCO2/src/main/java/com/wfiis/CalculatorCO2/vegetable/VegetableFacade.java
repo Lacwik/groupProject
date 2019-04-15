@@ -1,9 +1,9 @@
-package com.wfiis.CalculatorCO2.line;
+package com.wfiis.CalculatorCO2.vegetable;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class LineFacade {
+public class VegetableFacade {
 }
