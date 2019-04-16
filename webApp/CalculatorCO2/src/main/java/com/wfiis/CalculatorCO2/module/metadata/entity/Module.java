@@ -1,8 +1,12 @@
 package com.wfiis.CalculatorCO2.module.metadata.entity;
 
+import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
+import com.wfiis.CalculatorCO2.resource.metadata.entity.Resource;
+import com.wfiis.CalculatorCO2.vegetable.metadata.entity.Vegetable;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -34,9 +38,18 @@ public class Module {
     @Column(nullable = false, unique = false)
     private int outsourced;
 
+    private Resource resource;
+
+    private Company company;
+
+    @ManyToMany
+    @JoinTable(
+            name = "MODULE_VEGETABLES",
+            inverseJoinColumns = @JoinColumn(name = "module_id"),
+            joinColumns = @JoinColumn(name = "vegetable_id")
+    )
+    private List<Vegetable> vegetables;
+
     //TODO
-    //stage_module
-    //module_vegetable
-    //resource
-    //company
+    //outsourced module ??
 }

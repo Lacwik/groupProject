@@ -27,7 +27,4 @@ public class Resource {
 
     @Column(nullable = false, unique = false)
     private float oil;
-
-    //TODO
-    //module
 }

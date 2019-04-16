@@ -1,8 +1,12 @@
 package com.wfiis.CalculatorCO2.stage.metadata.entity;
 
+import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
+import com.wfiis.CalculatorCO2.module.metadata.entity.Module;
+import com.wfiis.CalculatorCO2.vegetable.metadata.entity.Vegetable;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -22,9 +26,24 @@ public class Stage {
     @Column(nullable = false, unique = false)
     private int outsourced;
 
+    private Company company;
+
+    @ManyToMany
+    @JoinTable(
+            name = "STAGE_VEGETABLES",
+            inverseJoinColumns = @JoinColumn(name = "stage_id"),
+            joinColumns = @JoinColumn(name = "vegetable_id")
+    )
+    private List<Vegetable> vegetables;
+
+    @ManyToMany
+    @JoinTable(
+            name = "STAGE_MODULES",
+            inverseJoinColumns = @JoinColumn(name = "stage_id"),
+            joinColumns = @JoinColumn(name = "module_id")
+    )
+    private List<Module> modules;
+
     //TODO
-    //stage_vegetable
-    //outsourced_stage
-    //line_stage
-    //company
+    //outsourced_stage ??
 }

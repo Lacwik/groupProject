@@ -18,9 +18,4 @@ public class Vegetable {
 
     @Column(nullable = false, unique = true)
     private String name;
-
-    //TODO
-    //stage_vegetable
-    //module_vegetable
-    //line_vegetable
 }
