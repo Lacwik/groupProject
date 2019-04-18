@@ -1,7 +1,11 @@
 package com.wfiis.CalculatorCO2.line.metadata.repository;
 
-import com.wfiis.CalculatorCO2.line.metadata.entity.Stage;
+import com.wfiis.CalculatorCO2.line.metadata.entity.Line;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface LineRepository extends JpaRepository<Stage, Long> {
+import java.util.List;
+
+public interface LineRepository extends JpaRepository<Line, Long> {
+    List<Line> findLinesByOutsourced(int outsourced);
+    List<Line> findLinesByCompanyId(Long companyId);
 }

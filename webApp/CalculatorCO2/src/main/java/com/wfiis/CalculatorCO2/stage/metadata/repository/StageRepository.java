@@ -1,7 +1,11 @@
 package com.wfiis.CalculatorCO2.stage.metadata.repository;
 
-import com.wfiis.CalculatorCO2.stage.metadata.entity.Module;
+import com.wfiis.CalculatorCO2.stage.metadata.entity.Stage;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface StageRepository extends JpaRepository<Module, Long> {
+import java.util.List;
+
+public interface StageRepository extends JpaRepository<Stage, Long> {
+    List<Stage> findStagesByOutsourced(int outsourced);
+    List<Stage> findStagesByCompanyId(Long companyId);
 }

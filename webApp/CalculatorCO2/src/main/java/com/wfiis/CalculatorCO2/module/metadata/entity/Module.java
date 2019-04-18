@@ -38,9 +38,11 @@ public class Module {
     @Column(nullable = false, unique = false)
     private int outsourced;
 
-    private Resource resource;
+    @Column(nullable = false, unique = false)
+    private Long resourceId;
 
-    private Company company;
+    @Column(nullable = false, unique = false)
+    private Long companyId;
 
     @ManyToMany
     @JoinTable(
@@ -49,7 +51,4 @@ public class Module {
             joinColumns = @JoinColumn(name = "vegetable_id")
     )
     private List<Vegetable> vegetables;
-
-    //TODO
-    //outsourced module ??
 }

@@ -26,7 +26,8 @@ public class Stage {
     @Column(nullable = false, unique = false)
     private int outsourced;
 
-    private Company company;
+    @Column(nullable = false, unique = false)
+    private Long companyId;
 
     @ManyToMany
     @JoinTable(
@@ -43,7 +44,4 @@ public class Stage {
             joinColumns = @JoinColumn(name = "module_id")
     )
     private List<Module> modules;
-
-    //TODO
-    //outsourced_stage ??
 }
