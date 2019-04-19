@@ -1,6 +1,6 @@
 package com.wfiis.CalculatorCO2.line.model;
 
-import com.wfiis.CalculatorCO2.stage.model.StageModel;
+import com.wfiis.CalculatorCO2.stage.model.StageCreateModel;
 import com.wfiis.CalculatorCO2.vegetable.model.VegetableModel;
 import lombok.AllArgsConstructor;
 
@@ -14,7 +14,7 @@ public class LineModel {
 
     private int outsourced;
 
-    private List<StageModel> stages;
+    private List<StageCreateModel> stages;
 
     private List<VegetableModel> vegetables;
 }

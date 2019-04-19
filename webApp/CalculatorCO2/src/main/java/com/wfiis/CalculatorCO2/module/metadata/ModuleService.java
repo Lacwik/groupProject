@@ -36,7 +36,7 @@ public class ModuleService {
                 module.getPower(),
                 module.getTime(),
                 module.getOutsourced(),
-                module.getResourceId(),
+                module.getResource(),
                 vegetableService.getModelsFromEntityList(module.getVegetables())
         );
     }

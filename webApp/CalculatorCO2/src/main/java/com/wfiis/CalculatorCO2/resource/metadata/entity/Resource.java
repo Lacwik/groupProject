@@ -1,8 +1,10 @@
 package com.wfiis.CalculatorCO2.resource.metadata.entity;
 
+import com.wfiis.CalculatorCO2.module.metadata.entity.Module;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -17,6 +19,9 @@ public class Resource {
     private Long id;
 
     @Column(nullable = false, unique = false)
+    private float power;
+
+    @Column(nullable = false, unique = false)
     private float water;
 
     @Column(nullable = false, unique = false)
@@ -27,4 +32,7 @@ public class Resource {
 
     @Column(nullable = false, unique = false)
     private float oil;
+
+    @OneToMany
+    private List<Module> modules;
 }

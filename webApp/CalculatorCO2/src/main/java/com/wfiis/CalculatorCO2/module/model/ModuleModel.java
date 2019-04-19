@@ -15,6 +15,6 @@ public class ModuleModel {
     private float power;
     private int time;
     private int outsourced;
-    private Long resource;
+    private Resource resource;
     private List<VegetableModel> vegetables;
 }

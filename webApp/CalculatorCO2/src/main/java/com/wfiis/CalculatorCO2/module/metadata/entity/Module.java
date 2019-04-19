@@ -38,11 +38,13 @@ public class Module {
     @Column(nullable = false, unique = false)
     private int outsourced;
 
-    @Column(nullable = false, unique = false)
-    private Long resourceId;
+    @ManyToOne
+    @JoinColumn(name = "resource_id")
+    private Resource resource;
 
-    @Column(nullable = false, unique = false)
-    private Long companyId;
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private Company company;
 
     @ManyToMany
     @JoinTable(

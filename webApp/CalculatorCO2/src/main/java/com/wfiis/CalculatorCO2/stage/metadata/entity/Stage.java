@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @Getter
 @Builder
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor
 @Table(name = "calc_stages")
 public class Stage {
     @Id
@@ -24,10 +24,11 @@ public class Stage {
     private String name;
 
     @Column(nullable = false, unique = false)
-    private int outsourced;
+    private Boolean outsourced;
 
-    @Column(nullable = false, unique = false)
-    private Long companyId;
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private Company company;
 
     @ManyToMany
     @JoinTable(

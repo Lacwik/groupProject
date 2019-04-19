@@ -4,6 +4,7 @@ import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
 import com.wfiis.CalculatorCO2.line.metadata.entity.Line;
 import com.wfiis.CalculatorCO2.line.metadata.repository.LineRepository;
 import com.wfiis.CalculatorCO2.line.model.LineModel;
+import com.wfiis.CalculatorCO2.stage.metadata.StageAssembler;
 import com.wfiis.CalculatorCO2.stage.metadata.StageService;
 import com.wfiis.CalculatorCO2.vegetable.metadata.VegetableService;
 
@@ -14,6 +15,7 @@ public class LineService {
     private LineRepository lineRepository;
     private StageService stageService;
     private VegetableService vegetableService;
+    private StageAssembler stageAssembler;
 
     public List<Line> getOutsourcedLines() {
         return lineRepository.findLinesByOutsourced(1);
@@ -39,7 +41,7 @@ public class LineService {
                 line.getId(),
                 line.getName(),
                 line.getOutsourced(),
-                stageService.getModelsFromEntityList(line.getStages()),
+                stageAssembler.getModelsFromEntityList(line.getStages()),
                 vegetableService.getModelsFromEntityList(line.getVegetables())
         );
     }

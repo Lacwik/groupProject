@@ -1,5 +1,6 @@
 package com.wfiis.CalculatorCO2.line.metadata.entity;
 
+import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
 import com.wfiis.CalculatorCO2.stage.metadata.entity.Stage;
 import com.wfiis.CalculatorCO2.vegetable.metadata.entity.Vegetable;
 import lombok.*;
@@ -25,8 +26,9 @@ public class Line {
     @Column(nullable = false, unique = false)
     private int outsourced;
 
-    @Column(nullable = false, unique = false)
-    private Long companyId;
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private Company company;
 
     @ManyToMany
     @JoinTable(

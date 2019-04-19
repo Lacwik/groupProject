@@ -3,6 +3,7 @@ package com.wfiis.CalculatorCO2.user.metadata;
 import com.wfiis.CalculatorCO2.company.metadata.CompanyService;
 import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
 import com.wfiis.CalculatorCO2.user.exception.UserNotFoundException;
+import com.wfiis.CalculatorCO2.user.exception.UserNotWorkingForCompanyException;
 import com.wfiis.CalculatorCO2.user.metadata.entity.User;
 import com.wfiis.CalculatorCO2.user.metadata.entity.UserCompanyJob;
 import com.wfiis.CalculatorCO2.user.metadata.repository.UserCompanyJobRepository;
@@ -112,5 +113,9 @@ public class UserMetadataService {
 
     public boolean canUserWorkingForCompany(Long userId, Long companyId) {
         return companyJobRepository.existsByUserIdAndCompanyId(userId, companyId);
+    }
+
+    public Company getCurrentCompanyWorkingFor(Long userId) {
+        return companyJobRepository.findByUserId(userId).orElseThrow(()->new UserNotWorkingForCompanyException(userId));
     }
 }
