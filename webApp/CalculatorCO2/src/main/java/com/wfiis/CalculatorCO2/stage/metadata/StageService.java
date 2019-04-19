@@ -24,7 +24,7 @@ public class StageService {
     private StageAssembler stageAssembler;
 
     public List<Stage> getOutsourcedStages() {
-        return stageRepository.findStagesByOutsourced(1);
+        return stageRepository.findStagesByOutsourced(true);
     }
 
     public List<Stage> getCompanyStages(Long companyId) {
