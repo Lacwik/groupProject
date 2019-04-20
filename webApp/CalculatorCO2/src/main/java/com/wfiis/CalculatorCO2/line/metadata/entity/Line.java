@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @Getter
 @Builder
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 @Table(name = "calc_lines")
 public class Line {
     @Id
@@ -24,7 +24,7 @@ public class Line {
     private String name;
 
     @Column(nullable = false, unique = false)
-    private int outsourced;
+    private Boolean outsourced;
 
     @ManyToOne
     @JoinColumn(name = "company_id")

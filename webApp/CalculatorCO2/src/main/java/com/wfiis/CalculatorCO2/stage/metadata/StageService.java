@@ -2,6 +2,8 @@ package com.wfiis.CalculatorCO2.stage.metadata;
 
 import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
 import com.wfiis.CalculatorCO2.company.model.CompanyIdentity;
+import com.wfiis.CalculatorCO2.line.metadata.LineService;
+import com.wfiis.CalculatorCO2.line.model.LineModel;
 import com.wfiis.CalculatorCO2.module.metadata.entity.Module;
 import com.wfiis.CalculatorCO2.stage.exceptions.StageNotFoundException;
 import com.wfiis.CalculatorCO2.stage.metadata.entity.Stage;
@@ -21,6 +23,7 @@ import java.util.List;
 public class StageService {
     private final StageRepository stageRepository;
     private final StageAssembler stageAssembler;
+    private final LineService lineService;
 
     @SecureCompanyScope(role = CompanyRole.MEMBER)
     public List<StageModel> getCompanyStages(CompanyIdentity companyIdentity, Company company) {
