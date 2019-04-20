@@ -1,42 +1,73 @@
 package com.wfiis.CalculatorCO2.module.metadata;
 
+import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
+import com.wfiis.CalculatorCO2.company.model.CompanyIdentity;
+import com.wfiis.CalculatorCO2.module.exceptions.ModuleNotFoundException;
 import com.wfiis.CalculatorCO2.module.metadata.entity.Module;
 import com.wfiis.CalculatorCO2.module.metadata.repository.ModuleRepository;
+import com.wfiis.CalculatorCO2.module.model.ModuleCreateModel;
 import com.wfiis.CalculatorCO2.module.model.ModuleModel;
-import com.wfiis.CalculatorCO2.vegetable.metadata.VegetableService;
+import com.wfiis.CalculatorCO2.stage.metadata.StageAssembler;
+import com.wfiis.CalculatorCO2.stage.model.StageModel;
+import com.wfiis.CalculatorCO2.user.model.CompanyRole;
+import com.wfiis.CalculatorCO2.user.security.scopes.SecureCompanyScope;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
+import javax.transaction.Transactional;
 import java.util.List;
 
+@Component
+@RequiredArgsConstructor
 public class ModuleService {
-    private ModuleRepository moduleRepository;
-    private VegetableService vegetableService;
+    private final ModuleRepository moduleRepository;
+    private final ModuleAssembler moduleAssembler;
+    private final StageAssembler stageAssembler;
 
-    public List<ModuleModel> getOutsourcedModules(){
-        return moduleAssembler.getCreateModelsFromEntityList(moduleRepository.findModulesByOutsourced(true));
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
+    public List<ModuleModel> getCompanyModules(CompanyIdentity companyIdentity, Company company) {
+        return moduleAssembler.getModelsFromEntityList(moduleRepository.findModulesByCompany(company));
     }
 
-    public List<Module> getCompanyModules(Long companyId){
-        return moduleRepository.findModulesByCompany(companyId);
+    @SecureCompanyScope(role = CompanyRole.ADMIN)
+    public ModuleModel addModule(CompanyIdentity companyIdentity, ModuleCreateModel moduleCreateModel, Company company){
+        Module module = moduleRepository.save(moduleAssembler.getNewEntityFromModel(moduleCreateModel, company));
+        return moduleAssembler.getModelFromEntity(module);
     }
 
-    public List<ModuleModel> getModelsFromEntityList(List<Module> modules) {
-        List<ModuleModel> outModules = new ArrayList<>();
-        for (Module module : modules) {
-            outModules.add(getModelFromEntity(module));
-        }
-        return outModules;
+    public Company getCompanyByModuleId(Long moduleId){
+        return getModuleById(moduleId).getCompany();
     }
 
-    public ModuleModel getModelFromEntity(Module module) {
-        return new ModuleModel(
-                module.getId(),
-                module.getName(),
-                module.getLoss(),
-                module.getWaste(),
-                module.getTime(),
-                module.getResource(),
-                module.getVegetables()
-        );
+    public Module getModuleById(Long moduleId){
+        return moduleRepository.findById(moduleId).orElseThrow(()->new ModuleNotFoundException(moduleId));
+    }
+
+    @Transactional
+    @SecureCompanyScope(role = CompanyRole.ADMIN)
+    public ModuleModel editModule(CompanyIdentity companyIdentity, ModuleCreateModel moduleCreateModel, Long moduleId){
+        Module module = getModuleById(moduleId);
+        module.setName(moduleCreateModel.getName());
+        module.setLoss(moduleCreateModel.getLoss());
+        module.setWaste(moduleCreateModel.getWaste());
+        module.setTime(moduleCreateModel.getTime());
+        module.setResource(moduleCreateModel.getResource());
+        module.setVegetables(moduleCreateModel.getVegetables());
+        return moduleAssembler.getModelFromEntity(module);
+    }
+
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
+    public ModuleModel getModuleModelById(CompanyIdentity companyIdentity, Long moduleId){
+        return moduleAssembler.getModelFromEntity(getModuleById(moduleId));
+    }
+
+    @SecureCompanyScope(role = CompanyRole.ADMIN)
+    public List<StageModel> getModuleStagesById(CompanyIdentity companyIdentity, Long moduleId){
+        return stageAssembler.getModelsFromEntityList(getModuleById(moduleId).getStages());
+    }
+
+    @SecureCompanyScope(role = CompanyRole.ADMIN)
+    public void deleteModuleById(CompanyIdentity companyIdentity, Long moduleId){
+        moduleRepository.delete(getModuleById(moduleId));
     }
 }

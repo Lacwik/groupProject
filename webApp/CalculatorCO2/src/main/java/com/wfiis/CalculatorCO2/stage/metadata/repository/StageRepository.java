@@ -9,5 +9,4 @@ import java.util.List;
 
 public interface StageRepository extends JpaRepository<Stage, Long> {
     List<Stage> findStagesByCompany(Company company);
-    List<Stage> findStageByModule(Module module);
 }

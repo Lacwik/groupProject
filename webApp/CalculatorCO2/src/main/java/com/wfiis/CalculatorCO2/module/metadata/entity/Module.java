@@ -2,6 +2,7 @@ package com.wfiis.CalculatorCO2.module.metadata.entity;
 
 import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
 import com.wfiis.CalculatorCO2.resource.metadata.entity.Resource;
+import com.wfiis.CalculatorCO2.stage.metadata.entity.Stage;
 import com.wfiis.CalculatorCO2.vegetable.metadata.entity.Vegetable;
 import lombok.*;
 
@@ -13,7 +14,7 @@ import java.util.List;
 @Setter
 @Getter
 @Builder
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 @Table(name = "calc_modules")
 public class Module {
     @Id
@@ -33,7 +34,7 @@ public class Module {
     private int time;
 
     @Column(nullable = false, unique = false)
-    private int outsourced;
+    private Boolean outsourced;
 
     @ManyToOne
     @JoinColumn(name = "resource_id")
@@ -50,4 +51,7 @@ public class Module {
             joinColumns = @JoinColumn(name = "vegetable_id")
     )
     private List<Vegetable> vegetables;
+
+    @ManyToMany
+    private List<Stage> stages;
 }
