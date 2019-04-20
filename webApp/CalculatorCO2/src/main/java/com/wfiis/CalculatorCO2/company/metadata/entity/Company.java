@@ -54,12 +54,12 @@ public class Company {
     )
     private List<User> administrators;
 
-    @OneToMany
+    @OneToMany(mappedBy = "company")
     private List<Module> modules;
 
-    @OneToMany
+    @OneToMany(mappedBy = "company")
     private List<Stage> stages;
 
-    @OneToMany
+    @OneToMany(mappedBy = "company")
     private List<Line> lines;
 }

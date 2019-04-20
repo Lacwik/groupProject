@@ -30,9 +30,6 @@ public class Module {
     private float waste;
 
     @Column(nullable = false, unique = false)
-    private float power;
-
-    @Column(nullable = false, unique = false)
     private int time;
 
     @Column(nullable = false, unique = false)

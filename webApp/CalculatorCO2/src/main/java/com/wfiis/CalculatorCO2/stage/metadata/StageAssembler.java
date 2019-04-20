@@ -11,8 +11,25 @@ import java.util.List;
 
 @Component
 public class StageAssembler {
-    public List<StageCreateModel> getModelsFromEntityList(List<Stage> stages) {
+
+    public List<StageCreateModel> getCreateModelsFromEntityList(List<Stage> stages) {
         List<StageCreateModel> outStages = new ArrayList<>();
+        for (Stage stage : stages) {
+            outStages.add(getCreateModelFromEntity(stage));
+        }
+        return outStages;
+    }
+
+    public StageCreateModel getCreateModelFromEntity(Stage stage) {
+        return new StageCreateModel(
+                stage.getName(),
+                stage.getVegetables(),
+                stage.getModules()
+        );
+    }
+
+    public List<StageModel> getModelsFromEntityList(List<Stage> stages) {
+        List<StageModel> outStages = new ArrayList<>();
         for (Stage stage : stages) {
             outStages.add(getModelFromEntity(stage));
         }

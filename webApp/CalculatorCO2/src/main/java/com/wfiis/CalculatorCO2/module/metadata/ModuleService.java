@@ -12,12 +12,12 @@ public class ModuleService {
     private ModuleRepository moduleRepository;
     private VegetableService vegetableService;
 
-    public List<Module> getOutsourcedModules(){
-        return moduleRepository.findModulesByOutsourced(1);
+    public List<ModuleModel> getOutsourcedModules(){
+        return moduleAssembler.getCreateModelsFromEntityList(moduleRepository.findModulesByOutsourced(true));
     }
 
     public List<Module> getCompanyModules(Long companyId){
-        return moduleRepository.findModulesByCompanyId(companyId);
+        return moduleRepository.findModulesByCompany(companyId);
     }
 
     public List<ModuleModel> getModelsFromEntityList(List<Module> modules) {
@@ -29,15 +29,14 @@ public class ModuleService {
     }
 
     public ModuleModel getModelFromEntity(Module module) {
-        return new ModuleModel(module.getId(),
+        return new ModuleModel(
+                module.getId(),
                 module.getName(),
                 module.getLoss(),
                 module.getWaste(),
-                module.getPower(),
                 module.getTime(),
-                module.getOutsourced(),
                 module.getResource(),
-                vegetableService.getModelsFromEntityList(module.getVegetables())
+                module.getVegetables()
         );
     }
 }

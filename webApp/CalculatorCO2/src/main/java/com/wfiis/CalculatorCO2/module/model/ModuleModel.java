@@ -1,7 +1,7 @@
 package com.wfiis.CalculatorCO2.module.model;
 
 import com.wfiis.CalculatorCO2.resource.metadata.entity.Resource;
-import com.wfiis.CalculatorCO2.vegetable.model.VegetableModel;
+import com.wfiis.CalculatorCO2.vegetable.metadata.entity.Vegetable;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
@@ -12,9 +12,7 @@ public class ModuleModel {
     private String name;
     private float loss;
     private float waste;
-    private float power;
     private int time;
-    private int outsourced;
     private Resource resource;
-    private List<VegetableModel> vegetables;
+    private List<Vegetable> vegetables;
 }

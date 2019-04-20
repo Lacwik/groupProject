@@ -1,9 +1,8 @@
 package com.wfiis.CalculatorCO2.line.metadata;
 
-import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
 import com.wfiis.CalculatorCO2.line.metadata.entity.Line;
 import com.wfiis.CalculatorCO2.line.metadata.repository.LineRepository;
-import com.wfiis.CalculatorCO2.line.model.LineModel;
+import com.wfiis.CalculatorCO2.line.model.LineCreateModel;
 import com.wfiis.CalculatorCO2.stage.metadata.StageAssembler;
 import com.wfiis.CalculatorCO2.stage.metadata.StageService;
 import com.wfiis.CalculatorCO2.vegetable.metadata.VegetableService;
@@ -17,17 +16,9 @@ public class LineService {
     private VegetableService vegetableService;
     private StageAssembler stageAssembler;
 
-    public List<Line> getOutsourcedLines() {
-        return lineRepository.findLinesByOutsourced(1);
-    }
 
-    public List<Line> getCompanyLines(Long companyId) {
-        return lineRepository.findLinesByCompanyId(companyId);
-    }
-
-
-    public List<LineModel> getModelsFromEntityList(List<Line> lines) {
-        List<LineModel> outLines = new ArrayList<>();
+    public List<LineCreateModel> getModelsFromEntityList(List<Line> lines) {
+        List<LineCreateModel> outLines = new ArrayList<>();
 
         for (Line line : lines) {
             outLines.add(getModelFromEntity(line));
@@ -36,13 +27,13 @@ public class LineService {
         return outLines;
     }
 
-    public LineModel getModelFromEntity(Line line) {
-        return new LineModel(
+    public LineCreateModel getModelFromEntity(Line line) {
+        return new LineCreateModel(
                 line.getId(),
                 line.getName(),
                 line.getOutsourced(),
-                stageAssembler.getModelsFromEntityList(line.getStages()),
-                vegetableService.getModelsFromEntityList(line.getVegetables())
+                line.getStages(),
+                line.getVegetables()
         );
     }
 }

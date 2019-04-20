@@ -116,6 +116,6 @@ public class UserMetadataService {
     }
 
     public Company getCurrentCompanyWorkingFor(Long userId) {
-        return companyJobRepository.findByUserId(userId).orElseThrow(()->new UserNotWorkingForCompanyException(userId));
+        return companyJobRepository.findByUserId(userId).orElseThrow(()->new UserNotWorkingForCompanyException(userId)).getCompany();
     }
 }
