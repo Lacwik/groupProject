@@ -58,8 +58,8 @@ public class StageFacade {
         return stageService.getStageLinesById(CompanyIdentity.of(company.getId()), stageId);
     }
 
-    public StageModel deleteStage(Long userId, Long stageId){
-        return stageService.deleteStageModelById(
+    public void deleteStage(Long userId, Long stageId){
+        stageService.deleteStageModelById(
                 CompanyIdentity.of(
                         userMetadataService.getCurrentCompanyWorkingFor(userId).getId()
                 ),

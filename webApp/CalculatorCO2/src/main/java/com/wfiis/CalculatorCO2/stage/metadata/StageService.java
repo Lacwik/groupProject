@@ -63,12 +63,13 @@ public class StageService {
     }
 
     @SecureCompanyScope(role = CompanyRole.ADMIN)
-    public StageModel deleteStageModelById(CompanyIdentity companyIdentity, Long stageId){
+    public void deleteStageModelById(CompanyIdentity companyIdentity, Long stageId){
         stageRepository.delete(getStageById(stageId));
-        return stageAssembler.getModelFromEntity(getStageById(stageId));
     }
 
     public List<StageModel> getStageModelsByModule(Module module){
-        stageRepository.f
+        return stageAssembler.getModelsFromEntityList(
+        stageRepository.findStageByModule(module)
+        );
     }
 }

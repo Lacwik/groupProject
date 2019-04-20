@@ -51,8 +51,9 @@ public class StageController {
     }
 
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<StageModel> deleteStage(UsernamePasswordAuthenticationToken idToken, @PathVariable Long id){
+    public ResponseEntity<String> deleteStage(UsernamePasswordAuthenticationToken idToken, @PathVariable Long id){
         UserAuthenticationPrincipal principal = (UserAuthenticationPrincipal) idToken.getPrincipal();
-        return ResponseEntity.ok(stageFacade.deleteStage(principal.getId(), id));
+        stageFacade.deleteStage(principal.getId(), id);
+        return ResponseEntity.ok("Stage with id " + id + " deleted");
     }
 }
