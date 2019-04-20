@@ -1,5 +1,6 @@
 package com.wfiis.CalculatorCO2.controllers;
 
+import com.wfiis.CalculatorCO2.line.model.LineModel;
 import com.wfiis.CalculatorCO2.stage.StageFacade;
 import com.wfiis.CalculatorCO2.stage.model.StageCreateModel;
 import com.wfiis.CalculatorCO2.stage.model.StageModel;

@@ -2,8 +2,8 @@ package com.wfiis.CalculatorCO2.stage;
 
 import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
 import com.wfiis.CalculatorCO2.company.model.CompanyIdentity;
+import com.wfiis.CalculatorCO2.line.model.LineModel;
 import com.wfiis.CalculatorCO2.stage.metadata.StageService;
-import com.wfiis.CalculatorCO2.stage.metadata.entity.Stage;
 import com.wfiis.CalculatorCO2.stage.model.StageCreateModel;
 import com.wfiis.CalculatorCO2.stage.model.StageModel;
 import com.wfiis.CalculatorCO2.user.metadata.UserMetadataService;
@@ -17,12 +17,6 @@ import java.util.List;
 public class StageFacade {
     private final StageService stageService;
     private final UserMetadataService userMetadataService;
-
-    /*public List<StageCreateModel> getOutsourcedStages(){
-        return stageService.getModelsFromEntityList(
-                stageService.getOutsourcedStages()
-        );
-    }*/
 
     public StageModel createStage(StageCreateModel stageCreateModel, Long userId) {
         Company company = userMetadataService.getCurrentCompanyWorkingFor(userId);
@@ -59,7 +53,7 @@ public class StageFacade {
     }
 
     public void deleteStage(Long userId, Long stageId){
-        stageService.deleteStageModelById(
+        stageService.deleteStageById(
                 CompanyIdentity.of(
                         userMetadataService.getCurrentCompanyWorkingFor(userId).getId()
                 ),

@@ -1,6 +1,7 @@
 package com.wfiis.CalculatorCO2.stage.metadata.entity;
 
 import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
+import com.wfiis.CalculatorCO2.line.metadata.entity.Line;
 import com.wfiis.CalculatorCO2.module.metadata.entity.Module;
 import com.wfiis.CalculatorCO2.vegetable.metadata.entity.Vegetable;
 import lombok.*;
@@ -45,4 +46,7 @@ public class Stage {
             joinColumns = @JoinColumn(name = "module_id")
     )
     private List<Module> modules;
+
+    @ManyToMany
+    private List<Line> lines;
 }

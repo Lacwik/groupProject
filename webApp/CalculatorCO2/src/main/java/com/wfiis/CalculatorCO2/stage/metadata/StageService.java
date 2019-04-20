@@ -2,9 +2,8 @@ package com.wfiis.CalculatorCO2.stage.metadata;
 
 import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
 import com.wfiis.CalculatorCO2.company.model.CompanyIdentity;
-import com.wfiis.CalculatorCO2.line.metadata.LineService;
+import com.wfiis.CalculatorCO2.line.metadata.LineAssembler;
 import com.wfiis.CalculatorCO2.line.model.LineModel;
-import com.wfiis.CalculatorCO2.module.metadata.entity.Module;
 import com.wfiis.CalculatorCO2.stage.exceptions.StageNotFoundException;
 import com.wfiis.CalculatorCO2.stage.metadata.entity.Stage;
 import com.wfiis.CalculatorCO2.stage.metadata.repository.StageRepository;
@@ -23,7 +22,7 @@ import java.util.List;
 public class StageService {
     private final StageRepository stageRepository;
     private final StageAssembler stageAssembler;
-    private final LineService lineService;
+    private final LineAssembler lineAssembler;
 
     @SecureCompanyScope(role = CompanyRole.MEMBER)
     public List<StageModel> getCompanyStages(CompanyIdentity companyIdentity, Company company) {
@@ -59,20 +58,13 @@ public class StageService {
         return stageAssembler.getModelFromEntity(getStageById(stageId));
     }
 
-    //TODO
     @SecureCompanyScope(role = CompanyRole.ADMIN)
     public List<LineModel> getStageLinesById(CompanyIdentity companyIdentity, Long stageId){
-        return lineService.getLineModelsByStage(getStageById(stageId));
+        return lineAssembler.getModelsFromEntityList(getStageById(stageId).getLines());
     }
 
     @SecureCompanyScope(role = CompanyRole.ADMIN)
-    public void deleteStageModelById(CompanyIdentity companyIdentity, Long stageId){
+    public void deleteStageById(CompanyIdentity companyIdentity, Long stageId){
         stageRepository.delete(getStageById(stageId));
-    }
-
-    public List<StageModel> getStageModelsByModule(Module module){
-        return stageAssembler.getModelsFromEntityList(
-        stageRepository.findStageByModule(module)
-        );
     }
 }

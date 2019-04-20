@@ -52,7 +52,8 @@ public class StageAssembler {
                 false,
                 company,
                 stageCreateModel.getVegetables(),
-                stageCreateModel.getModules()
+                stageCreateModel.getModules(),
+                new ArrayList<>()
         );
     }
 
