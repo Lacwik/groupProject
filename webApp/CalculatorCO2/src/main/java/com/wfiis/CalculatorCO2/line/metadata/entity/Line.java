@@ -45,4 +45,7 @@ public class Line {
             joinColumns = @JoinColumn(name = "vegetable_id")
     )
     private List<Vegetable> vegetables;
+
+    @Column(nullable = false, unique = false)
+    private Boolean unused;
 }

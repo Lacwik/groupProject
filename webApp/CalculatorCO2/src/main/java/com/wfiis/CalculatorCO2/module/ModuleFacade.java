@@ -15,7 +15,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class ModuleFacade {
-    private ModuleService moduleService;
+    private final ModuleService moduleService;
     private final UserMetadataService userMetadataService;
 
     public ModuleModel createModule(ModuleCreateModel moduleCreateModel, Long userId) {

@@ -7,6 +7,11 @@ import com.wfiis.CalculatorCO2.module.metadata.entity.Module;
 import com.wfiis.CalculatorCO2.module.metadata.repository.ModuleRepository;
 import com.wfiis.CalculatorCO2.module.model.ModuleCreateModel;
 import com.wfiis.CalculatorCO2.module.model.ModuleModel;
+import com.wfiis.CalculatorCO2.resource.metadata.entity.Resource;
+import com.wfiis.CalculatorCO2.resource.metadata.repository.ResourceRepository;
+import com.wfiis.CalculatorCO2.resourceFlags.metadata.ResourceFlagsService;
+import com.wfiis.CalculatorCO2.resourceFlags.metadata.entity.ResourceFlags;
+import com.wfiis.CalculatorCO2.resourceFlags.metadata.repository.ResourceFlagsRepository;
 import com.wfiis.CalculatorCO2.stage.metadata.StageAssembler;
 import com.wfiis.CalculatorCO2.stage.model.StageModel;
 import com.wfiis.CalculatorCO2.user.model.CompanyRole;
@@ -23,6 +28,7 @@ public class ModuleService {
     private final ModuleRepository moduleRepository;
     private final ModuleAssembler moduleAssembler;
     private final StageAssembler stageAssembler;
+    private final ResourceFlagsService resourceFlagsService;
 
     @SecureCompanyScope(role = CompanyRole.MEMBER)
     public List<ModuleModel> getCompanyModules(CompanyIdentity companyIdentity, Company company) {
@@ -47,11 +53,19 @@ public class ModuleService {
     @SecureCompanyScope(role = CompanyRole.ADMIN)
     public ModuleModel editModule(CompanyIdentity companyIdentity, ModuleCreateModel moduleCreateModel, Long moduleId){
         Module module = getModuleById(moduleId);
+
+        if (module.getUnused() == false)
+            return addModule(companyIdentity, moduleCreateModel, module.getCompany());
+
+        resourceFlagsService.editResourceFlags(
+                companyIdentity,
+                moduleCreateModel.getResourceFlagsCreateModel(),
+                module.getResourceFlags().getId()
+        );
+
         module.setName(moduleCreateModel.getName());
-        module.setLoss(moduleCreateModel.getLoss());
-        module.setWaste(moduleCreateModel.getWaste());
-        module.setTime(moduleCreateModel.getTime());
-        module.setResource(moduleCreateModel.getResource());
+        module.setPower(moduleCreateModel.getPower());
+        //module.setResourceFlags(resourceFlags);
         module.setVegetables(moduleCreateModel.getVegetables());
         return moduleAssembler.getModelFromEntity(module);
     }

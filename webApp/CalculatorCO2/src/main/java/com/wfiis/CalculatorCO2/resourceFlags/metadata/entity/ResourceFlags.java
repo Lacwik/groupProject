@@ -1,7 +1,6 @@
-package com.wfiis.CalculatorCO2.resource.metadata.entity;
+package com.wfiis.CalculatorCO2.resourceFlags.metadata.entity;
 
 import lombok.*;
-
 import javax.persistence.*;
 
 @Entity
@@ -9,25 +8,22 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Builder
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Table(name = "calc_resources")
-public class Resource {
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
+@Table(name = "calc_resources_flags")
+public class ResourceFlags {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, unique = false)
-    private float water;
+    private Boolean waterFlag;
 
     @Column(nullable = false, unique = false)
-    private float diesel;
+    private Boolean dieselFlag;
 
     @Column(nullable = false, unique = false)
-    private float lpg;
+    private Boolean lpgFlag;
 
     @Column(nullable = false, unique = false)
-    private float foil;
-
-    //@OneToMany
-    //private List<Module> modules;
+    private Boolean foilFlag;
 }

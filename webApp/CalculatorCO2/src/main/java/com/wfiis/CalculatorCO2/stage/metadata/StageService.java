@@ -4,6 +4,7 @@ import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
 import com.wfiis.CalculatorCO2.company.model.CompanyIdentity;
 import com.wfiis.CalculatorCO2.line.metadata.LineAssembler;
 import com.wfiis.CalculatorCO2.line.model.LineModel;
+import com.wfiis.CalculatorCO2.resourceFlags.metadata.ResourceFlagsService;
 import com.wfiis.CalculatorCO2.stage.exceptions.StageNotFoundException;
 import com.wfiis.CalculatorCO2.stage.metadata.entity.Stage;
 import com.wfiis.CalculatorCO2.stage.metadata.repository.StageRepository;
@@ -23,6 +24,7 @@ public class StageService {
     private final StageRepository stageRepository;
     private final StageAssembler stageAssembler;
     private final LineAssembler lineAssembler;
+    private final ResourceFlagsService resourceFlagsService;
 
     @SecureCompanyScope(role = CompanyRole.MEMBER)
     public List<StageModel> getCompanyStages(CompanyIdentity companyIdentity, Company company) {
@@ -47,7 +49,20 @@ public class StageService {
     @SecureCompanyScope(role = CompanyRole.ADMIN)
     public StageModel editStage(CompanyIdentity companyIdentity, StageCreateModel stageCreateModel, Long stageId){
         Stage stage = getStageById(stageId);
+
+        if (stage.getUnused() == false)
+            return addStage(companyIdentity, stageCreateModel, stage.getCompany());
+
+        resourceFlagsService.editResourceFlags(
+                companyIdentity,
+                stageAssembler.getFlags(stage.getModules()),
+                stage.getResourceFlags().getId()
+        );
+
         stage.setName(stageCreateModel.getName());
+        stage.setPower(stageCreateModel.getPower());
+        stage.setLoss(stageCreateModel.getLoss());
+        stage.setWaste(stageCreateModel.getWaste());
         stage.setVegetables(stageCreateModel.getVegetables());
         stage.setModules(stageCreateModel.getModules());
         return stageAssembler.getModelFromEntity(stage);

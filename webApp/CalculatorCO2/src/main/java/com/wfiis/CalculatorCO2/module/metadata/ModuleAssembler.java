@@ -4,17 +4,22 @@ import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
 import com.wfiis.CalculatorCO2.module.metadata.entity.Module;
 import com.wfiis.CalculatorCO2.module.model.ModuleCreateModel;
 import com.wfiis.CalculatorCO2.module.model.ModuleModel;
+import com.wfiis.CalculatorCO2.resourceFlags.metadata.ResourceFlagsAssembler;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class ModuleAssembler {
 
-    public List<ModuleCreateModel> getCreateModelsFromEntityList(List<Module> moduels) {
+    private final ResourceFlagsAssembler resourceFlagsAssembler;
+
+    public List<ModuleCreateModel> getCreateModelsFromEntityList(List<Module> modules) {
         List<ModuleCreateModel> outStages = new ArrayList<>();
-        for (Module module : moduels) {
+        for (Module module : modules) {
             outStages.add(getCreateModelFromEntity(module));
         }
         return outStages;
@@ -23,10 +28,8 @@ public class ModuleAssembler {
     public ModuleCreateModel getCreateModelFromEntity(Module module) {
         return new ModuleCreateModel(
                 module.getName(),
-                module.getLoss(),
-                module.getWaste(),
-                module.getTime(),
-                module.getResource(),
+                module.getPower(),
+                resourceFlagsAssembler.getCreateModelFromEntity(module.getResourceFlags()),
                 module.getVegetables()
         );
     }
@@ -42,10 +45,8 @@ public class ModuleAssembler {
     public ModuleModel getModelFromEntity(Module module) {
         return new ModuleModel(
                 module.getName(),
-                module.getLoss(),
-                module.getWaste(),
-                module.getTime(),
-                module.getResource(),
+                module.getPower(),
+                resourceFlagsAssembler.getCreateModelFromEntity(module.getResourceFlags()),
                 module.getVegetables(),
                 module.getId()
         );
@@ -55,14 +56,13 @@ public class ModuleAssembler {
         return new Module(
                 null,
                 moduleCreateModel.getName(),
-                moduleCreateModel.getLoss(),
-                moduleCreateModel.getWaste(),
-                moduleCreateModel.getTime(),
                 false,
-                moduleCreateModel.getResource(),
+                moduleCreateModel.getPower(),
+                resourceFlagsAssembler.getNewEntityFromModel(moduleCreateModel.getResourceFlagsCreateModel()),
                 company,
                 moduleCreateModel.getVegetables(),
-                new ArrayList<>()
+                new ArrayList<>(),
+                true
         );
     }
 }

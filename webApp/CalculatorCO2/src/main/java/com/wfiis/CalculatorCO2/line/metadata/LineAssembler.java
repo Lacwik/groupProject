@@ -51,7 +51,8 @@ public class LineAssembler {
                 false,
                 company,
                 lineCreateModel.getStages(),
-                lineCreateModel.getVegetables()
+                lineCreateModel.getVegetables(),
+                true
         );
     }
 }

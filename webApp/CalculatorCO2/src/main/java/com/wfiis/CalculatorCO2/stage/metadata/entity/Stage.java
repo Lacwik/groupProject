@@ -3,6 +3,7 @@ package com.wfiis.CalculatorCO2.stage.metadata.entity;
 import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
 import com.wfiis.CalculatorCO2.line.metadata.entity.Line;
 import com.wfiis.CalculatorCO2.module.metadata.entity.Module;
+import com.wfiis.CalculatorCO2.resourceFlags.metadata.entity.ResourceFlags;
 import com.wfiis.CalculatorCO2.vegetable.metadata.entity.Vegetable;
 import lombok.*;
 
@@ -23,6 +24,19 @@ public class Stage {
 
     @Column(nullable = false, unique = false)
     private String name;
+
+    @Column(nullable = false, unique = false)
+    private float power;
+
+    @Column(nullable = false, unique = false)
+    private float loss;
+
+    @Column(nullable = false, unique = false)
+    private float waste;
+
+    @ManyToOne
+    @JoinColumn(name = "resource_flags_id")
+    private ResourceFlags resourceFlags;
 
     @Column(nullable = false, unique = false)
     private Boolean outsourced;
@@ -49,4 +63,7 @@ public class Stage {
 
     @ManyToMany
     private List<Line> lines;
+
+    @Column(nullable = false, unique = false)
+    private Boolean unused;
 }

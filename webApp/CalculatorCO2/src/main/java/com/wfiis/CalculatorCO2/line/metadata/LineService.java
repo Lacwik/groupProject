@@ -44,6 +44,10 @@ public class LineService {
     @SecureCompanyScope(role = CompanyRole.ADMIN)
     public LineModel editLine(CompanyIdentity companyIdentity, LineCreateModel lineCreateModel, Long lineId){
         Line line = getLineById(lineId);
+
+        if (line.getUnused() == false)
+            return addLine(companyIdentity, lineCreateModel, line.getCompany());
+
         line.setName(lineCreateModel.getName());
         line.setStages(lineCreateModel.getStages());
         line.setVegetables(lineCreateModel.getVegetables());
