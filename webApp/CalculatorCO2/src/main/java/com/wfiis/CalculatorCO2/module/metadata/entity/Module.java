@@ -1,8 +1,8 @@
 package com.wfiis.CalculatorCO2.module.metadata.entity;
 
 import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
+import com.wfiis.CalculatorCO2.leftover.metadata.entity.Leftover;
 import com.wfiis.CalculatorCO2.resource.metadata.entity.Resource;
-import com.wfiis.CalculatorCO2.resourceFlags.metadata.entity.ResourceFlags;
 import com.wfiis.CalculatorCO2.stage.metadata.entity.Stage;
 import com.wfiis.CalculatorCO2.vegetable.metadata.entity.Vegetable;
 import lombok.*;
@@ -26,30 +26,27 @@ public class Module {
     private String name;
 
     @Column(nullable = false, unique = false)
+    private float power;
+
+    @Column(nullable = false, unique = false)
     private Boolean outsourced;
 
     @Column(nullable = false, unique = false)
-    private float power;
-
-    @ManyToOne
-    @JoinColumn(name = "resource_flags_id")
-    private ResourceFlags resourceFlags;
+    private Boolean used;
 
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
 
     @ManyToMany
-    @JoinTable(
-            name = "MODULE_VEGETABLES",
-            inverseJoinColumns = @JoinColumn(name = "module_id"),
-            joinColumns = @JoinColumn(name = "vegetable_id")
-    )
-    private List<Vegetable> vegetables;
-
-    @ManyToMany
     private List<Stage> stages;
 
-    @Column(nullable = false, unique = false)
-    private Boolean unused;
+    @OneToMany(mappedBy = "module")
+    private List<Vegetable> vegetables;
+
+    @OneToMany(mappedBy = "module")
+    private List<Resource> resources;
+
+    @OneToMany(mappedBy = "module")
+    private List<Leftover> leftovers;
 }

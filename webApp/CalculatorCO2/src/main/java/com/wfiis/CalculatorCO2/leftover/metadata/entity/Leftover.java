@@ -1,4 +1,4 @@
-package com.wfiis.CalculatorCO2.vegetable.metadata.entity;
+package com.wfiis.CalculatorCO2.leftover.metadata.entity;
 
 import com.wfiis.CalculatorCO2.module.metadata.entity.Module;
 import lombok.*;
@@ -11,8 +11,8 @@ import javax.persistence.*;
 @Getter
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Table(name = "calc_vegetables")
-public class Vegetable {
+@Table(name = "calc_leftovers")
+public class Leftover {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

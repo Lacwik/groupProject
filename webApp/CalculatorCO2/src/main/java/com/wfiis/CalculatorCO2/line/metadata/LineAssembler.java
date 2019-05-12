@@ -22,8 +22,7 @@ public class LineAssembler {
     public LineCreateModel getCreateModelFromEntity(Line line) {
         return new LineCreateModel(
                 line.getName(),
-                line.getStages(),
-                line.getVegetables()
+                line.getStages()
         );
     }
 
@@ -39,7 +38,6 @@ public class LineAssembler {
         return new LineModel(
                 line.getName(),
                 line.getStages(),
-                line.getVegetables(),
                 line.getId()
         );
     }
@@ -49,10 +47,9 @@ public class LineAssembler {
                 null,
                 lineCreateModel.getName(),
                 false,
+                false,
                 company,
-                lineCreateModel.getStages(),
-                lineCreateModel.getVegetables(),
-                true
+                lineCreateModel.getStages()
         );
     }
 }

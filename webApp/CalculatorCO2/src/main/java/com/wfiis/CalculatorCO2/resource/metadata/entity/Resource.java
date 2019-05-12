@@ -1,5 +1,6 @@
 package com.wfiis.CalculatorCO2.resource.metadata.entity;
 
+import com.wfiis.CalculatorCO2.module.metadata.entity.Module;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,17 +18,12 @@ public class Resource {
     private Long id;
 
     @Column(nullable = false, unique = false)
-    private float water;
+    private String name;
 
     @Column(nullable = false, unique = false)
-    private float diesel;
+    private String gus;
 
-    @Column(nullable = false, unique = false)
-    private float lpg;
-
-    @Column(nullable = false, unique = false)
-    private float foil;
-
-    //@OneToMany
-    //private List<Module> modules;
+    @ManyToOne
+    @JoinColumn(name = "module_id")
+    private Module module;
 }

@@ -3,8 +3,6 @@ package com.wfiis.CalculatorCO2.stage.metadata.entity;
 import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
 import com.wfiis.CalculatorCO2.line.metadata.entity.Line;
 import com.wfiis.CalculatorCO2.module.metadata.entity.Module;
-import com.wfiis.CalculatorCO2.resourceFlags.metadata.entity.ResourceFlags;
-import com.wfiis.CalculatorCO2.vegetable.metadata.entity.Vegetable;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,44 +24,23 @@ public class Stage {
     private String name;
 
     @Column(nullable = false, unique = false)
-    private float power;
-
-    @Column(nullable = false, unique = false)
-    private float loss;
-
-    @Column(nullable = false, unique = false)
-    private float waste;
-
-    @ManyToOne
-    @JoinColumn(name = "resource_flags_id")
-    private ResourceFlags resourceFlags;
-
-    @Column(nullable = false, unique = false)
     private Boolean outsourced;
+
+    @Column(nullable = false, unique = false)
+    private Boolean used;
 
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
 
     @ManyToMany
-    @JoinTable(
-            name = "STAGE_VEGETABLES",
-            inverseJoinColumns = @JoinColumn(name = "stage_id"),
-            joinColumns = @JoinColumn(name = "vegetable_id")
-    )
-    private List<Vegetable> vegetables;
+    private List<Line> lines;
 
     @ManyToMany
     @JoinTable(
-            name = "STAGE_MODULES",
+            name = "stage_modules",
             inverseJoinColumns = @JoinColumn(name = "stage_id"),
             joinColumns = @JoinColumn(name = "module_id")
     )
     private List<Module> modules;
-
-    @ManyToMany
-    private List<Line> lines;
-
-    @Column(nullable = false, unique = false)
-    private Boolean unused;
 }
