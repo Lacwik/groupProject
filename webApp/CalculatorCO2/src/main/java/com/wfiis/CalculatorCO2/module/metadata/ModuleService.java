@@ -33,14 +33,14 @@ public class ModuleService {
     private final ResourceAssembler resourceAssembler;
     private final LeftoverAssembler leftoverAssembler;
 
-    @SecureCompanyScope(role = CompanyRole.ADMIN)
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
     public ModuleModel createModule(CompanyIdentity companyIdentity, ModuleCreateModel moduleCreateModel, Company company) {
         Module module = moduleRepository.save(moduleAssembler.getNewEntityFromModel(moduleCreateModel, company));
         return moduleAssembler.getModelFromEntity(module);
     }
 
     @Transactional
-    @SecureCompanyScope(role = CompanyRole.ADMIN)
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
     public ModuleModel editModule(CompanyIdentity companyIdentity, ModuleCreateModel moduleCreateModel, Long moduleId) {
         Module module = getModuleEntity(moduleId);
 
@@ -65,11 +65,11 @@ public class ModuleService {
         return moduleRepository.findById(moduleId).orElseThrow(() -> new ModuleNotFoundException(moduleId));
     }
 
-    @SecureCompanyScope(role = CompanyRole.ADMIN)
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
     public String deleteModule(CompanyIdentity companyIdentity, Long moduleId) {
         Module module = getModuleEntity(moduleId);
 
-        if(module.getUsed()){
+        if(module.getUsed() || module.getStages().size() != 0){
             return "Module with id " + moduleId + " can not be deleted";
         }
 
@@ -86,22 +86,22 @@ public class ModuleService {
         return getModuleEntity(moduleId).getCompany();
     }
 
-    @SecureCompanyScope(role = CompanyRole.ADMIN)
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
     public List<StageModel> getModuleStages(CompanyIdentity companyIdentity, Long moduleId) {
         return stageAssembler.getModelsFromEntityList(getModuleEntity(moduleId).getStages());
     }
 
-    @SecureCompanyScope(role = CompanyRole.ADMIN)
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
     public List<VegetableModel> getModuleVegetables(CompanyIdentity companyIdentity, Long moduleId) {
         return vegetableAssembler.getModelsFromEntityList(getModuleEntity(moduleId).getVegetables());
     }
 
-    @SecureCompanyScope(role = CompanyRole.ADMIN)
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
     public List<ResourceModel> getModuleResources(CompanyIdentity companyIdentity, Long moduleId) {
         return resourceAssembler.getModelsFromEntityList(getModuleEntity(moduleId).getResources());
     }
 
-    @SecureCompanyScope(role = CompanyRole.ADMIN)
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
     public List<LeftoverModel> getModuleLeftovers(CompanyIdentity companyIdentity, Long moduleId) {
         return leftoverAssembler.getModelsFromEntityList(getModuleEntity(moduleId).getLeftovers());
     }

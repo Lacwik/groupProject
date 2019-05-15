@@ -42,14 +42,14 @@ public class StageService {
     private final ResourceAssembler resourceAssembler;
     private final LeftoverAssembler leftoverAssembler;
 
-    @SecureCompanyScope(role = CompanyRole.ADMIN)
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
     public StageModel createStage(CompanyIdentity companyIdentity, StageCreateModel stageCreateModel, Company company){
         Stage stage = stageRepository.save(stageAssembler.getNewEntityFromModel(stageCreateModel, company));
         return stageAssembler.getModelFromEntity(stage);
     }
 
     @Transactional
-    @SecureCompanyScope(role = CompanyRole.ADMIN)
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
     public StageModel editStage(CompanyIdentity companyIdentity, StageCreateModel stageCreateModel, Long stageId){
         Stage stage = getStageEntity(stageId);
 
@@ -71,11 +71,11 @@ public class StageService {
         return stageRepository.findById(stageId).orElseThrow(()->new StageNotFoundException(stageId));
     }
 
-    @SecureCompanyScope(role = CompanyRole.ADMIN)
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
     public String deleteStage(CompanyIdentity companyIdentity, Long stageId){
         Stage stage = getStageEntity(stageId);
 
-        if(stage.getUsed()){
+        if(stage.getUsed() || stage.getLines().size() != 0){
             return "Stage with id " + stageId + " can not be deleted";
         }
 
@@ -92,17 +92,17 @@ public class StageService {
         return getStageEntity(stageId).getCompany();
     }
 
-    @SecureCompanyScope(role = CompanyRole.ADMIN)
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
     public List<LineModel> getStageLines(CompanyIdentity companyIdentity, Long stageId){
         return lineAssembler.getModelsFromEntityList(getStageEntity(stageId).getLines());
     }
 
-    @SecureCompanyScope(role = CompanyRole.ADMIN)
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
     public List<ModuleModel> getStageModules(CompanyIdentity companyIdentity, Long stageId){
         return moduleAssembler.getModelsFromEntityList(getStageEntity(stageId).getModules());
     }
 
-    @SecureCompanyScope(role = CompanyRole.ADMIN)
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
     public List<VegetableModel> getStageVegetables(CompanyIdentity companyIdentity, Long stageId) {
         List<ModuleModel> moduleModels = getStageModules(companyIdentity, stageId);
 
@@ -118,7 +118,7 @@ public class StageService {
         return new ArrayList<>(vegetableModelsSet);
     }
 
-    @SecureCompanyScope(role = CompanyRole.ADMIN)
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
     public List<ResourceModel> getStageResources(CompanyIdentity companyIdentity, Long stageId) {
         List<ModuleModel> moduleModels = getStageModules(companyIdentity, stageId);
 
@@ -134,7 +134,7 @@ public class StageService {
         return new ArrayList<>(resourceModelSet);
     }
 
-    @SecureCompanyScope(role = CompanyRole.ADMIN)
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
     public List<LeftoverModel> getStageLeftovers(CompanyIdentity companyIdentity, Long stageId) {
         List<ModuleModel> moduleModels = getStageModules(companyIdentity, stageId);
 

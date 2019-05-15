@@ -42,18 +42,15 @@ public class LineService {
     private final StageAssembler stageAssembler;
     private final StageService stageService;
     private final ModuleAssembler moduleAssembler;
-    private final VegetableAssembler vegetableAssembler;
-    private final ResourceAssembler resourceAssembler;
-    private final LeftoverAssembler leftoverAssembler;
 
-    @SecureCompanyScope(role = CompanyRole.ADMIN)
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
     public LineModel createLine(CompanyIdentity companyIdentity, LineCreateModel lineCreateModel, Company company){
         Line line = lineRepository.save(lineAssembler.getNewEntityFromModel(lineCreateModel, company));
         return lineAssembler.getModelFromEntity(line);
     }
 
     @Transactional
-    @SecureCompanyScope(role = CompanyRole.ADMIN)
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
     public LineModel editLine(CompanyIdentity companyIdentity, LineCreateModel lineCreateModel, Long lineId){
         Line line = getLineEntity(lineId);
 
@@ -75,7 +72,7 @@ public class LineService {
         return lineRepository.findById(lineId).orElseThrow(()->new LineNotFoundException(lineId));
     }
 
-    @SecureCompanyScope(role = CompanyRole.ADMIN)
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
     public String deleteLine(CompanyIdentity companyIdentity, Long lineId){
         Line line = getLineEntity(lineId);
 
@@ -96,12 +93,12 @@ public class LineService {
         return getLineEntity(lineId).getCompany();
     }
 
-    @SecureCompanyScope(role = CompanyRole.ADMIN)
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
     public List<StageModel> getLineStages(CompanyIdentity companyIdentity, Long lineId){
         return stageAssembler.getModelsFromEntityList(getLineEntity(lineId).getStages());
     }
 
-    @SecureCompanyScope(role = CompanyRole.ADMIN)
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
     public List<ModuleModel> getLineModules(CompanyIdentity companyIdentity, Long lineId){
         List<StageModel> stageModels = getLineStages(companyIdentity, lineId);
 
@@ -117,7 +114,7 @@ public class LineService {
         return new ArrayList<>(moduleModelsSet);
     }
 
-    @SecureCompanyScope(role = CompanyRole.ADMIN)
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
     public List<VegetableModel> getLineVegetables(CompanyIdentity companyIdentity, Long lineId) {
         List<StageModel> stageModels = getLineStages(companyIdentity, lineId);
         Set<VegetableModel> vegetableModelsSet = new HashSet<>();
@@ -129,7 +126,7 @@ public class LineService {
         return new ArrayList<>(vegetableModelsSet);
     }
 
-    @SecureCompanyScope(role = CompanyRole.ADMIN)
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
     public List<ResourceModel> getLineResources(CompanyIdentity companyIdentity, Long lineId) {
         List<StageModel> stageModels = getLineStages(companyIdentity, lineId);
         Set<ResourceModel> resourceModelSet = new HashSet<>();
@@ -141,7 +138,7 @@ public class LineService {
         return new ArrayList<>(resourceModelSet);
     }
 
-    @SecureCompanyScope(role = CompanyRole.ADMIN)
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
     public List<LeftoverModel> getLineLeftovers(CompanyIdentity companyIdentity, Long lineId) {
         List<StageModel> stageModels = getLineStages(companyIdentity, lineId);
         Set<LeftoverModel> leftoverModelSet = new HashSet<>();
