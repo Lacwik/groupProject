@@ -1,8 +1,8 @@
 package com.wfiis.CalculatorCO2.controllers;
 
+import com.wfiis.CalculatorCO2.leftover.LeftoverFacade;
+import com.wfiis.CalculatorCO2.leftover.model.LeftoverModel;
 import com.wfiis.CalculatorCO2.user.model.UserAuthenticationPrincipal;
-import com.wfiis.CalculatorCO2.vegetable.VegetableFacade;
-import com.wfiis.CalculatorCO2.vegetable.model.VegetableModel;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -16,16 +16,17 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/vegetable")
+@RequestMapping("/leftover")
 @CrossOrigin
 @RequiredArgsConstructor
 @Slf4j
-public class VegetableController {
-    VegetableFacade vegetableFacade;
+
+public class LeftoverController {
+    LeftoverFacade leftoverFacade;
 
     @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<VegetableModel>> getAllVegetables(UsernamePasswordAuthenticationToken idToken) {
+    public ResponseEntity<List<LeftoverModel>> getAllLeftovers(UsernamePasswordAuthenticationToken idToken) {
         UserAuthenticationPrincipal principal = (UserAuthenticationPrincipal) idToken.getPrincipal();
-        return ResponseEntity.ok(vegetableFacade.getAllVegetables(principal.getId()));
+        return ResponseEntity.ok(leftoverFacade.getAllLeftovers(principal.getId()));
     }
 }

@@ -1,23 +1,30 @@
 package com.wfiis.CalculatorCO2.resource.metadata;
 
-
+import com.wfiis.CalculatorCO2.company.model.CompanyIdentity;
 import com.wfiis.CalculatorCO2.resource.metadata.entity.Resource;
+import com.wfiis.CalculatorCO2.resource.metadata.repository.ResourceRepository;
 import com.wfiis.CalculatorCO2.resource.model.ResourceModel;
+import com.wfiis.CalculatorCO2.user.model.CompanyRole;
+import com.wfiis.CalculatorCO2.user.security.scopes.SecureCompanyScope;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
+@RequiredArgsConstructor
 public class ResourceService {
+    ResourceRepository resourceRepository;
+    ResourceAssembler resourceAssembler;
 
-    public List<ResourceModel> getModelsFromEntityList(List<Resource> resources){
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
+    public List<ResourceModel> getAllModels(CompanyIdentity companyIdentity) {
+        List<Resource> resources = resourceRepository.findAll();
         List<ResourceModel> outResources = new ArrayList<>();
         for (Resource resource : resources) {
-            outResources.add(getModelFromEntity(resource));
+            outResources.add(resourceAssembler.getModelFromEntity(resource));
         }
         return outResources;
-    }
-
-    public ResourceModel getModelFromEntity(Resource resource){
-        return new ResourceModel(resource.getName(), resource.getGus(), resource.getId());
     }
 }

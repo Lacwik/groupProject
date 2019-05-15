@@ -1,8 +1,8 @@
 package com.wfiis.CalculatorCO2.controllers;
 
+import com.wfiis.CalculatorCO2.resource.ResourceFacade;
+import com.wfiis.CalculatorCO2.resource.model.ResourceModel;
 import com.wfiis.CalculatorCO2.user.model.UserAuthenticationPrincipal;
-import com.wfiis.CalculatorCO2.vegetable.VegetableFacade;
-import com.wfiis.CalculatorCO2.vegetable.model.VegetableModel;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -16,16 +16,16 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/vegetable")
+@RequestMapping("/resource")
 @CrossOrigin
 @RequiredArgsConstructor
 @Slf4j
-public class VegetableController {
-    VegetableFacade vegetableFacade;
+public class ResourceController {
+    ResourceFacade resourceFacade;
 
     @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<VegetableModel>> getAllVegetables(UsernamePasswordAuthenticationToken idToken) {
+    public ResponseEntity<List<ResourceModel>> getAllResources(UsernamePasswordAuthenticationToken idToken) {
         UserAuthenticationPrincipal principal = (UserAuthenticationPrincipal) idToken.getPrincipal();
-        return ResponseEntity.ok(vegetableFacade.getAllVegetables(principal.getId()));
+        return ResponseEntity.ok(resourceFacade.getAllResources(principal.getId()));
     }
 }

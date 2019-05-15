@@ -6,10 +6,14 @@ import com.wfiis.CalculatorCO2.user.security.scopes.SecureCompanyScope;
 import com.wfiis.CalculatorCO2.vegetable.metadata.entity.Vegetable;
 import com.wfiis.CalculatorCO2.vegetable.metadata.repository.VegetableRepository;
 import com.wfiis.CalculatorCO2.vegetable.model.VegetableModel;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
+@RequiredArgsConstructor
 public class VegetableService {
     VegetableRepository vegetableRepository;
     VegetableAssembler vegetableAssembler;
