@@ -16,6 +16,11 @@ public class VegetableFacade {
     private final VegetableService vegetableService;
     private final UserMetadataService userMetadataService;
 
+    public VegetableModel getVegetable(Long userId, Long vegetableId) {
+        Company company = userMetadataService.getCurrentCompanyWorkingFor(userId);
+        return vegetableService.getVegetable(CompanyIdentity.of(company.getId()), vegetableId);
+    }
+
     public List<VegetableModel> getAllVegetables(Long userId) {
         Company company = userMetadataService.getCurrentCompanyWorkingFor(userId);
         return vegetableService.getAllModels(CompanyIdentity.of(company.getId()));

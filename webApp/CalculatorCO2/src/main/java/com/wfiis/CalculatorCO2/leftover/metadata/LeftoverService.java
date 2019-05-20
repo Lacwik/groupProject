@@ -1,6 +1,7 @@
 package com.wfiis.CalculatorCO2.leftover.metadata;
 
 import com.wfiis.CalculatorCO2.company.model.CompanyIdentity;
+import com.wfiis.CalculatorCO2.leftover.exceptions.LeftoverNotFoundException;
 import com.wfiis.CalculatorCO2.leftover.metadata.entity.Leftover;
 import com.wfiis.CalculatorCO2.leftover.metadata.repository.LeftoverRepository;
 import com.wfiis.CalculatorCO2.leftover.model.LeftoverModel;
@@ -17,6 +18,15 @@ import java.util.List;
 public class LeftoverService {
     LeftoverRepository leftoverRepository;
     LeftoverAssembler leftoverAssembler;
+
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
+    public LeftoverModel getLeftover(CompanyIdentity companyIdentity, Long leftoverId){
+        return leftoverAssembler.getModelFromEntity(getLeftoverEntity(leftoverId));
+    }
+
+    public Leftover getLeftoverEntity(Long leftoverId){
+        return leftoverRepository.findById(leftoverId).orElseThrow(()->new LeftoverNotFoundException(leftoverId));
+    }
 
     @SecureCompanyScope(role = CompanyRole.MEMBER)
     public List<LeftoverModel> getAllModels(CompanyIdentity companyIdentity) {

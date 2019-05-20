@@ -1,6 +1,7 @@
 package com.wfiis.CalculatorCO2.resource.metadata;
 
 import com.wfiis.CalculatorCO2.company.model.CompanyIdentity;
+import com.wfiis.CalculatorCO2.resource.exceptions.ResourceNotFoundException;
 import com.wfiis.CalculatorCO2.resource.metadata.entity.Resource;
 import com.wfiis.CalculatorCO2.resource.metadata.repository.ResourceRepository;
 import com.wfiis.CalculatorCO2.resource.model.ResourceModel;
@@ -17,6 +18,15 @@ import java.util.List;
 public class ResourceService {
     ResourceRepository resourceRepository;
     ResourceAssembler resourceAssembler;
+
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
+    public ResourceModel getResource(CompanyIdentity companyIdentity, Long resourceId){
+        return resourceAssembler.getModelFromEntity(getResourceEntity(resourceId));
+    }
+
+    public Resource getResourceEntity(Long resourceId){
+        return resourceRepository.findById(resourceId).orElseThrow(()->new ResourceNotFoundException(resourceId));
+    }
 
     @SecureCompanyScope(role = CompanyRole.MEMBER)
     public List<ResourceModel> getAllModels(CompanyIdentity companyIdentity) {

@@ -102,16 +102,16 @@ public class LineService {
     public List<ModuleModel> getLineModules(CompanyIdentity companyIdentity, Long lineId){
         List<StageModel> stageModels = getLineStages(companyIdentity, lineId);
 
-        Set<ModuleModel> moduleModelsSet = new HashSet<>();
+        List<ModuleModel> moduleModels = new ArrayList<>();
 
         for(StageModel stageModel : stageModels){
             List<Module> modules = stageModel.getModules();
             for(Module module : modules){
-                moduleModelsSet.add(moduleAssembler.getModelFromEntity(module));
+                moduleModels.add(moduleAssembler.getModelFromEntity(module));
             }
         }
 
-        return new ArrayList<>(moduleModelsSet);
+        return moduleModels;
     }
 
     @SecureCompanyScope(role = CompanyRole.MEMBER)

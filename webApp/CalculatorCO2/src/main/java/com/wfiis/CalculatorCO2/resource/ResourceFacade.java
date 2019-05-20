@@ -16,6 +16,11 @@ public class ResourceFacade {
     private final ResourceService resourceService;
     private final UserMetadataService userMetadataService;
 
+    public ResourceModel getResource(Long userId, Long resourceId) {
+        Company company = userMetadataService.getCurrentCompanyWorkingFor(userId);
+        return resourceService.getResource(CompanyIdentity.of(company.getId()), resourceId);
+    }
+
     public List<ResourceModel> getAllResources(Long userId) {
         Company company = userMetadataService.getCurrentCompanyWorkingFor(userId);
         return resourceService.getAllModels(CompanyIdentity.of(company.getId()));
