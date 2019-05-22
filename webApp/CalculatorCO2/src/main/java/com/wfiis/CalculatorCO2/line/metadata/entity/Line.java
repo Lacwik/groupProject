@@ -34,7 +34,7 @@ public class Line {
 
     @ManyToMany
     @JoinTable(
-            name = "line_stages",
+            name = "calc_line_stages",
             inverseJoinColumns = @JoinColumn(name = "line_id"),
             joinColumns = @JoinColumn(name = "stage_id")
     )

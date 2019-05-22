@@ -38,7 +38,7 @@ public class Stage {
 
     @ManyToMany
     @JoinTable(
-            name = "stage_modules",
+            name = "calc_stage_modules",
             inverseJoinColumns = @JoinColumn(name = "stage_id"),
             joinColumns = @JoinColumn(name = "module_id")
     )

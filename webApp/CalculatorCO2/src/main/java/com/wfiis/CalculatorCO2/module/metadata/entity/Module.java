@@ -41,12 +41,27 @@ public class Module {
     @ManyToMany
     private List<Stage> stages;
 
-    @OneToMany(mappedBy = "module")
+    @OneToMany
+    @JoinTable(
+            name = "calc_module_vegetables",
+            inverseJoinColumns = @JoinColumn(name = "module_id"),
+            joinColumns = @JoinColumn(name = "vegetable_id")
+    )
     private List<Vegetable> vegetables;
 
-    @OneToMany(mappedBy = "module")
+    @OneToMany
+    @JoinTable(
+            name = "calc_module_resources",
+            inverseJoinColumns = @JoinColumn(name = "module_id"),
+            joinColumns = @JoinColumn(name = "resource_id")
+    )
     private List<Resource> resources;
 
-    @OneToMany(mappedBy = "module")
+    @OneToMany
+    @JoinTable(
+            name = "calc_module_leftovers",
+            inverseJoinColumns = @JoinColumn(name = "module_id"),
+            joinColumns = @JoinColumn(name = "leftover_id")
+    )
     private List<Leftover> leftovers;
 }
