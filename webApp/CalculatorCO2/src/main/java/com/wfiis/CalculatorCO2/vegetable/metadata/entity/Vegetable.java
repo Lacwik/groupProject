@@ -1,6 +1,5 @@
 package com.wfiis.CalculatorCO2.vegetable.metadata.entity;
 
-import com.wfiis.CalculatorCO2.module.metadata.entity.Module;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,8 +18,4 @@ public class Vegetable {
 
     @Column(nullable = false, unique = false)
     private String name;
-
-    @ManyToOne
-    @JoinColumn(name = "module_id")
-    private Module module;
 }
