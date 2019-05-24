@@ -1,5 +1,7 @@
 package com.wfiis.CalculatorCO2.line.metadata.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
 import com.wfiis.CalculatorCO2.stage.metadata.entity.Stage;
 import lombok.*;
@@ -30,13 +32,15 @@ public class Line {
 
     @ManyToOne
     @JoinColumn(name = "company_id")
+    @JsonBackReference
     private Company company;
 
     @ManyToMany
     @JoinTable(
             name = "calc_line_stages",
-            inverseJoinColumns = @JoinColumn(name = "line_id"),
-            joinColumns = @JoinColumn(name = "stage_id")
+            inverseJoinColumns = @JoinColumn(name = "stage_id"),
+            joinColumns = @JoinColumn(name = "line_id")
     )
+    @JsonManagedReference
     private List<Stage> stages;
 }

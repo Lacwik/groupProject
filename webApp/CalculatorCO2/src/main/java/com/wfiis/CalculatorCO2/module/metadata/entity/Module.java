@@ -1,5 +1,6 @@
 package com.wfiis.CalculatorCO2.module.metadata.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
 import com.wfiis.CalculatorCO2.leftover.metadata.entity.Leftover;
 import com.wfiis.CalculatorCO2.resource.metadata.entity.Resource;
@@ -36,32 +37,39 @@ public class Module {
 
     @ManyToOne
     @JoinColumn(name = "company_id")
+    @JsonBackReference
     private Company company;
 
     @ManyToMany
+    @JoinTable(
+            name = "calc_stage_modules",
+            inverseJoinColumns = @JoinColumn(name = "module_id"),
+            joinColumns = @JoinColumn(name = "stage_id")
+    )
+    @JsonBackReference
     private List<Stage> stages;
 
-    @OneToMany
+    @ManyToMany
     @JoinTable(
             name = "calc_module_vegetables",
-            inverseJoinColumns = @JoinColumn(name = "module_id"),
-            joinColumns = @JoinColumn(name = "vegetable_id")
+            inverseJoinColumns = @JoinColumn(name = "vegetable_id"),
+            joinColumns = @JoinColumn(name = "module_id")
     )
     private List<Vegetable> vegetables;
 
-    @OneToMany
+    @ManyToMany
     @JoinTable(
             name = "calc_module_resources",
-            inverseJoinColumns = @JoinColumn(name = "module_id"),
-            joinColumns = @JoinColumn(name = "resource_id")
+            inverseJoinColumns = @JoinColumn(name = "resource_id"),
+            joinColumns = @JoinColumn(name = "module_id")
     )
     private List<Resource> resources;
 
-    @OneToMany
+    @ManyToMany
     @JoinTable(
             name = "calc_module_leftovers",
-            inverseJoinColumns = @JoinColumn(name = "module_id"),
-            joinColumns = @JoinColumn(name = "leftover_id")
+            inverseJoinColumns = @JoinColumn(name = "leftover_id"),
+            joinColumns = @JoinColumn(name = "module_id")
     )
     private List<Leftover> leftovers;
 }
