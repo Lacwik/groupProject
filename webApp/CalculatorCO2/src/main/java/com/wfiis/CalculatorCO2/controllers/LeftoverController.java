@@ -19,7 +19,7 @@ import java.util.List;
 @Slf4j
 
 public class LeftoverController {
-    LeftoverFacade leftoverFacade;
+    private final LeftoverFacade leftoverFacade;
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<LeftoverModel> getLeftover(UsernamePasswordAuthenticationToken idToken, @PathVariable Long id){

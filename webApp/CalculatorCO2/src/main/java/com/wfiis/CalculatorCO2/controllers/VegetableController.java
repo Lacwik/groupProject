@@ -18,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class VegetableController {
-    VegetableFacade vegetableFacade;
+    private final VegetableFacade vegetableFacade;
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<VegetableModel> getVegetable(UsernamePasswordAuthenticationToken idToken, @PathVariable Long id){

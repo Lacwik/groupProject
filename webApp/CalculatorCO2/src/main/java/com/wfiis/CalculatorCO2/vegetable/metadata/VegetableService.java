@@ -16,8 +16,8 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class VegetableService {
-    VegetableRepository vegetableRepository;
-    VegetableAssembler vegetableAssembler;
+    private final VegetableRepository vegetableRepository;
+    private final VegetableAssembler vegetableAssembler;
 
     @SecureCompanyScope(role = CompanyRole.MEMBER)
     public VegetableModel getVegetable(CompanyIdentity companyIdentity, Long vegetableId){

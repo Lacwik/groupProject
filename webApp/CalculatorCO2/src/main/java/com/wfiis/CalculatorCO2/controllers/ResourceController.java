@@ -18,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class ResourceController {
-    ResourceFacade resourceFacade;
+    private final ResourceFacade resourceFacade;
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResourceModel> getResource(UsernamePasswordAuthenticationToken idToken, @PathVariable Long id){

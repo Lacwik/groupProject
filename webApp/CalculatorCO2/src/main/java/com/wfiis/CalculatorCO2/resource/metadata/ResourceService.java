@@ -16,8 +16,8 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class ResourceService {
-    ResourceRepository resourceRepository;
-    ResourceAssembler resourceAssembler;
+    private final ResourceRepository resourceRepository;
+    private final ResourceAssembler resourceAssembler;
 
     @SecureCompanyScope(role = CompanyRole.MEMBER)
     public ResourceModel getResource(CompanyIdentity companyIdentity, Long resourceId){

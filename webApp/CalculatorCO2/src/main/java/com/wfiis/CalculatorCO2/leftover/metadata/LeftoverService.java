@@ -16,8 +16,8 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class LeftoverService {
-    LeftoverRepository leftoverRepository;
-    LeftoverAssembler leftoverAssembler;
+    private final LeftoverRepository leftoverRepository;
+    private final LeftoverAssembler leftoverAssembler;
 
     @SecureCompanyScope(role = CompanyRole.MEMBER)
     public LeftoverModel getLeftover(CompanyIdentity companyIdentity, Long leftoverId){
