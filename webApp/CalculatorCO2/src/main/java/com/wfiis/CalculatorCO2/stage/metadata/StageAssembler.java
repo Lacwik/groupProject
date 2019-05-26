@@ -1,14 +1,17 @@
 package com.wfiis.CalculatorCO2.stage.metadata;
 
 import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
+import com.wfiis.CalculatorCO2.module.metadata.entity.Module;
 import com.wfiis.CalculatorCO2.stage.metadata.entity.Stage;
 import com.wfiis.CalculatorCO2.stage.model.StageCreateModel;
 import com.wfiis.CalculatorCO2.stage.model.StageModel;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Component
 public class StageAssembler {
 
@@ -23,7 +26,6 @@ public class StageAssembler {
     public StageCreateModel getCreateModelFromEntity(Stage stage) {
         return new StageCreateModel(
                 stage.getName(),
-                stage.getVegetables(),
                 stage.getModules()
         );
     }
@@ -39,7 +41,6 @@ public class StageAssembler {
     public StageModel getModelFromEntity(Stage stage) {
         return new StageModel(
                 stage.getName(),
-                stage.getVegetables(),
                 stage.getModules(),
                 stage.getId()
         );
@@ -50,11 +51,10 @@ public class StageAssembler {
                 null,
                 stageCreateModel.getName(),
                 false,
+                false,
                 company,
-                stageCreateModel.getVegetables(),
-                stageCreateModel.getModules(),
-                new ArrayList<>()
+                new ArrayList<>(),
+                stageCreateModel.getModules()
         );
     }
-
 }

@@ -1,9 +1,10 @@
 package com.wfiis.CalculatorCO2.stage.metadata.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
 import com.wfiis.CalculatorCO2.line.metadata.entity.Line;
 import com.wfiis.CalculatorCO2.module.metadata.entity.Module;
-import com.wfiis.CalculatorCO2.vegetable.metadata.entity.Vegetable;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,26 +28,29 @@ public class Stage {
     @Column(nullable = false, unique = false)
     private Boolean outsourced;
 
+    @Column(nullable = false, unique = false)
+    private Boolean used;
+
     @ManyToOne
     @JoinColumn(name = "company_id")
+    @JsonBackReference
     private Company company;
 
     @ManyToMany
     @JoinTable(
-            name = "STAGE_VEGETABLES",
+            name = "calc_line_stages",
             inverseJoinColumns = @JoinColumn(name = "stage_id"),
-            joinColumns = @JoinColumn(name = "vegetable_id")
+            joinColumns = @JoinColumn(name = "line_id")
     )
-    private List<Vegetable> vegetables;
+    @JsonBackReference
+    private List<Line> lines;
 
     @ManyToMany
     @JoinTable(
-            name = "STAGE_MODULES",
-            inverseJoinColumns = @JoinColumn(name = "stage_id"),
-            joinColumns = @JoinColumn(name = "module_id")
+            name = "calc_stage_modules",
+            inverseJoinColumns = @JoinColumn(name = "module_id"),
+            joinColumns = @JoinColumn(name = "stage_id")
     )
+    @JsonManagedReference
     private List<Module> modules;
-
-    @ManyToMany
-    private List<Line> lines;
 }

@@ -18,6 +18,7 @@ const initialState = {
         name: '',
     },
     isWorkingForCompany: false,
+    modules: [],
 };
 
 export const store = createStore(reducer, initialState, applyMiddleware(logger));

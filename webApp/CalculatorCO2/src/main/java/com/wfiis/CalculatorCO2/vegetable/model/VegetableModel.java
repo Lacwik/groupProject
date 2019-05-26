@@ -1,10 +1,13 @@
 package com.wfiis.CalculatorCO2.vegetable.model;
 
-import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-@AllArgsConstructor
-public class VegetableModel {
+@Getter
+public class VegetableModel extends VegetableCreateModel{
     private Long id;
 
-    private String name;
+    public VegetableModel(String name, long id){
+        super(name);
+        this.id = id;
+    }
 }

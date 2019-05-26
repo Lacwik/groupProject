@@ -4,49 +4,49 @@ import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
 import com.wfiis.CalculatorCO2.module.metadata.entity.Module;
 import com.wfiis.CalculatorCO2.module.model.ModuleCreateModel;
 import com.wfiis.CalculatorCO2.module.model.ModuleModel;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class ModuleAssembler {
 
-    public List<ModuleCreateModel> getCreateModelsFromEntityList(List<Module> moduels) {
-        List<ModuleCreateModel> outStages = new ArrayList<>();
-        for (Module module : moduels) {
-            outStages.add(getCreateModelFromEntity(module));
+    public List<ModuleCreateModel> getCreateModelsFromEntityList(List<Module> modules) {
+        List<ModuleCreateModel> outModules = new ArrayList<>();
+        for (Module module : modules) {
+            outModules.add(getCreateModelFromEntity(module));
         }
-        return outStages;
+        return outModules;
     }
 
     public ModuleCreateModel getCreateModelFromEntity(Module module) {
         return new ModuleCreateModel(
                 module.getName(),
-                module.getLoss(),
-                module.getWaste(),
-                module.getTime(),
-                module.getResource(),
-                module.getVegetables()
+                module.getPower(),
+                module.getVegetables(),
+                module.getResources(),
+                module.getLeftovers()
         );
     }
 
     public List<ModuleModel> getModelsFromEntityList(List<Module> modules) {
-        List<ModuleModel> outStages = new ArrayList<>();
+        List<ModuleModel> outModules = new ArrayList<>();
         for (Module module : modules) {
-            outStages.add(getModelFromEntity(module));
+            outModules.add(getModelFromEntity(module));
         }
-        return outStages;
+        return outModules;
     }
 
     public ModuleModel getModelFromEntity(Module module) {
         return new ModuleModel(
                 module.getName(),
-                module.getLoss(),
-                module.getWaste(),
-                module.getTime(),
-                module.getResource(),
+                module.getPower(),
                 module.getVegetables(),
+                module.getResources(),
+                module.getLeftovers(),
                 module.getId()
         );
     }
@@ -55,14 +55,14 @@ public class ModuleAssembler {
         return new Module(
                 null,
                 moduleCreateModel.getName(),
-                moduleCreateModel.getLoss(),
-                moduleCreateModel.getWaste(),
-                moduleCreateModel.getTime(),
+                moduleCreateModel.getPower(),
                 false,
-                moduleCreateModel.getResource(),
+                false,
                 company,
+                new ArrayList<>(),
                 moduleCreateModel.getVegetables(),
-                new ArrayList<>()
+                moduleCreateModel.getResources(),
+                moduleCreateModel.getLeftovers()
         );
     }
 }

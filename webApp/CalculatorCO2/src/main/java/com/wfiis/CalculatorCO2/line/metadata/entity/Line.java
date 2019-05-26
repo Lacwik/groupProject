@@ -1,8 +1,9 @@
 package com.wfiis.CalculatorCO2.line.metadata.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
 import com.wfiis.CalculatorCO2.stage.metadata.entity.Stage;
-import com.wfiis.CalculatorCO2.vegetable.metadata.entity.Vegetable;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,23 +27,20 @@ public class Line {
     @Column(nullable = false, unique = false)
     private Boolean outsourced;
 
+    @Column(nullable = false, unique = false)
+    private Boolean used;
+
     @ManyToOne
     @JoinColumn(name = "company_id")
+    @JsonBackReference
     private Company company;
 
     @ManyToMany
     @JoinTable(
-            name = "LINE_STAGES",
-            inverseJoinColumns = @JoinColumn(name = "line_id"),
-            joinColumns = @JoinColumn(name = "stage_id")
+            name = "calc_line_stages",
+            inverseJoinColumns = @JoinColumn(name = "stage_id"),
+            joinColumns = @JoinColumn(name = "line_id")
     )
+    @JsonManagedReference
     private List<Stage> stages;
-
-    @ManyToMany
-    @JoinTable(
-            name = "LINE_VEGETABLES",
-            inverseJoinColumns = @JoinColumn(name = "line_id"),
-            joinColumns = @JoinColumn(name = "vegetable_id")
-    )
-    private List<Vegetable> vegetables;
 }

@@ -65,7 +65,7 @@ class AddUserForm extends Component {
         return undefined;
     }
     componentWillReceiveProps(nextProps) {
-        if (this.props.revision != nextProps.revision) {
+        if (this.props.revision !== nextProps.revision) {
             this.setState({
                 email: '',
                 password: '',
