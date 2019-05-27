@@ -29,13 +29,13 @@ class NavigationContainer extends Component {
         if (this.props.isUserLogged) {
             return (
                 <React.Fragment>
-                    <li key="nav-module">
-                        <Settings style={{ color: '#aaaaaa' }} fontSize="large" />
-                        <Link to="/module/add-module">Dodaj Moduł</Link>
-                    </li>
-                    <li key="nav-module-display">
+                    <li key="nav-modules">
                         <SettingsApplications style={{ color: '#aaaaaa' }} fontSize="large" />
-                        <Link to="/module/display-module">Wyświetl moduły</Link>
+                        <Link to="/module/display-module">Moduły</Link>
+                    </li>
+                    <li key="nav-stages">
+                        <Settings style={{ color: '#aaaaaa' }} fontSize="large" />
+                        <Link to="/stage/display-stage">Etapy</Link>
                     </li>
                     <li key="nav-logout">
                         <ExitToApp style={{ color: '#aaaaaa' }} fontSize="large" />
