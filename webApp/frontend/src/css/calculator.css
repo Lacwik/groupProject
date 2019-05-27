@@ -1,0 +1,8 @@
+.calculactor-wrapper {
+    display:flex;
+    flex-direction: column;
+}
+
+.calculactor-wrapper > * {
+    margin-bottom: 1em;
+}

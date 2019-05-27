@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Home, GroupAdd, AccountBox, ExitToApp, List, Add, Settings, SettingsApplications } from '@material-ui/icons';
+import { Home, GroupAdd, AccountBox, ExitToApp, List, Add, Settings, SettingsApplications, Build } from '@material-ui/icons';
 import '../../css/navigation.css';
 import { APPLICATION_ROLES } from '../constants/applicationRoles.constants';
-//import { COMPANY_ROLES } from '../constants/companyRoles.constants';
+import { COMPANY_ROLES } from '../constants/companyRoles.constants';
 
 class NavigationContainer extends Component {
     renderLinksIfNotLogged() {
@@ -63,6 +63,33 @@ class NavigationContainer extends Component {
         return this.props.appUserRole === APPLICATION_ROLES.SUPER_ADMIN && this.props.isUserLogged;
     }
 
+    isCurrentLoggedUserIsMemberOfCompany() {
+        const {
+            isUserLogged,
+            isWorkingForCompany,
+            companyWorkingFor,
+        } = this.props;
+
+        const { role } = companyWorkingFor;
+
+        return isUserLogged && isWorkingForCompany;
+    }
+
+    renderLinksIfLoggedAsMemberOfCompany() {
+        if (this.isCurrentLoggedUserIsMemberOfCompany()) {
+            return (
+                <React.Fragment>
+                    <li key="calculator">
+                        <Build style={{ color: '#aaaaaa' }} fontSize="large" />
+                        <Link to="/calculator">Kalkulator</Link>
+                    </li>
+                </React.Fragment>
+            )
+        }
+
+        return '';
+    }
+
     renderLinksIfSuperAdminLogged() {
         if (this.isCurrentLoggedUserHasRoleSuperAdmin()) {
             return (
@@ -87,6 +114,7 @@ class NavigationContainer extends Component {
                     {this.renderLinksIfUserIsLoggedAsAdminJobRole()}
                     {this.renderLinksIfNotLogged()}
                     {this.renderLinksIfSuperAdminLogged()}
+                    {this.renderLinksIfLoggedAsMemberOfCompany()}
                     {this.renderLinksIfLogged()}
                 </ul>
             </aside>
