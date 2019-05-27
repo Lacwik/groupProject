@@ -4,6 +4,8 @@ import { VIEW_MODULE_SWITCH_STATES } from './viewModuleSwitchStates.enum';
 import ModuleFormSwitch from './components/moduleFormSwitch.component';
 import EditModuleForm from './components/editModuleForm.component';
 import ViewModule from './components/viewModule.component';
+import Button from '@material-ui/core/Button';
+
 
 class ViewModuleContainer extends Component {
     constructor() {
@@ -42,7 +44,7 @@ class ViewModuleContainer extends Component {
 
 
     onClickModule = (id) => {
-        this.setState({activeModule: id});
+        this.setState({activeModuleId: id});
     }
 
 
@@ -52,10 +54,18 @@ class ViewModuleContainer extends Component {
             <ul>
                 {this.state.moduleList.map(item => (
                     <li key={item.id}>
-                        <div onClick= {() => this.onClickModule(item.id)}>
-                            <ViewModule id={item.id}></ViewModule>
-                        </div>
-                        {/* <ViewModule id={item.id} ></ViewModule> */}
+                        
+                            
+                                
+                                    <ViewModule id={item.id} full_info={false}></ViewModule>
+                                    <br />
+                                    <Button 
+                                        variant="contained"
+                                        color="primary"
+                                        onClick= {() => this.onClickModule(item.id)}
+                                    >Edytuj
+                                    </Button>
+                                
                     </li>
                 ))}
             </ul>

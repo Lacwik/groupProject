@@ -8,13 +8,15 @@ class ViewModule extends Component {
         super(props);
 
         this.state = {
-            module: any
+            module: any,
+            full_info: false,
         };
     }
 
     componentDidMount(){
         moduleRepository.getModuleById(this.props.id).then(
             response => this.setState({ module: response })
+        ).then(() => this.setState({full_info: this.props.full_info})
         )
     }
 
@@ -24,8 +26,24 @@ class ViewModule extends Component {
         const vegetables = this.state.module.vegetables;
         const resources = this.state.module.resources;
         const leftovers = this.state.module.leftovers;
-
-
+        const full_info = this.state.full_info;
+    
+        let fullInfo;
+        if (full_info) {
+            fullInfo = (
+                <React.Fragment>
+                    <li key="name-view-vegetables">
+                        {vegetables}
+                    </li>
+                    <li key="name-view-resources">
+                        {resources}
+                    </li>
+                    <li key="name-view-leftovers">
+                        {leftovers}
+                    </li>
+                </React.Fragment>
+            );
+        }
         return (
             <React.Fragment>
                 
@@ -37,15 +55,9 @@ class ViewModule extends Component {
                     <li key="name-view-power">
                         Moc: {power}
                     </li>
-                    {/* <li key="name-view-vegetables">
-                        {vegetables}
-                    </li>
-                    <li key="name-view-resources">
-                        {resources}
-                    </li>
-                    <li key="name-view-leftovers">
-                        {leftovers}
-                    </li> */}
+                   
+                    {fullInfo}                  
+                    
                     
                 </ul>
             </React.Fragment>
