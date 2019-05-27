@@ -18,8 +18,8 @@ class DashboardContainer extends Component {
             .then(() => setCompanyWorkingFor({ id, role, name }))
             .then(() => setIsWorkingForCompany(true))
             .then(() => {
-                localStorage.setItem(AUTH_KEYS.COMPANY_LOGGED, true);
-                localStorage.setItem(AUTH_KEYS.COMPANY_WORKING_FOR, JSON.stringify({ id, role, name }));
+                sessionStorage.setItem(AUTH_KEYS.COMPANY_LOGGED, true);
+                sessionStorage.setItem(AUTH_KEYS.COMPANY_WORKING_FOR, JSON.stringify({ id, role, name }));
             });
     }
 

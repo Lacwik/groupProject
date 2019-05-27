@@ -28,9 +28,9 @@ class LoginContainer extends Component {
                 setIsUserLogged(true);
                 setApplicationUserRole(role);
 
-                localStorage.setItem(AUTH_KEYS.ACCESS_TOKEN, jwt);
-                localStorage.setItem(AUTH_KEYS.EMAIL, email);
-                localStorage.setItem(AUTH_KEYS.ROLE, role);
+                sessionStorage.setItem(AUTH_KEYS.ACCESS_TOKEN, jwt);
+                sessionStorage.setItem(AUTH_KEYS.EMAIL, email);
+                sessionStorage.setItem(AUTH_KEYS.ROLE, role);
 
                 return { email, jwt, role };
             })

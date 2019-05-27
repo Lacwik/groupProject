@@ -7,15 +7,15 @@ import { setJWT, setCurrentLoggedUserEmail, setIsUserLogged, setApplicationUserR
 
 class App extends Component {
   componentDidMount() {
-    const JWT = localStorage.getItem(AUTH_KEYS.ACCESS_TOKEN);
+    const JWT = sessionStorage.getItem(AUTH_KEYS.ACCESS_TOKEN);
     if (JWT) {
-      const email = localStorage.getItem(AUTH_KEYS.EMAIL);
-      const role = localStorage.getItem(AUTH_KEYS.ROLE);
+      const email = sessionStorage.getItem(AUTH_KEYS.EMAIL);
+      const role = sessionStorage.getItem(AUTH_KEYS.ROLE);
 
 
-      const companyLogged = localStorage.getItem(AUTH_KEYS.COMPANY_LOGGED);
+      const companyLogged = sessionStorage.getItem(AUTH_KEYS.COMPANY_LOGGED);
       if (companyLogged) {
-        const companyWorkingFor = JSON.parse(localStorage.getItem(AUTH_KEYS.COMPANY_WORKING_FOR));
+        const companyWorkingFor = JSON.parse(sessionStorage.getItem(AUTH_KEYS.COMPANY_WORKING_FOR));
         setCompanyWorkingFor(companyWorkingFor);
         setIsWorkingForCompany(true);
       }
