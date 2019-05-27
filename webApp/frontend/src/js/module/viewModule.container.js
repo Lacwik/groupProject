@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { moduleRepository } from '../factory/moduleRepository.factory';
-import { VIEW_MODULE_SWITCH_STATES } from './viewModuleSwitchStates.enum';
-import ModuleFormSwitch from './components/moduleFormSwitch.component';
 import EditModuleForm from './components/editModuleForm.component';
 import ViewModule from './components/viewModule.component';
 import Button from '@material-ui/core/Button';
@@ -9,7 +7,6 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { CenterFocusStrong } from '@material-ui/icons';
 
 
 class ViewModuleContainer extends Component {
@@ -20,9 +17,8 @@ class ViewModuleContainer extends Component {
             moduleList: [],
             activeModuleId: undefined,
             error: '',
-            viewForm: VIEW_MODULE_SWITCH_STATES.VIEW,
-            dialog_open: false
-
+            dialog_edit: false,
+            dialog_show: false
         }
     }
 
@@ -44,19 +40,20 @@ class ViewModuleContainer extends Component {
     }
 
 
-    onSwitchForm = (viewForm) => {
-        this.setState(state => ({ ...state, viewForm }));
-    }
-
-
     onCloseDialog = () => {
-        this.setState({dialog_open: false})
+        this.setState({dialog_edit: false});
+        this.setState({dialog_show: false})
     }
 
 
-    onClickModule = (id) => {
+    onClickModule_edit = (id) => {
         this.setState({activeModuleId: id});
-        this.setState({dialog_open: true});
+        this.setState({dialog_edit: true});
+    }
+
+    onClickModule_show = (id) => {
+        this.setState({activeModuleId: id});
+        this.setState({dialog_show: true});
     }
 
 
@@ -64,8 +61,8 @@ class ViewModuleContainer extends Component {
         return (
             <React.Fragment>
 
-            <Dialog open={this.state.dialog_open} onClose={this.onCloseDialog} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Edycja</DialogTitle>
+            <Dialog open={this.state.dialog_edit} onClose={this.onCloseDialog} aria-labelledby="dialog-edit-module">
+                <DialogTitle id="dialog-edit-module">Edycja</DialogTitle>
                 <DialogContent>
                     <EditModuleForm id={this.state.activeModuleId} onSubmit={moduleModel => this.onEditModule(moduleModel)} errorMessage={this.state.error} />
                 </DialogContent>
@@ -76,21 +73,17 @@ class ViewModuleContainer extends Component {
                 </DialogActions>
             </Dialog>
 
+            <Dialog open={this.state.dialog_show} onClose={this.onCloseDialog} aria-labelledby="dialog-show-module">
+                <DialogContent>
+                    <ViewModule id={this.state.activeModuleId} full_info={true}></ViewModule>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={this.onCloseDialog} color="primary">
+                    Powrót
+                    </Button>
+                </DialogActions>
+            </Dialog>
 
-
-            <table>
-            <thead>
-                <tr>
-                    <td>
-                        {"W tym rzędzie powinno sie znaleźć info podglądowe modułu"}
-                    </td>
-                    <td>
-                        {this.state.activeModuleId ? <ViewModule id={this.state.activeModuleId} full_info={false}></ViewModule> : "Brak modułów do wyświetlenia"}
-                    </td>
-                </tr>
-            </thead>
-            <tbody>
-            <tr>
                 <ul>
                     {this.state.moduleList.map(item => (
                         <li key={item.id}>
@@ -99,15 +92,19 @@ class ViewModuleContainer extends Component {
                             <Button 
                                 variant="contained"
                                 color="primary"
-                                onClick= {() => this.onClickModule(item.id)}
+                                onClick= {() => this.onClickModule_edit(item.id)}
                             >Edytuj
+                            </Button>
+                            <Button 
+                                variant="contained"
+                                color="primary"
+                                onClick= {() => this.onClickModule_show(item.id)}
+                            >Podgląd
                             </Button>
                         </li>
                     ))}
                 </ul>
-            </tr>
-            </tbody>              
-            </table>
+
             </React.Fragment>
         );
       }
