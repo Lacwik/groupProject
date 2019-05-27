@@ -6,7 +6,8 @@ import { AUTH_KEYS } from './constants/authentication.constants';
 import { setJWT, setCurrentLoggedUserEmail, setIsUserLogged, setApplicationUserRole, setCompanyWorkingFor, setIsWorkingForCompany } from './redux/app.service';
 
 class App extends Component {
-  componentDidMount() {
+  constructor() {
+    super();
     const JWT = sessionStorage.getItem(AUTH_KEYS.ACCESS_TOKEN);
     if (JWT) {
       const email = sessionStorage.getItem(AUTH_KEYS.EMAIL);

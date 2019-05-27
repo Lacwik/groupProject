@@ -13,7 +13,7 @@ class ViewModuleContainer extends Component {
         
         this.state = {
             moduleList: [],
-            activeModuleId: 1,
+            activeModuleId: undefined,
             error: '',
             viewForm: VIEW_MODULE_SWITCH_STATES.VIEW
 
@@ -22,7 +22,7 @@ class ViewModuleContainer extends Component {
 
     componentDidMount(){
         moduleRepository.getCompanyModules().then(
-            response => this.setState({moduleList: response, activeModuleId: response[0].id}),
+            response => this.setState({moduleList: response, activeModuleId: response ? response[0].id : undefined}),
         )
     }
 
@@ -51,24 +51,30 @@ class ViewModuleContainer extends Component {
     companyModulesListRender() {
         return (
             <React.Fragment>
-            <ul>
-                {this.state.moduleList.map(item => (
-                    <li key={item.id}>
-                        
-                            
-                                
-                                    <ViewModule id={item.id} full_info={false}></ViewModule>
-                                    <br />
-                                    <Button 
-                                        variant="contained"
-                                        color="primary"
-                                        onClick= {() => this.onClickModule(item.id)}
-                                    >Edytuj w chuj
-                                    </Button>
-                                
-                    </li>
-                ))}
-            </ul>
+            <table>
+
+                <td>
+                <ul>
+                    {this.state.moduleList.map(item => (
+                        <li key={item.id}>
+                            <ViewModule id={item.id} full_info={false}></ViewModule>
+                            <br />
+                            <Button 
+                                variant="contained"
+                                color="primary"
+                                onClick= {() => this.onClickModule(item.id)}
+                            >Edytuj
+                            </Button>
+                        </li>
+                    ))}
+                </ul>
+                </td>
+                <td>
+                    {this.state.activeModuleId ? <ViewModule id={this.state.activeModuleId} full_info={false}></ViewModule> : "Brak modułów do wyświetlenia"}
+                    
+                </td>
+
+            </table>
             </React.Fragment>
         );
       }
