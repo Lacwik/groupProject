@@ -33,11 +33,11 @@ class LogoutContainer extends Component {
         });
         setIsWorkingForCompany(false);
 
-        localStorage.setItem(AUTH_KEYS.ACCESS_TOKEN, '');
-        localStorage.setItem(AUTH_KEYS.EMAIL, '');
-        localStorage.setItem(AUTH_KEYS.ROLE, APPLICATION_ROLES.USER);
-        localStorage.setItem(AUTH_KEYS.COMPANY_LOGGED, '');
-        localStorage.setItem(AUTH_KEYS.COMPANY_WORKING_FOR, '');
+        sessionStorage.setItem(AUTH_KEYS.ACCESS_TOKEN, '');
+        sessionStorage.setItem(AUTH_KEYS.EMAIL, '');
+        sessionStorage.setItem(AUTH_KEYS.ROLE, APPLICATION_ROLES.USER);
+        sessionStorage.setItem(AUTH_KEYS.COMPANY_LOGGED, '');
+        sessionStorage.setItem(AUTH_KEYS.COMPANY_WORKING_FOR, '');
 
         setTimeout(() => this.setState(state => ({ ...state, shouldRedirect: true })), 1500);
     }
