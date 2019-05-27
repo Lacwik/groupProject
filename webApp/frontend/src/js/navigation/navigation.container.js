@@ -46,7 +46,7 @@ class NavigationContainer extends Component {
         }
     }
 
-    renderLinksIfUserIsLoggedAsJobRole() {
+    renderLinksIfUserIsLoggedAsAdminJobRole() {
         if (this.props.isUserLogged && this.props.isWorkingForCompany && this.props.companyWorkingFor.role === 'ADMIN') {
             return (
                 <React.Fragment>
@@ -84,7 +84,7 @@ class NavigationContainer extends Component {
                         <Home style={{ color: '#aaaaaa' }} fontSize="large" />
                         <Link to="/">Strona główna</Link>
                     </li>
-                    {this.renderLinksIfUserIsLoggedAsJobRole()}
+                    {this.renderLinksIfUserIsLoggedAsAdminJobRole()}
                     {this.renderLinksIfNotLogged()}
                     {this.renderLinksIfSuperAdminLogged()}
                     {this.renderLinksIfLogged()}
