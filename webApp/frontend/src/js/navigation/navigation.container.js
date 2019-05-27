@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Home, GroupAdd, AccountBox, ExitToApp, List, Add } from '@material-ui/icons';
+import { Home, GroupAdd, AccountBox, ExitToApp, List, Add, Settings, SettingsApplications } from '@material-ui/icons';
 import '../../css/navigation.css';
 import { APPLICATION_ROLES } from '../constants/applicationRoles.constants';
-import { COMPANY_ROLES } from '../constants/companyRoles.constants';
+//import { COMPANY_ROLES } from '../constants/companyRoles.constants';
 
 class NavigationContainer extends Component {
     renderLinksIfNotLogged() {
@@ -29,6 +29,14 @@ class NavigationContainer extends Component {
         if (this.props.isUserLogged) {
             return (
                 <React.Fragment>
+                    <li key="nav-module">
+                        <Settings style={{ color: '#aaaaaa' }} fontSize="large" />
+                        <Link to="/module/add-module">Dodaj Moduł</Link>
+                    </li>
+                    <li key="nav-module-display">
+                        <SettingsApplications style={{ color: '#aaaaaa' }} fontSize="large" />
+                        <Link to="/module/display-module">Wyświetl moduły</Link>
+                    </li>
                     <li key="nav-logout">
                         <ExitToApp style={{ color: '#aaaaaa' }} fontSize="large" />
                         <Link to="/logout">Wyloguj się</Link>
@@ -37,7 +45,6 @@ class NavigationContainer extends Component {
             )
         }
     }
-
 
     renderLinksIfUserIsLoggedAsJobRole() {
         if (this.props.isUserLogged && this.props.isWorkingForCompany && this.props.companyWorkingFor.role === 'ADMIN') {

@@ -18,6 +18,12 @@ class LoginForm extends Component {
         const { value: email } = e.target;
 
         this.setState(state => ({ ...state, email }));
+
+        // this.setState(state => ({
+        //     email: state.email,
+        //     password: state.password,
+        //     email,        
+        // });
     }
 
     onChangePassword = e => {

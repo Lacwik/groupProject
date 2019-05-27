@@ -1,6 +1,9 @@
 package com.wfiis.CalculatorCO2.company.metadata.entity;
 
 
+import com.wfiis.CalculatorCO2.line.metadata.entity.Line;
+import com.wfiis.CalculatorCO2.module.metadata.entity.Module;
+import com.wfiis.CalculatorCO2.stage.metadata.entity.Stage;
 import com.wfiis.CalculatorCO2.user.metadata.entity.User;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -9,16 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -59,4 +53,13 @@ public class Company {
             joinColumns = @JoinColumn(name = "company_id")
     )
     private List<User> administrators;
+
+    @OneToMany(mappedBy = "company")
+    private List<Module> modules;
+
+    @OneToMany(mappedBy = "company")
+    private List<Stage> stages;
+
+    @OneToMany(mappedBy = "company")
+    private List<Line> lines;
 }
