@@ -5,6 +5,11 @@ import ModuleFormSwitch from './components/moduleFormSwitch.component';
 import EditModuleForm from './components/editModuleForm.component';
 import ViewModule from './components/viewModule.component';
 import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import { CenterFocusStrong } from '@material-ui/icons';
 
 
 class ViewModuleContainer extends Component {
@@ -15,7 +20,8 @@ class ViewModuleContainer extends Component {
             moduleList: [],
             activeModuleId: undefined,
             error: '',
-            viewForm: VIEW_MODULE_SWITCH_STATES.VIEW
+            viewForm: VIEW_MODULE_SWITCH_STATES.VIEW,
+            dialog_open: false
 
         }
     }
@@ -43,17 +49,48 @@ class ViewModuleContainer extends Component {
     }
 
 
+    onCloseDialog = () => {
+        this.setState({dialog_open: false})
+    }
+
+
     onClickModule = (id) => {
         this.setState({activeModuleId: id});
+        this.setState({dialog_open: true});
     }
 
 
     companyModulesListRender() {
         return (
             <React.Fragment>
-            <table>
 
-                <td>
+            <Dialog open={this.state.dialog_open} onClose={this.onCloseDialog} aria-labelledby="form-dialog-title">
+                <DialogTitle id="form-dialog-title">Edycja</DialogTitle>
+                <DialogContent>
+                    <EditModuleForm id={this.state.activeModuleId} onSubmit={moduleModel => this.onEditModule(moduleModel)} errorMessage={this.state.error} />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={this.onCloseDialog} color="primary">
+                    Anuluj
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
+
+
+            <table>
+            <thead>
+                <tr>
+                    <td>
+                        {"W tym rzędzie powinno sie znaleźć info podglądowe modułu"}
+                    </td>
+                    <td>
+                        {this.state.activeModuleId ? <ViewModule id={this.state.activeModuleId} full_info={false}></ViewModule> : "Brak modułów do wyświetlenia"}
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+            <tr>
                 <ul>
                     {this.state.moduleList.map(item => (
                         <li key={item.id}>
@@ -68,45 +105,19 @@ class ViewModuleContainer extends Component {
                         </li>
                     ))}
                 </ul>
-                </td>
-                <td>
-                    {this.state.activeModuleId ? <ViewModule id={this.state.activeModuleId} full_info={false}></ViewModule> : "Brak modułów do wyświetlenia"}
-                    
-                </td>
-
+            </tr>
+            </tbody>              
             </table>
             </React.Fragment>
         );
       }
 
 
-    renderNeccessaryForm = () => {
-        const { viewForm, error } = this.state;
-        const { VIEW, EDIT } = VIEW_MODULE_SWITCH_STATES;
-
-        switch (viewForm) {
-            case VIEW:
-                return this.companyModulesListRender();
-
-            case EDIT:
-                return (
-                    <EditModuleForm id={this.state.activeModuleId} onSubmit={moduleModel => this.onEditModule(moduleModel)} errorMessage={error} />
-                );
-
-            default:
-                console.error("Unknow state: " + viewForm);    
-                return this.companyModulesListRender();
-        }
-    }
-
-
-
     render() {
         return (
             <div className="view-module-container">
                 <div className="wrapper-content"> 
-                    <ModuleFormSwitch switchForms={value => this.onSwitchForm(value)} defaultValue={this.state.viewForm} />
-                    {this.renderNeccessaryForm()}
+                    {this.companyModulesListRender()}
                 </div>
             </div>
         );
