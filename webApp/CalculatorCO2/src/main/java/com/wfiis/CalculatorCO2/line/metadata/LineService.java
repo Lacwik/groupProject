@@ -117,13 +117,23 @@ public class LineService {
     @SecureCompanyScope(role = CompanyRole.MEMBER)
     public List<VegetableModel> getLineVegetables(CompanyIdentity companyIdentity, Long lineId) {
         List<StageModel> stageModels = getLineStages(companyIdentity, lineId);
-        Set<VegetableModel> vegetableModelsSet = new HashSet<>();
 
+        List<VegetableModel> vegetableModels = new ArrayList<>();
+
+        boolean init = true;
         for(StageModel stageModel : stageModels){
-            vegetableModelsSet.addAll(stageService.getStageVegetables(companyIdentity, stageModel.getId()));
+            List<VegetableModel> vegetableModelsTmp = new ArrayList<>();
+
+            if (init) {
+                vegetableModels.addAll(stageService.getStageVegetables(companyIdentity, stageModel.getId()));
+                init = false;
+            } else {
+                vegetableModelsTmp.addAll(stageService.getStageVegetables(companyIdentity, stageModel.getId()));
+                vegetableModels.retainAll(vegetableModelsTmp);
+            }
         }
 
-        return new ArrayList<>(vegetableModelsSet);
+        return vegetableModels;
     }
 
     @SecureCompanyScope(role = CompanyRole.MEMBER)

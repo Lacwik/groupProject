@@ -43,17 +43,17 @@ public class StageService {
     private final LeftoverAssembler leftoverAssembler;
 
     @SecureCompanyScope(role = CompanyRole.MEMBER)
-    public StageModel createStage(CompanyIdentity companyIdentity, StageCreateModel stageCreateModel, Company company){
+    public StageModel createStage(CompanyIdentity companyIdentity, StageCreateModel stageCreateModel, Company company) {
         Stage stage = stageRepository.save(stageAssembler.getNewEntityFromModel(stageCreateModel, company));
         return stageAssembler.getModelFromEntity(stage);
     }
 
     @Transactional
     @SecureCompanyScope(role = CompanyRole.MEMBER)
-    public StageModel editStage(CompanyIdentity companyIdentity, StageCreateModel stageCreateModel, Long stageId){
+    public StageModel editStage(CompanyIdentity companyIdentity, StageCreateModel stageCreateModel, Long stageId) {
         Stage stage = getStageEntity(stageId);
 
-        if (stage.getUsed()){
+        if (stage.getUsed()) {
             return createStage(companyIdentity, stageCreateModel, stage.getCompany());
         }
 
@@ -63,19 +63,19 @@ public class StageService {
     }
 
     @SecureCompanyScope(role = CompanyRole.MEMBER)
-    public StageModel getStage(CompanyIdentity companyIdentity, Long stageId){
+    public StageModel getStage(CompanyIdentity companyIdentity, Long stageId) {
         return stageAssembler.getModelFromEntity(getStageEntity(stageId));
     }
 
-    public Stage getStageEntity(Long stageId){
-        return stageRepository.findById(stageId).orElseThrow(()->new StageNotFoundException(stageId));
+    public Stage getStageEntity(Long stageId) {
+        return stageRepository.findById(stageId).orElseThrow(() -> new StageNotFoundException(stageId));
     }
 
     @SecureCompanyScope(role = CompanyRole.MEMBER)
-    public String deleteStage(CompanyIdentity companyIdentity, Long stageId){
+    public String deleteStage(CompanyIdentity companyIdentity, Long stageId) {
         Stage stage = getStageEntity(stageId);
 
-        if(stage.getUsed() || stage.getLines().size() != 0){
+        if (stage.getUsed() || stage.getLines().size() != 0) {
             return "Stage with id " + stageId + " can not be deleted";
         }
 
@@ -88,17 +88,17 @@ public class StageService {
         return stageAssembler.getModelsFromEntityList(stageRepository.findStagesByCompany(company));
     }
 
-    public Company getCompanyByStageId(Long stageId){
+    public Company getCompanyByStageId(Long stageId) {
         return getStageEntity(stageId).getCompany();
     }
 
     @SecureCompanyScope(role = CompanyRole.MEMBER)
-    public List<LineModel> getStageLines(CompanyIdentity companyIdentity, Long stageId){
+    public List<LineModel> getStageLines(CompanyIdentity companyIdentity, Long stageId) {
         return lineAssembler.getModelsFromEntityList(getStageEntity(stageId).getLines());
     }
 
     @SecureCompanyScope(role = CompanyRole.MEMBER)
-    public List<ModuleModel> getStageModules(CompanyIdentity companyIdentity, Long stageId){
+    public List<ModuleModel> getStageModules(CompanyIdentity companyIdentity, Long stageId) {
         return moduleAssembler.getModelsFromEntityList(getStageEntity(stageId).getModules());
     }
 
@@ -106,16 +106,28 @@ public class StageService {
     public List<VegetableModel> getStageVegetables(CompanyIdentity companyIdentity, Long stageId) {
         List<ModuleModel> moduleModels = getStageModules(companyIdentity, stageId);
 
-        Set<VegetableModel> vegetableModelsSet = new HashSet<>();
-        
-        for(ModuleModel moduleModel : moduleModels){
+        List<VegetableModel> vegetableModels = new ArrayList<>();
+
+        boolean init = true;
+        for (ModuleModel moduleModel : moduleModels) {
+            List<VegetableModel> vegetableModelsTmp = new ArrayList<>();
+
             List<Vegetable> vegetables = moduleModel.getVegetables();
-            for(Vegetable vegetable : vegetables){
-                vegetableModelsSet.add(vegetableAssembler.getModelFromEntity(vegetable));
+            for (Vegetable vegetable : vegetables) {
+                if (init) {
+                    vegetableModels.add(vegetableAssembler.getModelFromEntity(vegetable));
+                } else {
+                    vegetableModelsTmp.add(vegetableAssembler.getModelFromEntity(vegetable));
+                }
+            }
+            if (init) {
+                init = false;
+            } else {
+                vegetableModels.retainAll(vegetableModelsTmp);
             }
         }
 
-        return new ArrayList<>(vegetableModelsSet);
+        return vegetableModels;
     }
 
     @SecureCompanyScope(role = CompanyRole.MEMBER)
@@ -124,9 +136,9 @@ public class StageService {
 
         Set<ResourceModel> resourceModelSet = new HashSet<>();
 
-        for(ModuleModel moduleModel : moduleModels){
+        for (ModuleModel moduleModel : moduleModels) {
             List<Resource> resources = moduleModel.getResources();
-            for(Resource resource : resources){
+            for (Resource resource : resources) {
                 resourceModelSet.add(resourceAssembler.getModelFromEntity(resource));
             }
         }
@@ -140,9 +152,9 @@ public class StageService {
 
         Set<LeftoverModel> leftoverModelSet = new HashSet<>();
 
-        for(ModuleModel moduleModel : moduleModels){
+        for (ModuleModel moduleModel : moduleModels) {
             List<Leftover> leftovers = moduleModel.getLeftovers();
-            for(Leftover leftover : leftovers){
+            for (Leftover leftover : leftovers) {
                 leftoverModelSet.add(leftoverAssembler.getModelFromEntity(leftover));
             }
         }
