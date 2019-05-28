@@ -10,7 +10,7 @@ import EditLineForm from './components/editLineForm.component';
 import AddLineForm from './components/addLineForm.component';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import { BorderColor, Visibility, DeleteForever, LinearScale } from '@material-ui/icons';
+import { BorderColor, Visibility, DeleteForever } from '@material-ui/icons';
 
 
 class ViewLineContainer extends Component {

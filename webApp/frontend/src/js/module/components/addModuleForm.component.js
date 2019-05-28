@@ -26,6 +26,19 @@ class AddModuleForm extends Component {
     }
 
     componentDidMount(){
+
+        Promise.all([
+            vegetableRepository.getAllVegetables(), 
+            resourceRepository.getAllResources(),
+            leftoverRepository.getAllLeftovers()
+        ])
+        .then( ([companyStages, defaultStages]) => {
+            this.setState({
+                allStages: [...companyStages, ...defaultStages].map(v => ({ ...v, value: v.id, label: v.name }))
+            });
+
+        })
+
         vegetableRepository.getAllVegetables().then(
             response => this.setState({
                 allVegetables: response.map(v => ({ ...v, value: v.id, label: v.name }))
