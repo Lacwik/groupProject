@@ -6,7 +6,9 @@ import com.wfiis.CalculatorCO2.module.metadata.ModuleAssembler;
 import com.wfiis.CalculatorCO2.module.metadata.ModuleService;
 import com.wfiis.CalculatorCO2.module.metadata.entity.Module;
 import com.wfiis.CalculatorCO2.module.model.ModuleModel;
+import com.wfiis.CalculatorCO2.stage.exceptions.StageNotFoundException;
 import com.wfiis.CalculatorCO2.stage.metadata.entity.Stage;
+import com.wfiis.CalculatorCO2.stage.metadata.repository.StageRepository;
 import com.wfiis.CalculatorCO2.stage.model.StageCreateModel;
 import com.wfiis.CalculatorCO2.stage.model.StageModel;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +21,7 @@ import java.util.List;
 @Component
 public class StageAssembler {
     private final ModuleAssembler moduleAssembler;
+    private final StageRepository stageRepository;
 
     public List<StageCreateModel> getCreateModelsFromEntityList(List<Stage> stages) {
         List<StageCreateModel> outStages = new ArrayList<>();
@@ -66,5 +69,9 @@ public class StageAssembler {
                 new ArrayList<>(),
                 modules
         );
+    }
+
+    public Stage getEntity(Long stageId){
+        return stageRepository.findById(stageId).orElseThrow(() -> new StageNotFoundException(stageId));
     }
 }

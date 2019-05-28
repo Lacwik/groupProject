@@ -58,8 +58,13 @@ public class LineService {
             return createLine(companyIdentity, lineCreateModel, line.getCompany());
         }
 
+        List<Stage> stages = new ArrayList<>();
+
+        for (StageModel stageModel : lineCreateModel.getStageModels())
+            stages.add(stageAssembler.getEntity(stageModel.getId()));
+
         line.setName(lineCreateModel.getName());
-        line.setStages(lineCreateModel.getStages());
+        line.setStages(stages);
         return lineAssembler.getModelFromEntity(line);
     }
 

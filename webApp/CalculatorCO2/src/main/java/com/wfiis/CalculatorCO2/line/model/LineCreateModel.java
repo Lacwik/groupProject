@@ -1,6 +1,6 @@
 package com.wfiis.CalculatorCO2.line.model;
 
-import com.wfiis.CalculatorCO2.stage.metadata.entity.Stage;
+import com.wfiis.CalculatorCO2.stage.model.StageModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,5 +12,5 @@ import java.util.List;
 @Getter
 public class LineCreateModel {
     private String name;
-    private List<Stage> stages;
+    private List<StageModel> stageModels;
 }
