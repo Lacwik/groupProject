@@ -77,4 +77,10 @@ public class ModuleController {
         UserAuthenticationPrincipal principal = (UserAuthenticationPrincipal) idToken.getPrincipal();
         return ResponseEntity.ok(moduleFacade.getModuleLeftovers(principal.getId(), id));
     }
+
+    @GetMapping(value = "/default", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<ModuleModel>> getDefaultModules(UsernamePasswordAuthenticationToken idToken) {
+        UserAuthenticationPrincipal principal = (UserAuthenticationPrincipal) idToken.getPrincipal();
+        return ResponseEntity.ok(moduleFacade.getDefaultModules(principal.getId()));
+    }
 }

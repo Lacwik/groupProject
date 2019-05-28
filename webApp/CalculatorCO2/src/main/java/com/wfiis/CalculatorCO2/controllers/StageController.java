@@ -84,4 +84,10 @@ public class StageController {
         UserAuthenticationPrincipal principal = (UserAuthenticationPrincipal) idToken.getPrincipal();
         return ResponseEntity.ok(stageFacade.getStageLeftovers(principal.getId(), id));
     }
+
+    @GetMapping(value = "/default", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<StageModel>> getDefaultStages(UsernamePasswordAuthenticationToken idToken) {
+        UserAuthenticationPrincipal principal = (UserAuthenticationPrincipal) idToken.getPrincipal();
+        return ResponseEntity.ok(stageFacade.getDefaultStages(principal.getId()));
+    }
 }

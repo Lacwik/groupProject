@@ -168,4 +168,9 @@ public class StageService {
 
         return new ArrayList<>(leftoverModelSet);
     }
+
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
+    public List<StageModel> getDefaultStages(CompanyIdentity companyIdentity, Company company) {
+        return stageAssembler.getModelsFromEntityList(stageRepository.findStagesByOutsourced(true));
+    }
 }

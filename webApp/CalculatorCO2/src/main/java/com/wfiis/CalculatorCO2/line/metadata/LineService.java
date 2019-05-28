@@ -164,4 +164,9 @@ public class LineService {
 
         return new ArrayList<>(leftoverModelSet);
     }
+
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
+    public List<LineModel> getDefaultLines(CompanyIdentity companyIdentity, Company company) {
+        return lineAssembler.getModelsFromEntityList(lineRepository.findLinesByOutsourced(true));
+    }
 }
