@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes, { number, string, any } from 'prop-types';
+import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
@@ -7,12 +7,6 @@ import { moduleRepository } from '../../factory/moduleRepository.factory';
 import { vegetableRepository } from '../../factory/vegetable.factory';
 import { resourceRepository } from '../../factory/resource.factory';
 import { leftoverRepository } from '../../factory/leftover.factory';
-
-// import Input from '@material-ui/core/Input';
-// import InputLabel from '@material-ui/core/InputLabel';
-// import MenuItem from '@material-ui/core/MenuItem';
-// import ListItemText from '@material-ui/core/ListItemText';
-// import Checkbox from '@material-ui/core/Checkbox';
 import Select from 'react-select'
 import makeAnimated from 'react-select/lib/animated';
 
@@ -64,18 +58,6 @@ class EditModuleForm extends Component {
     }
 
 
-    renderAvailableVegetables() {
-        return Object.keys({ ...this.state.allVegetables }).map(item => {
-            return (
-                <option
-                    key={item.id}
-                    value={item.name}
-                >{item.name}
-                </option>
-            );
-        })
-    }
-
     onChangeName = e => {
         const { value: name } = e.target;
 
@@ -124,7 +106,7 @@ class EditModuleForm extends Component {
             leftovers
         } = this.state;
 
-        console.log({ props: this.props, state: this.state });
+        //console.log({ props: this.props, state: this.state });
         return (
             <form id="module-edit-form" className="module-edit-form" onSubmit={e => e.preventDefault()}>
                 {this.props.errorMessage && <Paper className="error-box">{this.props.errorMessage}</Paper>}

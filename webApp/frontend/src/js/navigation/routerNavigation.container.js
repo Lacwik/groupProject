@@ -11,6 +11,8 @@ import DashboardContainer from '../dashboard/dashboard.container';
 import AddUsersContainer from '../company/addUsers.container';
 import AddModuleContainer from '../module/addModule.container';
 import ViewModuleContainer from '../module/viewModule.container';
+import ViewStageContainer from '../stage/viewStage.container';
+import ViewLineContainer from '../line/viewLine.container';
 
 class RouterNavigation extends Component {
   render() {
@@ -24,6 +26,8 @@ class RouterNavigation extends Component {
         <Route path='/company/add-member' component={AddUsersContainer} />
         <Route path='/module/add-module' component={AddModuleContainer} />
         <Route path='/module/display-module' component={ViewModuleContainer} />
+        <Route path='/stage/display-stage' component={ViewStageContainer} />
+        <Route path='/line/display-line' component={ViewLineContainer} />
       </Switch>
     );
   }

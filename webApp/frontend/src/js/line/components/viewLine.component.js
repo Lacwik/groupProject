@@ -1,28 +1,29 @@
 import React, { Component } from 'react';
 import { any } from 'prop-types';
+import { lineRepository } from '../../factory/lineRepository.factory';
 import { stageRepository } from '../../factory/stageRepository.factory';
-import ViewModule from '../../module/components/viewModule.component'
+import ViewStage from '../../stage/components/viewStage.component'
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import { ChevronRight } from '@material-ui/icons';
 
-class ViewStage extends Component {
+class ViewLine extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            stage: any,
+            line: any,
             full_info: false,
             dialog_show: false,
-            activeModuleId: undefined,
+            activeStageId: undefined,
         };
     }
 
     componentDidMount(){
-        stageRepository.getStageById(this.props.id).then(
-            response => this.setState({ stage: response })
+        lineRepository.getLineById(this.props.id).then(
+            response => this.setState({ line: response })
         ).then(() => this.setState({full_info: this.props.full_info})
         )
     }
@@ -31,16 +32,16 @@ class ViewStage extends Component {
         this.setState({dialog_show: false});
     }
 
-    onClickModule_show = (id) => {
-        this.setState({activeModuleId: id});
+    onClickStage_show = (id) => {
+        this.setState({activeStageId: id});
         this.setState({dialog_show: true});
     }
 
 
     render() {
 
-        const name = this.state.stage.name;
-        const modules = this.state.stage.modules;
+        const name = this.state.line.name;
+        const stages = this.state.line.stages;
         const full_info = this.state.full_info;
 
         let fullInfo;
@@ -49,7 +50,7 @@ class ViewStage extends Component {
                 <React.Fragment>
                     <Dialog open={this.state.dialog_show} onClose={this.onCloseDialog} aria-labelledby="dialog-show-module">
                         <DialogContent>
-                            <ViewModule id={this.state.activeModuleId} full_info={true}></ViewModule>
+                            <ViewStage id={this.state.activeStageId} full_info={true}></ViewStage>
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={this.onCloseDialog} color="primary">
@@ -58,16 +59,16 @@ class ViewStage extends Component {
                         </DialogActions>
                     </Dialog>
 
-                    <li key="name-view-modules">
-                        <b>{"Moduły:"}</b>
+                    <li key="name-view-stages">
+                        <b>{"Etapy:"}</b>
                         <ul>
-                            {modules.map(item => (
+                            {stages.map(item => (
                                 <li key={item.id}>
                                     <Button 
                                         variant="outlined" 
                                         color="primary" 
                                         size = "small"
-                                        onClick={() => this.onClickModule_show(item.id)}
+                                        onClick={() => this.onClickStage_show(item.id)}
                                     ><ChevronRight size="small" />
                                     </Button>
                                     {item.name}
@@ -84,7 +85,7 @@ class ViewStage extends Component {
             <React.Fragment>
                 <ul>
 
-                    <li key="name-view-stage">
+                    <li key="name-view-line">
                         <h1>{name}</h1>
                     </li>
 
@@ -96,4 +97,4 @@ class ViewStage extends Component {
     }
 }
 
-export default ViewStage;
+export default ViewLine;
