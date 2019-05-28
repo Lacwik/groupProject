@@ -13,11 +13,11 @@ class NavigationContainer extends Component {
             return (
                 <React.Fragment>
                     <li key="nav-register">
-                        <AccountBox style={{ color: '#000000' }} fontSize="large" />
-                        <Link to="/login">Zaloguj się</Link>
+                        <AccountBox style={{ color:'#e8eef4', background:'#e8eef4' }} fontSize="large" />
+                        <Link to="/login" >Zaloguj się</Link>
                     </li>
                     <li key="nav-login">
-                        <GroupAdd style={{ color: '#aaaaaa' }} fontSize="large" />
+                        <GroupAdd style={{ color: '#e8eef4' }} fontSize="large" />
                         <Link to="/register">Zarejestruj się</Link>
                     </li>
                 </React.Fragment>
@@ -30,19 +30,19 @@ class NavigationContainer extends Component {
             return (
                 <React.Fragment>
                     <li key="nav-modules">
-                        <Settings style={{ color: '#aaaaaa' }} fontSize="large" />
+                        <Settings style={{ color: '#23d8fc' }} fontSize="large" />
                         <Link to="/module/display-module">Moduły</Link>
                     </li>
                     <li key="nav-stages">
-                        <GroupWork style={{ color: '#aaaaaa' }} fontSize="large" />
+                        <GroupWork style={{ color: '#7744cc' }} fontSize="large" />
                         <Link to="/stage/display-stage">Etapy</Link>
                     </li>
                     <li key="nav-lines">
-                        <LinearScale style={{ color: '#aaaaaa' }} fontSize="large" />
+                        <LinearScale style={{ color: '#77ccdd' }} fontSize="large" />
                         <Link to="/line/display-line">Linie</Link>
                     </li>
                     <li key="nav-logout">
-                        <ExitToApp style={{ color: '#aaaaaa' }} fontSize="large" />
+                        <ExitToApp style={{ color: '#e8eef4' }} fontSize="large" />
                         <Link to="/logout">Wyloguj się</Link>
                     </li>
                 </React.Fragment>
@@ -55,7 +55,7 @@ class NavigationContainer extends Component {
             return (
                 <React.Fragment>
                     <li key="nav-company-add-user">
-                        <Add style={{ color: '#aaaaaa' }} fontSize="large" />
+                        <Add style={{ color: '#e8eef4' }} fontSize="large" />
                         <Link to="/company/add-member">Dodaj pracownika</Link>
                     </li>
                 </React.Fragment>
@@ -72,7 +72,7 @@ class NavigationContainer extends Component {
             return (
                 <React.Fragment>
                     <li key="nav-admin-requests">
-                        <List style={{ color: '#aaaaaa' }} fontSize="large" />
+                        <List style={{ color: '#e8eef4' }} fontSize="large" />
                         <Link to="/admin/requests">Zgłoszenia</Link>
                     </li>
                 </React.Fragment>
@@ -85,7 +85,7 @@ class NavigationContainer extends Component {
             <aside className="main-wrapper__sidebar">
                 <ul className="navigation">
                     <li key="nav-home">
-                        <Home style={{ color: '#aaaaaa' }} fontSize="large" />
+                        <Home style={{ color: '#e8eef4' }} fontSize="large" />
                         <Link to="/">Strona główna</Link>
                     </li>
                     {this.renderLinksIfUserIsLoggedAsAdminJobRole()}

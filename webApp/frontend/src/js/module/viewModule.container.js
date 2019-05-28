@@ -10,7 +10,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import { BorderColor, Visibility, DeleteForever  } from '@material-ui/icons';
+import { BorderColor, Visibility, DeleteForever, Settings } from '@material-ui/icons';
 
 
 class ViewModuleContainer extends Component {
@@ -149,7 +149,7 @@ class ViewModuleContainer extends Component {
                             <Fab 
                                 color="secondary" 
                                 aria-label="Add" 
-                                className="fab-module-head"
+                                className="fab-module-head button add"
                                 onClick={() => this.onClickModule_create()}
                             ><AddIcon />
                             </Fab>
@@ -165,19 +165,22 @@ class ViewModuleContainer extends Component {
                                 <br />
                                 <Fab 
                                     color="secondary"
-                                    aria-label="Delete" 
+                                    aria-label="Delete"
+                                    className="button delete"
                                     onClick= {() => this.onClickModule_delete(item.id)}
                                 ><DeleteForever />
                                 </Fab>
                                 <Fab 
                                     color="primary" 
-                                    aria-label="Edit" 
+                                    aria-label="Edit"
+                                    className="button edit" 
                                     onClick= {() => this.onClickModule_edit(item.id)}
                                 ><BorderColor />
                                 </Fab>
                                 <Fab 
                                     color="primary" 
                                     aria-label="Show" 
+                                    className="button show"
                                     onClick= {() => this.onClickModule_show(item.id)}
                                 ><Visibility />
                                 </Fab>
@@ -195,10 +198,14 @@ class ViewModuleContainer extends Component {
     render() {
         return (
             <div className="view-module-container">
-                <div className="wrapper-content"> 
-                    {this.companyModulesListRender()}
-                </div>
+            <div className="wrapper-content"> 
+            <div className="header-icon"><Settings  style={{ color: '#5588aa', fontSize:"55px" }} fontSize="large" /></div>
+            <div className="header"> Dostępne moduły </div>
+            <div className="columns">
+                {this.companyModulesListRender()}
             </div>
+            </div>
+        </div>
         );
     }
 }

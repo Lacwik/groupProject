@@ -167,18 +167,21 @@ class ViewLineContainer extends Component {
                                     <Fab 
                                         color="secondary"
                                         aria-label="Delete" 
+                                        className="button delete"
                                         onClick= {() => this.onClickLine_delete(item.id)}
                                     ><DeleteForever />
                                     </Fab>
                                     <Fab 
                                         color="primary" 
                                         aria-label="Edit" 
+                                        className="button edit"
                                         onClick= {() => this.onClickLine_edit(item.id)}
                                     ><BorderColor />
                                     </Fab>
                                     <Fab 
                                         color="primary" 
                                         aria-label="Show" 
+                                        className="button show"
                                         onClick= {() => this.onClickLine_show(item.id)}
                                     ><Visibility />
                                     </Fab>
@@ -197,6 +200,8 @@ class ViewLineContainer extends Component {
         return (
             <div className="view-line-container">
                 <div className="wrapper-content"> 
+                <LinearScale style={{ color: '#232323', fontSize:"55px", border:"#69b4ff", background:"#69b4ff", borderRadius:"3px" }} fontSize="large" />
+                <h1 className="header"> Dostępne linie </h1>
                     {this.companyLinesListRender()}
                 </div>
             </div>

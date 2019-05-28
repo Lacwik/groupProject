@@ -10,7 +10,7 @@ import EditStageForm from './components/editStageForm.component'
 import AddStageForm from './components/addStageForm.component'
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import { BorderColor, Visibility, DeleteForever } from '@material-ui/icons';
+import { BorderColor, Visibility, DeleteForever, GroupWork } from '@material-ui/icons';
 
 
 class ViewStageContainer extends Component {
@@ -166,18 +166,21 @@ class ViewStageContainer extends Component {
                                     <Fab 
                                         color="secondary"
                                         aria-label="Delete" 
+                                        className="button delete"
                                         onClick= {() => this.onClickStage_delete(item.id)}
                                     ><DeleteForever />
                                     </Fab>
                                     <Fab 
                                         color="primary" 
                                         aria-label="Edit" 
+                                        className="button edit"
                                         onClick= {() => this.onClickStage_edit(item.id)}
                                     ><BorderColor />
                                     </Fab>
                                     <Fab 
                                         color="primary" 
                                         aria-label="Show" 
+                                        className="button show"
                                         onClick= {() => this.onClickStage_show(item.id)}
                                     ><Visibility />
                                     </Fab>
@@ -196,6 +199,8 @@ class ViewStageContainer extends Component {
         return (
             <div className="view-stage-container">
                 <div className="wrapper-content"> 
+                <GroupWork style={{ color: '#232323;', fontSize:"55px", border:"#69ff72", background:"#69ff72", borderRadius:"3px" }} fontSize="large" />
+                <h1 className="header"> Dostępne etapy </h1>
                     {this.companyStagesListRender()}
                 </div>
             </div>
