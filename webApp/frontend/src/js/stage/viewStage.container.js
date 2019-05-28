@@ -2,10 +2,15 @@ import React, { Component } from 'react';
 import { stageRepository } from '../factory/stageRepository.factory';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import ViewStage from './components/viewStage.component'
 import EditStageForm from './components/editStageForm.component'
+import AddStageForm from './components/addStageForm.component'
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import { BorderColor, Visibility } from '@material-ui/icons';
 
 
 class ViewStageContainer extends Component {
@@ -17,7 +22,8 @@ class ViewStageContainer extends Component {
             activeStageId: undefined,
             error: '',
             dialog_edit: false,
-            dialog_show: false
+            dialog_show: false,
+            dialog_create: false,
         }
     }
 
@@ -38,10 +44,17 @@ class ViewStageContainer extends Component {
             .catch(err => this.setErrorMessage(err));
     }
 
+    onCreateStage = (stageModel) => {
+        console.log(stageModel)
+        return stageRepository.createStage(stageModel)
+            .catch(err => this.setErrorMessage(err));
+    } 
+
 
     onCloseDialog = () => {
         this.setState({dialog_edit: false});
         this.setState({dialog_show: false});
+        this.setState({dialog_create: false});
     }
 
 
@@ -53,6 +66,10 @@ class ViewStageContainer extends Component {
     onClickStage_show = (id) => {
         this.setState({activeStageId: id});
         this.setState({dialog_show: true});
+    }
+
+    onClickStage_create = () => {;
+        this.setState({dialog_create: true});
     }
 
 
@@ -72,6 +89,20 @@ class ViewStageContainer extends Component {
             </Dialog>
 
 
+            <Dialog open={this.state.dialog_create} onClose={this.onCloseDialog} aria-labelledby="dialog-create-stage">
+                <DialogTitle id="dialog-create-satge">Nowy etap</DialogTitle>
+                <DialogContent>
+                    <AddStageForm onSubmit={satgeModel => this.onCreateStage(satgeModel)} errorMessage={this.state.error} />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={this.onCloseDialog} color="primary">
+                    Anuluj
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
+
+
             <Dialog open={this.state.dialog_show} onClose={this.onCloseDialog} aria-labelledby="dialog-show-stage">
                 <DialogContent>
                     <ViewStage id={this.state.activeStageId} full_info={true}></ViewStage>
@@ -83,27 +114,45 @@ class ViewStageContainer extends Component {
                 </DialogActions>
             </Dialog>
 
-                <ul>
-                    {this.state.stageList.map(item => (
-                        <li key={item.id}>
-                            <ViewStage id={item.id} full_info={false}></ViewStage>
-                            <br />
-                            <Button 
-                                variant="contained"
-                                color="primary" 
-                                onClick= {() => this.onClickStage_edit(item.id)}
-                            >Edycja
-                            </Button>
-                            <Button 
-                                variant="contained"
-                                color="primary" 
-                                onClick= {() => this.onClickStage_show(item.id)}
-                            >Podgląd
-                            </Button>
-                        </li>
-                    ))}
-                </ul>
-
+            <table>
+                <thead>
+                    <tr>
+                        <td>
+                            <Fab 
+                                color="secondary" 
+                                aria-label="Add" 
+                                className="fab-stage-head" 
+                                onClick={() => this.onClickStage_create()}
+                            ><AddIcon />
+                            </Fab>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <ul>
+                            {this.state.stageList.map(item => (
+                                <li key={item.id}>
+                                    <ViewStage id={item.id} full_info={false}></ViewStage>
+                                    <br />
+                                    <Fab 
+                                        color="primary" 
+                                        aria-label="Edit" 
+                                        onClick= {() => this.onClickStage_edit(item.id)}
+                                    ><BorderColor />
+                                    </Fab>
+                                    <Fab 
+                                        color="primary" 
+                                        aria-label="Show" 
+                                        onClick= {() => this.onClickStage_show(item.id)}
+                                    ><Visibility />
+                                    </Fab>
+                                </li>
+                            ))}
+                        </ul>
+                    </tr>
+                </tbody>
+            </table>
             </React.Fragment>
         );
       }

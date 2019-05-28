@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { moduleRepository } from '../factory/moduleRepository.factory';
 import EditModuleForm from './components/editModuleForm.component';
+import AddModuleForm from './components/addModuleForm.component';
 import ViewModule from './components/viewModule.component';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import { BorderColor, Visibility } from '@material-ui/icons';
 
 
 class ViewModuleContainer extends Component {
@@ -18,7 +22,8 @@ class ViewModuleContainer extends Component {
             activeModuleId: undefined,
             error: '',
             dialog_edit: false,
-            dialog_show: false
+            dialog_show: false,
+            dialog_create: false,
         }
     }
 
@@ -40,9 +45,17 @@ class ViewModuleContainer extends Component {
     }
 
 
+    onCreateModule = (moduleModel) => {
+        console.log(moduleModel)
+        return moduleRepository.createModule(moduleModel)
+            .catch(err => this.setErrorMessage(err));
+    }
+
+
     onCloseDialog = () => {
         this.setState({dialog_edit: false});
-        this.setState({dialog_show: false})
+        this.setState({dialog_show: false});
+        this.setState({dialog_create: false});
     }
 
 
@@ -54,6 +67,10 @@ class ViewModuleContainer extends Component {
     onClickModule_show = (id) => {
         this.setState({activeModuleId: id});
         this.setState({dialog_show: true});
+    }
+
+    onClickModule_create = () => {
+        this.setState({dialog_create: true});
     }
 
 
@@ -73,6 +90,18 @@ class ViewModuleContainer extends Component {
                 </DialogActions>
             </Dialog>
 
+            <Dialog open={this.state.dialog_create} onClose={this.onCloseDialog} aria-labelledby="dialog-create-module">
+                <DialogTitle id="dialog-create-module">Nowy moduł</DialogTitle>
+                <DialogContent>
+                    <AddModuleForm onSubmit={moduleModel => this.onCreateModule(moduleModel)} errorMessage={this.state.error} />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={this.onCloseDialog} color="primary">
+                    Anuluj
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
             <Dialog open={this.state.dialog_show} onClose={this.onCloseDialog} aria-labelledby="dialog-show-module">
                 <DialogContent>
                     <ViewModule id={this.state.activeModuleId} full_info={true}></ViewModule>
@@ -84,27 +113,45 @@ class ViewModuleContainer extends Component {
                 </DialogActions>
             </Dialog>
 
-                <ul>
-                    {this.state.moduleList.map(item => (
-                        <li key={item.id}>
-                            <ViewModule id={item.id} full_info={false}></ViewModule>
-                            <br />
-                            <Button 
-                                variant="contained"
-                                color="primary"
-                                onClick= {() => this.onClickModule_edit(item.id)}
-                            >Edycja
-                            </Button>
-                            <Button 
-                                variant="contained"
-                                color="primary"
-                                onClick= {() => this.onClickModule_show(item.id)}
-                            >Podgląd
-                            </Button>
-                        </li>
-                    ))}
-                </ul>
-
+            <table>
+                <thead>
+                    <tr>
+                        <td>
+                            <Fab 
+                                color="secondary" 
+                                aria-label="Add" 
+                                className="fab-module-head"
+                                onClick={() => this.onClickModule_create()}
+                            ><AddIcon />
+                            </Fab>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <ul>
+                        {this.state.moduleList.map(item => (
+                            <li key={item.id}>
+                                <ViewModule id={item.id} full_info={false}></ViewModule>
+                                <br />
+                                <Fab 
+                                    color="primary" 
+                                    aria-label="Edit" 
+                                    onClick= {() => this.onClickModule_edit(item.id)}
+                                ><BorderColor />
+                                </Fab>
+                                <Fab 
+                                    color="primary" 
+                                    aria-label="Show" 
+                                    onClick= {() => this.onClickModule_show(item.id)}
+                                ><Visibility />
+                                </Fab>
+                            </li>
+                        ))}
+                    </ul>
+                    </tr>
+                </tbody>
+            </table>
             </React.Fragment>
         );
       }
