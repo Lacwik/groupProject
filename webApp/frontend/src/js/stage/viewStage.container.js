@@ -10,7 +10,7 @@ import EditStageForm from './components/editStageForm.component'
 import AddStageForm from './components/addStageForm.component'
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import { BorderColor, Visibility, DeleteForever } from '@material-ui/icons';
+import { BorderColor, Visibility, DeleteForever, GroupWork } from '@material-ui/icons';
 
 
 class ViewStageContainer extends Component {
@@ -31,7 +31,7 @@ class ViewStageContainer extends Component {
 
     componentDidMount(){
         stageRepository.getCompanyStages().then(
-            response => this.setState({stageList: response, activeStageId: response ? response[0].id : undefined}),
+            response => this.setState({stageList: response, activeStageId: response.length !== 0 ? response[0].id : undefined}),
         ).then(
             stageRepository.getDefaultStages().then(
                 response => this.setState({defaultStageList: response})
@@ -235,6 +235,8 @@ class ViewStageContainer extends Component {
         return (
             <div className="view-stage-container">
                 <div className="wrapper-content"> 
+                <GroupWork style={{ color: '#232323;', fontSize:"55px", border:"#69ff72", background:"#69ff72", borderRadius:"3px" }} fontSize="large" />
+                <h1 className="header"> Dostępne etapy </h1>
                     {this.companyStagesListRender()}
                 </div>
             </div>
