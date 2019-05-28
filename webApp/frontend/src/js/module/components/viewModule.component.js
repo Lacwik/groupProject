@@ -32,11 +32,15 @@ class ViewModule extends Component {
         if (full_info) {
             fullInfo = (
                 <React.Fragment>
+                    <li key="name-view-power">
+                        <b>Moc:</b> {power}
+                    </li> 
                     <li key="name-view-vegetables">
+                    
                         <b>{"Warzywa:"}</b>
                         <ul>
                             {vegetables.map(item => (
-                                <li key={item.id}>
+                                <li className="items" key={item.id}>
                                     {item.name}
                                 </li>
                             ))}
@@ -46,7 +50,7 @@ class ViewModule extends Component {
                         <b>{"Zasoby:"}</b>
                         <ul>
                             {resources.map(item => (
-                                <li key={item.id}>
+                                <li className="items" key={item.id}>
                                     {item.name}
                                 </li>
                             ))}
@@ -56,7 +60,7 @@ class ViewModule extends Component {
                         <b>{"Odpady:"}</b>
                         <ul>
                             {leftovers.map(item => (
-                                <li key={item.id}>
+                                <li className="items" key={item.id}>
                                     {item.name}
                                 </li>
                             ))}
@@ -73,9 +77,7 @@ class ViewModule extends Component {
                     <li key="name-view-module">
                         <h1>{name}</h1>
                     </li>
-                    <li key="name-view-power">
-                        <b>Moc:</b> {power}
-                    </li>
+                    
                    
                     {fullInfo}                  
                     
