@@ -19,6 +19,7 @@ class ViewStageContainer extends Component {
         
         this.state = {
             stageList: [],
+            defaultStageList: [],
             activeStageId: undefined,
             error: '',
             dialog_edit: false,
@@ -31,6 +32,10 @@ class ViewStageContainer extends Component {
     componentDidMount(){
         stageRepository.getCompanyStages().then(
             response => this.setState({stageList: response, activeStageId: response ? response[0].id : undefined}),
+        ).then(
+            stageRepository.getDefaultStages().then(
+                response => this.setState({defaultStageList: response})
+            )
         )
     }
 
@@ -162,32 +167,62 @@ class ViewStageContainer extends Component {
                 </thead>
                 <tbody>
                     <tr>
-                        <ul>
-                            {this.state.stageList.map(item => (
-                                <li key={item.id}>
-                                    <ViewStage id={item.id} full_info={false}></ViewStage>
-                                    <br />
-                                    <Fab 
-                                        color="secondary"
-                                        aria-label="Delete" 
-                                        onClick= {() => this.onClickStage_delete(item.id)}
-                                    ><DeleteForever />
-                                    </Fab>
-                                    <Fab 
-                                        color="primary" 
-                                        aria-label="Edit" 
-                                        onClick= {() => this.onClickStage_edit(item.id)}
-                                    ><BorderColor />
-                                    </Fab>
-                                    <Fab 
-                                        color="primary" 
-                                        aria-label="Show" 
-                                        onClick= {() => this.onClickStage_show(item.id)}
-                                    ><Visibility />
-                                    </Fab>
-                                </li>
-                            ))}
-                        </ul>
+                        <td>
+                            <ul>
+                                {this.state.stageList.map(item => (
+                                    <li key={item.id}>
+                                        <ViewStage id={item.id} full_info={false}></ViewStage>
+                                        <br />
+                                        <Fab 
+                                            color="secondary"
+                                            aria-label="Delete" 
+                                            onClick= {() => this.onClickStage_delete(item.id)}
+                                        ><DeleteForever />
+                                        </Fab>
+                                        <Fab 
+                                            color="primary" 
+                                            aria-label="Edit" 
+                                            onClick= {() => this.onClickStage_edit(item.id)}
+                                        ><BorderColor />
+                                        </Fab>
+                                        <Fab 
+                                            color="primary" 
+                                            aria-label="Show" 
+                                            onClick= {() => this.onClickStage_show(item.id)}
+                                        ><Visibility />
+                                        </Fab>
+                                    </li>
+                                ))}
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                {this.state.defaultStageList.map(item => (
+                                    <li key={item.id}>
+                                        <ViewStage id={item.id} full_info={false}></ViewStage>
+                                        <br />
+                                        <Fab 
+                                            color="secondary"
+                                            aria-label="Delete" 
+                                            onClick= {() => this.onClickStage_delete(item.id)}
+                                        ><DeleteForever />
+                                        </Fab>
+                                        <Fab 
+                                            color="primary" 
+                                            aria-label="Edit" 
+                                            onClick= {() => this.onClickStage_edit(item.id)}
+                                        ><BorderColor />
+                                        </Fab>
+                                        <Fab 
+                                            color="primary" 
+                                            aria-label="Show" 
+                                            onClick= {() => this.onClickStage_show(item.id)}
+                                        ><Visibility />
+                                        </Fab>
+                                    </li>
+                                ))}
+                            </ul>
+                        </td>
                     </tr>
                 </tbody>
             </table>
