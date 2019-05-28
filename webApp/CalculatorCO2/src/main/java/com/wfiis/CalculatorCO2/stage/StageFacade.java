@@ -71,4 +71,9 @@ public class StageFacade {
         Company company = userMetadataService.getCurrentCompanyWorkingFor(userId);
         return stageService.getStageLeftovers(CompanyIdentity.of(company.getId()), stageId);
     }
+
+    public List<StageModel> getDefaultStages(Long userId) {
+        Company company = userMetadataService.getCurrentCompanyWorkingFor(userId);
+        return stageService.getDefaultStages(CompanyIdentity.of(company.getId()), company);
+    }
 }

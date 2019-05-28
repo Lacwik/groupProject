@@ -1,7 +1,9 @@
 package com.wfiis.CalculatorCO2.module.metadata;
 
 import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
+import com.wfiis.CalculatorCO2.module.exceptions.ModuleNotFoundException;
 import com.wfiis.CalculatorCO2.module.metadata.entity.Module;
+import com.wfiis.CalculatorCO2.module.metadata.repository.ModuleRepository;
 import com.wfiis.CalculatorCO2.module.model.ModuleCreateModel;
 import com.wfiis.CalculatorCO2.module.model.ModuleModel;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +15,11 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class ModuleAssembler {
+    private final ModuleRepository moduleRepository;
+
+    public Module getEntity(Long moduleId) {
+        return moduleRepository.findById(moduleId).orElseThrow(() -> new ModuleNotFoundException(moduleId));
+    }
 
     public List<ModuleCreateModel> getCreateModelsFromEntityList(List<Module> modules) {
         List<ModuleCreateModel> outModules = new ArrayList<>();

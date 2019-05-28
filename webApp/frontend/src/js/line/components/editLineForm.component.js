@@ -15,7 +15,7 @@ class EditLineForm extends Component {
 
         this.state = {
             name: '',
-            stages: [],
+            stageModels: [],
             allStages: [],
         };
     }
@@ -24,7 +24,7 @@ class EditLineForm extends Component {
         lineRepository.getLineById(this.props.id).then(
             response => this.setState({ 
                 name: response.name,
-                stages: response.stages.map(v => ({ ...v, value: v.id, label: v.name })),
+                stageModels: response.stageModels.map(v => ({ ...v, value: v.id, label: v.name })),
             })
         ).then(
             stageRepository.getCompanyStages().then(
@@ -44,16 +44,16 @@ class EditLineForm extends Component {
 
 
     onChangeStages = e => {
-        const stages = e;
+        const stageModels = e;
 
-        this.setState(state => ({ ...state, stages }));
+        this.setState(state => ({ ...state, stageModels }));
     }
 
 
     onSubmit = () => {
-        const { name, stages } = this.state;
+        const { name, stageModels } = this.state;
 
-        this.props.onSubmit({ name, stages, id: this.props.id });
+        this.props.onSubmit({ name, stageModels, id: this.props.id });
     }
 
 
@@ -61,7 +61,7 @@ class EditLineForm extends Component {
 
         const {
             name, 
-            stages
+            stageModels
         } = this.state;
 
         //console.log({ props: this.props, state: this.state });
@@ -83,7 +83,7 @@ class EditLineForm extends Component {
                 <Select 
                     closeMenuOnSelect={false}
                     components={makeAnimated()}
-                    value={stages}
+                    value={stageModels}
                     isMulti
                     options={this.state.allStages}
                     onChange={this.onChangeStages}

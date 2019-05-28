@@ -19,6 +19,7 @@ class ViewModuleContainer extends Component {
         
         this.state = {
             moduleList: [],
+            defaultModulesList: [],
             activeModuleId: undefined,
             error: '',
             dialog_edit: false,
@@ -31,6 +32,10 @@ class ViewModuleContainer extends Component {
     componentDidMount(){
         moduleRepository.getCompanyModules().then(
             response => this.setState({moduleList: response, activeModuleId: response ? response[0].id : undefined}),
+        ).then(
+            moduleRepository.getDefaultModules().then(
+                response => this.setState({defaultModulesList: response})
+            )
         )
     }
 
@@ -42,6 +47,7 @@ class ViewModuleContainer extends Component {
 
     onEditModule = (moduleModel) => {
         return moduleRepository.editModule(moduleModel)
+            .then( window.location.reload() )
             .catch(err => this.setErrorMessage(err));
     }
 
@@ -49,12 +55,14 @@ class ViewModuleContainer extends Component {
     onCreateModule = (moduleModel) => {
         console.log(moduleModel)
         return moduleRepository.createModule(moduleModel)
+            .then( window.location.reload() )
             .catch(err => this.setErrorMessage(err));
     }
 
 
     onDeleteModule = (id) => {
         return moduleRepository.deleteModule(id)
+            .then( window.location.reload() )
             .catch(err => this.setErrorMessage(err));
     }
 
@@ -158,35 +166,62 @@ class ViewModuleContainer extends Component {
                 </thead>
                 <tbody>
                     <tr>
-                    <ul>
-                        {this.state.moduleList.map(item => (
-                            <li key={item.id}>
-                                <ViewModule id={item.id} full_info={false}></ViewModule>
-                                <br />
-                                <Fab 
-                                    color="secondary"
-                                    aria-label="Delete"
-                                    className="button delete"
-                                    onClick= {() => this.onClickModule_delete(item.id)}
-                                ><DeleteForever />
-                                </Fab>
-                                <Fab 
-                                    color="primary" 
-                                    aria-label="Edit"
-                                    className="button edit" 
-                                    onClick= {() => this.onClickModule_edit(item.id)}
-                                ><BorderColor />
-                                </Fab>
-                                <Fab 
-                                    color="primary" 
-                                    aria-label="Show" 
-                                    className="button show"
-                                    onClick= {() => this.onClickModule_show(item.id)}
-                                ><Visibility />
-                                </Fab>
-                            </li>
-                        ))}
-                    </ul>
+                        <td>
+                            <ul>
+                                {this.state.moduleList.map(item => (
+                                    <li key={item.id}>
+                                        <ViewModule id={item.id} full_info={false}></ViewModule>
+                                        <br />
+                                        <Fab 
+                                            color="secondary"
+                                            aria-label="Delete" 
+                                            onClick= {() => this.onClickModule_delete(item.id)}
+                                        ><DeleteForever />
+                                        </Fab>
+                                        <Fab 
+                                            color="primary" 
+                                            aria-label="Edit" 
+                                            onClick= {() => this.onClickModule_edit(item.id)}
+                                        ><BorderColor />
+                                        </Fab>
+                                        <Fab 
+                                            color="primary" 
+                                            aria-label="Show" 
+                                            onClick= {() => this.onClickModule_show(item.id)}
+                                        ><Visibility />
+                                        </Fab>
+                                    </li>
+                                ))}
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                {this.state.defaultModulesList.map(item => (
+                                    <li key={item.id}>
+                                        <ViewModule id={item.id} full_info={false}></ViewModule>
+                                        <br />
+                                        <Fab 
+                                            color="secondary"
+                                            aria-label="Delete" 
+                                            onClick= {() => this.onClickModule_delete(item.id)}
+                                        ><DeleteForever />
+                                        </Fab>
+                                        <Fab 
+                                            color="primary" 
+                                            aria-label="Edit" 
+                                            onClick= {() => this.onClickModule_edit(item.id)}
+                                        ><BorderColor />
+                                        </Fab>
+                                        <Fab 
+                                            color="primary" 
+                                            aria-label="Show" 
+                                            onClick= {() => this.onClickModule_show(item.id)}
+                                        ><Visibility />
+                                        </Fab>
+                                    </li>
+                                ))}
+                            </ul>
+                        </td>
                     </tr>
                 </tbody>
             </table>

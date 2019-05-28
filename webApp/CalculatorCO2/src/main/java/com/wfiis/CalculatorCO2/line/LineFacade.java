@@ -71,4 +71,9 @@ public class LineFacade {
         Company company = userMetadataService.getCurrentCompanyWorkingFor(userId);
         return lineService.getLineLeftovers(CompanyIdentity.of(company.getId()), lineId);
     }
+
+    public List<LineModel> getDefaultLines(Long userId) {
+        Company company = userMetadataService.getCurrentCompanyWorkingFor(userId);
+        return lineService.getDefaultLines(CompanyIdentity.of(company.getId()), company);
+    }
 }

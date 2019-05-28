@@ -40,7 +40,7 @@ class ViewStage extends Component {
     render() {
 
         const name = this.state.stage.name;
-        const modules = this.state.stage.modules;
+        const modulesModels = this.state.stage.modulesModels;
         const full_info = this.state.full_info;
 
         let fullInfo;
@@ -61,7 +61,7 @@ class ViewStage extends Component {
                     <li key="name-view-modules">
                         <b>{"Moduły:"}</b>
                         <ul>
-                            {modules.map(item => (
+                            {modulesModels.map(item => (
                                 <li key={item.id}>
                                     <Button 
                                         variant="outlined" 

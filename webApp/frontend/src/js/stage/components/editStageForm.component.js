@@ -15,7 +15,7 @@ class EditStageForm extends Component {
 
         this.state = {
             name: '',
-            modules: [],
+            modulesModels: [],
             allModules: [],
         };
     }
@@ -24,7 +24,7 @@ class EditStageForm extends Component {
         stageRepository.getStageById(this.props.id).then(
             response => this.setState({ 
                 name: response.name,
-                modules: response.modules.map(v => ({ ...v, value: v.id, label: v.name })),
+                modulesModels: response.modulesModels.map(v => ({ ...v, value: v.id, label: v.name })),
             })
         ).then(
             moduleRepository.getCompanyModules().then(
@@ -44,16 +44,16 @@ class EditStageForm extends Component {
 
 
     onChangeModules = e => {
-        const modules = e;
+        const modulesModels = e;
 
-        this.setState(state => ({ ...state, modules }));
+        this.setState(state => ({ ...state, modulesModels }));
     }
 
 
     onSubmit = () => {
-        const { name, modules } = this.state;
+        const { name, modulesModels } = this.state;
 
-        this.props.onSubmit({ name, modules, id: this.props.id });
+        this.props.onSubmit({ name, modulesModels, id: this.props.id });
     }
 
 
@@ -61,7 +61,7 @@ class EditStageForm extends Component {
 
         const {
             name, 
-            modules
+            modulesModels
         } = this.state;
 
         //console.log({ props: this.props, state: this.state });
@@ -83,7 +83,7 @@ class EditStageForm extends Component {
                 <Select 
                     closeMenuOnSelect={false}
                     components={makeAnimated()}
-                    value={modules}
+                    value={modulesModels}
                     isMulti
                     options={this.state.allModules}
                     onChange={this.onChangeModules}

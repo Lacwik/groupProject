@@ -8,6 +8,8 @@ import com.wfiis.CalculatorCO2.leftover.model.LeftoverModel;
 import com.wfiis.CalculatorCO2.line.metadata.LineAssembler;
 import com.wfiis.CalculatorCO2.line.model.LineModel;
 import com.wfiis.CalculatorCO2.module.metadata.ModuleAssembler;
+import com.wfiis.CalculatorCO2.module.metadata.ModuleService;
+import com.wfiis.CalculatorCO2.module.metadata.entity.Module;
 import com.wfiis.CalculatorCO2.module.model.ModuleModel;
 import com.wfiis.CalculatorCO2.resource.metadata.ResourceAssembler;
 import com.wfiis.CalculatorCO2.resource.metadata.entity.Resource;
@@ -38,13 +40,14 @@ public class StageService {
     private final StageAssembler stageAssembler;
     private final LineAssembler lineAssembler;
     private final ModuleAssembler moduleAssembler;
+    private final ModuleService moduleService;
     private final VegetableAssembler vegetableAssembler;
     private final ResourceAssembler resourceAssembler;
     private final LeftoverAssembler leftoverAssembler;
 
     @SecureCompanyScope(role = CompanyRole.MEMBER)
     public StageModel createStage(CompanyIdentity companyIdentity, StageCreateModel stageCreateModel, Company company) {
-        Stage stage = stageRepository.save(stageAssembler.getNewEntityFromModel(stageCreateModel, company));
+        Stage stage = stageRepository.save(stageAssembler.getNewEntityFromCreateModel(stageCreateModel, company));
         return stageAssembler.getModelFromEntity(stage);
     }
 
@@ -56,9 +59,13 @@ public class StageService {
         if (stage.getUsed()) {
             return createStage(companyIdentity, stageCreateModel, stage.getCompany());
         }
+        List<Module> modules = new ArrayList<>();
+
+        for (ModuleModel moduleModel : stageCreateModel.getModulesModels())
+            modules.add(moduleService.getModuleEntity(moduleModel.getId()));
 
         stage.setName(stageCreateModel.getName());
-        stage.setModules(stageCreateModel.getModules());
+        stage.setModules(modules);
         return stageAssembler.getModelFromEntity(stage);
     }
 
@@ -160,5 +167,10 @@ public class StageService {
         }
 
         return new ArrayList<>(leftoverModelSet);
+    }
+
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
+    public List<StageModel> getDefaultStages(CompanyIdentity companyIdentity, Company company) {
+        return stageAssembler.getModelsFromEntityList(stageRepository.findStagesByOutsourced(true));
     }
 }

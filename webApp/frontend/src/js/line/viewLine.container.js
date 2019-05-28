@@ -19,6 +19,7 @@ class ViewLineContainer extends Component {
         
         this.state = {
             linesList: [],
+            defaultLinesList: [],
             activeLineId: undefined,
             error: '',
             dialog_edit: false,
@@ -30,7 +31,11 @@ class ViewLineContainer extends Component {
 
     componentDidMount(){
         lineRepository.getCompanyLines().then(
-            response => this.setState({linesList: response, activeLineId: response ? response[0].id : undefined}),
+            response => this.setState({linesList: response, activeLineId: response.length !== 0 ? response[0].id : undefined}),
+        ).then(
+            lineRepository.getDefaultLines().then(
+                response => this.setState({defaultLinesList: response})
+            )
         )
     }
 
@@ -42,18 +47,21 @@ class ViewLineContainer extends Component {
 
     onEditLine = (lineModel) => {
         return lineRepository.editLine(lineModel)
+            .then( window.location.reload() )
             .catch(err => this.setErrorMessage(err));
     }
 
 
     onCreateLine = (lineModel) => {
         return lineRepository.createLine(lineModel)
+            .then( window.location.reload() )
             .catch(err => this.setErrorMessage(err));
     }
 
 
     onDeleteLine = (id) => {
         return lineRepository.deleteLine(id)
+            .then( window.location.reload() )
             .catch(err => this.setErrorMessage(err));
     }
 
@@ -61,6 +69,8 @@ class ViewLineContainer extends Component {
     onCloseDialog = () => {
         this.setState({dialog_edit: false});
         this.setState({dialog_show: false});
+        this.setState({dialog_create: false});
+        this.setState({dialog_delete: false});
     }
 
 
@@ -159,35 +169,62 @@ class ViewLineContainer extends Component {
                 </thead>
                 <tbody>
                     <tr>
-                        <ul>
-                            {this.state.linesList.map(item => (
-                                <li key={item.id}>
-                                    <ViewLine id={item.id} full_info={false}></ViewLine>
-                                    <br />
-                                    <Fab 
-                                        color="secondary"
-                                        aria-label="Delete" 
-                                        className="button delete"
-                                        onClick= {() => this.onClickLine_delete(item.id)}
-                                    ><DeleteForever />
-                                    </Fab>
-                                    <Fab 
-                                        color="primary" 
-                                        aria-label="Edit" 
-                                        className="button edit"
-                                        onClick= {() => this.onClickLine_edit(item.id)}
-                                    ><BorderColor />
-                                    </Fab>
-                                    <Fab 
-                                        color="primary" 
-                                        aria-label="Show" 
-                                        className="button show"
-                                        onClick= {() => this.onClickLine_show(item.id)}
-                                    ><Visibility />
-                                    </Fab>
-                                </li>
-                            ))}
-                        </ul>
+                        <td>
+                            <ul>
+                                {this.state.linesList.map(item => (
+                                    <li key={item.id}>
+                                        <ViewLine id={item.id} full_info={false}></ViewLine>
+                                        <br />
+                                        <Fab 
+                                            color="secondary"
+                                            aria-label="Delete" 
+                                            onClick= {() => this.onClickLine_delete(item.id)}
+                                        ><DeleteForever />
+                                        </Fab>
+                                        <Fab 
+                                            color="primary" 
+                                            aria-label="Edit" 
+                                            onClick= {() => this.onClickLine_edit(item.id)}
+                                        ><BorderColor />
+                                        </Fab>
+                                        <Fab 
+                                            color="primary" 
+                                            aria-label="Show" 
+                                            onClick= {() => this.onClickLine_show(item.id)}
+                                        ><Visibility />
+                                        </Fab>
+                                    </li>
+                                ))}
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                {this.state.defaultLinesList.map(item => (
+                                    <li key={item.id}>
+                                        <ViewLine id={item.id} full_info={false}></ViewLine>
+                                        <br />
+                                        <Fab 
+                                            color="secondary"
+                                            aria-label="Delete" 
+                                            onClick= {() => this.onClickLine_delete(item.id)}
+                                        ><DeleteForever />
+                                        </Fab>
+                                        <Fab 
+                                            color="primary" 
+                                            aria-label="Edit" 
+                                            onClick= {() => this.onClickLine_edit(item.id)}
+                                        ><BorderColor />
+                                        </Fab>
+                                        <Fab 
+                                            color="primary" 
+                                            aria-label="Show" 
+                                            onClick= {() => this.onClickLine_show(item.id)}
+                                        ><Visibility />
+                                        </Fab>
+                                    </li>
+                                ))}
+                            </ul>
+                        </td>
                     </tr>
                 </tbody>
             </table>
