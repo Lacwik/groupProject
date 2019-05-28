@@ -58,18 +58,6 @@ class EditModuleForm extends Component {
     }
 
 
-    renderAvailableVegetables() {
-        return Object.keys({ ...this.state.allVegetables }).map(item => {
-            return (
-                <option
-                    key={item.id}
-                    value={item.name}
-                >{item.name}
-                </option>
-            );
-        })
-    }
-
     onChangeName = e => {
         const { value: name } = e.target;
 

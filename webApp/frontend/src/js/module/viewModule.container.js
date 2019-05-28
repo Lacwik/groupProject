@@ -93,7 +93,7 @@ class ViewModuleContainer extends Component {
                                 variant="contained"
                                 color="primary"
                                 onClick= {() => this.onClickModule_edit(item.id)}
-                            >Edytuj
+                            >Edycja
                             </Button>
                             <Button 
                                 variant="contained"

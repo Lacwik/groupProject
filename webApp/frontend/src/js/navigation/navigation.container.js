@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Home, GroupAdd, AccountBox, ExitToApp, List, Add, Settings, SettingsApplications } from '@material-ui/icons';
+import { Home, GroupAdd, AccountBox, ExitToApp, List, Add, Settings, GroupWork, LinearScale } from '@material-ui/icons';
 import '../../css/navigation.css';
 import { APPLICATION_ROLES } from '../constants/applicationRoles.constants';
 //import { COMPANY_ROLES } from '../constants/companyRoles.constants';
@@ -30,12 +30,16 @@ class NavigationContainer extends Component {
             return (
                 <React.Fragment>
                     <li key="nav-modules">
-                        <SettingsApplications style={{ color: '#aaaaaa' }} fontSize="large" />
+                        <Settings style={{ color: '#aaaaaa' }} fontSize="large" />
                         <Link to="/module/display-module">Moduły</Link>
                     </li>
                     <li key="nav-stages">
-                        <Settings style={{ color: '#aaaaaa' }} fontSize="large" />
+                        <GroupWork style={{ color: '#aaaaaa' }} fontSize="large" />
                         <Link to="/stage/display-stage">Etapy</Link>
+                    </li>
+                    <li key="nav-lines">
+                        <LinearScale style={{ color: '#aaaaaa' }} fontSize="large" />
+                        <Link to="/line/display-line">Linie</Link>
                     </li>
                     <li key="nav-logout">
                         <ExitToApp style={{ color: '#aaaaaa' }} fontSize="large" />
