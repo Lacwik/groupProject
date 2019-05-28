@@ -31,7 +31,7 @@ class ViewModuleContainer extends Component {
 
     componentDidMount(){
         moduleRepository.getCompanyModules().then(
-            response => this.setState({moduleList: response, activeModuleId: response ? response[0].id : undefined}),
+            response => this.setState({moduleList: response, activeModuleId: response.length !== 0 ? response[0].id : undefined}),
         ).then(
             moduleRepository.getDefaultModules().then(
                 response => this.setState({defaultModulesList: response})
