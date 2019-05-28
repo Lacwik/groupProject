@@ -10,7 +10,7 @@ import EditStageForm from './components/editStageForm.component'
 import AddStageForm from './components/addStageForm.component'
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import { BorderColor, Visibility } from '@material-ui/icons';
+import { BorderColor, Visibility, DeleteForever } from '@material-ui/icons';
 
 
 class ViewStageContainer extends Component {
@@ -24,6 +24,7 @@ class ViewStageContainer extends Component {
             dialog_edit: false,
             dialog_show: false,
             dialog_create: false,
+            dialog_delete: false,
         }
     }
 
@@ -50,6 +51,11 @@ class ViewStageContainer extends Component {
             .catch(err => this.setErrorMessage(err));
     } 
 
+    onDeleteStage = (id) => {
+        return stageRepository.deleteStage(id)
+            .catch(err => this.setErrorMessage(err));
+    } 
+
 
     onCloseDialog = () => {
         this.setState({dialog_edit: false});
@@ -66,6 +72,11 @@ class ViewStageContainer extends Component {
     onClickStage_show = (id) => {
         this.setState({activeStageId: id});
         this.setState({dialog_show: true});
+    }
+
+    onClickStage_delete = (id) => {
+        this.setState({activeStageId: id});
+        this.setState({dialog_delete: true});
     }
 
     onClickStage_create = () => {;
@@ -93,6 +104,23 @@ class ViewStageContainer extends Component {
                 <DialogTitle id="dialog-create-satge">Nowy etap</DialogTitle>
                 <DialogContent>
                     <AddStageForm onSubmit={satgeModel => this.onCreateStage(satgeModel)} errorMessage={this.state.error} />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={this.onCloseDialog} color="primary">
+                    Anuluj
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
+
+            <Dialog open={this.state.dialog_delete} onClose={this.onCloseDialog} aria-labelledby="dialog-delete-stage">
+                <DialogTitle id="dialog-delete-stage">Usuń etap</DialogTitle>
+                <DialogContent>
+                    Czy na pewno chcesz trwale usunąć etap: 
+                    <b><ViewStage id={this.state.activeStageId} full_info={false}></ViewStage></b>
+                    <Button onClick={() => this.onDeleteStage(this.state.activeStageId)} color="secondary">
+                    Tak, usuń wybrany etap
+                    </Button>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={this.onCloseDialog} color="primary">
@@ -135,6 +163,12 @@ class ViewStageContainer extends Component {
                                 <li key={item.id}>
                                     <ViewStage id={item.id} full_info={false}></ViewStage>
                                     <br />
+                                    <Fab 
+                                        color="secondary"
+                                        aria-label="Delete" 
+                                        onClick= {() => this.onClickStage_delete(item.id)}
+                                    ><DeleteForever />
+                                    </Fab>
                                     <Fab 
                                         color="primary" 
                                         aria-label="Edit" 

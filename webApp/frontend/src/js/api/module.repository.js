@@ -40,6 +40,16 @@ export default class ModuleRepository {
             });
     }
 
+    deleteModule = (id = '') => {
+        return fetch(`http://localhost:8090/module/${id}`, {
+            method: 'DELETE',
+            headers: this.getHeaders(),
+        })
+            .then(response => handleError(response))
+            .then(response => response.json())
+            .catch(err => console.warn("Caught error while trying to delete module. ", err));
+    }
+
     getModuleById = (id = '') => {
         return fetch(`http://localhost:8090/module/${id}`, {
             method: 'GET',

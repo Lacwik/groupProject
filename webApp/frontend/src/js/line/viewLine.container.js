@@ -10,7 +10,7 @@ import EditLineForm from './components/editLineForm.component';
 import AddLineForm from './components/addLineForm.component';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import { BorderColor, Visibility } from '@material-ui/icons';
+import { BorderColor, Visibility, DeleteForever } from '@material-ui/icons';
 
 
 class ViewLineContainer extends Component {
@@ -24,6 +24,7 @@ class ViewLineContainer extends Component {
             dialog_edit: false,
             dialog_show: false,
             dialog_create: false,
+            dialog_delete: false,
         }
     }
 
@@ -51,6 +52,12 @@ class ViewLineContainer extends Component {
     }
 
 
+    onDeleteLine = (id) => {
+        return lineRepository.deleteLine(id)
+            .catch(err => this.setErrorMessage(err));
+    }
+
+
     onCloseDialog = () => {
         this.setState({dialog_edit: false});
         this.setState({dialog_show: false});
@@ -65,6 +72,11 @@ class ViewLineContainer extends Component {
     onClickLine_show = (id) => {
         this.setState({activeLineId: id});
         this.setState({dialog_show: true});
+    }
+
+    onClickLine_delete = (id) => {
+        this.setState({activeLineId: id});
+        this.setState({dialog_delete: true});
     }
 
     onClickLine_create = () => {
@@ -93,6 +105,23 @@ class ViewLineContainer extends Component {
                 <DialogTitle id="dialog-create-line">Nowa linia produkcyjna</DialogTitle>
                 <DialogContent>
                     <AddLineForm onSubmit={lineModel => this.onCreateLine(lineModel)} errorMessage={this.state.error} />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={this.onCloseDialog} color="primary">
+                    Anuluj
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
+
+            <Dialog open={this.state.dialog_delete} onClose={this.onCloseDialog} aria-labelledby="dialog-delete-line">
+                <DialogTitle id="dialog-delete-stage">Usuń linie</DialogTitle>
+                <DialogContent>
+                    Czy na pewno chcesz trwale usunąć linię produkcyjną: 
+                    <b><ViewLine id={this.state.activeLineId} full_info={false}></ViewLine></b>
+                    <Button onClick={() => this.onDeleteLine(this.state.activeLineId)} color="secondary">
+                    Tak, usuń wybrany etap
+                    </Button>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={this.onCloseDialog} color="primary">
@@ -135,6 +164,12 @@ class ViewLineContainer extends Component {
                                 <li key={item.id}>
                                     <ViewLine id={item.id} full_info={false}></ViewLine>
                                     <br />
+                                    <Fab 
+                                        color="secondary"
+                                        aria-label="Delete" 
+                                        onClick= {() => this.onClickLine_delete(item.id)}
+                                    ><DeleteForever />
+                                    </Fab>
                                     <Fab 
                                         color="primary" 
                                         aria-label="Edit" 
