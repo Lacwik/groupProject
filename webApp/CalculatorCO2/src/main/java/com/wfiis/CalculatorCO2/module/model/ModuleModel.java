@@ -4,10 +4,12 @@ import com.wfiis.CalculatorCO2.leftover.metadata.entity.Leftover;
 import com.wfiis.CalculatorCO2.resource.metadata.entity.Resource;
 import com.wfiis.CalculatorCO2.vegetable.metadata.entity.Vegetable;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Getter
+@NoArgsConstructor
 public class ModuleModel extends ModuleCreateModel {
     private Long id;
 

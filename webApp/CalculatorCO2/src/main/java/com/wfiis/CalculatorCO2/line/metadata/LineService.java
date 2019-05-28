@@ -105,9 +105,9 @@ public class LineService {
         List<ModuleModel> moduleModels = new ArrayList<>();
 
         for(StageModel stageModel : stageModels){
-            List<Module> modules = stageModel.getModules();
-            for(Module module : modules){
-                moduleModels.add(moduleAssembler.getModelFromEntity(module));
+            List<ModuleModel> models = stageModel.getModulesModels();
+            for(ModuleModel module : models){
+                moduleModels.add(module);
             }
         }
 
