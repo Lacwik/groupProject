@@ -1,25 +1,25 @@
 import React, { Component } from 'react';
-import { stageRepository } from '../factory/stageRepository.factory';
+import { lineRepository } from '../factory/lineRepository.factory';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import ViewStage from './components/viewStage.component'
-import EditStageForm from './components/editStageForm.component'
-import AddStageForm from './components/addStageForm.component'
+import ViewLine from './components/viewLine.component';
+import EditLineForm from './components/editLineForm.component';
+import AddLineForm from './components/addLineForm.component';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import { BorderColor, Visibility, DeleteForever } from '@material-ui/icons';
+import { BorderColor, Visibility, DeleteForever, LinearScale } from '@material-ui/icons';
 
 
-class ViewStageContainer extends Component {
+class ViewLineContainer extends Component {
     constructor() {
         super();
         
         this.state = {
-            stageList: [],
-            activeStageId: undefined,
+            linesList: [],
+            activeLineId: undefined,
             error: '',
             dialog_edit: false,
             dialog_show: false,
@@ -29,8 +29,8 @@ class ViewStageContainer extends Component {
     }
 
     componentDidMount(){
-        stageRepository.getCompanyStages().then(
-            response => this.setState({stageList: response, activeStageId: response ? response[0].id : undefined}),
+        lineRepository.getCompanyLines().then(
+            response => this.setState({linesList: response, activeLineId: response ? response[0].id : undefined}),
         )
     }
 
@@ -40,24 +40,25 @@ class ViewStageContainer extends Component {
     }
 
 
-    onEditStage = (stageModel) => {
-        return stageRepository.editStage(stageModel)
+    onEditLine = (lineModel) => {
+        return lineRepository.editLine(lineModel)
             .then( window.location.reload() )
             .catch(err => this.setErrorMessage(err));
     }
 
-    onCreateStage = (stageModel) => {
-        console.log(stageModel)
-        return stageRepository.createStage(stageModel)
+
+    onCreateLine = (lineModel) => {
+        return lineRepository.createLine(lineModel)
             .then( window.location.reload() )
             .catch(err => this.setErrorMessage(err));
-    } 
+    }
 
-    onDeleteStage = (id) => {
-        return stageRepository.deleteStage(id)
-            .then(window.location.reload() )
+
+    onDeleteLine = (id) => {
+        return lineRepository.deleteLine(id)
+            .then( window.location.reload() )
             .catch(err => this.setErrorMessage(err));
-    } 
+    }
 
 
     onCloseDialog = () => {
@@ -68,33 +69,34 @@ class ViewStageContainer extends Component {
     }
 
 
-    onClickStage_edit = (id) => {
-        this.setState({activeStageId: id});
+    onClickLine_edit = (id) => {
+        this.setState({activeLineId: id});
         this.setState({dialog_edit: true});
     }
 
-    onClickStage_show = (id) => {
-        this.setState({activeStageId: id});
+    onClickLine_show = (id) => {
+        this.setState({activeLineId: id});
         this.setState({dialog_show: true});
     }
 
-    onClickStage_delete = (id) => {
-        this.setState({activeStageId: id});
+    onClickLine_delete = (id) => {
+        this.setState({activeLineId: id});
         this.setState({dialog_delete: true});
     }
 
-    onClickStage_create = () => {;
+    onClickLine_create = () => {
         this.setState({dialog_create: true});
     }
 
 
-    companyStagesListRender() {
+    companyLinesListRender() {
         return (
             <React.Fragment>
 
-            <Dialog open={this.state.dialog_edit} onClose={this.onCloseDialog} aria-labelledby="dialog-edit-stage">
+
+            <Dialog open={this.state.dialog_edit} onClose={this.onCloseDialog} aria-labelledby="dialog-edit-line">
                 <DialogContent>
-                    <EditStageForm id={this.state.activeStageId} onSubmit={stageModel => this.onEditStage(stageModel)} errorMessage={this.state.error} />
+                    <EditLineForm id={this.state.activeLineId} onSubmit={lineModel => this.onEditLine(lineModel)} errorMessage={this.state.error} />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={this.onCloseDialog} color="primary">
@@ -104,10 +106,10 @@ class ViewStageContainer extends Component {
             </Dialog>
 
 
-            <Dialog open={this.state.dialog_create} onClose={this.onCloseDialog} aria-labelledby="dialog-create-stage">
-                <DialogTitle id="dialog-create-satge">Nowy etap</DialogTitle>
+            <Dialog open={this.state.dialog_create} onClose={this.onCloseDialog} aria-labelledby="dialog-create-line">
+                <DialogTitle id="dialog-create-line">Nowa linia produkcyjna</DialogTitle>
                 <DialogContent>
-                    <AddStageForm onSubmit={satgeModel => this.onCreateStage(satgeModel)} errorMessage={this.state.error} />
+                    <AddLineForm onSubmit={lineModel => this.onCreateLine(lineModel)} errorMessage={this.state.error} />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={this.onCloseDialog} color="primary">
@@ -117,12 +119,12 @@ class ViewStageContainer extends Component {
             </Dialog>
 
 
-            <Dialog open={this.state.dialog_delete} onClose={this.onCloseDialog} aria-labelledby="dialog-delete-stage">
-                <DialogTitle id="dialog-delete-stage">Usuń etap</DialogTitle>
+            <Dialog open={this.state.dialog_delete} onClose={this.onCloseDialog} aria-labelledby="dialog-delete-line">
+                <DialogTitle id="dialog-delete-stage">Usuń linie</DialogTitle>
                 <DialogContent>
-                    Czy na pewno chcesz trwale usunąć etap: 
-                    <b><ViewStage id={this.state.activeStageId} full_info={false}></ViewStage></b>
-                    <Button onClick={() => this.onDeleteStage(this.state.activeStageId)} color="secondary">
+                    Czy na pewno chcesz trwale usunąć linię produkcyjną: 
+                    <b><ViewLine id={this.state.activeLineId} full_info={false}></ViewLine></b>
+                    <Button onClick={() => this.onDeleteLine(this.state.activeLineId)} color="secondary">
                     Tak, usuń wybrany etap
                     </Button>
                 </DialogContent>
@@ -134,10 +136,9 @@ class ViewStageContainer extends Component {
             </Dialog>
 
 
-
-            <Dialog open={this.state.dialog_show} onClose={this.onCloseDialog} aria-labelledby="dialog-show-stage">
+            <Dialog open={this.state.dialog_show} onClose={this.onCloseDialog} aria-labelledby="dialog-show-line">
                 <DialogContent>
-                    <ViewStage id={this.state.activeStageId} full_info={true}></ViewStage>
+                    <ViewLine id={this.state.activeLineId} full_info={true}></ViewLine>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={this.onCloseDialog} color="primary">
@@ -146,6 +147,7 @@ class ViewStageContainer extends Component {
                 </DialogActions>
             </Dialog>
 
+
             <table>
                 <thead>
                     <tr>
@@ -153,8 +155,8 @@ class ViewStageContainer extends Component {
                             <Fab 
                                 color="secondary" 
                                 aria-label="Add" 
-                                className="fab-stage-head" 
-                                onClick={() => this.onClickStage_create()}
+                                className="fab-line-head" 
+                                onClick={() => this.onClickLine_create()}
                             ><AddIcon />
                             </Fab>
                         </td>
@@ -163,26 +165,26 @@ class ViewStageContainer extends Component {
                 <tbody>
                     <tr>
                         <ul>
-                            {this.state.stageList.map(item => (
+                            {this.state.linesList.map(item => (
                                 <li key={item.id}>
-                                    <ViewStage id={item.id} full_info={false}></ViewStage>
+                                    <ViewLine id={item.id} full_info={false}></ViewLine>
                                     <br />
                                     <Fab 
                                         color="secondary"
                                         aria-label="Delete" 
-                                        onClick= {() => this.onClickStage_delete(item.id)}
+                                        onClick= {() => this.onClickLine_delete(item.id)}
                                     ><DeleteForever />
                                     </Fab>
                                     <Fab 
                                         color="primary" 
                                         aria-label="Edit" 
-                                        onClick= {() => this.onClickStage_edit(item.id)}
+                                        onClick= {() => this.onClickLine_edit(item.id)}
                                     ><BorderColor />
                                     </Fab>
                                     <Fab 
                                         color="primary" 
                                         aria-label="Show" 
-                                        onClick= {() => this.onClickStage_show(item.id)}
+                                        onClick= {() => this.onClickLine_show(item.id)}
                                     ><Visibility />
                                     </Fab>
                                 </li>
@@ -198,9 +200,9 @@ class ViewStageContainer extends Component {
 
     render() {
         return (
-            <div className="view-stage-container">
+            <div className="view-line-container">
                 <div className="wrapper-content"> 
-                    {this.companyStagesListRender()}
+                    {this.companyLinesListRender()}
                 </div>
             </div>
         );
@@ -208,4 +210,4 @@ class ViewStageContainer extends Component {
 }
 
 
-export default ViewStageContainer;
+export default ViewLineContainer;

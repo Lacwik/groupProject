@@ -1,6 +1,6 @@
 package com.wfiis.CalculatorCO2.stage.model;
 
-import com.wfiis.CalculatorCO2.module.metadata.entity.Module;
+import com.wfiis.CalculatorCO2.module.model.ModuleModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,5 +12,5 @@ import java.util.List;
 @Getter
 public class StageCreateModel {
     private String name;
-    private List<Module> modules;
+    private List<ModuleModel> modulesModels;
 }

@@ -84,4 +84,10 @@ public class LineController {
         UserAuthenticationPrincipal principal = (UserAuthenticationPrincipal) idToken.getPrincipal();
         return ResponseEntity.ok(lineFacade.getLineLeftovers(principal.getId(), id));
     }
+
+    @GetMapping(value = "/default", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<LineModel>> getDefaultLines(UsernamePasswordAuthenticationToken idToken) {
+        UserAuthenticationPrincipal principal = (UserAuthenticationPrincipal) idToken.getPrincipal();
+        return ResponseEntity.ok(lineFacade.getDefaultLines(principal.getId()));
+    }
 }

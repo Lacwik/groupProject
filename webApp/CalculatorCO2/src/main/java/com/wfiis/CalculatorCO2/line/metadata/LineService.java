@@ -58,8 +58,13 @@ public class LineService {
             return createLine(companyIdentity, lineCreateModel, line.getCompany());
         }
 
+        List<Stage> stages = new ArrayList<>();
+
+        for (StageModel stageModel : lineCreateModel.getStageModels())
+            stages.add(stageAssembler.getEntity(stageModel.getId()));
+
         line.setName(lineCreateModel.getName());
-        line.setStages(lineCreateModel.getStages());
+        line.setStages(stages);
         return lineAssembler.getModelFromEntity(line);
     }
 
@@ -105,9 +110,9 @@ public class LineService {
         List<ModuleModel> moduleModels = new ArrayList<>();
 
         for(StageModel stageModel : stageModels){
-            List<Module> modules = stageModel.getModules();
-            for(Module module : modules){
-                moduleModels.add(moduleAssembler.getModelFromEntity(module));
+            List<ModuleModel> models = stageModel.getModulesModels();
+            for(ModuleModel module : models){
+                moduleModels.add(module);
             }
         }
 
@@ -158,5 +163,10 @@ public class LineService {
         }
 
         return new ArrayList<>(leftoverModelSet);
+    }
+
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
+    public List<LineModel> getDefaultLines(CompanyIdentity companyIdentity, Company company) {
+        return lineAssembler.getModelsFromEntityList(lineRepository.findLinesByOutsourced(true));
     }
 }

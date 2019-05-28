@@ -65,4 +65,9 @@ public class ModuleFacade {
         Company company = userMetadataService.getCurrentCompanyWorkingFor(userId);
         return moduleService.getModuleLeftovers(CompanyIdentity.of(company.getId()), moduleId);
     }
+
+    public List<ModuleModel> getDefaultModules(Long userId) {
+        Company company = userMetadataService.getCurrentCompanyWorkingFor(userId);
+        return moduleService.getDefaultModules(CompanyIdentity.of(company.getId()), company);
+    }
 }

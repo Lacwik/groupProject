@@ -1,6 +1,7 @@
 package com.wfiis.CalculatorCO2.line.model;
 
 import com.wfiis.CalculatorCO2.stage.metadata.entity.Stage;
+import com.wfiis.CalculatorCO2.stage.model.StageModel;
 import lombok.Getter;
 
 import java.util.List;
@@ -9,8 +10,8 @@ import java.util.List;
 public class LineModel extends LineCreateModel {
     private Long id;
 
-    public LineModel(String name, List<Stage> stages, Long id) {
-        super(name, stages);
+    public LineModel(String name, List<StageModel> stageModels, Long id) {
+        super(name, stageModels);
         this.id = id;
     }
 }

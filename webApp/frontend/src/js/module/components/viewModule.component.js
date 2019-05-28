@@ -33,13 +33,34 @@ class ViewModule extends Component {
             fullInfo = (
                 <React.Fragment>
                     <li key="name-view-vegetables">
-                        {vegetables}
+                        <b>{"Warzywa:"}</b>
+                        <ul>
+                            {vegetables.map(item => (
+                                <li key={item.id}>
+                                    {item.name}
+                                </li>
+                            ))}
+                        </ul>
                     </li>
                     <li key="name-view-resources">
-                        {resources}
+                        <b>{"Zasoby:"}</b>
+                        <ul>
+                            {resources.map(item => (
+                                <li key={item.id}>
+                                    {item.name}
+                                </li>
+                            ))}
+                        </ul>
                     </li>
                     <li key="name-view-leftovers">
-                        {leftovers}
+                        <b>{"Odpady:"}</b>
+                        <ul>
+                            {leftovers.map(item => (
+                                <li key={item.id}>
+                                    {item.name}
+                                </li>
+                            ))}
+                        </ul>
                     </li>
                 </React.Fragment>
             );
@@ -50,10 +71,10 @@ class ViewModule extends Component {
                 <ul>
 
                     <li key="name-view-module">
-                        <h2>{name}</h2>
+                        <h1>{name}</h1>
                     </li>
                     <li key="name-view-power">
-                        Moc: {power}
+                        <b>Moc:</b> {power}
                     </li>
                    
                     {fullInfo}                  

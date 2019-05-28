@@ -105,4 +105,9 @@ public class ModuleService {
     public List<LeftoverModel> getModuleLeftovers(CompanyIdentity companyIdentity, Long moduleId) {
         return leftoverAssembler.getModelsFromEntityList(getModuleEntity(moduleId).getLeftovers());
     }
+
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
+    public List<ModuleModel> getDefaultModules(CompanyIdentity companyIdentity, Company company) {
+        return moduleAssembler.getModelsFromEntityList(moduleRepository.findModulesByOutsourced(true));
+    }
 }

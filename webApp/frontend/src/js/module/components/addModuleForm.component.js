@@ -1,22 +1,46 @@
 import React, { Component } from 'react';
-import PropTypes, { number, string } from 'prop-types';
+import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
-import Select from '@material-ui/core/Select';
-import { VEGETABLES } from '../../constants/vegetables.constants';
-import { RESOURCES } from '../../constants/resources.constants';
+import { vegetableRepository } from '../../factory/vegetable.factory';
+import { resourceRepository } from '../../factory/resource.factory';
+import { leftoverRepository } from '../../factory/leftover.factory';
+import Select from 'react-select'
+import makeAnimated from 'react-select/lib/animated';
 
 class AddModuleForm extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            name: string,
-            loss: number,
-            waste: number,
-            time: number,
+            name: '',
+            power: 0,
+            vegetables: [],
+            resources: [],
+            leftovers: [],
+            allVegetables: [],
+            allResources: [],
+            allLeftovers: [],
         };
+    }
+
+    componentDidMount(){
+        vegetableRepository.getAllVegetables().then(
+            response => this.setState({
+                allVegetables: response.map(v => ({ ...v, value: v.id, label: v.name }))
+            })
+        ).then(
+        resourceRepository.getAllResources().then(
+            response => this.setState({
+                allResources: response.map(v => ({ ...v, value: v.id, label: v.name }))
+            })
+        ),
+        leftoverRepository.getAllLeftovers().then(
+            response => this.setState({
+                allLeftovers: response.map(v => ({ ...v, value: v.id, label: v.name }))
+            })
+        ))
     }
 
     onChangeName = e => {
@@ -25,136 +49,103 @@ class AddModuleForm extends Component {
         this.setState(state => ({ ...state, name }));
     }
 
-    onChangeLoss = e => {
-        const { value: loss } = e.target;
+    onChangePower = e => {
+        const { value: power } = e.target;
 
-        this.setState(state => ({ ...state, loss }));
+        this.setState(state => ({ ...state, power }));
     }
 
-    onChangeWaste = e => {
-        const { value: waste } = e.target;
+    onChangeVegetables = e => {
+        const vegetables = e;
 
-        this.setState(state => ({ ...state, waste }));
+        this.setState(state => ({ ...state, vegetables }));
     }
 
-    onChangeTime = e => {
-        const { value: time } = e.target;
+    onChangeResources = e => {
+        const resources = e;
 
-        this.setState(state => ({ ...state, time }));
+        this.setState(state => ({ ...state, resources }));
     }
 
-    onChangeFuel = e => {
-        const { value: resource } = e.target;
+    onChangeLeftovers = e => {
+        const leftovers = e;
 
-        this.setState(state => ({ ...state, resource }));
+        this.setState(state => ({ ...state, leftovers }));
     }
 
-
-    onChangeResource = e => {
-        const { value: resource } = e.target;
-
-        this.setState(state => ({ ...state, resource }));
-    }
 
     onSubmit = () => {
-        const { name, loss, waste, time, resource, vegetables } = this.state;
+        const { name, power, vegetables, resources, leftovers } = this.state;
 
-        this.props.onSubmit(name, loss, waste, time, resource, vegetables);
+        this.props.onSubmit({ name, power, vegetables, resources, leftovers });
     }
 
-    renderAvailableVegetables() {
-        return Object.keys({ ...VEGETABLES }).map(key => {
-            const value = VEGETABLES[key];
-            return (
-                <option
-                    key={key}
-                    value={key}
-                >{value}
-                </option>
-            );
-        })
-    }
-
-    renderAvailableResources() {
-        return Object.keys({ ...RESOURCES }).map(key => {
-            const value = RESOURCES[key];
-            return (
-                <option
-                    key={key}
-                    value={key}
-                >{value}
-                </option>
-            );
-        })
-    }
 
     render() {
+
         const {
             name, 
-            loss, 
-            waste, 
-            time, 
+            power, 
+            vegetables, 
+            resources, 
+            leftovers
         } = this.state;
 
         return (
-            <form id="add-module-form" className="add-module-form" onSubmit={e => e.preventDefault()}>
-                <h2 className="add-module-form__title">Stwórz moduł</h2>
+            <form id="module-create-form" className="module-create-form" onSubmit={e => e.preventDefault()}>
                 {this.props.errorMessage && <Paper className="error-box">{this.props.errorMessage}</Paper>}
                 <TextField
-                    label="nazwa etapu"
+                    label="Nazwa"
                     value={name}
                     onChange={this.onChangeName}
-                    type="name"
+                    type="text"
                     fullWidth
-                >Nazwa modułu
+                >Nazwa
                 </TextField>
                 <TextField
-                    label="loss"
+                    label="Moc"
+                    value={power}
+                    onChange={this.onChangePower}
+                    type="text"
                     fullWidth
-                    value={loss}
-                    onChange={this.onChangeLoss}
-                    type={Number}
-                >Generowana strata
+                >Moc
                 </TextField>
-                <TextField
-                    label="waste"
-                    fullWidth
-                    value={waste}
-                    onChange={this.onChangeWaste}
-                    type={Number}
-                >Odpady
-                </TextField>
-                <TextField
-                    label="time"
-                    fullWidth
-                    value={time}
-                    onChange={this.onChangeTime}
-                    type={Number}
-                >Czas działania
-                </TextField>
-                <Select
-                    label="warzywa"
-                    native
-                    fullWidth
+                <p></p>
+                <Select 
+                    closeMenuOnSelect={false}
+                    components={makeAnimated()}
+                    value={vegetables}
+                    isMulti
+                    options={this.state.allVegetables}
                     onChange={this.onChangeVegetables}
-                >Warzywa
-                    {this.renderAvailableVegetables()}
-                </Select>
-                <Select
-                    label="paliwo"
-                    native
-                    fullWidth
-                    onChange={this.onChangeResource}
-                >Paliwo
-                    {this.renderAvailableResources()}
-                </Select>
+                    />
+                <p></p>
+                <Select 
+                    closeMenuOnSelect={false}
+                    components={makeAnimated()}
+                    value={resources}
+                    isMulti
+                    options={this.state.allResources}
+                    onChange={this.onChangeResources}
+                    />
+                <p></p>
+                <Select 
+                    closeMenuOnSelect={false}
+                    components={makeAnimated()}
+                    value={leftovers}
+                    isMulti
+                    options={this.state.allLeftovers}
+                    onChange={this.onChangeLeftovers}
+                    />
+                <p></p>
                 <Button 
                     variant="contained"
                     color="primary"
-                    className="form-add-module__button"
+                    className="module-edit__button"
                     onClick={this.onSubmit}
-                >Zapisz</Button>
-            </form>             
+                >Zapisz
+                </Button>
+            </form>                
         );
     }
 }
