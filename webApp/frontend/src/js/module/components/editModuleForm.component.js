@@ -126,6 +126,7 @@ class EditModuleForm extends Component {
                     components={makeAnimated()}
                     value={vegetables}
                     isMulti
+                    isDisabled
                     options={this.state.allVegetables}
                     onChange={this.onChangeVegetables}
                     />

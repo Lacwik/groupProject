@@ -72,6 +72,7 @@ class CreateLineForm extends Component {
                     onChange={this.onChangeName}
                     type="text"
                     fullWidth
+                    required
                 >Nazwa
                 </TextField>
                 
