@@ -33,5 +33,4 @@ export default class LeftoversRepository {
             .catch(err => console.warn("Caught error while trying to get leftover by search value. ", err));
     }
 
-    
 }
