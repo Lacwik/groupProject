@@ -14,7 +14,7 @@ class CreateLineForm extends Component {
 
         this.state = {
             name: '',
-            stages: [],
+            stageModels: [],
             allStages: [],
         };
     }
@@ -36,16 +36,16 @@ class CreateLineForm extends Component {
 
 
     onChangeStages = e => {
-        const stages = e;
+        const stageModels = e;
 
-        this.setState(state => ({ ...state, stages }));
+        this.setState(state => ({ ...state, stageModels }));
     }
 
 
     onSubmit = () => {
-        const { name, stages } = this.state;
+        const { name, stageModels } = this.state;
 
-        this.props.onSubmit({ name, stages });
+        this.props.onSubmit({ name, stageModels });
     }
 
 
@@ -53,7 +53,7 @@ class CreateLineForm extends Component {
 
         const {
             name, 
-            stages
+            stageModels
         } = this.state;
 
         //console.log({ props: this.props, state: this.state });
@@ -75,7 +75,7 @@ class CreateLineForm extends Component {
                 <Select 
                     closeMenuOnSelect={false}
                     components={makeAnimated()}
-                    value={stages}
+                    value={stageModels}
                     isMulti
                     options={this.state.allStages}
                     onChange={this.onChangeStages}

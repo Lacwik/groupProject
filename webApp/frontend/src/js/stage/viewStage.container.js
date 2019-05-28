@@ -42,17 +42,20 @@ class ViewStageContainer extends Component {
 
     onEditStage = (stageModel) => {
         return stageRepository.editStage(stageModel)
+            .then( window.location.reload() )
             .catch(err => this.setErrorMessage(err));
     }
 
     onCreateStage = (stageModel) => {
         console.log(stageModel)
         return stageRepository.createStage(stageModel)
+            .then( window.location.reload() )
             .catch(err => this.setErrorMessage(err));
     } 
 
     onDeleteStage = (id) => {
         return stageRepository.deleteStage(id)
+            .then(window.location.reload() )
             .catch(err => this.setErrorMessage(err));
     } 
 
@@ -61,6 +64,7 @@ class ViewStageContainer extends Component {
         this.setState({dialog_edit: false});
         this.setState({dialog_show: false});
         this.setState({dialog_create: false});
+        this.setState({dialog_delete: false});
     }
 
 

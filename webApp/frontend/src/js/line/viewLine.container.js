@@ -42,18 +42,21 @@ class ViewLineContainer extends Component {
 
     onEditLine = (lineModel) => {
         return lineRepository.editLine(lineModel)
+            .then( window.location.reload() )
             .catch(err => this.setErrorMessage(err));
     }
 
 
     onCreateLine = (lineModel) => {
         return lineRepository.createLine(lineModel)
+            .then( window.location.reload() )
             .catch(err => this.setErrorMessage(err));
     }
 
 
     onDeleteLine = (id) => {
         return lineRepository.deleteLine(id)
+            .then( window.location.reload() )
             .catch(err => this.setErrorMessage(err));
     }
 
@@ -61,6 +64,8 @@ class ViewLineContainer extends Component {
     onCloseDialog = () => {
         this.setState({dialog_edit: false});
         this.setState({dialog_show: false});
+        this.setState({dialog_create: false});
+        this.setState({dialog_delete: false});
     }
 
 

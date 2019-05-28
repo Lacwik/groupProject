@@ -14,7 +14,7 @@ class AddStageForm extends Component {
 
         this.state = {
             name: '',
-            modules: [],
+            modulesModels: [],
             allModules: [],
         };
     }
@@ -36,16 +36,16 @@ class AddStageForm extends Component {
 
 
     onChangeModules = e => {
-        const modules = e;
+        const modulesModels = e;
 
-        this.setState(state => ({ ...state, modules }));
+        this.setState(state => ({ ...state, modulesModels }));
     }
 
 
     onSubmit = () => {
-        const { name, modules } = this.state;
+        const { name, modulesModels } = this.state;
 
-        this.props.onSubmit({ name, modules });
+        this.props.onSubmit({ name, modulesModels });
     }
 
 
@@ -53,7 +53,7 @@ class AddStageForm extends Component {
 
         const {
             name, 
-            modules
+            modulesModels
         } = this.state;
 
         //console.log({ props: this.props, state: this.state });
@@ -75,7 +75,7 @@ class AddStageForm extends Component {
                 <Select 
                     closeMenuOnSelect={false}
                     components={makeAnimated()}
-                    value={modules}
+                    value={modulesModels}
                     isMulti
                     options={this.state.allModules}
                     onChange={this.onChangeModules}

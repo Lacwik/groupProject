@@ -42,6 +42,7 @@ class ViewModuleContainer extends Component {
 
     onEditModule = (moduleModel) => {
         return moduleRepository.editModule(moduleModel)
+            .then( window.location.reload() )
             .catch(err => this.setErrorMessage(err));
     }
 
@@ -49,12 +50,14 @@ class ViewModuleContainer extends Component {
     onCreateModule = (moduleModel) => {
         console.log(moduleModel)
         return moduleRepository.createModule(moduleModel)
+            .then( window.location.reload() )
             .catch(err => this.setErrorMessage(err));
     }
 
 
     onDeleteModule = (id) => {
         return moduleRepository.deleteModule(id)
+            .then( window.location.reload() )
             .catch(err => this.setErrorMessage(err));
     }
 

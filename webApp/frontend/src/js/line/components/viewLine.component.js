@@ -40,7 +40,7 @@ class ViewLine extends Component {
     render() {
 
         const name = this.state.line.name;
-        const stages = this.state.line.stages;
+        const stageModels = this.state.line.stageModels;
         const full_info = this.state.full_info;
 
         let fullInfo;
@@ -61,7 +61,7 @@ class ViewLine extends Component {
                     <li key="name-view-stages">
                         <b>{"Etapy:"}</b>
                         <ul>
-                            {stages.map(item => (
+                            {stageModels.map(item => (
                                 <li key={item.id}>
                                     <Button 
                                         variant="outlined" 
