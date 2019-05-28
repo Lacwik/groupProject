@@ -21,18 +21,19 @@ class EditStageForm extends Component {
     }
 
     componentDidMount(){
-        stageRepository.getStageById(this.props.id).then(
-            response => this.setState({ 
-                name: response.name,
-                modulesModels: response.modulesModels.map(v => ({ ...v, value: v.id, label: v.name })),
-            })
-        ).then(
-            moduleRepository.getCompanyModules().then(
-                response => this.setState({
-                    allModules: response.map(v => ({ ...v, value: v.id, label: v.name }))
-                })
-            )
-        )
+        Promise.all([
+            stageRepository.getStageById(this.props.id),
+            moduleRepository.getCompanyModules(), 
+            moduleRepository.getDefaultModules()
+        ])
+        .then( ([stageModel, companyModules, defaultModules]) => {
+            this.setState({
+                name: stageModel.name,
+                modulesModels: stageModel.modulesModels.map(v => ({ ...v, value: v.id, label: v.name })),
+                allModules: [...companyModules, ...defaultModules].map(v => ({ ...v, value: v.id, label: v.name }))
+            });
+
+        })
     }
 
 

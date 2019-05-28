@@ -20,11 +20,16 @@ class AddStageForm extends Component {
     }
 
     componentDidMount(){
-        moduleRepository.getCompanyModules().then(
-            response => this.setState({
-                allModules: response.map(v => ({ ...v, value: v.id, label: v.name }))
-            })
-        )
+        Promise.all([
+            moduleRepository.getCompanyModules(), 
+            moduleRepository.getDefaultModules()
+        ])
+        .then( ([companyModules, defaultModules]) => {
+            this.setState({
+                allModules: [...companyModules, ...defaultModules].map(v => ({ ...v, value: v.id, label: v.name }))
+            });
+
+        })
     }
 
 

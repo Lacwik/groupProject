@@ -21,15 +21,19 @@ class EditLineForm extends Component {
     }
 
     componentDidMount(){
-        Promise.all([stageRepository.getCompanyStages(), stageRepository.getDefaultStages(), lineRepository.getLineById(this.props.id)])
-            .then( ([companyStages, defaultStages, lineModel]) => {
-                this.setState({
-                    allStages: [...companyStages, ...defaultStages].map(v => ({ ...v, value: v.id, label: v.name })),
-                    name: lineModel.name,
-                    stageModels: lineModel.stageModels.map(v => ({ ...v, value: v.id, label: v.name })),
-                });
-    
-            })
+        Promise.all([
+            stageRepository.getCompanyStages(), 
+            stageRepository.getDefaultStages(), 
+            lineRepository.getLineById(this.props.id)
+        ])
+        .then( ([companyStages, defaultStages, lineModel]) => {
+            this.setState({
+                allStages: [...companyStages, ...defaultStages].map(v => ({ ...v, value: v.id, label: v.name })),
+                name: lineModel.name,
+                stageModels: lineModel.stageModels.map(v => ({ ...v, value: v.id, label: v.name })),
+            });
+
+        })
     }
 
 

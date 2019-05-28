@@ -26,34 +26,19 @@ class AddModuleForm extends Component {
     }
 
     componentDidMount(){
-
         Promise.all([
             vegetableRepository.getAllVegetables(), 
             resourceRepository.getAllResources(),
             leftoverRepository.getAllLeftovers()
         ])
-        .then( ([companyStages, defaultStages]) => {
+        .then( ([vegetables, resources, leftovers]) => {
             this.setState({
-                allStages: [...companyStages, ...defaultStages].map(v => ({ ...v, value: v.id, label: v.name }))
+                allVegetables: vegetables.map(v => ({ ...v, value: v.id, label: v.name })),
+                allResources: resources.map(v => ({ ...v, value: v.id, label: v.name })),
+                allLeftovers: leftovers.map(v => ({ ...v, value: v.id, label: v.name }))
             });
 
         })
-
-        vegetableRepository.getAllVegetables().then(
-            response => this.setState({
-                allVegetables: response.map(v => ({ ...v, value: v.id, label: v.name }))
-            })
-        ).then(
-        resourceRepository.getAllResources().then(
-            response => this.setState({
-                allResources: response.map(v => ({ ...v, value: v.id, label: v.name }))
-            })
-        ),
-        leftoverRepository.getAllLeftovers().then(
-            response => this.setState({
-                allLeftovers: response.map(v => ({ ...v, value: v.id, label: v.name }))
-            })
-        ))
     }
 
     onChangeName = e => {
