@@ -70,6 +70,16 @@ export default class LineRepository {
             .catch(err => console.warn("Caught error while trying to get company lines. ", err));
     }
 
+    getDefaultLines = () => {
+        return fetch(`http://localhost:8090/line/default`, {
+            method: 'GET',
+            headers: this.getHeaders(),
+        })
+            .then(response => handleError(response))
+            .then(response => response.json())
+            .catch(err => console.warn("Caught error while trying to get default lines. ", err));
+    }
+
     getLineStages = (id = '') => {
         return fetch(`http://localhost:8090/line/stages/${id}`, {
             method: 'GET',

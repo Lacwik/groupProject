@@ -20,11 +20,13 @@ class CreateLineForm extends Component {
     }
 
     componentDidMount(){
-        stageRepository.getCompanyStages().then(
-            response => this.setState({
-                allStages: response.map(v => ({ ...v, value: v.id, label: v.name }))
-            })
-        )
+        Promise.all([stageRepository.getCompanyStages(), stageRepository.getDefaultStages()])
+        .then( ([companyStages, defaultStages]) => {
+            this.setState({
+                allStages: [...companyStages, ...defaultStages].map(v => ({ ...v, value: v.id, label: v.name }))
+            });
+
+        })
     }
 
 
