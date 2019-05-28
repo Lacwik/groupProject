@@ -69,4 +69,14 @@ export default class ModuleRepository {
             .then(response => response.json())
             .catch(err => console.warn("Caught error while trying to get company modules. ", err));
     }
+
+    getDefaultModules = () => {
+        return fetch(`http://localhost:8090/module/default`, {
+            method: 'GET',
+            headers: this.getHeaders(),
+        })
+            .then(response => handleError(response))
+            .then(response => response.json())
+            .catch(err => console.warn("Caught error while trying to get default modules. ", err));
+    }
 }

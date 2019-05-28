@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Home, GroupAdd, AccountBox, ExitToApp, List, Add, Settings, GroupWork, LinearScale } from '@material-ui/icons';
+import { Home, GroupAdd, AccountBox, ExitToApp, List, Add, Settings, GroupWork, LinearScale, Build } from '@material-ui/icons';
 import '../../css/navigation.css';
 import { APPLICATION_ROLES } from '../constants/applicationRoles.constants';
 import { COMPANY_ROLES } from '../constants/companyRoles.constants';

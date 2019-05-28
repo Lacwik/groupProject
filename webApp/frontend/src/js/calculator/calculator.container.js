@@ -13,19 +13,23 @@ class CalculatorContainer extends Component {
     }
    
     componentDidMount() {
-        lineRepository.getCompanyLines()
-            .then(lines => this.setState(state => ({ ...state, lines })));
+        Promise.all([lineRepository.getCompanyLines(), lineRepository.getDefaultLines()])
+        .then(([company, defaultLines]) => {
+            this.setState({
+                lines: [...company, ...defaultLines],
+            });
+
+        });
     }
 
     render() {
-        console.log({ state: this.state });
         const {
             lines,
         } = this.state;
 
         return (
             <div className="wrapper-content">
-                <h3>Kalkulator śladu węglowego</h3>
+                <h2>Kalkulator śladu węglowego</h2>
                 <Calculator
                     lines={lines}
                 />

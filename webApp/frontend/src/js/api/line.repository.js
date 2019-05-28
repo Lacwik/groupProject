@@ -80,6 +80,16 @@ export default class LineRepository {
             .catch(err => console.warn("Caught error while trying to get line stages. ", err));
     }
             
+    getDefaultLines = () => {
+        return fetch(`http://localhost:8090/line/default`, {
+            method: 'GET',
+            headers: this.getHeaders(),
+        })
+            .then(response => handleError(response))
+            .then(response => response.json())
+            .catch(err => console.warn("Caught error while trying to get default lines. ", err));
+    }
+
     getLineStages = (id = '') => {
         return fetch(`http://localhost:8090/line/stages/${id}`, {
             method: 'GET',
@@ -98,6 +108,18 @@ export default class LineRepository {
             .then(response => handleError(response))
             .then(response => response.json())
             .catch(err => console.warn("Caught error while trying to get line modules. ", err));
-            .catch(err => console.warn("Caught error while trying to get vegetables for line. ", err));
     }
+
+    
+    
+    getResourcesForLine = lineId => {
+        return fetch(`http://localhost:8090/line/resources/${lineId}`, {
+            method: 'GET',
+            headers: this.getHeaders(),
+        })
+            .then(response => handleError(response))
+            .then(response => response.json())
+            .catch(err => console.warn("Caught error while trying to get line leftovers. ", err));
+    }
+
 }

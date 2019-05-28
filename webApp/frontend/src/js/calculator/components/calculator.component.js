@@ -4,6 +4,9 @@ import LineSelect from './lineSelect.component';
 import VegetableSelect from './vegetableSelect.component';
 import { lineRepository } from '../../factory/lineRepository.factory';
 import TextField from '@material-ui/core/TextField';
+import ViewResourceFormForLineStages from './viewResourceFormForLineStages.component';
+import Select from 'react-select';
+import { Button } from '@material-ui/core';
 
 class Calculator extends Component {
     constructor(props) {
@@ -11,15 +14,21 @@ class Calculator extends Component {
 
         this.state = {
             currentLineId: undefined,
+            currentVegetableId: undefined,
             vegetables: [],
+            lineResources: [],
         }
     }
 
     onChangeLine = id => {
         this.setState(state => ({ ...state, currentLineId: id }));
         this.fetchVegetablesForLine(id);
+        this.fetchResourcesForLine(id);
     };
    
+    getLine = () => {
+        return this.props.lines.find(line => line.id === this.state.currentLineId);
+    }
 
     fetchVegetablesForLine(lineId) {
         if (lineId) {
@@ -28,8 +37,37 @@ class Calculator extends Component {
         }
     }
 
+    fetchResourcesForLine = id => {
+        return lineRepository.getResourcesForLine(id)
+            .then(resources => this.setState(state => ({ ...state, lineResources: resources })));
+    }
+
     onChangeVegetable = id => {
         this.setState(state => ({ ...state, currentVegetableId: id }));
+    }
+    onChangeResource = (id, value) => {
+        this.setState(state => ({
+            ...state,
+            resourcesType: {
+                ...state.resourcesType,
+                [id]: value,
+            },
+        }));
+    }
+
+    renderFormForChooseResourcesType = () => {
+        return this.state.lineResources.map(resource => (
+                <li key={resource.id} style={{ marginBottom: '.5em' }}>
+                    <Select
+                        required
+                        options={[]}
+                        onChange={value => this.onChangeResource(resource.id, value)}
+                        noOptionsMessage={() => `Brak informacji w bazie wiedzy`}
+                        placeholder={`Wybierz ${resource.name}`}
+                      />
+                </li>
+
+            ));
     }
 
     render() {
@@ -43,30 +81,34 @@ class Calculator extends Component {
             currentVegetableId,
         } = this.state;
         
-        console.log({ state: this.state, props: this.props });
+        console.log({ state: this.state });
 
         return (
             <form onSubmit={e => this.onSubmit(e)} className="calculactor-wrapper">
                 <LineSelect lines={lines} onChange={id => this.onChangeLine(id)} />
                 {currentLineId ? <VegetableSelect vegetables={vegetables} onChange={id => this.onChangeVegetable(id)} /> : ''}
-                {true ? (
+                {currentVegetableId ? (
                     <React.Fragment>
                         <TextField
+                            required
                             label="Surowiec [kg]"
                         />
 
                         <TextField
+                            required
                             label="Produkt [kg]"
                         />
+                        {this.state.lineResources.length !== 0 ? (<h3>Wybierz typy zasobów</h3>) : ''}
+                        <ul style={{ padding: 0, margin: 0 }}>
+                            {this.renderFormForChooseResourcesType()}
+                        </ul>
+                        <ViewResourceFormForLineStages line={this.getLine()} />
+                        <Button variant="contained" color="primary" style={{ width: '25%', marginTop: '1em' }}>
+                            Oblicz     
+                        </Button>
                     </React.Fragment>
                 ) 
                 : ''}
-                {/*
-                - lista etapow z linii (definiujemy resourcy z bazy wiedzy)
-                - w każdym etapie trzeba uzupełnić występujące tam resoursy
-                - każdy etap ma czas działania
-            
-                */}
             </form>
         );
     }

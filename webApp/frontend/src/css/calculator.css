@@ -6,3 +6,25 @@
 .calculactor-wrapper > * {
     margin-bottom: 1em;
 }
+
+.form-stage {
+    margin-top: 1em;
+    width: 100%;
+    padding: 1em;
+    background: #69ff72;
+    box-sizing: border-box;
+}
+
+.form-stage h3 {
+    margin:0;
+    margin-bottom: .5em;
+}
+
+.resource-form-mini {
+    display: flex;
+}
+
+.resource-form-mini > * {
+    flex: 1;
+    margin-right: 1em;
+}
