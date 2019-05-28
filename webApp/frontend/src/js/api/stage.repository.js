@@ -40,6 +40,17 @@ export default class StageRepository {
             });
     }
 
+    deleteStage = (id = '') => {
+        return fetch(`http://localhost:8090/stage/${id}`, {
+            method: 'DELETE',
+            headers: this.getHeaders(),
+            body: JSON.stringify(),
+        })
+            .then(response => handleError(response))
+            .then(response => response.json())
+            .catch(err => console.warn("Caught error while trying to delete stage. ", err));
+    }
+
     getStageById = (id = '') => {
         return fetch(`http://localhost:8090/stage/${id}`, {
             method: 'GET',

@@ -10,7 +10,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import { BorderColor, Visibility } from '@material-ui/icons';
+import { BorderColor, Visibility, DeleteForever  } from '@material-ui/icons';
 
 
 class ViewModuleContainer extends Component {
@@ -24,6 +24,7 @@ class ViewModuleContainer extends Component {
             dialog_edit: false,
             dialog_show: false,
             dialog_create: false,
+            dialog_delete: false,
         }
     }
 
@@ -52,10 +53,17 @@ class ViewModuleContainer extends Component {
     }
 
 
+    onDeleteModule = (id) => {
+        return moduleRepository.deleteModule(id)
+            .catch(err => this.setErrorMessage(err));
+    }
+
+
     onCloseDialog = () => {
         this.setState({dialog_edit: false});
         this.setState({dialog_show: false});
         this.setState({dialog_create: false});
+        this.setState({dialog_delete: false});
     }
 
 
@@ -71,6 +79,11 @@ class ViewModuleContainer extends Component {
 
     onClickModule_create = () => {
         this.setState({dialog_create: true});
+    }
+
+    onClickModule_delete = (id) => {
+        this.setState({activeModuleId: id});
+        this.setState({dialog_delete: true});
     }
 
 
@@ -94,6 +107,22 @@ class ViewModuleContainer extends Component {
                 <DialogTitle id="dialog-create-module">Nowy moduł</DialogTitle>
                 <DialogContent>
                     <AddModuleForm onSubmit={moduleModel => this.onCreateModule(moduleModel)} errorMessage={this.state.error} />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={this.onCloseDialog} color="primary">
+                    Anuluj
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
+            <Dialog open={this.state.dialog_delete} onClose={this.onCloseDialog} aria-labelledby="dialog-delete-module">
+                <DialogTitle id="dialog-delete-module">Usuń moduł</DialogTitle>
+                <DialogContent>
+                    Czy na pewno chcesz trwale usunąć moduł: 
+                    <b><ViewModule id={this.state.activeModuleId} full_info={false}></ViewModule></b>
+                    <Button onClick={() => this.onDeleteModule(this.state.activeModuleId)} color="secondary">
+                    Tak, usuń wybrany moduł
+                    </Button>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={this.onCloseDialog} color="primary">
@@ -134,6 +163,12 @@ class ViewModuleContainer extends Component {
                             <li key={item.id}>
                                 <ViewModule id={item.id} full_info={false}></ViewModule>
                                 <br />
+                                <Fab 
+                                    color="secondary"
+                                    aria-label="Delete" 
+                                    onClick= {() => this.onClickModule_delete(item.id)}
+                                ><DeleteForever />
+                                </Fab>
                                 <Fab 
                                     color="primary" 
                                     aria-label="Edit" 

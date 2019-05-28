@@ -40,6 +40,16 @@ export default class LineRepository {
             });
     }
 
+    deleteLine = (id = '') => {
+        return fetch(`http://localhost:8090/line/${id}`, {
+            method: 'DELETE',
+            headers: this.getHeaders(),
+        })
+            .then(response => handleError(response))
+            .then(response => response.json())
+            .catch(err => console.warn("Caught error while trying to delete line. ", err));
+    }
+
     getLineById = (id = '') => {
         return fetch(`http://localhost:8090/line/${id}`, {
             method: 'GET',
