@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { any } from 'prop-types';
 import { lineRepository } from '../../factory/lineRepository.factory';
-import { stageRepository } from '../../factory/stageRepository.factory';
 import ViewStage from '../../stage/components/viewStage.component'
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
