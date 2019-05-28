@@ -237,6 +237,8 @@ class ViewLineContainer extends Component {
         return (
             <div className="view-line-container">
                 <div className="wrapper-content"> 
+                <LinearScale style={{ color: '#232323', fontSize:"55px", border:"#69b4ff", background:"#69b4ff", borderRadius:"3px" }} fontSize="large" />
+                <h1 className="header"> Dostępne linie </h1>
                     {this.companyLinesListRender()}
                 </div>
             </div>

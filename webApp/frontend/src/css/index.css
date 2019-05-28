@@ -6,6 +6,7 @@ nnpm startbody {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #e8eef4;
 }
 
 code {
@@ -17,11 +18,12 @@ ul {
   list-style-type: none;
 }
 
-.button.edit {
+.button.delete {
   margin: 5px 5px 5px 40px !important;
 }
 .button {
   font-size: 12px !important;
+  margin-right: 5px !important;
 }
 
 .wrapper-content ul {
@@ -57,4 +59,8 @@ ul h1 {
 
   color: #3f51b6;
 
+}
+
+.button.add {
+  float: right;
 }
