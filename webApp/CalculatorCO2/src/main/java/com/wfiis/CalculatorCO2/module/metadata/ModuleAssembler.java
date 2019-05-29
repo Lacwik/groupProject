@@ -21,6 +21,14 @@ public class ModuleAssembler {
         return moduleRepository.findById(moduleId).orElseThrow(() -> new ModuleNotFoundException(moduleId));
     }
 
+    public List<Module> getEntityFromModelList(List<ModuleModel> moduleModels){
+        List<Module> modules = new ArrayList<>();
+        for (ModuleModel moduleModel : moduleModels){
+            modules.add(getEntity(moduleModel.getId()));
+        }
+        return modules;
+    }
+
     public List<ModuleCreateModel> getCreateModelsFromEntityList(List<Module> modules) {
         List<ModuleCreateModel> outModules = new ArrayList<>();
         for (Module module : modules) {

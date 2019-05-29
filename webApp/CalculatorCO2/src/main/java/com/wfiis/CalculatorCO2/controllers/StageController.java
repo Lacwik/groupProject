@@ -90,4 +90,10 @@ public class StageController {
         UserAuthenticationPrincipal principal = (UserAuthenticationPrincipal) idToken.getPrincipal();
         return ResponseEntity.ok(stageFacade.getDefaultStages(principal.getId()));
     }
+
+    @GetMapping(value = "/vegetables/stages", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<StageModel>> getStagesByVegetableList(UsernamePasswordAuthenticationToken idToken, @RequestBody List<VegetableModel> vegetableModel) {
+        UserAuthenticationPrincipal principal = (UserAuthenticationPrincipal) idToken.getPrincipal();
+        return ResponseEntity.ok(stageFacade.getStagesByVegetableList(vegetableModel, principal.getId()));
+    }
 }

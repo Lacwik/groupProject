@@ -28,33 +28,27 @@ class EditModuleForm extends Component {
     }
 
     componentDidMount(){
-        moduleRepository.getModuleById(this.props.id).then(
-            response => this.setState({ 
-                name: response.name,
-                power: response.power,
-                vegetables: response.vegetables.map(v => ({ ...v, value: v.id, label: v.name })),
-                resources: response.resources.map(v => ({ ...v, value: v.id, label: v.name })),
-                leftovers: response.leftovers.map(v => ({ ...v, value: v.id, label: v.name })),
-            })
-        ).then(
-            vegetableRepository.getAllVegetables().then(
-                response => this.setState({
-                    allVegetables: response.map(v => ({ ...v, value: v.id, label: v.name }))
-                })
-            ),
-            resourceRepository.getAllResources().then(
-                response => this.setState({
-                    allResources: response.map(v => ({ ...v, value: v.id, label: v.name }))
-                })
-            ),
-            leftoverRepository.getAllLeftovers().then(
-                response => this.setState({
-                    allLeftovers: response.map(v => ({ ...v, value: v.id, label: v.name }))
-                })
-            )
-        )
-        
 
+        Promise.all([
+            moduleRepository.getModuleById(this.props.id), 
+            vegetableRepository.getAllVegetables(),
+            resourceRepository.getAllResources(),
+            leftoverRepository.getAllLeftovers(),
+        ])
+        .then( ([moduleModel, vegetables, resources, leftovers]) => {
+            this.setState({
+                name: moduleModel.name,
+                power: moduleModel.power,
+                vegetables: moduleModel.vegetables.map(v => ({ ...v, value: v.id, label: v.name })),
+                resources: moduleModel.resources.map(v => ({ ...v, value: v.id, label: v.name })),
+                leftovers: moduleModel.leftovers.map(v => ({ ...v, value: v.id, label: v.name })),
+                allVegetables: vegetables.map(v => ({ ...v, value: v.id, label: v.name })),
+                allResources: resources.map(v => ({ ...v, value: v.id, label: v.name })),
+                allLeftovers: leftovers.map(v => ({ ...v, value: v.id, label: v.name }))
+            });
+
+        })
+        
     }
 
 
@@ -127,17 +121,18 @@ class EditModuleForm extends Component {
                 >Moc
                 </TextField>
                 <p></p>
-                <Select 
+                {/* <Select 
                     closeMenuOnSelect={false}
                     components={makeAnimated()}
                     value={vegetables}
                     isMulti
+                    isDisabled
                     options={this.state.allVegetables}
                     onChange={this.onChangeVegetables}
                     placeholder="Wybierz warzywa.."
                     maxMenuHeight = {150}
                     />
-                <p></p>
+                <p></p> */}
                 <Select 
                     closeMenuOnSelect={false}
                     components={makeAnimated()}

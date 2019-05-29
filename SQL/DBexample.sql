@@ -502,6 +502,7 @@ CREATE TABLE `companies_workers` (
 
 LOCK TABLES `companies_workers` WRITE;
 /*!40000 ALTER TABLE `companies_workers` DISABLE KEYS */;
+INSERT INTO `companies_workers` VALUES (1,1);
 /*!40000 ALTER TABLE `companies_workers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -601,4 +602,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-28 19:42:41
+-- Dump completed on 2019-05-29  2:46:08

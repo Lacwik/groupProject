@@ -173,4 +173,27 @@ public class StageService {
     public List<StageModel> getDefaultStages(CompanyIdentity companyIdentity, Company company) {
         return stageAssembler.getModelsFromEntityList(stageRepository.findStagesByOutsourced(true));
     }
+
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
+    public List<StageModel> getStagesByVegetableList(CompanyIdentity companyIdentity, List<VegetableModel> vegetableModels, Company company) {
+        List<Module> modules = moduleAssembler.getEntityFromModelList(moduleService.getModulesByVegetableList(companyIdentity,vegetableModels,company));
+        List<Stage> stagesTmp = stageRepository.findAll();
+        List<Stage> stages = new ArrayList<>();
+
+        for (Stage stage: stagesTmp){
+            List<Module> stageModels = stage.getModules();
+
+            boolean good = true;
+            for (Module module: stageModels){
+                if (!modules.contains(module)){
+                    good = false;
+                }
+            }
+
+            if(good){
+                stages.add(stage);
+            }
+        }
+        return stageAssembler.getModelsFromEntityList(stages);
+    }
 }

@@ -76,4 +76,9 @@ public class StageFacade {
         Company company = userMetadataService.getCurrentCompanyWorkingFor(userId);
         return stageService.getDefaultStages(CompanyIdentity.of(company.getId()), company);
     }
+
+    public List<StageModel> getStagesByVegetableList(List<VegetableModel> vegetableModels, Long userId) {
+        Company company = userMetadataService.getCurrentCompanyWorkingFor(userId);
+        return stageService.getStagesByVegetableList(CompanyIdentity.of(company.getId()), vegetableModels, company);
+    }
 }

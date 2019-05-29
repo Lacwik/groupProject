@@ -12,6 +12,7 @@ import AddUsersContainer from '../company/addUsers.container';
 import ViewModuleContainer from '../module/viewModule.container';
 import ViewStageContainer from '../stage/viewStage.container';
 import ViewLineContainer from '../line/viewLine.container';
+import CalculatorContainer from '../calculator/calculator.container';
 
 class RouterNavigation extends Component {
   render() {
@@ -26,6 +27,7 @@ class RouterNavigation extends Component {
         <Route path='/module/display-module' component={ViewModuleContainer} />
         <Route path='/stage/display-stage' component={ViewStageContainer} />
         <Route path='/line/display-line' component={ViewLineContainer} />
+        <Route path='/calculator' component={CalculatorContainer} />
       </Switch>
     );
   }

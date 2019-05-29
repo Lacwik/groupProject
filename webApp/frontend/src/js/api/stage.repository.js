@@ -80,4 +80,26 @@ export default class StageRepository {
             .then(response => response.json())
             .catch(err => console.warn("Caught error while trying to get default stages. ", err));
     }
+
+    
+    getLeftoversForStage = stageId => {
+        return fetch(`http://localhost:8090/stage/leftovers/${stageId}`, {
+            method: 'GET',
+            headers: this.getHeaders(),
+        })
+            .then(response => handleError(response))
+            .then(response => response.json())
+            .catch(err => console.warn("Caught error while trying to get line leftovers. ", err));
+    }
+
+    
+    getResourcesForStage = stageId => {
+        return fetch(`http://localhost:8090/stage/resources/${stageId}`, {
+            method: 'GET',
+            headers: this.getHeaders(),
+        })
+            .then(response => handleError(response))
+            .then(response => response.json())
+            .catch(err => console.warn("Caught error while trying to get line leftovers. ", err));
+    }
 }
