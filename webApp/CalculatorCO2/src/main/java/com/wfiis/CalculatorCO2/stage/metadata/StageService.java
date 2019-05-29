@@ -177,7 +177,8 @@ public class StageService {
     @SecureCompanyScope(role = CompanyRole.MEMBER)
     public List<StageModel> getStagesByVegetableList(CompanyIdentity companyIdentity, List<VegetableModel> vegetableModels, Company company) {
         List<Module> modules = moduleAssembler.getEntityFromModelList(moduleService.getModulesByVegetableList(companyIdentity,vegetableModels,company));
-        List<Stage> stagesTmp = stageRepository.findAll();
+        List<Stage> stagesTmp = stageRepository.findAllByCompany(company);
+        stagesTmp.addAll(stageRepository.findAllByOutsourced(true));
         List<Stage> stages = new ArrayList<>();
 
         for (Stage stage: stagesTmp){

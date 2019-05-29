@@ -11,5 +11,6 @@ import java.util.List;
 public interface StageRepository extends JpaRepository<Stage, Long> {
     List<Stage> findStagesByOutsourced(Boolean outsourced);
     List<Stage> findStagesByCompany(Company company);
-    List<Stage> findAll();
+    List<Stage> findAllByCompany(Company company);
+    List<Stage> findAllByOutsourced(Boolean outsourced);
 }

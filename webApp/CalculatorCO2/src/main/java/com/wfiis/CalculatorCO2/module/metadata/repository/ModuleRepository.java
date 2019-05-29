@@ -10,5 +10,6 @@ import java.util.List;
 public interface ModuleRepository extends JpaRepository<Module, Long> {
     List<Module> findModulesByOutsourced(Boolean outsourced);
     List<Module> findModulesByCompany(Company company);
-    List<Module> findModuleByVegetables(Vegetable vegetables);
+    List<Module> findModuleByVegetablesAndCompany(Vegetable vegetables, Company company);
+    List<Module> findModuleByVegetablesAndOutsourced(Vegetable vegetables, Boolean outsourced);
 }
