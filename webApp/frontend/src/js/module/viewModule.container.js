@@ -100,7 +100,7 @@ class ViewModuleContainer extends Component {
             <React.Fragment>
 
             <Dialog open={this.state.dialog_edit} onClose={this.onCloseDialog} aria-labelledby="dialog-edit-module">
-                <DialogTitle id="dialog-edit-module">Edycja</DialogTitle>
+                <DialogTitle id="dialog-edit-module dialog-header">Edytuj moduł</DialogTitle>
                 <DialogContent>
                     <EditModuleForm id={this.state.activeModuleId} onSubmit={moduleModel => this.onEditModule(moduleModel)} errorMessage={this.state.error} />
                 </DialogContent>
@@ -112,7 +112,7 @@ class ViewModuleContainer extends Component {
             </Dialog>
 
             <Dialog open={this.state.dialog_create} onClose={this.onCloseDialog} aria-labelledby="dialog-create-module">
-                <DialogTitle id="dialog-create-module">Nowy moduł</DialogTitle>
+                <DialogTitle id="dialog-create-module dialog-header">Nowy moduł</DialogTitle>
                 <DialogContent>
                     <AddModuleForm onSubmit={moduleModel => this.onCreateModule(moduleModel)} errorMessage={this.state.error} />
                 </DialogContent>
@@ -124,7 +124,7 @@ class ViewModuleContainer extends Component {
             </Dialog>
 
             <Dialog open={this.state.dialog_delete} onClose={this.onCloseDialog} aria-labelledby="dialog-delete-module">
-                <DialogTitle id="dialog-delete-module">Usuń moduł</DialogTitle>
+                <DialogTitle id="dialog-delete-module dialog-header">Usuń moduł</DialogTitle>
                 <DialogContent>
                     Czy na pewno chcesz trwale usunąć moduł: 
                     <b><ViewModule id={this.state.activeModuleId} full_info={false}></ViewModule></b>

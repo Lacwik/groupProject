@@ -64,3 +64,16 @@ ul h1 {
 .button.add {
   float: right;
 }
+
+#module-create-form {
+  max-height: 450px;
+}
+
+.dialog-header {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.dialog {
+  min-width: 800px !important;
+}
