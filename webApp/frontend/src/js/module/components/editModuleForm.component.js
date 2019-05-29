@@ -111,7 +111,7 @@ class EditModuleForm extends Component {
             <form id="module-edit-form" className="module-edit-form" onSubmit={e => e.preventDefault()}>
                 {this.props.errorMessage && <Paper className="error-box">{this.props.errorMessage}</Paper>}
                 <TextField
-                    label="Name"
+                    label="Nazwa"
                     value={name}
                     onChange={this.onChangeName}
                     type="text"
@@ -119,7 +119,7 @@ class EditModuleForm extends Component {
                 >Nazwa
                 </TextField>
                 <TextField
-                    label="Power"
+                    label="Moc"
                     value={power}
                     onChange={this.onChangePower}
                     type="text"
@@ -134,6 +134,8 @@ class EditModuleForm extends Component {
                     isMulti
                     options={this.state.allVegetables}
                     onChange={this.onChangeVegetables}
+                    placeholder="Wybierz warzywa.."
+                    maxMenuHeight = {150}
                     />
                 <p></p>
                 <Select 
@@ -143,6 +145,8 @@ class EditModuleForm extends Component {
                     isMulti
                     options={this.state.allResources}
                     onChange={this.onChangeResources}
+                    placeholder="Wybierz zasoby.."
+                    maxMenuHeight = {100}
                     />
                 <p></p>
                 <Select 
@@ -152,6 +156,8 @@ class EditModuleForm extends Component {
                     isMulti
                     options={this.state.allLeftovers}
                     onChange={this.onChangeLeftovers}
+                    placeholder="Wybierz pozostałości.."
+                    maxMenuHeight = {60}
                     />
                 <p></p>
                 <Button 

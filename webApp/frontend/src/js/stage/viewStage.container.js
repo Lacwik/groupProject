@@ -30,13 +30,18 @@ class ViewStageContainer extends Component {
     }
 
     componentDidMount(){
-        stageRepository.getCompanyStages().then(
-            response => this.setState({stageList: response, activeStageId: response ? response[0].id : undefined}),
-        ).then(
-            stageRepository.getDefaultStages().then(
-                response => this.setState({defaultStageList: response})
-            )
-        )
+
+        Promise.all([
+            stageRepository.getCompanyStages(), 
+            stageRepository.getDefaultStages(),
+        ])
+        .then( ([companyStages, defaultStages]) => {
+            this.setState({
+                stageList: companyStages,
+                defaultStageList: defaultStages
+            });
+
+        })
     }
 
 

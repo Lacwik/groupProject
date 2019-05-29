@@ -118,6 +118,8 @@ class AddModuleForm extends Component {
                     isMulti
                     options={this.state.allVegetables}
                     onChange={this.onChangeVegetables}
+                    placeholder = "Wybierz warzywa.."
+                    maxMenuHeight = {150}
                     />
                 <p></p>
                 <Select 
@@ -127,6 +129,8 @@ class AddModuleForm extends Component {
                     isMulti
                     options={this.state.allResources}
                     onChange={this.onChangeResources}
+                    placeholder="Wybierz zasoby.."
+                    maxMenuHeight = {100}
                     />
                 <p></p>
                 <Select 
@@ -136,6 +140,8 @@ class AddModuleForm extends Component {
                     isMulti
                     options={this.state.allLeftovers}
                     onChange={this.onChangeLeftovers}
+                    placeholder="Wybierz pozostałości.."
+                    maxMenuHeight = {60}
                     />
                 <p></p>
                 <Button 
