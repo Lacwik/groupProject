@@ -16,11 +16,13 @@ import com.wfiis.CalculatorCO2.stage.model.StageModel;
 import com.wfiis.CalculatorCO2.user.model.CompanyRole;
 import com.wfiis.CalculatorCO2.user.security.scopes.SecureCompanyScope;
 import com.wfiis.CalculatorCO2.vegetable.metadata.VegetableAssembler;
+import com.wfiis.CalculatorCO2.vegetable.metadata.entity.Vegetable;
 import com.wfiis.CalculatorCO2.vegetable.model.VegetableModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -109,5 +111,23 @@ public class ModuleService {
     @SecureCompanyScope(role = CompanyRole.MEMBER)
     public List<ModuleModel> getDefaultModules(CompanyIdentity companyIdentity, Company company) {
         return moduleAssembler.getModelsFromEntityList(moduleRepository.findModulesByOutsourced(true));
+    }
+
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
+    public List<ModuleModel> getModulesByVegetableList(CompanyIdentity companyIdentity, List<VegetableModel> vegetableModels, Company company) {
+        List<Vegetable> vegetables = vegetableAssembler.getEntityFromModelList(vegetableModels);
+        List<Module> modules = new ArrayList<>();
+        boolean init = true;
+        for (Vegetable vegetable: vegetables){
+            if (init){
+                modules.addAll(moduleRepository.findModuleByVegetables(vegetable));
+                init = false;
+            }else{
+                List<Module> modulesTmp = new ArrayList<>();
+                modulesTmp.addAll(moduleRepository.findModuleByVegetables(vegetable));
+                modules.retainAll(modulesTmp);
+            }
+        }
+        return moduleAssembler.getModelsFromEntityList(modules);
     }
 }

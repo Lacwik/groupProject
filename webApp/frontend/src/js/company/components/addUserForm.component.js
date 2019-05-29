@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
-import Select from '@material-ui/core/Select';
+import Select from 'react-select';
 import { COMPANY_ROLES } from '../../constants/companyRoles.constants';
 
 class AddUserForm extends Component {
@@ -77,20 +77,10 @@ class AddUserForm extends Component {
     }
 
     renderCompanyRoles() {
-        return Object.keys({ ...COMPANY_ROLES }).map(key => {
-            const value = COMPANY_ROLES[key];
-            return (
-                <option
-                    key={key}
-                    value={key}
-                >{value}
-                </option>
-            );
-        })
+        return Object.keys({ ...COMPANY_ROLES }).map(key => ({ value: key, label: COMPANY_ROLES[key] }));
     }
 
-    onChangeRole = e => {
-        const { value: role } = e.target;
+    onChangeRole = role => {
 
         this.setState(state => ({ ...state, role }));
     }
@@ -140,12 +130,11 @@ class AddUserForm extends Component {
                 </TextField>
 
                 <Select
-                    native
+                    placeholder="Rola"
                     fullWidth
                     onChange={this.onChangeRole}
-                >
-                    {this.renderCompanyRoles()}
-                </Select>
+                    options={this.renderCompanyRoles()}
+                />
                 <Button
                     variant="contained"
                     color="primary"

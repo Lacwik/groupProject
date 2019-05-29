@@ -83,4 +83,10 @@ public class ModuleController {
         UserAuthenticationPrincipal principal = (UserAuthenticationPrincipal) idToken.getPrincipal();
         return ResponseEntity.ok(moduleFacade.getDefaultModules(principal.getId()));
     }
+
+    @GetMapping(value = "/vegetables/modules", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<ModuleModel>> getModulesByVegetableList(UsernamePasswordAuthenticationToken idToken, @RequestBody List<VegetableModel> vegetableModel) {
+        UserAuthenticationPrincipal principal = (UserAuthenticationPrincipal) idToken.getPrincipal();
+        return ResponseEntity.ok(moduleFacade.getModulesByVegetableList(vegetableModel, principal.getId()));
+    }
 }

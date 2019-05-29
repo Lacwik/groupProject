@@ -127,12 +127,11 @@ public class LineService {
 
         boolean init = true;
         for(StageModel stageModel : stageModels){
-            List<VegetableModel> vegetableModelsTmp = new ArrayList<>();
-
             if (init) {
                 vegetableModels.addAll(stageService.getStageVegetables(companyIdentity, stageModel.getId()));
                 init = false;
             } else {
+                List<VegetableModel> vegetableModelsTmp = new ArrayList<>();
                 vegetableModelsTmp.addAll(stageService.getStageVegetables(companyIdentity, stageModel.getId()));
                 vegetableModels.retainAll(vegetableModelsTmp);
             }
