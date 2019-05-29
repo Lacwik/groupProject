@@ -121,7 +121,7 @@ class EditModuleForm extends Component {
                 >Moc
                 </TextField>
                 <p></p>
-                <Select 
+                {/* <Select 
                     closeMenuOnSelect={false}
                     components={makeAnimated()}
                     value={vegetables}
@@ -130,7 +130,7 @@ class EditModuleForm extends Component {
                     options={this.state.allVegetables}
                     onChange={this.onChangeVegetables}
                     />
-                <p></p>
+                <p></p> */}
                 <Select 
                     closeMenuOnSelect={false}
                     components={makeAnimated()}
