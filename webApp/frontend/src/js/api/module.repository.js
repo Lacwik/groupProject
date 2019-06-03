@@ -27,7 +27,6 @@ export default class ModuleRepository {
     }
 
     editModule = module => {
-        console.log(module);
         return fetch(`http://localhost:8090/module/${module.id}`, {
             method: 'PUT',
             headers: this.getHeaders(),

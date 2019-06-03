@@ -100,7 +100,6 @@ class EditModuleForm extends Component {
             leftovers
         } = this.state;
 
-        //console.log({ props: this.props, state: this.state });
         return (
             <form id="module-edit-form" className="module-edit-form" onSubmit={e => e.preventDefault()}>
                 {this.props.errorMessage && <Paper className="error-box">{this.props.errorMessage}</Paper>}

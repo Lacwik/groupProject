@@ -53,7 +53,6 @@ class ViewModuleContainer extends Component {
 
 
     onCreateModule = (moduleModel) => {
-        console.log(moduleModel)
         return moduleRepository.createModule(moduleModel)
             .then( window.location.reload() )
             .catch(err => this.setErrorMessage(err));
