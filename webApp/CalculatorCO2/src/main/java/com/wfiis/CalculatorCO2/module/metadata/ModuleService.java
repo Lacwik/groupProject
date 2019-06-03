@@ -120,11 +120,13 @@ public class ModuleService {
         boolean init = true;
         for (Vegetable vegetable: vegetables){
             if (init){
-                modules.addAll(moduleRepository.findModuleByVegetables(vegetable));
+                modules.addAll(moduleRepository.findModuleByVegetablesAndCompany(vegetable,company));
+                modules.addAll(moduleRepository.findModuleByVegetablesAndOutsourced(vegetable,true));
                 init = false;
             }else{
                 List<Module> modulesTmp = new ArrayList<>();
-                modulesTmp.addAll(moduleRepository.findModuleByVegetables(vegetable));
+                modulesTmp.addAll(moduleRepository.findModuleByVegetablesAndCompany(vegetable,company));
+                modulesTmp.addAll(moduleRepository.findModuleByVegetablesAndOutsourced(vegetable,true));
                 modules.retainAll(modulesTmp);
             }
         }
