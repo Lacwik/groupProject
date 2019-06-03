@@ -114,7 +114,7 @@ class ViewStageContainer extends Component {
             </Dialog>
 
 
-            <Dialog open={this.state.dialog_create} onClose={this.onCloseDialog} aria-labelledby="dialog-create-stage">
+            <Dialog open={this.state.dialog_create} onClose={this.onCloseDialog} aria-labelledby="dialog-create-stage" fullScreen={true}>
                 <DialogTitle id="dialog-create-satge">Nowy etap</DialogTitle>
                 <DialogContent>
                     <AddStageForm onSubmit={satgeModel => this.onCreateStage(satgeModel)} errorMessage={this.state.error} />
@@ -240,7 +240,7 @@ class ViewStageContainer extends Component {
         return (
             <div className="view-stage-container">
                 <div className="wrapper-content"> 
-                <GroupWork style={{ color: '#232323;', fontSize:"55px", border:"#69ff72", background:"#69ff72", borderRadius:"3px" }} fontSize="large" />
+                <GroupWork style={{ color: '#232323', fontSize:"55px", border:"#69ff72", background:"#69ff72", borderRadius:"3px" }} fontSize="large" />
                 <h1 className="header"> Dostępne etapy </h1>
                     {this.companyStagesListRender()}
                 </div>
