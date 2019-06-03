@@ -27,7 +27,6 @@ export default class LineRepository {
     }
 
     editLine = line => {
-        console.log(line);
         return fetch(`http://localhost:8090/line/${line.id}`, {
             method: 'PUT',
             headers: this.getHeaders(),

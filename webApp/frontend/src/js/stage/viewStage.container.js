@@ -57,7 +57,6 @@ class ViewStageContainer extends Component {
     }
 
     onCreateStage = (stageModel) => {
-        console.log(stageModel)
         return stageRepository.createStage(stageModel)
             .then( window.location.reload() )
             .catch(err => this.setErrorMessage(err));

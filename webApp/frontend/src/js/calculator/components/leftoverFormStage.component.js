@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Select from 'react-select';
+import ViewResourceFormForLineStages from './viewResourceFormForLineStages.component';
 import { stageRepository } from '../../factory/stageRepository.factory';
 import { TextField } from '@material-ui/core';
 
@@ -21,10 +21,11 @@ class LeftoverFormStage extends Component {
         return this.state.leftovers.map(resource => (
                 <div style={{ marginBottom: '.5em' }} key={resource.id}>
                     <TextField
+                        type="number"
                         required
-                        placeholder={`Wpisz ilość ${resource.name}`}
                         fullWidth
-                        label={resource.name}
+                        label={`${ViewResourceFormForLineStages.capitalizeFirstLetter(resource.name)} [kg]`}
+                        onChange={e => this.props.onChangeLeftover(this.props.stage.id, resource.id, { value: e.target.value, unit: 'kg' })}
                     />
                 </div>
         ));
@@ -42,6 +43,7 @@ class LeftoverFormStage extends Component {
 
 LeftoverFormStage.propTypes = {
     stage: PropTypes.object,
+    onChangeLeftover: PropTypes.func,
 };
 
 export default LeftoverFormStage;
