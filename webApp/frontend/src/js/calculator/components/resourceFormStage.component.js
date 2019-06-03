@@ -21,13 +21,24 @@ class ResourceFormStage extends Component {
             .then(([leftovers, resources]) => this.setState(state => ({ ...state, leftovers, resources })));;
     }
 
+    findUnitsForResource = gusId => {
+        const gus = this.props.gusCategory.find(({ gus_id }) => gus_id === gusId);
+
+        if (!gus) {
+            return '';
+        }
+
+        return gus.shortcut_unit;
+    }
+
     renderResources() {
         return this.state.resources.map(resource => (
             <div className="resource-form-mini" key={resource.id} style={{ marginBottom: '.5em' }}>
                 <TextField
+                    type="number"
                     required
-                    placeholder={`Wpisz ilość ${resource.name}`}
-                    label={resource.name}
+                    label={`${resource.name} ${this.findUnitsForResource(resource.gus) ? `[${this.findUnitsForResource(resource.gus)}]` : ''}`}
+                    onChange={e => this.props.onChangeResource(this.props.stage.id, resource.id, { value: e.target.value, unit: this.findUnitsForResource(resource.gus)})}
                 />
             </div>
         ));
@@ -45,6 +56,8 @@ class ResourceFormStage extends Component {
 
 ResourceFormStage.propTypes = {
     stage: PropTypes.object,
+    onChangeResource: PropTypes.func,
+    gusCategory: PropTypes.array,
 };
 
 export default ResourceFormStage;

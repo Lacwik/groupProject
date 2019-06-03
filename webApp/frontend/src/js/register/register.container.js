@@ -61,7 +61,6 @@ class RegisterContainer extends Component {
     }
 
     render() {
-        console.log('Props: ', this.props);
         return (
             <div className="wrapper-content">
                 <div className="register-forms-container">

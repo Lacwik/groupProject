@@ -27,7 +27,6 @@ export default class StageRepository {
     }
 
     editStage = stage => {
-        console.log(stage);
         return fetch(`http://localhost:8090/stage/${stage.id}`, {
             method: 'PUT',
             headers: this.getHeaders(),

@@ -61,7 +61,6 @@ class CreateLineForm extends Component {
             stageModels
         } = this.state;
 
-        //console.log({ props: this.props, state: this.state });
         return (
             <form id="line-edit-form" className="line-edit-form" onSubmit={e => e.preventDefault()}>
                 {this.props.errorMessage && <Paper className="error-box">{this.props.errorMessage}</Paper>}

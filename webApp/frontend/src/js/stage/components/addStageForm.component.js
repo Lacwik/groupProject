@@ -61,7 +61,6 @@ class AddStageForm extends Component {
             modulesModels
         } = this.state;
 
-        //console.log({ props: this.props, state: this.state });
         return (
             <form id="stage-edit-form" className="stage-edit-form" onSubmit={e => e.preventDefault()}>
                 {this.props.errorMessage && <Paper className="error-box">{this.props.errorMessage}</Paper>}
