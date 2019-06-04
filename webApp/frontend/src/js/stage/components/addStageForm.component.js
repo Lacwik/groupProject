@@ -61,13 +61,14 @@ class AddStageForm extends Component {
         if (selectedVegetables.length !== 0) {
             this.setState({
                 isVegetableSelected: true,
-                
+                avaliableModules: this.state.allModules.filter(this.moduleContainsVegetables)
             })
             
         }
         else {
             this.setState({isVegetableSelected: false})
         }
+        console.log(this.state.avaliableModules)
     }
 
 
@@ -75,6 +76,16 @@ class AddStageForm extends Component {
         const { name, modulesModels } = this.state;
 
         this.props.onSubmit({ name, modulesModels });
+    }
+
+    moduleContainsVegetables = (value) => {
+        let temp_vegetables = this.state.selectedVegetables.map(vege => {
+            if(value.vegetables.includes(vege)){
+                (vege)
+            }
+        })
+
+        return temp_vegetables.length == value.vegetables.length 
     }
 
 
