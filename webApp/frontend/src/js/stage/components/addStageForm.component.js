@@ -51,6 +51,7 @@ class AddStageForm extends Component {
         const modulesModels = e;
 
         this.setState(state => ({ ...state, modulesModels }));
+        console.log(modulesModels)
     }
 
 
@@ -80,9 +81,9 @@ class AddStageForm extends Component {
 
     moduleContainsVegetables = (value) => {
         let temp_vegetables = this.state.selectedVegetables.map(vege => {
-            if(value.vegetables.includes(vege)){
-                (vege)
-            }
+            // if(value.vegetables.includes(vege)){
+            //     (vege)
+            // }
         })
 
         return temp_vegetables.length == value.vegetables.length 
