@@ -3,11 +3,16 @@ import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
 import { moduleRepository } from '../../factory/moduleRepository.factory';
 import { vegetableRepository } from '../../factory/vegetable.factory';
 import Select from 'react-select'
 import makeAnimated from 'react-select/lib/animated';
 import { stageRepository } from '../../factory/stageRepository.factory';
+import { Sort } from '@material-ui/icons';
 
 
 class AddStageForm extends Component {
@@ -16,12 +21,14 @@ class AddStageForm extends Component {
 
         this.state = {
             name: '',
+            modulesOrder: '',
             modulesModels: [],
             avaliableModules: [],
             allModules: [],
             allVegetables: [],
             selectedVegetables: [],
             isVegetableSelected: false,
+            dialog_show: false,
         };
     }
 
@@ -51,9 +58,32 @@ class AddStageForm extends Component {
         const modulesModels = e;
 
         this.setState(state => ({ ...state, modulesModels }));
+        this.setState({modulesOrder: ''});
+        let order = '';
+        modulesModels.forEach(element => {
+            order = order + element.id.toString() + ';'; 
+        });
+        this.setState({modulesOrder: order});
         console.log(modulesModels)
+        console.log(order)
     }
 
+    setModulesOrder = (value) => {
+        let order =  this.state.modulesOrder;
+        order += value.id.toString() + ';';
+        
+
+        this.setState({modulesOrder: order}) ;
+        
+    }
+
+    onCloseDialog = () => {
+        this.setState({dialog_show: false});
+    }
+
+    onClickQuickView = () => {
+        this.setState({dialog_show: true});
+    }
 
     onChangeVegetables = e => {
         const selectedVegetables = e;
@@ -62,7 +92,7 @@ class AddStageForm extends Component {
         if (selectedVegetables.length !== 0) {
             this.setState({
                 isVegetableSelected: true,
-                avaliableModules: this.state.allModules.filter(this.moduleContainsVegetables)
+               // avaliableModules: this.state.allModules.filter(this.moduleContainsVegetables)
             })
             
         }
@@ -74,19 +104,35 @@ class AddStageForm extends Component {
 
 
     onSubmit = () => {
-        const { name, modulesModels } = this.state;
+        const { name, modulesModels, modulesOrder } = this.state;
 
-        this.props.onSubmit({ name, modulesModels });
+        this.props.onSubmit({ name, modulesModels, modulesOrder });
     }
 
-    moduleContainsVegetables = (value) => {
-        let temp_vegetables = this.state.selectedVegetables.map(vege => {
-            // if(value.vegetables.includes(vege)){
-            //     (vege)
-            // }
-        })
 
-        return temp_vegetables.length == value.vegetables.length 
+
+    viewDialogs = () => {
+        return(
+            <React.Fragment>
+                <Dialog 
+                open={this.state.dialog_show} 
+                onClose={this.onCloseDialog} 
+                aria-labelledby="dialog-quick-view"
+                >
+                    <DialogTitle id="dialog-quick-view dialog-header">Szybki podgląd</DialogTitle>
+                    <DialogContent>
+                        <h2>{this.state.name}</h2>
+                        <br></br>
+
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.onCloseDialog} color="primary">
+                        Powrót
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+            </React.Fragment>
+        )
     }
 
 
@@ -114,16 +160,20 @@ class AddStageForm extends Component {
                         options={this.state.allModules}
                         onChange={this.onChangeModules}
                     />
+                    <br></br>
+                    * kolejność dodawania ma znaczenie
                     <p></p>
                 </React.Fragment>
             )
         }
 
-        //console.log({ props: this.props, state: this.state });
         return (
+
+
             <form id="stage-edit-form" className="stage-edit-form" onSubmit={e => e.preventDefault()}>
                 {this.props.errorMessage && <Paper className="error-box">{this.props.errorMessage}</Paper>}
 
+                {this.viewDialogs()}
                 <TextField
                     label="Nazwa"
                     value={name}
@@ -150,6 +200,14 @@ class AddStageForm extends Component {
 
                 {modulesByVegetable}
                 
+                <Button 
+                    variant="outlined"
+                    color="default"
+                    className="stage-quick-view__button"
+                    onClick={this.onClickQuickView}
+                ><Sort size="small" />
+                </Button>
+
                 <Button 
                     variant="contained"
                     color="primary"
