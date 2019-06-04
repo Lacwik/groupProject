@@ -226,6 +226,7 @@ class ViewLineContainer extends Component {
                 containerClass="carousel-container"
                 deviceType={this.props.deviceType}
                 itemClass="carousel-item-padding-40-px carousel-item"
+                
                 >
                     {this.state.linesList.map(item => (
                         <div key={item.id} style={{background: 'white'}}>

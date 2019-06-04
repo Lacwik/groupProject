@@ -127,4 +127,18 @@ export default class StageRepository {
                 return Promise.reject(err);
             });
     }
+
+    getStagesByVegetableList = vegetablesList => {
+        return fetch(`http://localhost:8090/stage/vegetables/stages`, {
+            method: 'POST',
+            headers: this.getHeaders(),
+            body: JSON.stringify(vegetablesList),
+        })
+            .then(response => handleError(response))
+            .then(response => response.json())
+            .catch(err => {
+                console.warn("Caught error while trying to create stage. ", err);
+                return Promise.reject(err);
+            });
+    }
 }
