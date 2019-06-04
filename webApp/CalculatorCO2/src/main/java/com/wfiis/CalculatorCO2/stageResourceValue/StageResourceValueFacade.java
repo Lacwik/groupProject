@@ -19,9 +19,9 @@ public class StageResourceValueFacade {
         return stageResourceValueService.createStageResourceValue(CompanyIdentity.of(company.getId()), stageResourceValueCreateModel, company);
     }
 
-    public StageResourceValueCreateModel editStageResourceValue(StageResourceValueCreateModel moduleCreateModel, Long srvId, Long userId) {
+    public StageResourceValueCreateModel editStageResourceValue(StageResourceValueCreateModel stageResourceValueCreateModel, Long srvId, Long userId) {
         Company company = userMetadataService.getCurrentCompanyWorkingFor(userId);
-        return stageResourceValueService.editStageResourceValue(CompanyIdentity.of(company.getId()), moduleCreateModel, srvId);
+        return stageResourceValueService.editStageResourceValue(CompanyIdentity.of(company.getId()), stageResourceValueCreateModel, srvId);
     }
 
     public StageResourceValueCreateModel getStageResourceValue(Long userId, Long srvId) {

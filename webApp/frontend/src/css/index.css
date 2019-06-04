@@ -16,6 +16,21 @@ code {
 
 ul {
   list-style-type: none;
+  display: inline-grid;
+  padding: 2px 0px;
+}
+
+ul .items {
+  padding: 0px 15px;
+}
+
+ul h1 {
+  margin-top: 0px;
+  text-transform: uppercase;
+}
+
+.wrapper-content ul {
+  font-size: 12px;
 }
 
 .button.delete {
@@ -26,19 +41,17 @@ ul {
   margin-right: 5px !important;
 }
 
-.wrapper-content ul {
-  font-size: 12px;
-}
-
 .header-icon {
   float: left;
   margin-right: 24px;
 }
+
 .header {
   padding: 10px;
   margin-left: 30px;
   font-size: 30px;
   font-weight: 700;
+  margin-bottom: 40px;
 }
 
 .dialogWindow {
@@ -47,22 +60,14 @@ ul {
 .dialogWindow .items{
   margin-left: 35px;
 }
-.columns {
-  column-count: 2;
-}
-
-ul h1 {
-  margin-top: 0px;
-}
 
 .MuiRadio-colorSecondary-774.MuiRadio-checked-771 {
-
   color: #3f51b6;
-
 }
 
 .button.add {
   float: right;
+  margin: 10px;
 }
 
 #module-create-form {
@@ -73,7 +78,23 @@ ul h1 {
   font-size: 20px;
   font-weight: 600;
 }
+.slide h1 {
+  text-transform: uppercase;
+  font-size: 20px;
+}
 
-.dialog {
-  min-width: 800px !important;
+.MuiDialog-paperWidthSm-18 {
+  min-width: 360px;
+  min-height: 300px;
+}
+
+.view-elements-button {
+  margin: 5px !important;
+}
+.elements {
+  text-transform: uppercase;
+}
+
+.form-stage .icon {
+  float: right;
 }

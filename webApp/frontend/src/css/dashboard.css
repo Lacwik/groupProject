@@ -22,3 +22,12 @@
     margin:0;
     padding:0;
 }
+.MuiCardContent-root-190,
+.MuiCardContent-root-38 {
+    padding: 16px;
+    text-align: center;
+}
+.MuiCard-root-162 {
+    overflow: hidden;
+    margin: 10px;
+}

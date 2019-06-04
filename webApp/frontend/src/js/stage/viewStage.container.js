@@ -132,6 +132,7 @@ class ViewStageContainer extends Component {
         return (
             <React.Fragment>
                 <Dialog open={this.state.dialog_edit} onClose={this.onCloseDialog} aria-labelledby="dialog-edit-stage">
+                <DialogTitle id="dialog-edit-stage dialog-header">Edytuj etap</DialogTitle>
                 <DialogContent>
                     <EditStageForm id={this.state.activeStageId} onSubmit={stageModel => this.onEditStage(stageModel)} errorMessage={this.state.error} />
                 </DialogContent>
@@ -144,7 +145,7 @@ class ViewStageContainer extends Component {
 
 
             <Dialog open={this.state.dialog_create} onClose={this.onCloseDialog} aria-labelledby="dialog-create-stage" fullScreen={true}>
-                <DialogTitle id="dialog-create-satge">Nowy etap</DialogTitle>
+                <DialogTitle id="dialog-create-stage dialog-header">Nowy etap</DialogTitle>
                 <DialogContent>
                     <AddStageForm onSubmit={satgeModel => this.onCreateStage(satgeModel)} errorMessage={this.state.error} />
                 </DialogContent>
@@ -157,7 +158,7 @@ class ViewStageContainer extends Component {
 
 
             <Dialog open={this.state.dialog_delete} onClose={this.onCloseDialog} aria-labelledby="dialog-delete-stage">
-                <DialogTitle id="dialog-delete-stage">Usuń etap</DialogTitle>
+                <DialogTitle id="dialog-delete-stage dialog-header">Usuń etap</DialogTitle>
                 <DialogContent>
                     Czy na pewno chcesz trwale usunąć etap: 
                     <b><ViewStage id={this.state.activeStageId} full_info={false}></ViewStage></b>
@@ -199,13 +200,12 @@ class ViewStageContainer extends Component {
             <Fab 
                 color="secondary" 
                 aria-label="Add" 
-                className="fab-stage-head" 
+                className="fab-stage-head button add" 
                 onClick={() => this.onClickStage_create()}
             ><AddIcon />
             </Fab>
             <p></p>
-
-            etapy należące do firmy:
+            <h3 class="elements-type"> Etapy należące do firmy:</h3>
             <br></br>
             <Carousel 
                 showThumbs={false}
@@ -221,8 +221,7 @@ class ViewStageContainer extends Component {
                     ))}
             </Carousel>
             <p></p>
-
-            etapy domyślne:
+             <h3 class="elements-type">Etapy domyślne:</h3>
             <br></br>
             <Carousel 
                 showThumbs={false} 
@@ -249,8 +248,8 @@ class ViewStageContainer extends Component {
         return (
             <div className="view-stage-container">
                 <div className="wrapper-content"> 
-                <GroupWork style={{ color: '#232323', fontSize:"55px", border:"#69ff72", background:"#69ff72", borderRadius:"3px" }} fontSize="large" />
-                <h1 className="header"> Dostępne etapy </h1>
+                <div className="header-icon"><GroupWork  style={{ color: '#aa88cc', fontSize:"55px" }} fontSize="large" /></div>
+                <div className="header"> Dostępne etapy </div>
                     {this.companyStagesListRender()}
                 </div>
             </div>

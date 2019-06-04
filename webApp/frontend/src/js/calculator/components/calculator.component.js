@@ -269,7 +269,8 @@ class Calculator extends Component {
                             label="Produkt [kg]"
                             onChange={e => this.onChangeProduct(e.target.value)}
                         />
-                        {this.state.lineResources.length !== 0 ? (<h3>Wybierz typy zasobów</h3>) : ''}
+                        <p></p>
+                        {this.state.lineResources.length !== 0 ? (<label style={{ fontSize:17}}>Wybierz typy zasobów: </label>) : ''}
                         <ul style={{ padding: 0, margin: 0 }}>
                             {this.renderFormForChooseResourcesType()}
                         </ul>
