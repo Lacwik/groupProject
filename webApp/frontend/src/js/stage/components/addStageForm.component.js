@@ -64,8 +64,7 @@ class AddStageForm extends Component {
             order = order + element.id.toString() + ';'; 
         });
         this.setState({modulesOrder: order});
-        console.log(modulesModels)
-        console.log(order)
+
     }
 
     setModulesOrder = (value) => {
@@ -92,14 +91,17 @@ class AddStageForm extends Component {
         if (selectedVegetables.length !== 0) {
             this.setState({
                 isVegetableSelected: true,
-               // avaliableModules: this.state.allModules.filter(this.moduleContainsVegetables)
+            })
+            Promise.all([
+                stageRepository.getModulesByVegetableList(selectedVegetables),
+            ]).then( ([modulesResponse]) => {
+                this.setState({avaliableModules: modulesResponse.map(v => ({ ...v, value: v.id, label: v.name })) });
             })
             
         }
         else {
             this.setState({isVegetableSelected: false})
         }
-        console.log(this.state.avaliableModules)
     }
 
 
@@ -157,7 +159,7 @@ class AddStageForm extends Component {
                         components={makeAnimated()}
                         value={modulesModels}
                         isMulti
-                        options={this.state.allModules}
+                        options={avaliableModules}
                         onChange={this.onChangeModules}
                         placeholder = "Wybierz moduły.."
                         maxMenuHeight = {60}

@@ -131,7 +131,12 @@ class ViewStageContainer extends Component {
     viewDialogs = () => {
         return (
             <React.Fragment>
-                <Dialog open={this.state.dialog_edit} onClose={this.onCloseDialog} aria-labelledby="dialog-edit-stage" className="dialog">
+                <Dialog 
+                open={this.state.dialog_edit} 
+                onClose={this.onCloseDialog} 
+                aria-labelledby="dialog-edit-stage" 
+                className="dialog"
+                >
                 <DialogTitle id="dialog-edit-stage dialog-header">Edytuj etap</DialogTitle>
                 <DialogContent>
                     <EditStageForm id={this.state.activeStageId} onSubmit={stageModel => this.onEditStage(stageModel)} errorMessage={this.state.error} />
@@ -144,7 +149,13 @@ class ViewStageContainer extends Component {
             </Dialog>
 
 
-            <Dialog open={this.state.dialog_create} onClose={this.onCloseDialog} aria-labelledby="dialog-create-stage" className="dialog">
+            <Dialog 
+            open={this.state.dialog_create} 
+            onClose={this.onCloseDialog} 
+            aria-labelledby="dialog-create-stage" 
+            className="dialog"
+            fullScreen={true}
+            >
                 <DialogTitle id="dialog-create-stage dialog-header">Nowy etap</DialogTitle>
                 <DialogContent>
                     <AddStageForm onSubmit={satgeModel => this.onCreateStage(satgeModel)} errorMessage={this.state.error} />
@@ -157,7 +168,12 @@ class ViewStageContainer extends Component {
             </Dialog>
 
 
-            <Dialog open={this.state.dialog_delete} onClose={this.onCloseDialog} aria-labelledby="dialog-delete-stage" className="dialog delete">
+            <Dialog 
+            open={this.state.dialog_delete} 
+            onClose={this.onCloseDialog} 
+            aria-labelledby="dialog-delete-stage" 
+            className="dialog delete"
+            >
                 <DialogTitle id="dialog-delete-stage dialog-header">Usuń etap</DialogTitle>
                 <DialogContent>
                     Czy na pewno chcesz trwale usunąć etap: 

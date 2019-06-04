@@ -104,12 +104,13 @@ export default class StageRepository {
 
 
     getModulesByVegetableList = vegetablesList => {
-        return fetch(`http://localhost:8090/vegetables/modules`, {
-            method: 'GET',
+        return fetch(`http://localhost:8090/module/vegetables/modules`, {
+            method: 'POST',
             headers: this.getHeaders(),
             body: JSON.stringify(vegetablesList),
         })
             .then(response => handleError(response))
+            .then(response => response.json())
             .catch(err => {
                 console.warn("Caught error while trying to create stage. ", err);
                 return Promise.reject(err);
