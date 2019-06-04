@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.wfiis.CalculatorCO2.line.metadata.entity.Line;
 import com.wfiis.CalculatorCO2.stageResourceValue.metadata.entity.StageResourceValue;
+import com.wfiis.CalculatorCO2.vegetable.metadata.entity.Vegetable;
 import lombok.*;
 
 import javax.persistence.*;
@@ -34,4 +35,9 @@ public class LineStatistics {
     )
     @JsonManagedReference
     private List<StageResourceValue> stageResourceValues;
+
+    @ManyToOne
+    @JoinColumn(name = "vegetable_id")
+    @JsonBackReference
+    private Vegetable vegetable;
 }

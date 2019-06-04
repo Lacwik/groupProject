@@ -33,5 +33,5 @@ public class StageResourceValue {
     private Stage stage;
 
     @Column(nullable = false, unique = false)
-    private float time;
+    private Long time;
 }

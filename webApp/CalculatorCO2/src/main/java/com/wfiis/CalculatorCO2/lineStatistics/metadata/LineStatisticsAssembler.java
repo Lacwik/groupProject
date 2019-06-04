@@ -3,6 +3,8 @@ package com.wfiis.CalculatorCO2.lineStatistics.metadata;
 import com.wfiis.CalculatorCO2.lineStatistics.metadata.entity.LineStatistics;
 import com.wfiis.CalculatorCO2.lineStatistics.model.LineStatisticsCreateModel;
 import com.wfiis.CalculatorCO2.stageResourceValue.metadata.StageResourceValueAssembler;
+import com.wfiis.CalculatorCO2.vegetable.metadata.VegetableService;
+import com.wfiis.CalculatorCO2.vegetable.metadata.entity.Vegetable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -13,11 +15,13 @@ import java.util.List;
 @Component
 public class LineStatisticsAssembler {
     private final StageResourceValueAssembler stageResourceValueAssembler;
+    private final VegetableService vegetableService;
 
     public LineStatisticsCreateModel getCreateModelFromEntity(LineStatistics lineStatistics) {
         return new LineStatisticsCreateModel(
                 lineStatistics.getLine(),
-                stageResourceValueAssembler.getCreateModelsFromEntityList(lineStatistics.getStageResourceValues())
+                stageResourceValueAssembler.getCreateModelsFromEntityList(lineStatistics.getStageResourceValues()),
+                lineStatistics.getVegetable()
         );
     }
 
@@ -33,7 +37,9 @@ public class LineStatisticsAssembler {
         return new LineStatistics(
                 null,
                 lineStatisticsCreateModel.getLine(),
-                stageResourceValueAssembler.getNewEntitiesFromModels(lineStatisticsCreateModel.getStageResourceValueCM())
+                stageResourceValueAssembler.getNewEntitiesFromModels(lineStatisticsCreateModel.getStageResourceValueCM()),
+                vegetableService.getVegetableEntity(lineStatisticsCreateModel.getVegetable().getId())
+
         );
     }
 

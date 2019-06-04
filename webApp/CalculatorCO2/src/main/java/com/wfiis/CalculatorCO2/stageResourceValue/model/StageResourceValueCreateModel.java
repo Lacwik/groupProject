@@ -13,5 +13,5 @@ public class StageResourceValueCreateModel {
     private Resource resource;
     private float value;
     private Stage stage;
-    private float time;
+    private Long time;
 }
