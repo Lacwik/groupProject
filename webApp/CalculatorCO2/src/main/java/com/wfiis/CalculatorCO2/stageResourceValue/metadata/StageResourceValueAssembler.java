@@ -1,6 +1,7 @@
 package com.wfiis.CalculatorCO2.stageResourceValue.metadata;
 
 import com.wfiis.CalculatorCO2.stageResourceValue.metadata.entity.StageResourceValue;
+import com.wfiis.CalculatorCO2.stageResourceValue.metadata.repository.StageResourceValueRepository;
 import com.wfiis.CalculatorCO2.stageResourceValue.model.StageResourceValueCreateModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -11,6 +12,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @Component
 public class StageResourceValueAssembler {
+
+    private final StageResourceValueRepository stageResourceValueRepository;
 
     public StageResourceValueCreateModel getCreateModelFromEntity(StageResourceValue stageResourceValue) {
         return new StageResourceValueCreateModel(
@@ -42,7 +45,7 @@ public class StageResourceValueAssembler {
     public List<StageResourceValue> getNewEntitiesFromModels(List<StageResourceValueCreateModel> stageResourceValueCreateModels){
         List<StageResourceValue> outSRV = new ArrayList<>();
         for (StageResourceValueCreateModel srvcr : stageResourceValueCreateModels) {
-            outSRV.add(getNewEntityFromModel(srvcr));
+            outSRV.add(stageResourceValueRepository.save(getNewEntityFromModel(srvcr)));
         }
         return outSRV;
     }
