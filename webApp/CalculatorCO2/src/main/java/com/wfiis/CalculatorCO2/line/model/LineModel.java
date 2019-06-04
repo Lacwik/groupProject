@@ -10,8 +10,8 @@ import java.util.List;
 public class LineModel extends LineCreateModel {
     private Long id;
 
-    public LineModel(String name, List<StageModel> stageModels, Long id) {
-        super(name, stageModels);
+    public LineModel(String name, List<StageModel> stageModels, String stagesOrder, Long id) {
+        super(name, stageModels, stagesOrder);
         this.id = id;
     }
 }

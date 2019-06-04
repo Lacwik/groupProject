@@ -103,13 +103,39 @@ export default class StageRepository {
     }
 
 
-    getModulesByVegetableList = vegetablesList => {
-        return fetch(`http://localhost:8090/vegetables/modules`, {
+    getStageVegetables = stageId => {
+        return fetch(`http://localhost:8090/stage/vegetables/${stageId}`, {
             method: 'GET',
+            headers: this.getHeaders(),
+        })
+            .then(response => handleError(response))
+            .then(response => response.json())
+            .catch(err => console.warn("Caught error while trying to get line vegetables. ", err));
+    }
+
+
+    getModulesByVegetableList = vegetablesList => {
+        return fetch(`http://localhost:8090/module/vegetables/modules`, {
+            method: 'POST',
             headers: this.getHeaders(),
             body: JSON.stringify(vegetablesList),
         })
             .then(response => handleError(response))
+            .then(response => response.json())
+            .catch(err => {
+                console.warn("Caught error while trying to create stage. ", err);
+                return Promise.reject(err);
+            });
+    }
+
+    getStagesByVegetableList = vegetablesList => {
+        return fetch(`http://localhost:8090/stage/vegetables/stages`, {
+            method: 'POST',
+            headers: this.getHeaders(),
+            body: JSON.stringify(vegetablesList),
+        })
+            .then(response => handleError(response))
+            .then(response => response.json())
             .catch(err => {
                 console.warn("Caught error while trying to create stage. ", err);
                 return Promise.reject(err);

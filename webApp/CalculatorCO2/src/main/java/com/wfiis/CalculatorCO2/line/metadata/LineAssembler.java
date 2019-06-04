@@ -29,7 +29,8 @@ public class LineAssembler {
     public LineCreateModel getCreateModelFromEntity(Line line) {
         return new LineCreateModel(
                 line.getName(),
-                stageAssembler.getModelsFromEntityList(line.getStages())
+                stageAssembler.getModelsFromEntityList(line.getStages()),
+                line.getStagesOrder()
         );
     }
 
@@ -45,6 +46,7 @@ public class LineAssembler {
         return new LineModel(
                 line.getName(),
                 stageAssembler.getModelsFromEntityList(line.getStages()),
+                line.getStagesOrder(),
                 line.getId()
         );
     }
@@ -61,7 +63,8 @@ public class LineAssembler {
                 false,
                 false,
                 company,
-                stages
+                stages,
+                lineCreateModel.getStagesOrder()
         );
     }
 }

@@ -10,11 +10,24 @@ import EditStageForm from './components/editStageForm.component'
 import AddStageForm from './components/addStageForm.component'
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import { Carousel } from 'react-responsive-carousel';
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 import { BorderColor, Visibility, DeleteForever, GroupWork } from '@material-ui/icons';
 
-
+const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1
+    }
+  };
 
 class ViewStageContainer extends Component {
     constructor() {
@@ -104,6 +117,7 @@ class ViewStageContainer extends Component {
             <React.Fragment>
                 <ViewStage id={item.id} full_info={false}></ViewStage>
                 <br />
+                <div className="carousel-button">
                 <Fab 
                     color="secondary"
                     aria-label="Delete" 
@@ -122,6 +136,7 @@ class ViewStageContainer extends Component {
                     onClick= {() => this.onClickStage_show(item.id)}
                 ><Visibility />
                 </Fab>
+                </div>
                 <br></br>
 
             </React.Fragment>
@@ -131,7 +146,12 @@ class ViewStageContainer extends Component {
     viewDialogs = () => {
         return (
             <React.Fragment>
-                <Dialog open={this.state.dialog_edit} onClose={this.onCloseDialog} aria-labelledby="dialog-edit-stage">
+                <Dialog 
+                open={this.state.dialog_edit} 
+                onClose={this.onCloseDialog} 
+                aria-labelledby="dialog-edit-stage" 
+                className="dialog"
+                >
                 <DialogTitle id="dialog-edit-stage dialog-header">Edytuj etap</DialogTitle>
                 <DialogContent>
                     <EditStageForm id={this.state.activeStageId} onSubmit={stageModel => this.onEditStage(stageModel)} errorMessage={this.state.error} />
@@ -144,7 +164,13 @@ class ViewStageContainer extends Component {
             </Dialog>
 
 
-            <Dialog open={this.state.dialog_create} onClose={this.onCloseDialog} aria-labelledby="dialog-create-stage" fullScreen={true}>
+            <Dialog 
+            open={this.state.dialog_create} 
+            onClose={this.onCloseDialog} 
+            aria-labelledby="dialog-create-stage" 
+            className="dialog"
+            fullScreen={true}
+            >
                 <DialogTitle id="dialog-create-stage dialog-header">Nowy etap</DialogTitle>
                 <DialogContent>
                     <AddStageForm onSubmit={satgeModel => this.onCreateStage(satgeModel)} errorMessage={this.state.error} />
@@ -157,16 +183,21 @@ class ViewStageContainer extends Component {
             </Dialog>
 
 
-            <Dialog open={this.state.dialog_delete} onClose={this.onCloseDialog} aria-labelledby="dialog-delete-stage">
+            <Dialog 
+            open={this.state.dialog_delete} 
+            onClose={this.onCloseDialog} 
+            aria-labelledby="dialog-delete-stage" 
+            className="dialog delete"
+            >
                 <DialogTitle id="dialog-delete-stage dialog-header">Usuń etap</DialogTitle>
                 <DialogContent>
                     Czy na pewno chcesz trwale usunąć etap: 
                     <b><ViewStage id={this.state.activeStageId} full_info={false}></ViewStage></b>
+                </DialogContent>
+                <DialogActions>
                     <Button onClick={() => this.onDeleteStage(this.state.activeStageId)} color="secondary">
                     Tak, usuń wybrany etap
                     </Button>
-                </DialogContent>
-                <DialogActions>
                     <Button onClick={this.onCloseDialog} color="primary">
                     Anuluj
                     </Button>
@@ -175,7 +206,7 @@ class ViewStageContainer extends Component {
 
 
 
-            <Dialog open={this.state.dialog_show} onClose={this.onCloseDialog} aria-labelledby="dialog-show-stage">
+            <Dialog open={this.state.dialog_show} onClose={this.onCloseDialog} aria-labelledby="dialog-show-stage" className="dialog">
                 <DialogContent>
                     <ViewStage id={this.state.activeStageId} full_info={true}></ViewStage>
                 </DialogContent>
@@ -208,11 +239,16 @@ class ViewStageContainer extends Component {
             <h3 class="elements-type"> Etapy należące do firmy:</h3>
             <br></br>
             <Carousel 
-                showThumbs={false}
-                showIndicators={false} 
-                useKeyboardArrows={true}
-                emulateTouch 
-                infiniteLoop 
+                swipeable={false}
+                draggable={false}
+                responsive={responsive}
+                ssr={true}
+                slidesToSlide={2}
+                infinite={true}
+                keyBoardControl={true}
+                containerClass="carousel-container"
+                deviceType={this.props.deviceType}
+                itemClass="carousel-item-padding-40-px carousel-item"
                 >
                     {this.state.stageList.map(item => (
                         <div key={item.id} style={{background: 'white'}}>
@@ -224,11 +260,16 @@ class ViewStageContainer extends Component {
              <h3 class="elements-type">Etapy domyślne:</h3>
             <br></br>
             <Carousel 
-                showThumbs={false} 
-                showIndicators={false}
-                useKeyboardArrows={true}
-                emulateTouch 
-                infiniteLoop 
+                swipeable={false}
+                draggable={false}
+                responsive={responsive}
+                ssr={true}
+                slidesToSlide={2}
+                infinite={true}
+                keyBoardControl={true}
+                containerClass="carousel-container"
+                deviceType={this.props.deviceType}
+                itemClass="carousel-item-padding-40-px carousel-item"
                 >
                     {this.state.defaultStageList.map(item => (
                         <div key={item.id} style={{background: 'white'}}>
@@ -248,7 +289,7 @@ class ViewStageContainer extends Component {
         return (
             <div className="view-stage-container">
                 <div className="wrapper-content"> 
-                <div className="header-icon"><GroupWork  style={{ color: '#aa88cc', fontSize:"55px" }} fontSize="large" /></div>
+                <div className="header-icon"><GroupWork  style={{ color: '#66aaee', fontSize:"55px" }} fontSize="large" /></div>
                 <div className="header"> Dostępne etapy </div>
                     {this.companyStagesListRender()}
                 </div>

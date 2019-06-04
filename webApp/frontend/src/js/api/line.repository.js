@@ -69,7 +69,7 @@ export default class LineRepository {
             .catch(err => console.warn("Caught error while trying to get company lines. ", err));
     }
 
-    getVegetablesForLine = lineId => {
+    getLineVegetables = lineId => {
         return fetch(`http://localhost:8090/line/vegetables/${lineId}`, {
                 method: 'GET',
                 headers: this.getHeaders(),

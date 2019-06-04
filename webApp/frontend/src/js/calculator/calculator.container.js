@@ -5,7 +5,7 @@ import Calculator from './components/calculator.component';
 import { lineRepository } from '../factory/lineRepository.factory';
 import '../../css/calculator.css';
 import { handleError } from '../api/handleErrors.service';
-import { Build } from '@material-ui/icons';
+import { Exposure } from '@material-ui/icons';
 
 class CalculatorContainer extends Component {
     constructor(props) {
@@ -25,7 +25,7 @@ class CalculatorContainer extends Component {
 
         });
     }
-    
+
     getHeaders = () => {
         return {
             'Content-Type': 'application/json',
@@ -34,10 +34,35 @@ class CalculatorContainer extends Component {
     }
 
     onCalculate = data => {
-        console.log({ data });
-        return fetch('http://localhost:8090/calculcator', {
+        const mapData = {
+            ...data,
+            resources: Object.values(data.resources),
+            stages: [
+                ...Object.values(data.stages).map(stage => ({
+                    ...stage,  
+                    duration: stage.duration / 1000,
+                    leftovers: Object.keys(stage.leftovers).map(key => ({ ...stage.leftovers[key], id: key })),
+                    resources: Object.keys(stage.resources).map(key => ({ ...stage.resources[key], id: key })),
+                })),
+            ],
+        }
+        const m2 = {
+            ...data,
+            resources: Object.values(data.resources),
+            stages: [
+                ...Object.values(data.stages).map(stage => ({
+                    ...stage,  
+                    duration: stage.duration / 1000,
+                    // leftovers: Object.keys(stage.leftovers).map(key => ({ ...stage.leftovers[key], id: key })),
+                    // resources: Object.keys(stage.resources).map(key => ({ ...stage.resources[key], id: key })),
+                })),
+            ],
+        }
+
+        console.log({ m2, data });
+        return fetch('http://localhost:8090/calculator', {
             method: 'POST',
-            body: JSON.stringify(data),
+            body: JSON.stringify(m2),
             headers: this.getHeaders(),
         })
             .then(response => handleError(response))
@@ -54,7 +79,7 @@ class CalculatorContainer extends Component {
 
         return (
             <div className="wrapper-content">
-            <div className="header-icon"><Build  style={{ color: '#ffbb88', fontSize:"55px" }} fontSize="large" /></div>
+            <div className="header-icon"><Exposure  style={{ color: '#ffcc66', fontSize:"55px" }} fontSize="large" /></div>
             <div className="header"> Kalkulator śladu węglowego </div>
                 <Calculator
                     lines={lines}

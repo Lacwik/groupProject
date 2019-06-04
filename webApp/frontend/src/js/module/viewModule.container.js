@@ -11,10 +11,26 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import { BorderColor, Visibility, DeleteForever, Settings } from '@material-ui/icons';
-import { Carousel } from 'react-responsive-carousel';
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+// import { Carousel } from 'react-responsive-carousel';
+// import "react-responsive-carousel/lib/styles/carousel.min.css";
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
-
+const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1
+    }
+  };
+  
 class ViewModuleContainer extends Component {
     constructor() {
         super();
@@ -100,7 +116,7 @@ class ViewModuleContainer extends Component {
         return (
             <React.Fragment>
 
-            <Dialog open={this.state.dialog_edit} onClose={this.onCloseDialog} aria-labelledby="dialog-edit-module">
+            <Dialog open={this.state.dialog_edit} onClose={this.onCloseDialog} aria-labelledby="dialog-edit-module" className="dialog">
                 <DialogTitle id="dialog-edit-module dialog-header">Edytuj moduł</DialogTitle>
                 <DialogContent>
                     <EditModuleForm id={this.state.activeModuleId} onSubmit={moduleModel => this.onEditModule(moduleModel)} errorMessage={this.state.error} />
@@ -112,7 +128,7 @@ class ViewModuleContainer extends Component {
                 </DialogActions>
             </Dialog>
 
-            <Dialog open={this.state.dialog_create} onClose={this.onCloseDialog} aria-labelledby="dialog-create-module" fullScreen={true}>
+            <Dialog open={this.state.dialog_create} onClose={this.onCloseDialog} aria-labelledby="dialog-create-module" className="dialog">
                 <DialogTitle id="dialog-create-module dialog-header">Nowy moduł</DialogTitle>
                 <DialogContent>
                     <AddModuleForm onSubmit={moduleModel => this.onCreateModule(moduleModel)} errorMessage={this.state.error} />
@@ -124,23 +140,23 @@ class ViewModuleContainer extends Component {
                 </DialogActions>
             </Dialog>
 
-            <Dialog open={this.state.dialog_delete} onClose={this.onCloseDialog} aria-labelledby="dialog-delete-module">
+            <Dialog open={this.state.dialog_delete} onClose={this.onCloseDialog} aria-labelledby="dialog-delete-module" className="dialog delete" >  
                 <DialogTitle id="dialog-delete-module dialog-header">Usuń moduł</DialogTitle>
                 <DialogContent>
                     Czy na pewno chcesz trwale usunąć moduł: 
                     <b><ViewModule id={this.state.activeModuleId} full_info={false}></ViewModule></b>
+                </DialogContent>
+                <DialogActions>
                     <Button onClick={() => this.onDeleteModule(this.state.activeModuleId)} color="secondary">
                     Tak, usuń wybrany moduł
                     </Button>
-                </DialogContent>
-                <DialogActions>
                     <Button onClick={this.onCloseDialog} color="primary">
                     Anuluj
                     </Button>
                 </DialogActions>
             </Dialog>
 
-            <Dialog open={this.state.dialog_show} onClose={this.onCloseDialog} aria-labelledby="dialog-show-module">
+            <Dialog open={this.state.dialog_show} onClose={this.onCloseDialog} aria-labelledby="dialog-show-module" className="dialog">
                 <DialogContent>
                     <ViewModule id={this.state.activeModuleId} full_info={true}></ViewModule>
                 </DialogContent>
@@ -202,11 +218,16 @@ class ViewModuleContainer extends Component {
            <h3 class="elements-type"> Moduły należące do firmy:</h3>
             <br></br>
             <Carousel 
-                showThumbs={false}
-                showIndicators={false} 
-                useKeyboardArrows={true}
-                emulateTouch 
-                infiniteLoop 
+                swipeable={false}
+                draggable={false}
+                responsive={responsive}
+                ssr={true}
+                slidesToSlide={2}
+                infinite={true}
+                keyBoardControl={true}
+                containerClass="carousel-container"
+                deviceType={this.props.deviceType}
+                itemClass="carousel-item-padding-40-px carousel-item"
                 >
                     {this.state.moduleList.map(item => (
                         <div key={item.id} style={{background: 'white'}}>
@@ -215,14 +236,19 @@ class ViewModuleContainer extends Component {
                     ))}
             </Carousel>
             <p></p>
-            <h3 class="elements-type">Moduły domyślne:</h3>
+            <h3 className="elements-type">Moduły domyślne:</h3>
             <br></br>
             <Carousel 
-                showThumbs={false} 
-                showIndicators={false}
-                useKeyboardArrows={true}
-                emulateTouch 
-                infiniteLoop 
+                swipeable={false}
+                draggable={false}
+                responsive={responsive}
+                ssr={true}
+                slidesToSlide={2}
+                infinite={true}
+                keyBoardControl={true}
+                containerClass="carousel-container"
+                deviceType={this.props.deviceType}
+                itemClass="carousel-item-padding-40-px carousel-item"
                 >
                     {this.state.defaultModulesList.map(item => (
                         <div key={item.id} style={{background: 'white'}}>
@@ -241,7 +267,7 @@ class ViewModuleContainer extends Component {
         return (
             <div className="view-module-container">
             <div className="wrapper-content"> 
-            <div className="header-icon"><Settings  style={{ color: '#5588aa', fontSize:"55px" }} fontSize="large" /></div>
+            <div className="header-icon"><Settings  style={{ color: '#9988ff', fontSize:"55px" }} fontSize="large" /></div>
             <div className="header"> Dostępne moduły </div>
             <div className="columns">
                 

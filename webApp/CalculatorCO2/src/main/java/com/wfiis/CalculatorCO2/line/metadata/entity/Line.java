@@ -43,4 +43,6 @@ public class Line {
     )
     @JsonManagedReference
     private List<Stage> stages;
+
+    private String stagesOrder;
 }

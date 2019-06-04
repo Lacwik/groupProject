@@ -31,6 +31,12 @@ class ResourceFormStage extends Component {
         return gus.shortcut_unit;
     }
 
+    findResourceId = gusId => {
+        const gus = this.props.gusCategory.find(({ gus_id }) => gus_id === gusId);
+
+        return gus.id;
+    }
+
     renderResources() {
         return this.state.resources.map(resource => (
             <div className="resource-form-mini" key={resource.id} style={{ marginBottom: '.5em' }}>
@@ -38,7 +44,7 @@ class ResourceFormStage extends Component {
                     type="number"
                     required
                     label={`${resource.name} ${this.findUnitsForResource(resource.gus) ? `[${this.findUnitsForResource(resource.gus)}]` : ''}`}
-                    onChange={e => this.props.onChangeResource(this.props.stage.id, resource.id, { value: e.target.value, unit: this.findUnitsForResource(resource.gus)})}
+                    onChange={e => this.props.onChangeResource(this.props.stage.id, this.findResourceId(resource.gus), { value: e.target.value, unit: this.findUnitsForResource(resource.gus)})}
                 />
             </div>
         ));

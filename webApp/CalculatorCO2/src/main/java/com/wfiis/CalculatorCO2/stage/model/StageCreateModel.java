@@ -13,4 +13,5 @@ import java.util.List;
 public class StageCreateModel {
     private String name;
     private List<ModuleModel> modulesModels;
+    private  String modulesOrder;
 }

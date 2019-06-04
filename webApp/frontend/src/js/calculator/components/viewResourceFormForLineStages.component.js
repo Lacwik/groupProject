@@ -111,8 +111,8 @@ class ViewResourceFormForLineStages extends Component {
             <li key={stage.id}>
                 
                 <div className="form-stage">
+                <div className="icon"><GroupWork  style={{ color: '#66aaee', fontSize:"55px"}} fontSize="large" /></div>
                     <h2>Konfiguracja etapu: {stage.name.toUpperCase()}</h2>
-                    <div className="icon"><GroupWork  style={{ color: '#aa88cc', fontSize:"55px" }} fontSize="large" /></div>
                     <TimeFormStage
                         stage={stage}
                         onChangeDuration={(id, duration) => this.onChangeDuration(id, duration)}
