@@ -66,6 +66,7 @@ public class StageService {
 
         stage.setName(stageCreateModel.getName());
         stage.setModules(modules);
+        stage.setModulesOrder(stageCreateModel.getModulesOrder());
         return stageAssembler.getModelFromEntity(stage);
     }
 
