@@ -100,7 +100,7 @@ class ViewModuleContainer extends Component {
         return (
             <React.Fragment>
 
-            <Dialog open={this.state.dialog_edit} onClose={this.onCloseDialog} aria-labelledby="dialog-edit-module">
+            <Dialog open={this.state.dialog_edit} onClose={this.onCloseDialog} aria-labelledby="dialog-edit-module" className="dialog">
                 <DialogTitle id="dialog-edit-module dialog-header">Edytuj moduł</DialogTitle>
                 <DialogContent>
                     <EditModuleForm id={this.state.activeModuleId} onSubmit={moduleModel => this.onEditModule(moduleModel)} errorMessage={this.state.error} />
@@ -112,7 +112,7 @@ class ViewModuleContainer extends Component {
                 </DialogActions>
             </Dialog>
 
-            <Dialog open={this.state.dialog_create} onClose={this.onCloseDialog} aria-labelledby="dialog-create-module" fullScreen={true}>
+            <Dialog open={this.state.dialog_create} onClose={this.onCloseDialog} aria-labelledby="dialog-create-module" className="dialog">
                 <DialogTitle id="dialog-create-module dialog-header">Nowy moduł</DialogTitle>
                 <DialogContent>
                     <AddModuleForm onSubmit={moduleModel => this.onCreateModule(moduleModel)} errorMessage={this.state.error} />
@@ -124,23 +124,23 @@ class ViewModuleContainer extends Component {
                 </DialogActions>
             </Dialog>
 
-            <Dialog open={this.state.dialog_delete} onClose={this.onCloseDialog} aria-labelledby="dialog-delete-module">
+            <Dialog open={this.state.dialog_delete} onClose={this.onCloseDialog} aria-labelledby="dialog-delete-module" className="dialog delete" >  
                 <DialogTitle id="dialog-delete-module dialog-header">Usuń moduł</DialogTitle>
                 <DialogContent>
                     Czy na pewno chcesz trwale usunąć moduł: 
                     <b><ViewModule id={this.state.activeModuleId} full_info={false}></ViewModule></b>
+                </DialogContent>
+                <DialogActions>
                     <Button onClick={() => this.onDeleteModule(this.state.activeModuleId)} color="secondary">
                     Tak, usuń wybrany moduł
                     </Button>
-                </DialogContent>
-                <DialogActions>
                     <Button onClick={this.onCloseDialog} color="primary">
                     Anuluj
                     </Button>
                 </DialogActions>
             </Dialog>
 
-            <Dialog open={this.state.dialog_show} onClose={this.onCloseDialog} aria-labelledby="dialog-show-module">
+            <Dialog open={this.state.dialog_show} onClose={this.onCloseDialog} aria-labelledby="dialog-show-module" className="dialog">
                 <DialogContent>
                     <ViewModule id={this.state.activeModuleId} full_info={true}></ViewModule>
                 </DialogContent>
@@ -241,7 +241,7 @@ class ViewModuleContainer extends Component {
         return (
             <div className="view-module-container">
             <div className="wrapper-content"> 
-            <div className="header-icon"><Settings  style={{ color: '#5588aa', fontSize:"55px" }} fontSize="large" /></div>
+            <div className="header-icon"><Settings  style={{ color: '#9988ff', fontSize:"55px" }} fontSize="large" /></div>
             <div className="header"> Dostępne moduły </div>
             <div className="columns">
                 

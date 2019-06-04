@@ -89,7 +89,7 @@ class EditLineForm extends Component {
                     options={this.state.allStages}
                     onChange={this.onChangeStages}
                     placeholder="Wybierz etapy.."
-                    maxMenuHeight = {60}
+                    maxMenuHeight = {90}
                     />
                 <p></p>
                 
