@@ -51,7 +51,7 @@ class Calculator extends Component {
 
     fetchVegetablesForLine(lineId) {
         if (lineId) {
-            lineRepository.getVegetablesForLine(lineId)
+            lineRepository.getLineVegetables(lineId)
                 .then(vegetables => this.setState(state => ({ ...state, vegetables })));
         }
     }

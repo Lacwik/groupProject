@@ -33,24 +33,6 @@ class NavigationContainer extends Component {
         if (this.props.isUserLogged) {
             return (
                 <React.Fragment>
-                    <li key="nav-modules">
-                        <Link to="/module/display-module">
-                        <Settings style={{ color: '#9988ff' }} fontSize="large" />
-                        </Link>
-                        <Link to="/module/display-module">Moduły</Link>
-                    </li>
-                    <li key="nav-stages">
-                        <Link to="/stage/display-stage">
-                        <GroupWork style={{ color: '#66aaee' }} fontSize="large" />
-                        </Link>
-                        <Link to="/stage/display-stage">Etapy</Link>
-                    </li>
-                    <li key="nav-lines">
-                        <Link to="/line/display-line">
-                        <LinearScale style={{ color: '#aaddbb' }} fontSize="large" />
-                        </Link>
-                        <Link to="/line/display-line">Linie</Link>
-                    </li>
                     <li key="nav-logout">
                         <Link to="/logout">
                         <ExitToApp style={{ color: '#fc5627' }} fontSize="large" />
@@ -96,7 +78,24 @@ class NavigationContainer extends Component {
     renderLinksIfLoggedAsMemberOfCompany() {
         if (this.isCurrentLoggedUserIsMemberOfCompany()) {
             return (
-                <React.Fragment>
+                <React.Fragment><li key="nav-modules">
+                <Link to="/module/display-module">
+                <Settings style={{ color: '#9988ff' }} fontSize="large" />
+                </Link>
+                <Link to="/module/display-module">Moduły</Link>
+            </li>
+            <li key="nav-stages">
+                <Link to="/stage/display-stage">
+                <GroupWork style={{ color: '#66aaee' }} fontSize="large" />
+                </Link>
+                <Link to="/stage/display-stage">Etapy</Link>
+            </li>
+            <li key="nav-lines">
+                <Link to="/line/display-line">
+                <LinearScale style={{ color: '#aaddbb' }} fontSize="large" />
+                </Link>
+                <Link to="/line/display-line">Linie</Link>
+            </li>
                     <li key="calculator">
                         <Link to="/calculator">
                         <Exposure style={{ color: '#ffcc66' }} fontSize="large" />

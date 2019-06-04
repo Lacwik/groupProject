@@ -4,7 +4,6 @@ import ResourceFormStage from './resourceFormStage.component';
 import LeftoverFormStage from './leftoverFormStage.component';
 import TimeFormStage from './timeFormStage.component';
 import moment from 'moment';
-import moment from 'moment';
 import {GroupWork } from '@material-ui/icons';
 
 
