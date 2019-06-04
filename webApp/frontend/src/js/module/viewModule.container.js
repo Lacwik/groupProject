@@ -223,7 +223,7 @@ class ViewModuleContainer extends Component {
                 responsive={responsive}
                 ssr={true}
                 slidesToSlide={2}
-                infinite={true}
+                infinite={this.state.moduleList.length<3 ? false:true}
                 keyBoardControl={true}
                 containerClass="carousel-container"
                 deviceType={this.props.deviceType}
@@ -244,7 +244,7 @@ class ViewModuleContainer extends Component {
                 responsive={responsive}
                 ssr={true}
                 slidesToSlide={2}
-                infinite={true}
+                infinite={this.state.defaultModulesList.length<3 ? false:true}
                 keyBoardControl={true}
                 containerClass="carousel-container"
                 deviceType={this.props.deviceType}
@@ -253,6 +253,7 @@ class ViewModuleContainer extends Component {
                     {this.state.defaultModulesList.map(item => (
                         <div key={item.id} style={{background: 'white'}}>
                             {this.viewModuleInCarousel(item)}
+                            
                         </div>
                     ))}
             </Carousel>
