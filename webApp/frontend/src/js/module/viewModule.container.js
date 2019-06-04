@@ -11,6 +11,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import { BorderColor, Visibility, DeleteForever, Settings } from '@material-ui/icons';
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 
 class ViewModuleContainer extends Component {
@@ -94,7 +96,7 @@ class ViewModuleContainer extends Component {
     }
 
 
-    companyModulesListRender() {
+    viewDialogs = () => {
         return (
             <React.Fragment>
 
@@ -110,7 +112,7 @@ class ViewModuleContainer extends Component {
                 </DialogActions>
             </Dialog>
 
-            <Dialog open={this.state.dialog_create} onClose={this.onCloseDialog} aria-labelledby="dialog-create-module">
+            <Dialog open={this.state.dialog_create} onClose={this.onCloseDialog} aria-labelledby="dialog-create-module" fullScreen={true}>
                 <DialogTitle id="dialog-create-module dialog-header">Nowy moduł</DialogTitle>
                 <DialogContent>
                     <AddModuleForm onSubmit={moduleModel => this.onCreateModule(moduleModel)} errorMessage={this.state.error} />
@@ -149,81 +151,89 @@ class ViewModuleContainer extends Component {
                 </DialogActions>
             </Dialog>
 
-            <table>
-                <thead>
-                    <tr>
-                        <td>
-                            <Fab 
-                                color="secondary" 
-                                aria-label="Add" 
-                                className="fab-module-head button add"
-                                onClick={() => this.onClickModule_create()}
-                            ><AddIcon />
-                            </Fab>
-                        </td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <ul>
-                                {this.state.moduleList.map(item => (
-                                    <li key={item.id}>
-                                        <ViewModule id={item.id} full_info={false}></ViewModule>
-                                        <br />
-                                        <Fab 
-                                            color="secondary"
-                                            aria-label="Delete" 
-                                            onClick= {() => this.onClickModule_delete(item.id)}
-                                        ><DeleteForever />
-                                        </Fab>
-                                        <Fab 
-                                            color="primary" 
-                                            aria-label="Edit" 
-                                            onClick= {() => this.onClickModule_edit(item.id)}
-                                        ><BorderColor />
-                                        </Fab>
-                                        <Fab 
-                                            color="primary" 
-                                            aria-label="Show" 
-                                            onClick= {() => this.onClickModule_show(item.id)}
-                                        ><Visibility />
-                                        </Fab>
-                                    </li>
-                                ))}
-                            </ul>
-                        </td>
-                        <td>
-                            <ul>
-                                {this.state.defaultModulesList.map(item => (
-                                    <li key={item.id}>
-                                        <ViewModule id={item.id} full_info={false}></ViewModule>
-                                        <br />
-                                        <Fab 
-                                            color="secondary"
-                                            aria-label="Delete" 
-                                            onClick= {() => this.onClickModule_delete(item.id)}
-                                        ><DeleteForever />
-                                        </Fab>
-                                        <Fab 
-                                            color="primary" 
-                                            aria-label="Edit" 
-                                            onClick= {() => this.onClickModule_edit(item.id)}
-                                        ><BorderColor />
-                                        </Fab>
-                                        <Fab 
-                                            color="primary" 
-                                            aria-label="Show" 
-                                            onClick= {() => this.onClickModule_show(item.id)}
-                                        ><Visibility />
-                                        </Fab>
-                                    </li>
-                                ))}
-                            </ul>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            </React.Fragment>
+        )
+    }
+
+    viewModuleInCarousel = (item) => {
+        return (
+            <React.Fragment>
+                <ViewModule id={item.id} full_info={false}></ViewModule>
+                <br />
+                <Fab 
+                    color="secondary"
+                    aria-label="Delete" 
+                    onClick= {() => this.onClickModule_delete(item.id)}
+                ><DeleteForever />
+                </Fab>
+                <Fab 
+                    color="primary" 
+                    aria-label="Edit" 
+                    onClick= {() => this.onClickModule_edit(item.id)}
+                ><BorderColor />
+                </Fab>
+                <Fab 
+                    color="primary" 
+                    aria-label="Show" 
+                    onClick= {() => this.onClickModule_show(item.id)}
+                ><Visibility />
+                </Fab>
+                <br></br>
+
+            </React.Fragment>
+        )
+    }
+
+
+    companyModulesListRender() {
+        return (
+            <React.Fragment>
+
+            {this.viewDialogs()}
+
+            <Fab 
+                color="secondary" 
+                aria-label="Add" 
+                className="fab-module-head button add"
+                onClick={() => this.onClickModule_create()}
+            ><AddIcon />
+            </Fab>
+            <p></p>
+
+            moduły należące do firmy:
+            <br></br>
+            <Carousel 
+                showThumbs={false}
+                showIndicators={false} 
+                useKeyboardArrows={true}
+                emulateTouch 
+                infiniteLoop 
+                >
+                    {this.state.moduleList.map(item => (
+                        <div key={item.id} style={{background: 'white'}}>
+                            {this.viewModuleInCarousel(item)}
+                        </div>
+                    ))}
+            </Carousel>
+            <p></p>
+
+            moduły domyślne:
+            <br></br>
+            <Carousel 
+                showThumbs={false} 
+                showIndicators={false}
+                useKeyboardArrows={true}
+                emulateTouch 
+                infiniteLoop 
+                >
+                    {this.state.defaultModulesList.map(item => (
+                        <div key={item.id} style={{background: 'white'}}>
+                            {this.viewModuleInCarousel(item)}
+                        </div>
+                    ))}
+            </Carousel>
+            <p></p>
+            
             </React.Fragment>
         );
       }
@@ -236,8 +246,9 @@ class ViewModuleContainer extends Component {
             <div className="header-icon"><Settings  style={{ color: '#5588aa', fontSize:"55px" }} fontSize="large" /></div>
             <div className="header"> Dostępne moduły </div>
             <div className="columns">
-                {this.companyModulesListRender()}
+                
             </div>
+            {this.companyModulesListRender()}
             </div>
         </div>
         );

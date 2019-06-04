@@ -4,8 +4,10 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import { moduleRepository } from '../../factory/moduleRepository.factory';
+import { vegetableRepository } from '../../factory/vegetable.factory';
 import Select from 'react-select'
 import makeAnimated from 'react-select/lib/animated';
+import { stageRepository } from '../../factory/stageRepository.factory';
 
 
 class AddStageForm extends Component {
@@ -15,20 +17,25 @@ class AddStageForm extends Component {
         this.state = {
             name: '',
             modulesModels: [],
+            avaliableModules: [],
             allModules: [],
+            allVegetables: [],
+            selectedVegetables: [],
+            isVegetableSelected: false,
         };
     }
 
     componentDidMount(){
         Promise.all([
             moduleRepository.getCompanyModules(), 
-            moduleRepository.getDefaultModules()
+            moduleRepository.getDefaultModules(),
+            vegetableRepository.getAllVegetables(),
         ])
-        .then( ([companyModules, defaultModules]) => {
+        .then( ([companyModules, defaultModules, vegetables]) => {
             this.setState({
-                allModules: [...companyModules, ...defaultModules].map(v => ({ ...v, value: v.id, label: v.name }))
+                allModules: [...companyModules, ...defaultModules].map(v => ({ ...v, value: v.id, label: v.name })),
+                allVegetables: vegetables.map(v => ({ ...v, value: v.id, label: v.name }))
             });
-
         })
     }
 
@@ -47,6 +54,23 @@ class AddStageForm extends Component {
     }
 
 
+    onChangeVegetables = e => {
+        const selectedVegetables = e;
+
+        this.setState(state => ({ ...state, selectedVegetables }));
+        if (selectedVegetables.length !== 0) {
+            this.setState({
+                isVegetableSelected: true,
+                
+            })
+            
+        }
+        else {
+            this.setState({isVegetableSelected: false})
+        }
+    }
+
+
     onSubmit = () => {
         const { name, modulesModels } = this.state;
 
@@ -58,9 +82,32 @@ class AddStageForm extends Component {
 
         const {
             name, 
-            modulesModels
+            modulesModels,
+            avaliableModules,
+            selectedVegetables,
+            allVegetables,
+            isVegetableSelected,
         } = this.state;
 
+        let modulesByVegetable;
+        if (isVegetableSelected) {
+            modulesByVegetable = (
+                <React.Fragment>
+                    Dostępne moduły:
+                    <Select 
+                        closeMenuOnSelect={false}
+                        components={makeAnimated()}
+                        value={modulesModels}
+                        isMulti
+                        options={this.state.allModules}
+                        onChange={this.onChangeModules}
+                    />
+                    <p></p>
+                </React.Fragment>
+            )
+        }
+
+        //console.log({ props: this.props, state: this.state });
         return (
             <form id="stage-edit-form" className="stage-edit-form" onSubmit={e => e.preventDefault()}>
                 {this.props.errorMessage && <Paper className="error-box">{this.props.errorMessage}</Paper>}
@@ -77,15 +124,19 @@ class AddStageForm extends Component {
                 
                 <p></p>
 
+                Wybierz warzywo dla etapu:
+
                 <Select 
                     closeMenuOnSelect={false}
                     components={makeAnimated()}
-                    value={modulesModels}
+                    value={selectedVegetables}
                     isMulti
-                    options={this.state.allModules}
-                    onChange={this.onChangeModules}
+                    options={allVegetables}
+                    onChange={this.onChangeVegetables}
                     />
                 <p></p>
+
+                {modulesByVegetable}
                 
                 <Button 
                     variant="contained"

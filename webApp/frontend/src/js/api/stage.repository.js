@@ -101,4 +101,18 @@ export default class StageRepository {
             .then(response => response.json())
             .catch(err => console.warn("Caught error while trying to get line leftovers. ", err));
     }
+
+
+    getModulesByVegetableList = vegetablesList => {
+        return fetch(`http://localhost:8090/vegetables/modules`, {
+            method: 'GET',
+            headers: this.getHeaders(),
+            body: JSON.stringify(vegetablesList),
+        })
+            .then(response => handleError(response))
+            .catch(err => {
+                console.warn("Caught error while trying to create stage. ", err);
+                return Promise.reject(err);
+            });
+    }
 }
