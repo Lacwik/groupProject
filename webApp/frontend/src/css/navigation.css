@@ -1,5 +1,5 @@
 .navigation {
-    color: white;
+    color: #313030;
     display:flex;
     padding: 4em 0 2em 0;
     box-sizing: border-box;
@@ -16,10 +16,15 @@
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    text-align: center;
 }
 
 .navigation a {
     /* margin-left: .5em; */
     text-decoration: none;
-    color: white;
+    color: #313030;
+}
+
+.main-wrapper__sidebar {
+    background-color: #ffffff;
 }

@@ -159,6 +159,8 @@ class AddStageForm extends Component {
                         isMulti
                         options={this.state.allModules}
                         onChange={this.onChangeModules}
+                        placeholder = "Wybierz moduły.."
+                        maxMenuHeight = {60}
                     />
                     <br></br>
                     * kolejność dodawania ma znaczenie
@@ -194,7 +196,7 @@ class AddStageForm extends Component {
                     options={allVegetables}
                     onChange={this.onChangeVegetables}
                     placeholder="Wybierz warzywo.."
-                    maxMenuHeight = {150}
+                    maxMenuHeight = {100}
                     />
                 <p></p>
 

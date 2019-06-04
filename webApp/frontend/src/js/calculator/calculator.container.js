@@ -54,7 +54,7 @@ class CalculatorContainer extends Component {
 
         return (
             <div className="wrapper-content">
-            <div className="header-icon"><Build  style={{ color: '#ffbb88', fontSize:"55px" }} fontSize="large" /></div>
+            <div className="header-icon"><Build  style={{ color: '#ffcc66', fontSize:"55px" }} fontSize="large" /></div>
             <div className="header"> Kalkulator śladu węglowego </div>
                 <Calculator
                     lines={lines}

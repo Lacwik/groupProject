@@ -13,4 +13,5 @@ import java.util.List;
 public class LineCreateModel {
     private String name;
     private List<StageModel> stageModels;
+    private String stagesOrder;
 }

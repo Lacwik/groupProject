@@ -53,4 +53,6 @@ public class Stage {
     )
     @JsonManagedReference
     private List<Module> modules;
+
+    private String modulesOrder;
 }

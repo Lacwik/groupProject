@@ -131,7 +131,7 @@ class ViewStageContainer extends Component {
     viewDialogs = () => {
         return (
             <React.Fragment>
-                <Dialog open={this.state.dialog_edit} onClose={this.onCloseDialog} aria-labelledby="dialog-edit-stage">
+                <Dialog open={this.state.dialog_edit} onClose={this.onCloseDialog} aria-labelledby="dialog-edit-stage" className="dialog">
                 <DialogTitle id="dialog-edit-stage dialog-header">Edytuj etap</DialogTitle>
                 <DialogContent>
                     <EditStageForm id={this.state.activeStageId} onSubmit={stageModel => this.onEditStage(stageModel)} errorMessage={this.state.error} />
@@ -144,7 +144,7 @@ class ViewStageContainer extends Component {
             </Dialog>
 
 
-            <Dialog open={this.state.dialog_create} onClose={this.onCloseDialog} aria-labelledby="dialog-create-stage" fullScreen={true}>
+            <Dialog open={this.state.dialog_create} onClose={this.onCloseDialog} aria-labelledby="dialog-create-stage" className="dialog">
                 <DialogTitle id="dialog-create-stage dialog-header">Nowy etap</DialogTitle>
                 <DialogContent>
                     <AddStageForm onSubmit={satgeModel => this.onCreateStage(satgeModel)} errorMessage={this.state.error} />
@@ -157,16 +157,16 @@ class ViewStageContainer extends Component {
             </Dialog>
 
 
-            <Dialog open={this.state.dialog_delete} onClose={this.onCloseDialog} aria-labelledby="dialog-delete-stage">
+            <Dialog open={this.state.dialog_delete} onClose={this.onCloseDialog} aria-labelledby="dialog-delete-stage" className="dialog delete">
                 <DialogTitle id="dialog-delete-stage dialog-header">Usuń etap</DialogTitle>
                 <DialogContent>
                     Czy na pewno chcesz trwale usunąć etap: 
                     <b><ViewStage id={this.state.activeStageId} full_info={false}></ViewStage></b>
+                </DialogContent>
+                <DialogActions>
                     <Button onClick={() => this.onDeleteStage(this.state.activeStageId)} color="secondary">
                     Tak, usuń wybrany etap
                     </Button>
-                </DialogContent>
-                <DialogActions>
                     <Button onClick={this.onCloseDialog} color="primary">
                     Anuluj
                     </Button>
@@ -175,7 +175,7 @@ class ViewStageContainer extends Component {
 
 
 
-            <Dialog open={this.state.dialog_show} onClose={this.onCloseDialog} aria-labelledby="dialog-show-stage">
+            <Dialog open={this.state.dialog_show} onClose={this.onCloseDialog} aria-labelledby="dialog-show-stage" className="dialog">
                 <DialogContent>
                     <ViewStage id={this.state.activeStageId} full_info={true}></ViewStage>
                 </DialogContent>
@@ -248,7 +248,7 @@ class ViewStageContainer extends Component {
         return (
             <div className="view-stage-container">
                 <div className="wrapper-content"> 
-                <div className="header-icon"><GroupWork  style={{ color: '#aa88cc', fontSize:"55px" }} fontSize="large" /></div>
+                <div className="header-icon"><GroupWork  style={{ color: '#66aaee', fontSize:"55px" }} fontSize="large" /></div>
                 <div className="header"> Dostępne etapy </div>
                     {this.companyStagesListRender()}
                 </div>

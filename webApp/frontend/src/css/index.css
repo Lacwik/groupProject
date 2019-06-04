@@ -9,6 +9,11 @@ nnpm startbody {
   background-color: #e8eef4;
 }
 
+body {
+  color: #393939;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -27,6 +32,7 @@ ul .items {
 ul h1 {
   margin-top: 0px;
   text-transform: uppercase;
+  text-align: center;
 }
 
 .wrapper-content ul {
@@ -52,13 +58,7 @@ ul h1 {
   font-size: 30px;
   font-weight: 700;
   margin-bottom: 40px;
-}
-
-.dialogWindow {
-  width: 500px !important;
-}
-.dialogWindow .items{
-  margin-left: 35px;
+  letter-spacing: 1px;
 }
 
 .MuiRadio-colorSecondary-774.MuiRadio-checked-771 {
@@ -78,6 +78,7 @@ ul h1 {
   font-size: 20px;
   font-weight: 600;
 }
+
 .slide h1 {
   text-transform: uppercase;
   font-size: 20px;
@@ -90,11 +91,30 @@ ul h1 {
 
 .view-elements-button {
   margin: 5px !important;
+  border: none !important;
 }
+
 .elements {
   text-transform: uppercase;
 }
 
 .form-stage .icon {
   float: right;
+}
+
+.view-icon {
+padding-top: 25px;
+}
+
+/* .MuiButton-sizeSmall-792{
+  border: none !important;
+}   */
+
+.MuiDialog-paperWidthSm-18 {
+  min-width: 360px;
+  min-height: 400px;
+}
+
+.dialog.delete .MuiDialog-paperWidthSm-18{
+  min-height: 220px !important;
 }

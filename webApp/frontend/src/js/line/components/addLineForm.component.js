@@ -85,7 +85,7 @@ class CreateLineForm extends Component {
                     options={this.state.allStages}
                     onChange={this.onChangeStages}
                     placeholder="Wybierz etapy.."
-                    maxMenuHeight = {150}
+                    maxMenuHeight = {90}
                     />
                 <p></p>
                 
