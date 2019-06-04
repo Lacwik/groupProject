@@ -152,7 +152,7 @@ class EditModuleForm extends Component {
                     options={this.state.allLeftovers}
                     onChange={this.onChangeLeftovers}
                     placeholder="Wybierz pozostałości.."
-                    maxMenuHeight = {60}
+                    maxMenuHeight = {65}
                     />
                 <p></p>
                 <Button 

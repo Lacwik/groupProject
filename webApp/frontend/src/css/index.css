@@ -16,6 +16,7 @@ code {
 
 ul {
   list-style-type: none;
+  display: inline-grid;
 }
 
 .button.delete {
@@ -47,9 +48,9 @@ ul {
 .dialogWindow .items{
   margin-left: 35px;
 }
-.columns {
+/* .columns {
   column-count: 2;
-}
+} */
 
 ul h1 {
   margin-top: 0px;
@@ -73,7 +74,14 @@ ul h1 {
   font-size: 20px;
   font-weight: 600;
 }
+.MuiDialog-paperWidthSm-18 {
+    min-width: 600px;
 
-.dialog {
-  min-width: 800px !important;
+}
+/* #view-list {
+  list-style: none;
+  display: inline-grid;
+} */
+.items {
+  float: right;
 }
