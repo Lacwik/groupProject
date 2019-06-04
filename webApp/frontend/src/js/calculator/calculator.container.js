@@ -5,7 +5,7 @@ import Calculator from './components/calculator.component';
 import { lineRepository } from '../factory/lineRepository.factory';
 import '../../css/calculator.css';
 import { handleError } from '../api/handleErrors.service';
-import { Build } from '@material-ui/icons';
+import { Exposure } from '@material-ui/icons';
 
 class CalculatorContainer extends Component {
     constructor(props) {
@@ -54,7 +54,7 @@ class CalculatorContainer extends Component {
 
         return (
             <div className="wrapper-content">
-            <div className="header-icon"><Build  style={{ color: '#ffcc66', fontSize:"55px" }} fontSize="large" /></div>
+            <div className="header-icon"><Exposure  style={{ color: '#ffcc66', fontSize:"55px" }} fontSize="large" /></div>
             <div className="header"> Kalkulator śladu węglowego </div>
                 <Calculator
                     lines={lines}

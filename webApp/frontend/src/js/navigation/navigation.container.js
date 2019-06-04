@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Home, GroupAdd, AccountBox, ExitToApp, List, Add, Settings, GroupWork, LinearScale, Build } from '@material-ui/icons';
+import { Home, GroupAdd, AccountBox, ExitToApp, List, Add, Settings, GroupWork, LinearScale, Build, Exposure } from '@material-ui/icons';
 import '../../css/navigation.css';
 import { APPLICATION_ROLES } from '../constants/applicationRoles.constants';
 import { COMPANY_ROLES } from '../constants/companyRoles.constants';
@@ -20,7 +20,7 @@ class NavigationContainer extends Component {
                     </li>
                     <li key="nav-login">
                         <Link to="/register">
-                        <GroupAdd style={{ color: '#9988ff' }} fontSize="large" />
+                        <GroupAdd style={{ color: '#87ff99' }} fontSize="large" />
                         </Link>
                         <Link to="/register">Zarejestruj się</Link>
                     </li>
@@ -52,7 +52,7 @@ class NavigationContainer extends Component {
                         <Link to="/line/display-line">Linie</Link>
                     </li>
                     <li key="nav-logout">
-                        <Link to="/line/display-line">
+                        <Link to="/logout">
                         <ExitToApp style={{ color: '#fc5627' }} fontSize="large" />
                         </Link>
                         <Link to="/logout">Wyloguj się</Link>
@@ -68,7 +68,7 @@ class NavigationContainer extends Component {
                 <React.Fragment>
                     <li key="nav-company-add-user">
                         <Link to="/company/add-member">
-                        <Add style={{ color: '#ff8866' }} fontSize="large" />
+                        <GroupAdd style={{ color: '#87ff99' }} fontSize="large" />
                         </Link>
                         <Link to="/company/add-member">Dodaj pracownika</Link>
                     </li>
@@ -99,7 +99,7 @@ class NavigationContainer extends Component {
                 <React.Fragment>
                     <li key="calculator">
                         <Link to="/calculator">
-                        <Build style={{ color: '#ffcc66' }} fontSize="large" />
+                        <Exposure style={{ color: '#ffcc66' }} fontSize="large" />
                         </Link>
                         <Link to="/calculator">Kalkulator</Link>
                     </li>
