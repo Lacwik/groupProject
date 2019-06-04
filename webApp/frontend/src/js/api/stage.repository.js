@@ -103,6 +103,17 @@ export default class StageRepository {
     }
 
 
+    getStageVegetables = stageId => {
+        return fetch(`http://localhost:8090/stage/vegetables/${stageId}`, {
+            method: 'GET',
+            headers: this.getHeaders(),
+        })
+            .then(response => handleError(response))
+            .then(response => response.json())
+            .catch(err => console.warn("Caught error while trying to get line vegetables. ", err));
+    }
+
+
     getModulesByVegetableList = vegetablesList => {
         return fetch(`http://localhost:8090/module/vegetables/modules`, {
             method: 'POST',

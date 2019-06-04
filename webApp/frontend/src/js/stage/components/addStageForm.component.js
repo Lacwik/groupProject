@@ -67,15 +67,6 @@ class AddStageForm extends Component {
 
     }
 
-    setModulesOrder = (value) => {
-        let order =  this.state.modulesOrder;
-        order += value.id.toString() + ';';
-        
-
-        this.setState({modulesOrder: order}) ;
-        
-    }
-
     onCloseDialog = () => {
         this.setState({dialog_show: false});
     }

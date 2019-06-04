@@ -15,8 +15,11 @@ class EditStageForm extends Component {
 
         this.state = {
             name: '',
+            modulesOrder: '',
             modulesModels: [],
             allModules: [],
+            avaliableModules: [],
+            stageVegetables: [],
         };
     }
 
@@ -24,15 +27,25 @@ class EditStageForm extends Component {
         Promise.all([
             stageRepository.getStageById(this.props.id),
             moduleRepository.getCompanyModules(), 
-            moduleRepository.getDefaultModules()
+            moduleRepository.getDefaultModules(),
+            stageRepository.getStageVegetables(this.props.id),
         ])
-        .then( ([stageModel, companyModules, defaultModules]) => {
+        .then( ([stageModel, companyModules, defaultModules, stageVegetables]) => {
             this.setState({
                 name: stageModel.name,
                 modulesModels: stageModel.modulesModels.map(v => ({ ...v, value: v.id, label: v.name })),
-                allModules: [...companyModules, ...defaultModules].map(v => ({ ...v, value: v.id, label: v.name }))
+                allModules: [...companyModules, ...defaultModules].map(v => ({ ...v, value: v.id, label: v.name })),
+                stageVegetables: stageVegetables,
             });
 
+        })
+    }
+
+    componentDidUpdate(){
+        Promise.all([
+            stageRepository.getModulesByVegetableList(this.state.stageVegetables),
+        ]).then( ([moduleResponse]) => {
+            this.setState({ avaliableModules: moduleResponse.map(v => ({ ...v, value: v.id, label: v.name }))})
         })
     }
 
@@ -48,13 +61,19 @@ class EditStageForm extends Component {
         const modulesModels = e;
 
         this.setState(state => ({ ...state, modulesModels }));
+        this.setState({modulesOrder: ''});
+        let order = '';
+        modulesModels.forEach(element => {
+            order = order + element.id.toString() + ';'; 
+        });
+        this.setState({modulesOrder: order});
     }
 
 
     onSubmit = () => {
-        const { name, modulesModels } = this.state;
+        const { name, modulesModels, modulesOrder } = this.state;
 
-        this.props.onSubmit({ name, modulesModels, id: this.props.id });
+        this.props.onSubmit({ name, modulesModels, modulesOrder, id: this.props.id });
     }
 
 
@@ -65,7 +84,7 @@ class EditStageForm extends Component {
             modulesModels
         } = this.state;
 
-        //({ props: this.props, state: this.state });
+        
         return (
             <form id="stage-edit-form" className="stage-edit-form" onSubmit={e => e.preventDefault()}>
                 {this.props.errorMessage && <Paper className="error-box">{this.props.errorMessage}</Paper>}
@@ -87,9 +106,9 @@ class EditStageForm extends Component {
                     components={makeAnimated()}
                     value={modulesModels}
                     isMulti
-                    options={this.state.allModules}
+                    options={this.state.avaliableModules}
                     onChange={this.onChangeModules}
-                    placeholder="Wybierz warzywo.."
+                    placeholder="Wybierz moduły.."
                     maxMenuHeight = {120}
                     />
                 <p></p>
