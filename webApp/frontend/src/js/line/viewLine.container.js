@@ -108,7 +108,7 @@ class ViewLineContainer extends Component {
     onClickLine_create = () => {
         this.setState({dialog_create: true});
     }
-
+    
     viewDialogs = () => {
         return(
             <React.Fragment>
@@ -221,12 +221,11 @@ class ViewLineContainer extends Component {
                 responsive={responsive}
                 ssr={true}
                 slidesToSlide={2}
-                infinite={true}
+                infinite={this.state.linesList.length<3 ? false:true}
                 keyBoardControl={true}
                 containerClass="carousel-container"
                 deviceType={this.props.deviceType}
                 itemClass="carousel-item-padding-40-px carousel-item"
-                
                 >
                     {this.state.linesList.map(item => (
                         <div key={item.id} style={{background: 'white'}}>
@@ -243,7 +242,7 @@ class ViewLineContainer extends Component {
                 responsive={responsive}
                 ssr={true}
                 slidesToSlide={2}
-                infinite={true}
+                infinite={this.state.defaultLinesList.length<3 ? false:true}
                 keyBoardControl={true}
                 containerClass="carousel-container"
                 deviceType={this.props.deviceType}

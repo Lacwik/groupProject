@@ -244,7 +244,7 @@ class ViewStageContainer extends Component {
                 responsive={responsive}
                 ssr={true}
                 slidesToSlide={2}
-                infinite={true}
+                infinite={this.state.stageList.length<3 ? false:true}
                 keyBoardControl={true}
                 containerClass="carousel-container"
                 deviceType={this.props.deviceType}
@@ -265,7 +265,7 @@ class ViewStageContainer extends Component {
                 responsive={responsive}
                 ssr={true}
                 slidesToSlide={2}
-                infinite={true}
+                infinite={this.state.defaultStageList.length<3 ? false:true}
                 keyBoardControl={true}
                 containerClass="carousel-container"
                 deviceType={this.props.deviceType}
