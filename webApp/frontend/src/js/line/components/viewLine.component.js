@@ -60,10 +60,12 @@ class ViewLine extends Component {
 
                     <li key="name-view-stages">
                         <b>{"Etapy:"}</b>
+                        <p></p>
                         <ul>
                             {stageModels.map(item => (
-                                <li key={item.id}>
+                                <li className="elements" key={item.id}>
                                     <Button 
+                                        className = "view-elements-button"
                                         variant="outlined" 
                                         color="primary" 
                                         size = "small"

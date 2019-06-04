@@ -71,7 +71,7 @@ class EditStageForm extends Component {
                 {this.props.errorMessage && <Paper className="error-box">{this.props.errorMessage}</Paper>}
 
                 <TextField
-                    label="Name"
+                    label="Nazwa"
                     value={name}
                     onChange={this.onChangeName}
                     type="text"
@@ -89,6 +89,8 @@ class EditStageForm extends Component {
                     isMulti
                     options={this.state.allModules}
                     onChange={this.onChangeModules}
+                    placeholder="Wybierz warzywo.."
+                    maxMenuHeight = {60}
                     />
                 <p></p>
                 
