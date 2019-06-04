@@ -112,9 +112,30 @@ padding-top: 25px;
 
 .MuiDialog-paperWidthSm-18 {
   min-width: 360px;
-  min-height: 400px;
+  min-height: 450px;
 }
 
 .dialog.delete .MuiDialog-paperWidthSm-18{
   min-height: 220px !important;
+}
+.carousel-container {
+  margin-top: 30px;
+}
+.carousel-container .carousel-item h1{
+  font-size: 12px !important;
+  text-align: center;
+}
+.react-multi-carousel-track {
+  text-align: center;
+}
+.carousel-item ul {
+  display: table-row;
+  text-align: center;
+}
+.carousel-item ul li {
+  display: table-cell;
+  height: 40px;
+  margin: 10px;
+  vertical-align: top;
+  width: 290px;
 }

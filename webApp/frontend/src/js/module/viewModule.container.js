@@ -11,10 +11,26 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import { BorderColor, Visibility, DeleteForever, Settings } from '@material-ui/icons';
-import { Carousel } from 'react-responsive-carousel';
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+// import { Carousel } from 'react-responsive-carousel';
+// import "react-responsive-carousel/lib/styles/carousel.min.css";
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
-
+const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1
+    }
+  };
+  
 class ViewModuleContainer extends Component {
     constructor() {
         super();
@@ -202,11 +218,16 @@ class ViewModuleContainer extends Component {
            <h3 class="elements-type"> Moduły należące do firmy:</h3>
             <br></br>
             <Carousel 
-                showThumbs={false}
-                showIndicators={false} 
-                useKeyboardArrows={true}
-                emulateTouch 
-                infiniteLoop 
+                swipeable={false}
+                draggable={false}
+                responsive={responsive}
+                ssr={true}
+                slidesToSlide={2}
+                infinite={true}
+                keyBoardControl={true}
+                containerClass="carousel-container"
+                deviceType={this.props.deviceType}
+                itemClass="carousel-item-padding-40-px carousel-item"
                 >
                     {this.state.moduleList.map(item => (
                         <div key={item.id} style={{background: 'white'}}>
@@ -218,11 +239,16 @@ class ViewModuleContainer extends Component {
             <h3 class="elements-type">Moduły domyślne:</h3>
             <br></br>
             <Carousel 
-                showThumbs={false} 
-                showIndicators={false}
-                useKeyboardArrows={true}
-                emulateTouch 
-                infiniteLoop 
+                swipeable={false}
+                draggable={false}
+                responsive={responsive}
+                ssr={true}
+                slidesToSlide={2}
+                infinite={true}
+                keyBoardControl={true}
+                containerClass="carousel-container"
+                deviceType={this.props.deviceType}
+                itemClass="carousel-item-padding-40-px carousel-item"
                 >
                     {this.state.defaultModulesList.map(item => (
                         <div key={item.id} style={{background: 'white'}}>
