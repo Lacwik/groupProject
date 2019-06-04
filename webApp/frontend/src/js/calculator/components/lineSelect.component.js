@@ -12,7 +12,8 @@ class LineSelect extends Component {
             <Select
                 options={this.mapLinesToSelect()}
                 onChange={({ value }) => this.props.onChange(value)}
-                placeholder="Wybierz linię"
+                placeholder="Wybierz linię.."
+                maxMenuHeight = {150}
                 noOptionsMessage={() => 'Brak dostępnych linii'}
             />
         );

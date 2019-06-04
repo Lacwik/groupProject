@@ -199,8 +199,7 @@ class ViewModuleContainer extends Component {
             ><AddIcon />
             </Fab>
             <p></p>
-
-            moduły należące do firmy:
+           <h3 class="elements-type"> Moduły należące do firmy:</h3>
             <br></br>
             <Carousel 
                 showThumbs={false}
@@ -216,8 +215,7 @@ class ViewModuleContainer extends Component {
                     ))}
             </Carousel>
             <p></p>
-
-            moduły domyślne:
+            <h3 class="elements-type">Moduły domyślne:</h3>
             <br></br>
             <Carousel 
                 showThumbs={false} 

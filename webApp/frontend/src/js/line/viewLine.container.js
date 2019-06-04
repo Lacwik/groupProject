@@ -193,13 +193,12 @@ class ViewLineContainer extends Component {
             <Fab 
                 color="secondary" 
                 aria-label="Add" 
-                className="fab-line-head" 
+                className="fab-line-head button add" 
                 onClick={() => this.onClickLine_create()}
             ><AddIcon />
             </Fab>
             <p></p>
-
-            linie należące do firmy:
+            <h3 class="elements-type">Linie należące do firmy:</h3>
             <br></br>
             <Carousel 
                 showThumbs={false}
@@ -215,8 +214,7 @@ class ViewLineContainer extends Component {
                     ))}
             </Carousel>
             <p></p>
-
-            linie domyślne:
+            <h3 class="elements-type">Linie domyślne:</h3>
             <br></br>
             <Carousel 
                 showThumbs={false} 
@@ -241,8 +239,8 @@ class ViewLineContainer extends Component {
         return (
             <div className="view-line-container">
                 <div className="wrapper-content"> 
-                <LinearScale style={{ color: '#232323', fontSize:"55px", border:"#69b4ff", background:"#69b4ff", borderRadius:"3px" }} fontSize="large" />
-                <h1 className="header"> Dostępne linie </h1>
+                <div className="header-icon"><LinearScale  style={{ color: '#77ccdd', fontSize:"55px" }} fontSize="large" /></div>
+                <div className="header"> Dostępne linie </div>
                     {this.companyLinesListRender()}
                 </div>
             </div>

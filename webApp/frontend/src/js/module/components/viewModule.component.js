@@ -33,7 +33,7 @@ class ViewModule extends Component {
             fullInfo = (
                 <React.Fragment>
                     <li key="name-view-power">
-                        <b>Moc:</b> {power}
+                        <b>Moc:</b> <label className="items">{power} </label>
                     </li> 
                     <li key="name-view-vegetables view-list">
                     

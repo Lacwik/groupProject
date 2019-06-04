@@ -84,6 +84,8 @@ class CreateLineForm extends Component {
                     isMulti
                     options={this.state.allStages}
                     onChange={this.onChangeStages}
+                    placeholder="Wybierz etapy.."
+                    maxMenuHeight = {150}
                     />
                 <p></p>
                 

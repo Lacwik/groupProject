@@ -70,7 +70,7 @@ class EditLineForm extends Component {
                 {this.props.errorMessage && <Paper className="error-box">{this.props.errorMessage}</Paper>}
 
                 <TextField
-                    label="Name"
+                    label="Nazwa"
                     value={name}
                     onChange={this.onChangeName}
                     type="text"
@@ -88,6 +88,8 @@ class EditLineForm extends Component {
                     isMulti
                     options={this.state.allStages}
                     onChange={this.onChangeStages}
+                    placeholder="Wybierz etapy.."
+                    maxMenuHeight = {60}
                     />
                 <p></p>
                 
