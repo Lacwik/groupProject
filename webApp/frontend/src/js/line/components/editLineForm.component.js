@@ -15,8 +15,11 @@ class EditLineForm extends Component {
 
         this.state = {
             name: '',
+            stagesOrder: '',
             stageModels: [],
             allStages: [],
+            lineVegetables: [],
+            avaliableStages: [],
         };
     }
 
@@ -24,15 +27,25 @@ class EditLineForm extends Component {
         Promise.all([
             stageRepository.getCompanyStages(), 
             stageRepository.getDefaultStages(), 
-            lineRepository.getLineById(this.props.id)
+            lineRepository.getLineById(this.props.id),
+            lineRepository.getLineVegetables(this.props.id),
         ])
-        .then( ([companyStages, defaultStages, lineModel]) => {
+        .then( ([companyStages, defaultStages, lineModel, vegetables]) => {
             this.setState({
                 allStages: [...companyStages, ...defaultStages].map(v => ({ ...v, value: v.id, label: v.name })),
                 name: lineModel.name,
                 stageModels: lineModel.stageModels.map(v => ({ ...v, value: v.id, label: v.name })),
+                lineVegetables: vegetables,
             });
 
+        })
+    }
+
+    componentDidUpdate(){
+        Promise.all([
+            stageRepository.getStagesByVegetableList(this.state.lineVegetables),
+        ]).then( ([stagesResponse]) => {
+            this.setState({ avaliableStages: stagesResponse.map(v => ({ ...v, value: v.id, label: v.name }))})
         })
     }
 
@@ -48,13 +61,19 @@ class EditLineForm extends Component {
         const stageModels = e;
 
         this.setState(state => ({ ...state, stageModels }));
+        this.setState({stagesOrder: ''});
+        let order = '';
+        stageModels.forEach(element => {
+            order = order + element.id.toString() + ';'; 
+        });
+        this.setState({stagesOrder: order});
     }
 
 
     onSubmit = () => {
-        const { name, stageModels } = this.state;
+        const { name, stageModels, stagesOrder } = this.state;
 
-        this.props.onSubmit({ name, stageModels, id: this.props.id });
+        this.props.onSubmit({ name, stageModels, stagesOrder, id: this.props.id });
     }
 
 
