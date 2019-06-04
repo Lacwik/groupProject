@@ -10,8 +10,24 @@ import EditStageForm from './components/editStageForm.component'
 import AddStageForm from './components/addStageForm.component'
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 import { BorderColor, Visibility, DeleteForever, GroupWork } from '@material-ui/icons';
 
+const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1
+    }
+  };
 
 class ViewStageContainer extends Component {
     constructor() {
@@ -92,16 +108,51 @@ class ViewStageContainer extends Component {
         this.setState({dialog_delete: true});
     }
 
-    onClickStage_create = () => {;
+    onClickStage_create = () => {
         this.setState({dialog_create: true});
     }
 
-
-    companyStagesListRender() {
+    viewStageInCarousel = (item) => {
         return (
             <React.Fragment>
+                <ViewStage id={item.id} full_info={false}></ViewStage>
+                <br />
+                <div className="carousel-button">
+                <Fab 
+                    color="secondary"
+                    aria-label="Delete" 
+                    onClick= {() => this.onClickStage_delete(item.id)}
+                ><DeleteForever />
+                </Fab>
+                <Fab 
+                    color="primary" 
+                    aria-label="Edit" 
+                    onClick= {() => this.onClickStage_edit(item.id)}
+                ><BorderColor />
+                </Fab>
+                <Fab 
+                    color="primary" 
+                    aria-label="Show" 
+                    onClick= {() => this.onClickStage_show(item.id)}
+                ><Visibility />
+                </Fab>
+                </div>
+                <br></br>
 
-            <Dialog open={this.state.dialog_edit} onClose={this.onCloseDialog} aria-labelledby="dialog-edit-stage">
+            </React.Fragment>
+        )
+    }
+
+    viewDialogs = () => {
+        return (
+            <React.Fragment>
+                <Dialog 
+                open={this.state.dialog_edit} 
+                onClose={this.onCloseDialog} 
+                aria-labelledby="dialog-edit-stage" 
+                className="dialog"
+                >
+                <DialogTitle id="dialog-edit-stage dialog-header">Edytuj etap</DialogTitle>
                 <DialogContent>
                     <EditStageForm id={this.state.activeStageId} onSubmit={stageModel => this.onEditStage(stageModel)} errorMessage={this.state.error} />
                 </DialogContent>
@@ -113,8 +164,14 @@ class ViewStageContainer extends Component {
             </Dialog>
 
 
-            <Dialog open={this.state.dialog_create} onClose={this.onCloseDialog} aria-labelledby="dialog-create-stage">
-                <DialogTitle id="dialog-create-satge">Nowy etap</DialogTitle>
+            <Dialog 
+            open={this.state.dialog_create} 
+            onClose={this.onCloseDialog} 
+            aria-labelledby="dialog-create-stage" 
+            className="dialog"
+            fullScreen={true}
+            >
+                <DialogTitle id="dialog-create-stage dialog-header">Nowy etap</DialogTitle>
                 <DialogContent>
                     <AddStageForm onSubmit={satgeModel => this.onCreateStage(satgeModel)} errorMessage={this.state.error} />
                 </DialogContent>
@@ -126,16 +183,21 @@ class ViewStageContainer extends Component {
             </Dialog>
 
 
-            <Dialog open={this.state.dialog_delete} onClose={this.onCloseDialog} aria-labelledby="dialog-delete-stage">
-                <DialogTitle id="dialog-delete-stage">Usuń etap</DialogTitle>
+            <Dialog 
+            open={this.state.dialog_delete} 
+            onClose={this.onCloseDialog} 
+            aria-labelledby="dialog-delete-stage" 
+            className="dialog delete"
+            >
+                <DialogTitle id="dialog-delete-stage dialog-header">Usuń etap</DialogTitle>
                 <DialogContent>
                     Czy na pewno chcesz trwale usunąć etap: 
                     <b><ViewStage id={this.state.activeStageId} full_info={false}></ViewStage></b>
+                </DialogContent>
+                <DialogActions>
                     <Button onClick={() => this.onDeleteStage(this.state.activeStageId)} color="secondary">
                     Tak, usuń wybrany etap
                     </Button>
-                </DialogContent>
-                <DialogActions>
                     <Button onClick={this.onCloseDialog} color="primary">
                     Anuluj
                     </Button>
@@ -144,7 +206,7 @@ class ViewStageContainer extends Component {
 
 
 
-            <Dialog open={this.state.dialog_show} onClose={this.onCloseDialog} aria-labelledby="dialog-show-stage">
+            <Dialog open={this.state.dialog_show} onClose={this.onCloseDialog} aria-labelledby="dialog-show-stage" className="dialog">
                 <DialogContent>
                     <ViewStage id={this.state.activeStageId} full_info={true}></ViewStage>
                 </DialogContent>
@@ -155,81 +217,69 @@ class ViewStageContainer extends Component {
                 </DialogActions>
             </Dialog>
 
-            <table>
-                <thead>
-                    <tr>
-                        <td>
-                            <Fab 
-                                color="secondary" 
-                                aria-label="Add" 
-                                className="fab-stage-head" 
-                                onClick={() => this.onClickStage_create()}
-                            ><AddIcon />
-                            </Fab>
-                        </td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <ul>
-                                {this.state.stageList.map(item => (
-                                    <li key={item.id}>
-                                        <ViewStage id={item.id} full_info={false}></ViewStage>
-                                        <br />
-                                        <Fab 
-                                            color="secondary"
-                                            aria-label="Delete" 
-                                            onClick= {() => this.onClickStage_delete(item.id)}
-                                        ><DeleteForever />
-                                        </Fab>
-                                        <Fab 
-                                            color="primary" 
-                                            aria-label="Edit" 
-                                            onClick= {() => this.onClickStage_edit(item.id)}
-                                        ><BorderColor />
-                                        </Fab>
-                                        <Fab 
-                                            color="primary" 
-                                            aria-label="Show" 
-                                            onClick= {() => this.onClickStage_show(item.id)}
-                                        ><Visibility />
-                                        </Fab>
-                                    </li>
-                                ))}
-                            </ul>
-                        </td>
-                        <td>
-                            <ul>
-                                {this.state.defaultStageList.map(item => (
-                                    <li key={item.id}>
-                                        <ViewStage id={item.id} full_info={false}></ViewStage>
-                                        <br />
-                                        <Fab 
-                                            color="secondary"
-                                            aria-label="Delete" 
-                                            onClick= {() => this.onClickStage_delete(item.id)}
-                                        ><DeleteForever />
-                                        </Fab>
-                                        <Fab 
-                                            color="primary" 
-                                            aria-label="Edit" 
-                                            onClick= {() => this.onClickStage_edit(item.id)}
-                                        ><BorderColor />
-                                        </Fab>
-                                        <Fab 
-                                            color="primary" 
-                                            aria-label="Show" 
-                                            onClick= {() => this.onClickStage_show(item.id)}
-                                        ><Visibility />
-                                        </Fab>
-                                    </li>
-                                ))}
-                            </ul>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            </React.Fragment>
+        )
+    }
+
+
+    companyStagesListRender() {
+        return (
+            <React.Fragment>
+
+            {this.viewDialogs()}
+
+            <Fab 
+                color="secondary" 
+                aria-label="Add" 
+                className="fab-stage-head button add" 
+                onClick={() => this.onClickStage_create()}
+            ><AddIcon />
+            </Fab>
+            <p></p>
+            <h3 class="elements-type"> Etapy należące do firmy:</h3>
+            <br></br>
+            <Carousel 
+                swipeable={false}
+                draggable={false}
+                responsive={responsive}
+                ssr={true}
+                slidesToSlide={2}
+                infinite={true}
+                keyBoardControl={true}
+                containerClass="carousel-container"
+                deviceType={this.props.deviceType}
+                itemClass="carousel-item-padding-40-px carousel-item"
+                >
+                    {this.state.stageList.map(item => (
+                        <div key={item.id} style={{background: 'white'}}>
+                            {this.viewStageInCarousel(item)}
+                        </div>
+                    ))}
+            </Carousel>
+            <p></p>
+             <h3 class="elements-type">Etapy domyślne:</h3>
+            <br></br>
+            <Carousel 
+                swipeable={false}
+                draggable={false}
+                responsive={responsive}
+                ssr={true}
+                slidesToSlide={2}
+                infinite={true}
+                keyBoardControl={true}
+                containerClass="carousel-container"
+                deviceType={this.props.deviceType}
+                itemClass="carousel-item-padding-40-px carousel-item"
+                >
+                    {this.state.defaultStageList.map(item => (
+                        <div key={item.id} style={{background: 'white'}}>
+                            {this.viewStageInCarousel(item)}
+                        </div>
+                    ))}
+            </Carousel>
+            <p></p>
+
+
             </React.Fragment>
         );
       }
@@ -239,8 +289,8 @@ class ViewStageContainer extends Component {
         return (
             <div className="view-stage-container">
                 <div className="wrapper-content"> 
-                <GroupWork style={{ color: '#232323;', fontSize:"55px", border:"#69ff72", background:"#69ff72", borderRadius:"3px" }} fontSize="large" />
-                <h1 className="header"> Dostępne etapy </h1>
+                <div className="header-icon"><GroupWork  style={{ color: '#66aaee', fontSize:"55px" }} fontSize="large" /></div>
+                <div className="header"> Dostępne etapy </div>
                     {this.companyStagesListRender()}
                 </div>
             </div>

@@ -65,6 +65,7 @@ public class LineService {
 
         line.setName(lineCreateModel.getName());
         line.setStages(stages);
+        line.setStagesOrder(lineCreateModel.getStagesOrder());
         return lineAssembler.getModelFromEntity(line);
     }
 

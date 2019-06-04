@@ -139,8 +139,8 @@ class AddModuleForm extends Component {
                     isMulti
                     options={this.state.allLeftovers}
                     onChange={this.onChangeLeftovers}
-                    placeholder="Wybierz pozostałości.."
-                    maxMenuHeight = {60}
+                    placeholder="Wybierz rodzaj selekcji.."
+                    maxMenuHeight = {65}
                     />
                 <p></p>
                 <Button 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes, { any } from 'prop-types';
 import { moduleRepository } from '../../factory/moduleRepository.factory';
 import { connect } from 'react-redux';
+import { Settings } from '@material-ui/icons';
 
 class ViewModule extends Component {
     constructor(props) {
@@ -33,9 +34,9 @@ class ViewModule extends Component {
             fullInfo = (
                 <React.Fragment>
                     <li key="name-view-power">
-                        <b>Moc:</b> {power}
+                        <b>Moc:</b> <label className="items">{power} </label>
                     </li> 
-                    <li key="name-view-vegetables">
+                    <li key="name-view-vegetables view-list">
                     
                         <b>{"Warzywa:"}</b>
                         <ul>
@@ -46,7 +47,7 @@ class ViewModule extends Component {
                             ))}
                         </ul>
                     </li>
-                    <li key="name-view-resources">
+                    <li key="name-view-resources view-list">
                         <b>{"Zasoby:"}</b>
                         <ul>
                             {resources.map(item => (
@@ -56,7 +57,7 @@ class ViewModule extends Component {
                             ))}
                         </ul>
                     </li>
-                    <li key="name-view-leftovers">
+                    <li key="name-view-leftovers view-list">
                         <b>{"Odpady:"}</b>
                         <ul>
                             {leftovers.map(item => (

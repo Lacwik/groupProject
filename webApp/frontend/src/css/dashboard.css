@@ -16,9 +16,12 @@
 .dashboard-card__title {
     margin:0;
     padding:0;
+    text-align: center;
+
 }
 
 .dashboard-card__role {
     margin:0;
     padding:0;
+    text-align: center;
 }

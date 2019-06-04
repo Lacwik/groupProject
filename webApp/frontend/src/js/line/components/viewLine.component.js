@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import { ChevronRight } from '@material-ui/icons';
+import { ChevronRight, GroupWork } from '@material-ui/icons';
 
 class ViewLine extends Component {
     constructor(props) {
@@ -60,15 +60,17 @@ class ViewLine extends Component {
 
                     <li key="name-view-stages">
                         <b>{"Etapy:"}</b>
+                        <p></p>
                         <ul>
                             {stageModels.map(item => (
-                                <li key={item.id}>
+                                <li className="elements" key={item.id}>
                                     <Button 
+                                        className = "view-elements-button"
                                         variant="outlined" 
                                         color="primary" 
                                         size = "small"
                                         onClick={() => this.onClickStage_show(item.id)}
-                                    ><ChevronRight size="small" />
+                                    ><GroupWork style={{ color: '#66aaee' }} size="small" />
                                     </Button>
                                     {item.name}
                                 </li>

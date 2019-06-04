@@ -4,6 +4,9 @@ import ResourceFormStage from './resourceFormStage.component';
 import LeftoverFormStage from './leftoverFormStage.component';
 import TimeFormStage from './timeFormStage.component';
 import moment from 'moment';
+import moment from 'moment';
+import {GroupWork } from '@material-ui/icons';
+
 
 class ViewResourceFormForLineStages extends Component {
     static capitalizeFirstLetter = str => {
@@ -109,6 +112,7 @@ class ViewResourceFormForLineStages extends Component {
             <li key={stage.id}>
                 
                 <div className="form-stage">
+                <div className="icon"><GroupWork  style={{ color: '#66aaee', fontSize:"55px"}} fontSize="large" /></div>
                     <h2>Konfiguracja etapu: {stage.name.toUpperCase()}</h2>
                     <TimeFormStage
                         stage={stage}

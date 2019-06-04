@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import { ChevronRight } from '@material-ui/icons';
+import { ChevronRight, Settings } from '@material-ui/icons';
 
 class ViewStage extends Component {
     constructor(props) {
@@ -60,15 +60,18 @@ class ViewStage extends Component {
 
                     <li key="name-view-modules">
                         <b>{"Moduły:"}</b>
+                        <p></p>
                         <ul>
                             {modulesModels.map(item => (
-                                <li key={item.id}>
+                                <li className="elements" key={item.id}>
                                     <Button 
+                                        className = "view-elements-button"
                                         variant="outlined" 
                                         color="primary" 
                                         size = "small"
+                                        border = "none"
                                         onClick={() => this.onClickModule_show(item.id)}
-                                    ><ChevronRight size="small" />
+                                    ><Settings style={{ color: '#9988ff' }} size="small" />
                                     </Button>
                                     {item.name}
                                 </li>

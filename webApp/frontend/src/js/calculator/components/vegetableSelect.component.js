@@ -19,7 +19,8 @@ class VegetableSelect extends Component {
             <Select
                 options={this.mapVegetablesForSelect()}
                 onChange={({ value }) => this.props.onChange(value)}
-                placeholder="Wybierz warzywo"
+                placeholder="Wybierz warzywo.."
+                maxMenuHeight = {150}
                 noOptionsMessage={() => 'Brak dostępnych warzyw dla linii'}
             />
         );
