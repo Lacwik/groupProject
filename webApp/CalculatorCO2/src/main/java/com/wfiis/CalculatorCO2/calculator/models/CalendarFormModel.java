@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.Map;
+import java.util.List;
 
 @AllArgsConstructor
 @Setter
@@ -14,6 +14,6 @@ import java.util.Map;
 public class CalendarFormModel {
     private ObjectValueWithUnit material;
     private ObjectValueWithUnit product;
-    private Map<String, GusResource> resources;
-    private Map<String, CalendarStage> stages;
+    private List<GusResource> resources;
+    private List<CalculatorStage> stages;
 }

@@ -61,7 +61,7 @@ class AddStageForm extends Component {
         this.setState({modulesOrder: ''});
         let order = '';
         modulesModels.forEach(element => {
-            order = order + element.id.toString() + ';'; 
+            order = order + element.id.toString() + ';';
         });
         this.setState({modulesOrder: order});
 
@@ -88,7 +88,7 @@ class AddStageForm extends Component {
             ]).then( ([modulesResponse]) => {
                 this.setState({avaliableModules: modulesResponse.map(v => ({ ...v, value: v.id, label: v.name })) });
             })
-            
+
         }
         else {
             this.setState({isVegetableSelected: false})
@@ -107,9 +107,9 @@ class AddStageForm extends Component {
     viewDialogs = () => {
         return(
             <React.Fragment>
-                <Dialog 
-                open={this.state.dialog_show} 
-                onClose={this.onCloseDialog} 
+                <Dialog
+                open={this.state.dialog_show}
+                onClose={this.onCloseDialog}
                 aria-labelledby="dialog-quick-view"
                 >
                     <DialogTitle id="dialog-quick-view dialog-header">Szybki podgląd</DialogTitle>
@@ -145,7 +145,7 @@ class AddStageForm extends Component {
             modulesByVegetable = (
                 <React.Fragment>
                     Dostępne moduły:
-                    <Select 
+                    <Select
                         closeMenuOnSelect={false}
                         components={makeAnimated()}
                         value={modulesModels}
@@ -194,8 +194,8 @@ class AddStageForm extends Component {
                 <p></p>
 
                 {modulesByVegetable}
-                
-                <Button 
+
+                <Button
                     variant="outlined"
                     color="default"
                     className="stage-quick-view__button"
@@ -203,7 +203,7 @@ class AddStageForm extends Component {
                 ><Sort size="small" />
                 </Button>
 
-                <Button 
+                <Button
                     variant="contained"
                     color="primary"
                     className="stage-add__button"

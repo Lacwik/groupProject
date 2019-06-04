@@ -64,7 +64,7 @@ class EditStageForm extends Component {
         this.setState({modulesOrder: ''});
         let order = '';
         modulesModels.forEach(element => {
-            order = order + element.id.toString() + ';'; 
+            order = order + element.id.toString() + ';';
         });
         this.setState({modulesOrder: order});
     }
@@ -84,7 +84,7 @@ class EditStageForm extends Component {
             modulesModels
         } = this.state;
 
-        
+
         return (
             <form id="stage-edit-form" className="stage-edit-form" onSubmit={e => e.preventDefault()}>
                 {this.props.errorMessage && <Paper className="error-box">{this.props.errorMessage}</Paper>}

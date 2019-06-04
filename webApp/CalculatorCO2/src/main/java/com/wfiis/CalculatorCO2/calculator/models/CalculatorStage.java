@@ -5,15 +5,16 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.Duration;
+import java.util.Map;
+
 @AllArgsConstructor
 @Setter
 @Getter
 @ToString
-public class GusResource {
+public class CalculatorStage {
+    private Duration duration;
     private Long id;
-    private String name_pl;
-    private String gus_id;
-    private Long unit_id;
-    private String shortcut_unit;
-    private Float equiv_kgCo2;
+    private Map<Long, ObjectValueWithUnit> leftovers;
+    private Map<Long, ObjectValueWithUnit> resources;
 }

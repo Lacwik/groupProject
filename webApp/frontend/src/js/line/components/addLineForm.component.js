@@ -61,7 +61,7 @@ class CreateLineForm extends Component {
         this.setState({stagesOrder: ''});
         let order = '';
         stageModels.forEach(element => {
-            order = order + element.id.toString() + ';'; 
+            order = order + element.id.toString() + ';';
         });
         this.setState({stagesOrder: order});
     }
@@ -88,7 +88,7 @@ class CreateLineForm extends Component {
             ]).then( ([stagesResponse]) => {
                 this.setState({avaliableStages: stagesResponse.map(v => ({ ...v, value: v.id, label: v.name })) });
             })
-            
+
         }
         else {
             this.setState({isVegetableSelected: false})
@@ -99,9 +99,9 @@ class CreateLineForm extends Component {
     viewDialogs = () => {
         return(
             <React.Fragment>
-                <Dialog 
-                open={this.state.dialog_show} 
-                onClose={this.onCloseDialog} 
+                <Dialog
+                open={this.state.dialog_show}
+                onClose={this.onCloseDialog}
                 aria-labelledby="dialog-quick-view"
                 >
                     <DialogTitle id="dialog-quick-view dialog-header">Szybki podgląd</DialogTitle>
@@ -145,7 +145,7 @@ class CreateLineForm extends Component {
             stagesByVegetable = (
                 <React.Fragment>
                     Dostępne etapy:
-                    <Select 
+                    <Select
                         closeMenuOnSelect={false}
                         components={makeAnimated()}
                         value={stageModels}
@@ -194,7 +194,7 @@ class CreateLineForm extends Component {
 
                 {stagesByVegetable}
 
-                <Button 
+                <Button
                     variant="outlined"
                     color="default"
                     className="stage-quick-view__button"

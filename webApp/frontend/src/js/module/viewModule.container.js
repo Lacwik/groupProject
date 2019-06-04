@@ -236,7 +236,7 @@ class ViewModuleContainer extends Component {
                     ))}
             </Carousel>
             <p></p>
-            <h3 class="elements-type">Moduły domyślne:</h3>
+            <h3 className="elements-type">Moduły domyślne:</h3>
             <br></br>
             <Carousel 
                 swipeable={false}
