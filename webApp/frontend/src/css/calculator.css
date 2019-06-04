@@ -11,8 +11,9 @@
     margin-top: 1em;
     width: 100%;
     padding: 1em;
-    background: #7744CC;
+    background: #efffff;
     box-sizing: border-box;
+    border-radius: 10px;
 }
 
 .form-stage h3 {

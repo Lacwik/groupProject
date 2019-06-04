@@ -113,7 +113,7 @@ class AddStageForm extends Component {
                 {this.props.errorMessage && <Paper className="error-box">{this.props.errorMessage}</Paper>}
 
                 <TextField
-                    label="Name"
+                    label="Nazwa"
                     value={name}
                     onChange={this.onChangeName}
                     type="text"
@@ -124,8 +124,6 @@ class AddStageForm extends Component {
                 
                 <p></p>
 
-                Wybierz warzywo dla etapu:
-
                 <Select 
                     closeMenuOnSelect={false}
                     components={makeAnimated()}
@@ -133,6 +131,8 @@ class AddStageForm extends Component {
                     isMulti
                     options={allVegetables}
                     onChange={this.onChangeVegetables}
+                    placeholder="Wybierz warzywo.."
+                    maxMenuHeight = {150}
                     />
                 <p></p>
 

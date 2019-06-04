@@ -98,7 +98,9 @@ class NavigationContainer extends Component {
             return (
                 <React.Fragment>
                     <li key="calculator">
-                        <Build style={{ color: '#aaaaaa' }} fontSize="large" />
+                        <Link to="/calculator">
+                        <Build style={{ color: '#ffbb88' }} fontSize="large" />
+                        </Link>
                         <Link to="/calculator">Kalkulator</Link>
                     </li>
                 </React.Fragment>

@@ -60,10 +60,12 @@ class ViewStage extends Component {
 
                     <li key="name-view-modules">
                         <b>{"Moduły:"}</b>
+                        <p></p>
                         <ul>
                             {modulesModels.map(item => (
-                                <li key={item.id}>
+                                <li className="elements" key={item.id}>
                                     <Button 
+                                        className = "view-elements-button"
                                         variant="outlined" 
                                         color="primary" 
                                         size = "small"
