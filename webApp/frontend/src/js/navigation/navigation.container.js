@@ -14,13 +14,13 @@ class NavigationContainer extends Component {
                 <React.Fragment>
                     <li key="nav-register">
                         <Link to="/login" >
-                        <AccountBox style={{ color:'#e8eef4' }} fontSize="large" />
+                        <AccountBox style={{ color:'#66aaee' }} fontSize="large" />
                         </Link>
                         <Link to="/login" >Zaloguj się</Link>
                     </li>
                     <li key="nav-login">
                         <Link to="/register">
-                        <GroupAdd style={{ color: '#e8eef4' }} fontSize="large" />
+                        <GroupAdd style={{ color: '#9988ff' }} fontSize="large" />
                         </Link>
                         <Link to="/register">Zarejestruj się</Link>
                     </li>
@@ -35,25 +35,25 @@ class NavigationContainer extends Component {
                 <React.Fragment>
                     <li key="nav-modules">
                         <Link to="/module/display-module">
-                        <Settings style={{ color: '#23d8fc' }} fontSize="large" />
+                        <Settings style={{ color: '#9988ff' }} fontSize="large" />
                         </Link>
                         <Link to="/module/display-module">Moduły</Link>
                     </li>
                     <li key="nav-stages">
                         <Link to="/stage/display-stage">
-                        <GroupWork style={{ color: '#7744cc' }} fontSize="large" />
+                        <GroupWork style={{ color: '#66aaee' }} fontSize="large" />
                         </Link>
                         <Link to="/stage/display-stage">Etapy</Link>
                     </li>
                     <li key="nav-lines">
                         <Link to="/line/display-line">
-                        <LinearScale style={{ color: '#77ccdd' }} fontSize="large" />
+                        <LinearScale style={{ color: '#aaddbb' }} fontSize="large" />
                         </Link>
                         <Link to="/line/display-line">Linie</Link>
                     </li>
                     <li key="nav-logout">
                         <Link to="/line/display-line">
-                        <ExitToApp style={{ color: '#e8eef4' }} fontSize="large" />
+                        <ExitToApp style={{ color: '#fc5627' }} fontSize="large" />
                         </Link>
                         <Link to="/logout">Wyloguj się</Link>
                     </li>
@@ -68,7 +68,7 @@ class NavigationContainer extends Component {
                 <React.Fragment>
                     <li key="nav-company-add-user">
                         <Link to="/company/add-member">
-                        <Add style={{ color: '#e8eef4' }} fontSize="large" />
+                        <Add style={{ color: '#ff8866' }} fontSize="large" />
                         </Link>
                         <Link to="/company/add-member">Dodaj pracownika</Link>
                     </li>
@@ -99,7 +99,7 @@ class NavigationContainer extends Component {
                 <React.Fragment>
                     <li key="calculator">
                         <Link to="/calculator">
-                        <Build style={{ color: '#ffbb88' }} fontSize="large" />
+                        <Build style={{ color: '#ffcc66' }} fontSize="large" />
                         </Link>
                         <Link to="/calculator">Kalkulator</Link>
                     </li>
@@ -116,7 +116,7 @@ class NavigationContainer extends Component {
                 <React.Fragment>
                     <li key="nav-admin-requests">
                         <Link to="/admin/requests">
-                        <List style={{ color: '#e8eef4' }} fontSize="large" />
+                        <List style={{ color: '#ff9987' }} fontSize="large" />
                         </Link>
                         <Link to="/admin/requests">Zgłoszenia</Link>
                     </li>
@@ -131,7 +131,7 @@ class NavigationContainer extends Component {
                 <ul className="navigation">
                     <li key="nav-home">
                         <Link to="/">
-                        <Home style={{ color: '#e8eef4' }} fontSize="large" />
+                        <Home style={{ color: '#ff55bb' }} fontSize="large" />
                         </Link>
                         <Link to="/">Strona główna</Link>
                     </li>

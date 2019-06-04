@@ -90,7 +90,7 @@ class EditStageForm extends Component {
                     options={this.state.allModules}
                     onChange={this.onChangeModules}
                     placeholder="Wybierz warzywo.."
-                    maxMenuHeight = {60}
+                    maxMenuHeight = {120}
                     />
                 <p></p>
                 

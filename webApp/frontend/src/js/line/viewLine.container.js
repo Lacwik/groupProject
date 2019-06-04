@@ -99,7 +99,8 @@ class ViewLineContainer extends Component {
         return(
             <React.Fragment>
 
-            <Dialog open={this.state.dialog_edit} onClose={this.onCloseDialog} aria-labelledby="dialog-edit-line">
+            <Dialog open={this.state.dialog_edit} onClose={this.onCloseDialog} aria-labelledby="dialog-edit-line" className="dialog">
+            <DialogTitle id="dialog-edit-line">Edytuj linię</DialogTitle>
                 <DialogContent>
                     <EditLineForm id={this.state.activeLineId} onSubmit={lineModel => this.onEditLine(lineModel)} errorMessage={this.state.error} />
                 </DialogContent>
@@ -111,7 +112,7 @@ class ViewLineContainer extends Component {
             </Dialog>
 
 
-            <Dialog open={this.state.dialog_create} onClose={this.onCloseDialog} aria-labelledby="dialog-create-line" fullScreen={true}>
+            <Dialog open={this.state.dialog_create} onClose={this.onCloseDialog} aria-labelledby="dialog-create-line" className="dialog">
                 <DialogTitle id="dialog-create-line">Nowa linia produkcyjna</DialogTitle>
                 <DialogContent>
                     <AddLineForm onSubmit={lineModel => this.onCreateLine(lineModel)} errorMessage={this.state.error} />
@@ -124,16 +125,16 @@ class ViewLineContainer extends Component {
             </Dialog>
 
 
-            <Dialog open={this.state.dialog_delete} onClose={this.onCloseDialog} aria-labelledby="dialog-delete-line">
-                <DialogTitle id="dialog-delete-stage">Usuń linie</DialogTitle>
+            <Dialog open={this.state.dialog_delete} onClose={this.onCloseDialog} aria-labelledby="dialog-delete-line" className="dialog delete">
+                <DialogTitle id="dialog-delete-stage">Usuń linię</DialogTitle>
                 <DialogContent>
                     Czy na pewno chcesz trwale usunąć linię produkcyjną: 
                     <b><ViewLine id={this.state.activeLineId} full_info={false}></ViewLine></b>
-                    <Button onClick={() => this.onDeleteLine(this.state.activeLineId)} color="secondary">
-                    Tak, usuń wybrany etap
-                    </Button>
                 </DialogContent>
                 <DialogActions>
+                    <Button onClick={() => this.onDeleteLine(this.state.activeLineId)} color="secondary">
+                    Tak, usuń wybraną linię
+                    </Button>
                     <Button onClick={this.onCloseDialog} color="primary">
                     Anuluj
                     </Button>
@@ -141,7 +142,7 @@ class ViewLineContainer extends Component {
             </Dialog>
 
 
-            <Dialog open={this.state.dialog_show} onClose={this.onCloseDialog} aria-labelledby="dialog-show-line">
+            <Dialog open={this.state.dialog_show} onClose={this.onCloseDialog} aria-labelledby="dialog-show-line" className="dialog">
                 <DialogContent>
                     <ViewLine id={this.state.activeLineId} full_info={true}></ViewLine>
                 </DialogContent>
@@ -239,7 +240,7 @@ class ViewLineContainer extends Component {
         return (
             <div className="view-line-container">
                 <div className="wrapper-content"> 
-                <div className="header-icon"><LinearScale  style={{ color: '#77ccdd', fontSize:"55px" }} fontSize="large" /></div>
+                <div className="header-icon"><LinearScale  style={{ color: '#aaddbb', fontSize:"55px" }} fontSize="large" /></div>
                 <div className="header"> Dostępne linie </div>
                     {this.companyLinesListRender()}
                 </div>
