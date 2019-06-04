@@ -61,9 +61,7 @@ class AddStageForm extends Component {
         if (selectedVegetables.length !== 0) {
             this.setState({
                 isVegetableSelected: true,
-                avaliableModules: this.state.allModules.map( v => ({
-                    ...v, 
-                }))
+                
             })
             
         }
@@ -101,7 +99,7 @@ class AddStageForm extends Component {
                         components={makeAnimated()}
                         value={modulesModels}
                         isMulti
-                        options={this.state.avaliableModules}
+                        options={this.state.allModules}
                         onChange={this.onChangeModules}
                     />
                     <p></p>

@@ -11,6 +11,8 @@ import AddLineForm from './components/addLineForm.component';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import { BorderColor, Visibility, DeleteForever, LinearScale } from '@material-ui/icons';
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 
 class ViewLineContainer extends Component {
@@ -93,11 +95,9 @@ class ViewLineContainer extends Component {
         this.setState({dialog_create: true});
     }
 
-
-    companyLinesListRender() {
-        return (
+    viewDialogs = () => {
+        return(
             <React.Fragment>
-
 
             <Dialog open={this.state.dialog_edit} onClose={this.onCloseDialog} aria-labelledby="dialog-edit-line">
                 <DialogContent>
@@ -111,7 +111,7 @@ class ViewLineContainer extends Component {
             </Dialog>
 
 
-            <Dialog open={this.state.dialog_create} onClose={this.onCloseDialog} aria-labelledby="dialog-create-line">
+            <Dialog open={this.state.dialog_create} onClose={this.onCloseDialog} aria-labelledby="dialog-create-line" fullScreen={true}>
                 <DialogTitle id="dialog-create-line">Nowa linia produkcyjna</DialogTitle>
                 <DialogContent>
                     <AddLineForm onSubmit={lineModel => this.onCreateLine(lineModel)} errorMessage={this.state.error} />
@@ -151,83 +151,87 @@ class ViewLineContainer extends Component {
                     </Button>
                 </DialogActions>
             </Dialog>
+            </React.Fragment>
+        )
+    }
+
+    viewLineInCarousel = (item) => {
+        return(
+            <React.Fragment>
+                <ViewLine id={item.id} full_info={false}></ViewLine>
+                <br />
+                <Fab 
+                    color="secondary"
+                    aria-label="Delete" 
+                    onClick= {() => this.onClickLine_delete(item.id)}
+                ><DeleteForever />
+                </Fab>
+                <Fab 
+                    color="primary" 
+                    aria-label="Edit" 
+                    onClick= {() => this.onClickLine_edit(item.id)}
+                ><BorderColor />
+                </Fab>
+                <Fab 
+                    color="primary" 
+                    aria-label="Show" 
+                    onClick= {() => this.onClickLine_show(item.id)}
+                ><Visibility />
+                </Fab>
+            </React.Fragment>
+        )
+    }
 
 
-            <table>
-                <thead>
-                    <tr>
-                        <td>
-                            <Fab 
-                                color="secondary" 
-                                aria-label="Add" 
-                                className="fab-line-head" 
-                                onClick={() => this.onClickLine_create()}
-                            ><AddIcon />
-                            </Fab>
-                        </td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <ul>
-                                {this.state.linesList.map(item => (
-                                    <li key={item.id}>
-                                        <ViewLine id={item.id} full_info={false}></ViewLine>
-                                        <br />
-                                        <Fab 
-                                            color="secondary"
-                                            aria-label="Delete" 
-                                            onClick= {() => this.onClickLine_delete(item.id)}
-                                        ><DeleteForever />
-                                        </Fab>
-                                        <Fab 
-                                            color="primary" 
-                                            aria-label="Edit" 
-                                            onClick= {() => this.onClickLine_edit(item.id)}
-                                        ><BorderColor />
-                                        </Fab>
-                                        <Fab 
-                                            color="primary" 
-                                            aria-label="Show" 
-                                            onClick= {() => this.onClickLine_show(item.id)}
-                                        ><Visibility />
-                                        </Fab>
-                                    </li>
-                                ))}
-                            </ul>
-                        </td>
-                        <td>
-                            <ul>
-                                {this.state.defaultLinesList.map(item => (
-                                    <li key={item.id}>
-                                        <ViewLine id={item.id} full_info={false}></ViewLine>
-                                        <br />
-                                        <Fab 
-                                            color="secondary"
-                                            aria-label="Delete" 
-                                            onClick= {() => this.onClickLine_delete(item.id)}
-                                        ><DeleteForever />
-                                        </Fab>
-                                        <Fab 
-                                            color="primary" 
-                                            aria-label="Edit" 
-                                            onClick= {() => this.onClickLine_edit(item.id)}
-                                        ><BorderColor />
-                                        </Fab>
-                                        <Fab 
-                                            color="primary" 
-                                            aria-label="Show" 
-                                            onClick= {() => this.onClickLine_show(item.id)}
-                                        ><Visibility />
-                                        </Fab>
-                                    </li>
-                                ))}
-                            </ul>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+    companyLinesListRender() {
+        return (
+            <React.Fragment>
+
+
+            {this.viewDialogs()}
+
+            <Fab 
+                color="secondary" 
+                aria-label="Add" 
+                className="fab-line-head" 
+                onClick={() => this.onClickLine_create()}
+            ><AddIcon />
+            </Fab>
+            <p></p>
+
+            linie należące do firmy:
+            <br></br>
+            <Carousel 
+                showThumbs={false}
+                showIndicators={false} 
+                useKeyboardArrows={true}
+                emulateTouch 
+                infiniteLoop 
+                >
+                    {this.state.linesList.map(item => (
+                        <div key={item.id} style={{background: 'white'}}>
+                            {this.viewLineInCarousel(item)}
+                        </div>
+                    ))}
+            </Carousel>
+            <p></p>
+
+            linie domyślne:
+            <br></br>
+            <Carousel 
+                showThumbs={false} 
+                showIndicators={false}
+                useKeyboardArrows={true}
+                emulateTouch 
+                infiniteLoop 
+                >
+                    {this.state.defaultLinesList.map(item => (
+                        <div key={item.id} style={{background: 'white'}}>
+                            {this.viewLineInCarousel(item)}
+                        </div>
+                    ))}
+            </Carousel>
+            <p></p>
             </React.Fragment>
         );
       }
