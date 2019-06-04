@@ -15,4 +15,5 @@ public class GusResource {
     private String gus_id;
     private Long unit_id;
     private String shortcut_unit;
+    private Float equiv_kgCo2;
 }

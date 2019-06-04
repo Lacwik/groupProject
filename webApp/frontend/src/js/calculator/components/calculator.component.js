@@ -93,7 +93,7 @@ class Calculator extends Component {
             ...state,
             resourcesType: {
                 ...state.resourcesType,
-                [id]: value,
+                [value.value]: value,
             },
         }));
     }

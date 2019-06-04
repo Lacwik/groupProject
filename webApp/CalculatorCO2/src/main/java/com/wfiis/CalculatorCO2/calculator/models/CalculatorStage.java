@@ -12,9 +12,9 @@ import java.util.Map;
 @Setter
 @Getter
 @ToString
-public class CalendarStage {
+public class CalculatorStage {
     private Duration duration;
     private Long id;
-    private Map<String, ObjectValueWithUnit> leftovers;
-    private Map<String, ObjectValueWithUnit> resources;
+    private Map<Long, ObjectValueWithUnit> leftovers;
+    private Map<Long, ObjectValueWithUnit> resources;
 }
