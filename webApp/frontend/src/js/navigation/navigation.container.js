@@ -14,7 +14,7 @@ class NavigationContainer extends Component {
                 <React.Fragment>
                     <li key="nav-register">
                         <Link to="/login" >
-                        <AccountBox style={{ color:'#e8eef4', background:'#e8eef4' }} fontSize="large" />
+                        <AccountBox style={{ color:'#e8eef4' }} fontSize="large" />
                         </Link>
                         <Link to="/login" >Zaloguj się</Link>
                     </li>
