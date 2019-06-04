@@ -12,8 +12,8 @@ import java.util.List;
 public class StageModel extends StageCreateModel {
     private Long id;
 
-    public StageModel(String name, List<ModuleModel> modulesModels, Long id) {
-        super(name, modulesModels);
+    public StageModel(String name, List<ModuleModel> modulesModels, String modulesOrder, Long id) {
+        super(name, modulesModels, modulesOrder);
         this.id = id;
     }
 }

@@ -34,7 +34,8 @@ public class StageAssembler {
     public StageCreateModel getCreateModelFromEntity(Stage stage) {
         return new StageCreateModel(
                 stage.getName(),
-                moduleAssembler.getModelsFromEntityList(stage.getModules())
+                moduleAssembler.getModelsFromEntityList(stage.getModules()),
+                stage.getModulesOrder()
         );
     }
 
@@ -50,6 +51,7 @@ public class StageAssembler {
         return new StageModel(
                 stage.getName(),
                 moduleAssembler.getModelsFromEntityList(stage.getModules()),
+                stage.getModulesOrder(),
                 stage.getId()
         );
     }
@@ -67,7 +69,8 @@ public class StageAssembler {
                 false,
                 company,
                 new ArrayList<>(),
-                modules
+                modules,
+                stageCreateModel.getModulesOrder()
         );
     }
 
