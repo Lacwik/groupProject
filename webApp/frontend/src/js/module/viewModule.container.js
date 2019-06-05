@@ -142,9 +142,11 @@ class ViewModuleContainer extends Component {
 
             <Dialog open={this.state.dialog_delete} onClose={this.onCloseDialog} aria-labelledby="dialog-delete-module" className="dialog delete" >  
                 <DialogTitle id="dialog-delete-module dialog-header">Usuń moduł</DialogTitle>
-                <DialogContent>
+                <DialogContent id="dialog-delete">
                     Czy na pewno chcesz trwale usunąć moduł: 
-                    <b><ViewModule id={this.state.activeModuleId} full_info={false}></ViewModule></b>
+                    <p></p>
+                    <br></br>
+                    <b><ViewModule className="delete-header" id={this.state.activeModuleId} full_info={false}></ViewModule></b>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={() => this.onDeleteModule(this.state.activeModuleId)} color="secondary">
