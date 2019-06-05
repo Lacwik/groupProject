@@ -103,32 +103,6 @@ class AddStageForm extends Component {
     }
 
 
-
-    viewDialogs = () => {
-        return(
-            <React.Fragment>
-                <Dialog
-                open={this.state.dialog_show}
-                onClose={this.onCloseDialog}
-                aria-labelledby="dialog-quick-view"
-                >
-                    <DialogTitle id="dialog-quick-view dialog-header">Szybki podgląd</DialogTitle>
-                    <DialogContent>
-                        <h2>{this.state.name}</h2>
-                        <br></br>
-
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={this.onCloseDialog} color="primary">
-                        Powrót
-                        </Button>
-                    </DialogActions>
-                </Dialog>
-            </React.Fragment>
-        )
-    }
-
-
     render() {
 
         const {
@@ -156,7 +130,7 @@ class AddStageForm extends Component {
                         maxMenuHeight = {60}
                     />
                     <br></br>
-                    * kolejność dodawania ma znaczenie
+                    <label className="warning-comment">*Kolejność dodawania ma znaczenie</label>
                     <p></p>
                 </React.Fragment>
             )
@@ -167,8 +141,6 @@ class AddStageForm extends Component {
 
             <form id="stage-edit-form" className="stage-edit-form" onSubmit={e => e.preventDefault()}>
                 {this.props.errorMessage && <Paper className="error-box">{this.props.errorMessage}</Paper>}
-
-                {this.viewDialogs()}
                 <TextField
                     label="Nazwa"
                     value={name}
@@ -194,14 +166,7 @@ class AddStageForm extends Component {
                 <p></p>
 
                 {modulesByVegetable}
-
-                <Button
-                    variant="outlined"
-                    color="default"
-                    className="stage-quick-view__button"
-                    onClick={this.onClickQuickView}
-                ><Sort size="small" />
-                </Button>
+    
 
                 <Button
                     variant="contained"

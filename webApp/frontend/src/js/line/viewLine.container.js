@@ -141,7 +141,7 @@ class ViewLineContainer extends Component {
 
             <Dialog open={this.state.dialog_delete} onClose={this.onCloseDialog} aria-labelledby="dialog-delete-line" className="dialog delete">
                 <DialogTitle id="dialog-delete-stage">Usuń linię</DialogTitle>
-                <DialogContent>
+                <DialogContent id="dialog-delete">
                     Czy na pewno chcesz trwale usunąć linię produkcyjną: 
                     <b><ViewLine id={this.state.activeLineId} full_info={false}></ViewLine></b>
                 </DialogContent>

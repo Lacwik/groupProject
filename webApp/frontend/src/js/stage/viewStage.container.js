@@ -190,7 +190,7 @@ class ViewStageContainer extends Component {
             className="dialog delete"
             >
                 <DialogTitle id="dialog-delete-stage dialog-header">Usuń etap</DialogTitle>
-                <DialogContent>
+                <DialogContent id="dialog-delete">
                     Czy na pewno chcesz trwale usunąć etap: 
                     <b><ViewStage id={this.state.activeStageId} full_info={false}></ViewStage></b>
                 </DialogContent>

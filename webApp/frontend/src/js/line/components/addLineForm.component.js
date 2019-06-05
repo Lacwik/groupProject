@@ -96,31 +96,6 @@ class CreateLineForm extends Component {
     }
 
 
-    viewDialogs = () => {
-        return(
-            <React.Fragment>
-                <Dialog
-                open={this.state.dialog_show}
-                onClose={this.onCloseDialog}
-                aria-labelledby="dialog-quick-view"
-                >
-                    <DialogTitle id="dialog-quick-view dialog-header">Szybki podgląd</DialogTitle>
-                    <DialogContent>
-                        <h2>{this.state.name}</h2>
-                        <br></br>
-
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={this.onCloseDialog} color="primary">
-                        Powrót
-                        </Button>
-                    </DialogActions>
-                </Dialog>
-            </React.Fragment>
-        )
-    }
-
-
     onSubmit = () => {
         const { name, stageModels, stagesOrder } = this.state;
 
@@ -153,10 +128,10 @@ class CreateLineForm extends Component {
                         options={avaliableStages}
                         onChange={this.onChangeStages}
                         placeholder = "Wybierz etapy.."
-                        maxMenuHeight = {60}
+                        maxMenuHeight = {100}
                     />
                     <br></br>
-                    * kolejność dodawania ma znaczenie
+                    <label className="warning-comment">*Kolejność dodawania ma znaczenie</label>
                     <p></p>
                 </React.Fragment>
             )
@@ -166,8 +141,6 @@ class CreateLineForm extends Component {
         return (
             <form id="line-edit-form" className="line-edit-form" onSubmit={e => e.preventDefault()}>
                 {this.props.errorMessage && <Paper className="error-box">{this.props.errorMessage}</Paper>}
-
-                {this.viewDialogs()}
                 <TextField
                     label="Nazwa"
                     value={name}
@@ -193,14 +166,6 @@ class CreateLineForm extends Component {
                 <p></p>
 
                 {stagesByVegetable}
-
-                <Button
-                    variant="outlined"
-                    color="default"
-                    className="stage-quick-view__button"
-                    onClick={this.onClickQuickView}
-                ><Sort size="small" />
-                </Button>
 
                 <Button 
                     variant="contained"
