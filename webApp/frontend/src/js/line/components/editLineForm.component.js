@@ -36,6 +36,7 @@ class EditLineForm extends Component {
                 name: lineModel.name,
                 stageModels: lineModel.stageModels.map(v => ({ ...v, value: v.id, label: v.name })),
                 lineVegetables: vegetables,
+                stagesOrder: lineModel.stagesOrder,
             });
 
         })
@@ -81,8 +82,26 @@ class EditLineForm extends Component {
 
         const {
             name, 
-            stageModels
         } = this.state;
+        var stageModels = this.state.stageModels;
+        const dbOrder = this.state.stagesOrder;
+
+        if(dbOrder){
+            if(dbOrder.length !== 0){
+                var sortedStagesModels = [];
+                var order = dbOrder.split(";");
+                order.pop();
+                order = order.map(Number);
+                var tempStage;
+                order.forEach( (value) => {
+                    tempStage = stageModels.find(function(element){
+                        return element.id === value
+                    });
+                    sortedStagesModels.push(tempStage);
+                });
+                stageModels = sortedStagesModels;
+            }
+        }
 
         return (
             <form id="line-edit-form" className="line-edit-form" onSubmit={e => e.preventDefault()}>

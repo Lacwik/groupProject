@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import { ChevronRight, Settings } from '@material-ui/icons';
+import { Settings } from '@material-ui/icons';
 
 class ViewStage extends Component {
     constructor(props) {
@@ -14,6 +14,9 @@ class ViewStage extends Component {
 
         this.state = {
             stage: any,
+            name: '',
+            modulesOrder: '',
+            modulesModels: [],
             full_info: false,
             dialog_show: false,
             activeModuleId: undefined,
@@ -21,10 +24,17 @@ class ViewStage extends Component {
     }
 
     componentDidMount(){
-        stageRepository.getStageById(this.props.id).then(
-            response => this.setState({ stage: response })
-        ).then(() => this.setState({full_info: this.props.full_info})
-        )
+
+        Promise.all([
+            stageRepository.getStageById(this.props.id),
+        ]).then( ([stageModel]) => {
+            this.setState({
+                stage: stageModel,
+                name: stageModel.name,
+                full_info: this.props.full_info,
+                modulesOrder: stageModel.modulesOrder,
+            })
+        })
     }
 
     onCloseDialog = () => {
@@ -40,8 +50,27 @@ class ViewStage extends Component {
     render() {
 
         const name = this.state.stage.name;
-        const modulesModels = this.state.stage.modulesModels;
+        var modulesModels = this.state.stage.modulesModels;
+        const dbOrder = this.state.modulesOrder;
         const full_info = this.state.full_info;
+
+
+        if(dbOrder){
+            if(dbOrder.length !== 0){
+                var sortedModulesModels = [];
+                var order = dbOrder.split(";");
+                order.pop();
+                order = order.map(Number);
+                var tempModule;
+                order.forEach( (value) => {
+                    tempModule = modulesModels.find(function(element){
+                        return element.id === value
+                    });
+                    sortedModulesModels.push(tempModule);
+                });
+                modulesModels = sortedModulesModels;
+            }
+        }
 
         let fullInfo;
         if (full_info) {
