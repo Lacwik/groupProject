@@ -12,6 +12,8 @@ import java.util.List;
 @Getter
 @ToString
 public class CalendarFormModel {
+    private Long vegetableId;
+    private Long lineId;
     private ObjectValueWithUnit material;
     private ObjectValueWithUnit product;
     private List<GusResource> resources;

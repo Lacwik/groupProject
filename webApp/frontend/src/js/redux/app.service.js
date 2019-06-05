@@ -81,3 +81,10 @@ export const removeUserById = id => {
 export const isUserLogged = () => {
     return store.getState().isUserLogged;
 }
+
+export const setStatistics = statistics => {
+    store.dispatch({
+        type: 'SET_STATISTICS',
+        statistics,
+    })
+}

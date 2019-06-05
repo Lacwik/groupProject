@@ -251,7 +251,7 @@ class ViewStageContainer extends Component {
                 itemClass="carousel-item-padding-40-px carousel-item"
                 >
                     {this.state.stageList.map(item => (
-                        <div key={item.id} style={{background: 'white'}}>
+                        <div key={item.id} style={{background: 'white', padding: '1em 0', boxSizing: 'border-box' }}>
                             {this.viewStageInCarousel(item)}
                         </div>
                     ))}
@@ -272,7 +272,7 @@ class ViewStageContainer extends Component {
                 itemClass="carousel-item-padding-40-px carousel-item"
                 >
                     {this.state.defaultStageList.map(item => (
-                        <div key={item.id} style={{background: 'white'}}>
+                        <div key={item.id} style={{background: 'white', padding: '1em 0', boxSizing: 'border-box' }}>
                             {this.viewStageInCarousel(item)}
                         </div>
                     ))}

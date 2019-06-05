@@ -13,7 +13,7 @@ class Dashboard extends Component {
                 name={name}
                 id={id}
                 onLoginAsCompanyRole={(id, role, name) => this.props.onLoginAsCompanyRole(id, role, name)}
-                isWorkingFor={this.props.companyWorkingFor.id === id}
+                isWorkingFor={this.props.companyWorkingFor.id === id && this.props.companyWorkingFor.role === role}
             />
         ));
     }

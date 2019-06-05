@@ -73,10 +73,10 @@ class ViewModule extends Component {
         return (
             <React.Fragment>
                 
-                <ul>
+                <ul style={{ width: '100%' }}>
 
                     <li key="name-view-module">
-                        <h1>{name}</h1>
+                        <h1 style={{ textAlign: 'center', width: '100%' }}>{name}</h1>
                     </li>
                     
                    

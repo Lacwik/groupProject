@@ -13,6 +13,8 @@ import ViewModuleContainer from '../module/viewModule.container';
 import ViewStageContainer from '../stage/viewStage.container';
 import ViewLineContainer from '../line/viewLine.container';
 import CalculatorContainer from '../calculator/calculator.container';
+import StatisticsContainer from '../statistics/statistics.container';
+import statisticContainer from '../statistics/statistic.container';
 
 class RouterNavigation extends Component {
   render() {
@@ -28,6 +30,8 @@ class RouterNavigation extends Component {
         <Route path='/stage/display-stage' component={ViewStageContainer} />
         <Route path='/line/display-line' component={ViewLineContainer} />
         <Route path='/calculator' component={CalculatorContainer} />
+        <Route path='/statistics' component={StatisticsContainer} />
+        <Route path='/statistic/:id' component={statisticContainer} />
       </Switch>
     );
   }

@@ -13,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -53,5 +55,12 @@ public class LineStatisticsService {
 
     public LineStatistics getLineStatisticsEntity(Long lineStatisticsID) {
         return lineStatisticsRepository.findById(lineStatisticsID).orElseThrow(() -> new LineStatisticsNotFoundException(lineStatisticsID));
+    }
+
+    @SecureCompanyScope(role = CompanyRole.MEMBER)
+    public List<LineStatisticsCreateModel> getLineStatisticsForCompany(CompanyIdentity companyIdentity) {
+        return lineStatisticsRepository.findAllByCompanyId(companyIdentity.getCompanyId()).stream()
+                .map(lineStatisticsAssembler::getCreateModelFromEntity)
+                .collect(Collectors.toList());
     }
 }

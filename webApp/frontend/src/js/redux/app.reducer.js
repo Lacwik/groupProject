@@ -61,6 +61,12 @@ const toReducer = (state = {}, action) => {
                 isWorkingForCompany: action.value,
             };
 
+        case 'SET_STATISTICS':
+            return {
+                ...state,
+                statistics: action.statistics,
+            };
+
         case Types.REMOVE_USER_BY_ID:
             return {
                 ...state,

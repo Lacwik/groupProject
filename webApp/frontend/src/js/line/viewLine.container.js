@@ -228,7 +228,7 @@ class ViewLineContainer extends Component {
                 itemClass="carousel-item-padding-40-px carousel-item"
                 >
                     {this.state.linesList.map(item => (
-                        <div key={item.id} style={{background: 'white'}}>
+                        <div key={item.id} style={{background: 'white', padding: '1em 0', boxSizing: 'border-box' }}>
                             {this.viewLineInCarousel(item)}
                         </div>
                     ))}
@@ -249,7 +249,7 @@ class ViewLineContainer extends Component {
                 itemClass="carousel-item-padding-40-px carousel-item"
                 >
                     {this.state.defaultLinesList.map(item => (
-                        <div key={item.id} style={{background: 'white'}}>
+                        <div key={item.id} style={{background: 'white', padding: '1em 0', boxSizing: 'border-box' }}>
                             {this.viewLineInCarousel(item)}
                         </div>
                     ))}

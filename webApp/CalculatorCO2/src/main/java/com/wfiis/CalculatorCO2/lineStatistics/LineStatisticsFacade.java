@@ -8,6 +8,8 @@ import com.wfiis.CalculatorCO2.user.metadata.UserMetadataService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class LineStatisticsFacade {
@@ -32,5 +34,10 @@ public class LineStatisticsFacade {
     public String deleteLineStatistics(Long userId, Long lineStatisticsID) {
         Company company = userMetadataService.getCurrentCompanyWorkingFor(userId);
         return lineStatisticsService.deleteLineStatistics(CompanyIdentity.of(company.getId()), lineStatisticsID);
+    }
+
+    public List<LineStatisticsCreateModel> getStatisticsForCompany(CompanyIdentity companyIdentity) {
+        return lineStatisticsService.getLineStatisticsForCompany(companyIdentity);
+
     }
 }

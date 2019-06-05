@@ -53,7 +53,7 @@ class ResourceFormStage extends Component {
     render() {
         return (
             <React.Fragment>
-                <h3>Konfiguracja zasobów</h3>
+                {this.state.resources.length > 0 ? <h3>Konfiguracja zasobów</h3> : ''}
                 {this.renderResources()}
             </React.Fragment>
         )

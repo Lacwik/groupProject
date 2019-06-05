@@ -19,9 +19,12 @@ public class LineStatisticsAssembler {
 
     public LineStatisticsCreateModel getCreateModelFromEntity(LineStatistics lineStatistics) {
         return new LineStatisticsCreateModel(
+                lineStatistics.getId(),
                 lineStatistics.getLine(),
                 stageResourceValueAssembler.getCreateModelsFromEntityList(lineStatistics.getStageResourceValues()),
-                lineStatistics.getVegetable()
+                lineStatistics.getVegetable(),
+                lineStatistics.getCarbonPrint(),
+                null
         );
     }
 
@@ -38,7 +41,9 @@ public class LineStatisticsAssembler {
                 null,
                 lineStatisticsCreateModel.getLine(),
                 stageResourceValueAssembler.getNewEntitiesFromModels(lineStatisticsCreateModel.getStageResourceValueCM()),
-                vegetableService.getVegetableEntity(lineStatisticsCreateModel.getVegetable().getId())
+                vegetableService.getVegetableEntity(lineStatisticsCreateModel.getVegetable().getId()),
+                lineStatisticsCreateModel.getCarbonPrint(),
+                lineStatisticsCreateModel.getCompany()
 
         );
     }
