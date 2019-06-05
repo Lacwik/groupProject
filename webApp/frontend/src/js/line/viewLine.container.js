@@ -213,7 +213,7 @@ class ViewLineContainer extends Component {
             ><AddIcon />
             </Fab>
             <p></p>
-            <h3 class="elements-type">Linie należące do firmy:</h3>
+            <h3 className="elements-type">Linie należące do firmy:</h3>
             <br></br>
             <Carousel 
                 swipeable={false}
@@ -234,7 +234,7 @@ class ViewLineContainer extends Component {
                     ))}
             </Carousel>
             <p></p>
-            <h3 class="elements-type">Linie domyślne:</h3>
+            <h3 className="elements-type">Linie domyślne:</h3>
             <br></br>
             <Carousel 
                 swipeable={false}

@@ -217,7 +217,7 @@ class ViewModuleContainer extends Component {
             ><AddIcon />
             </Fab>
             <p></p>
-           <h3 class="elements-type"> Moduły należące do firmy:</h3>
+           <h3 className="elements-type"> Moduły należące do firmy:</h3>
             <br></br>
             <Carousel 
                 swipeable={false}

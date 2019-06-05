@@ -235,7 +235,7 @@ class ViewStageContainer extends Component {
             ><AddIcon />
             </Fab>
             <p></p>
-            <h3 class="elements-type"> Etapy należące do firmy:</h3>
+            <h3 className="elements-type"> Etapy należące do firmy:</h3>
             <br></br>
             <Carousel 
                 swipeable={false}
@@ -256,7 +256,7 @@ class ViewStageContainer extends Component {
                     ))}
             </Carousel>
             <p></p>
-             <h3 class="elements-type">Etapy domyślne:</h3>
+             <h3 className="elements-type">Etapy domyślne:</h3>
             <br></br>
             <Carousel 
                 swipeable={false}
