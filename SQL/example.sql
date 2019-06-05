@@ -2,6 +2,8 @@ insert into calc_users(id, name, last_name, email, password, is_active, role) va
 insert into calc_companies (name) values ('Karotka');
 insert into calc_users_job (role,company_id, user_id) values (1,1,1);
 insert into companies_admin (user_id, company_id) values (1,1);
+
+insert into companies_admin (user_id, company_id) values (1,1);
 insert into calc_vegetables (name) values ("marchewka");
 insert into calc_vegetables (name) values ("brokuł");
 insert into calc_vegetables (name) values ("cebula kostka");
