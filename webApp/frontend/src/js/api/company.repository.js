@@ -29,7 +29,7 @@ export default class CompanyRepository {
             headers: this.getHeaders(),
             body: JSON.stringify({
                 ...user,
-                companyRole: user.role.toUpperCase(),
+                companyRole: user.role.value.toUpperCase(),
                 companyId: this.store.getState().companyWorkingFor.id,
             }),
         })

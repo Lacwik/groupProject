@@ -19,6 +19,29 @@ class StatisticsContainer extends Component {
         };
     }
 
+    componentDidMount() {
+        if (this.props.companyIdWorkingFor && !this.state.alreadyFetch) {
+            fetch(`http://localhost:8090/company/${this.props.companyIdWorkingFor}/statistics`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${this.props.JWT}`,
+                }
+            })
+                .then(response => handleError(response))
+                .then(response => response.json())
+                .then(statistics => {
+                    this.setState({ alreadyFetch: true });
+                    setStatistics(statistics);
+                })
+                .catch(err => {
+                    console.warn("Caught error while trying to get company's statistics. ", err);
+                    return Promise.reject(err);
+                });
+        }
+
+    }
+
     componentDidUpdate() {
         if (this.props.companyIdWorkingFor && !this.state.alreadyFetch) {
             fetch(`http://localhost:8090/company/${this.props.companyIdWorkingFor}/statistics`, {
