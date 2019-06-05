@@ -2,12 +2,26 @@ package com.wfiis.CalculatorCO2.lineStatistics.metadata.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
 import com.wfiis.CalculatorCO2.line.metadata.entity.Line;
 import com.wfiis.CalculatorCO2.stageResourceValue.metadata.entity.StageResourceValue;
 import com.wfiis.CalculatorCO2.vegetable.metadata.entity.Vegetable;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.util.List;
 
 @Entity
@@ -40,4 +54,10 @@ public class LineStatistics {
     @JoinColumn(name = "vegetable_id")
     @JsonBackReference
     private Vegetable vegetable;
+
+    private Float carbonPrint;
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    @JsonBackReference
+    private Company company;
 }

@@ -235,7 +235,7 @@ class ViewStageContainer extends Component {
             ><AddIcon />
             </Fab>
             <p></p>
-            <h3 class="elements-type"> Etapy należące do firmy:</h3>
+            <h3 className="elements-type"> Etapy należące do firmy:</h3>
             <br></br>
             <Carousel 
                 swipeable={false}
@@ -250,13 +250,13 @@ class ViewStageContainer extends Component {
                 itemClass="carousel-item-padding-40-px carousel-item"
                 >
                     {this.state.stageList.map(item => (
-                        <div key={item.id} style={{background: 'white'}}>
+                        <div key={item.id} style={{background: 'white', padding: '1em 0', boxSizing: 'border-box' }}>
                             {this.viewStageInCarousel(item)}
                         </div>
                     ))}
             </Carousel>
             <p></p>
-             <h3 class="elements-type">Etapy domyślne:</h3>
+             <h3 className="elements-type">Etapy domyślne:</h3>
             <br></br>
             <Carousel 
                 swipeable={false}
@@ -271,7 +271,7 @@ class ViewStageContainer extends Component {
                 itemClass="carousel-item-padding-40-px carousel-item"
                 >
                     {this.state.defaultStageList.map(item => (
-                        <div key={item.id} style={{background: 'white'}}>
+                        <div key={item.id} style={{background: 'white', padding: '1em 0', boxSizing: 'border-box' }}>
                             {this.viewStageInCarousel(item)}
                         </div>
                     ))}

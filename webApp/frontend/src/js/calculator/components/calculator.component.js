@@ -189,7 +189,7 @@ class Calculator extends Component {
         e.preventDefault();
 
         const state = { ...this.state };
-        const { stages } = state;
+        const { stages, currentLineId: lineId, currentVegetableId: vegetableId } = state;
         
         const clearStages = {};
         Object.keys(stages).forEach(key => {
@@ -214,6 +214,8 @@ class Calculator extends Component {
                 stages: newState.stages,
                 resources: newState.resourcesType,
                 product: newState.product,
+                lineId,
+                vegetableId,
                 material: newState.material,
             }))
             .then(data => this.props.onCalculate(data))

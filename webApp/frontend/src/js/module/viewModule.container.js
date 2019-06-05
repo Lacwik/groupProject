@@ -217,7 +217,7 @@ class ViewModuleContainer extends Component {
             ><AddIcon />
             </Fab>
             <p></p>
-           <h3 class="elements-type"> Moduły należące do firmy:</h3>
+           <h3 className="elements-type"> Moduły należące do firmy:</h3>
             <br></br>
             <Carousel 
                 swipeable={false}
@@ -232,7 +232,7 @@ class ViewModuleContainer extends Component {
                 itemClass="carousel-item-padding-40-px carousel-item"
                 >
                     {this.state.moduleList.map(item => (
-                        <div key={item.id} style={{background: 'white'}}>
+                        <div key={item.id} style={{background: 'white', padding: '1em 0', boxSizing: 'border-box' }}>
                             {this.viewModuleInCarousel(item)}
                         </div>
                     ))}
@@ -253,7 +253,7 @@ class ViewModuleContainer extends Component {
                 itemClass="carousel-item-padding-40-px carousel-item"
                 >
                     {this.state.defaultModulesList.map(item => (
-                        <div key={item.id} style={{background: 'white'}}>
+                        <div key={item.id} style={{background: 'white', padding: '1em 0', boxSizing: 'border-box' }}>
                             {this.viewModuleInCarousel(item)}
                             
                         </div>

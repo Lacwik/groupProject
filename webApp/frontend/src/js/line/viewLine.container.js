@@ -213,7 +213,7 @@ class ViewLineContainer extends Component {
             ><AddIcon />
             </Fab>
             <p></p>
-            <h3 class="elements-type">Linie należące do firmy:</h3>
+            <h3 className="elements-type">Linie należące do firmy:</h3>
             <br></br>
             <Carousel 
                 swipeable={false}
@@ -228,13 +228,13 @@ class ViewLineContainer extends Component {
                 itemClass="carousel-item-padding-40-px carousel-item"
                 >
                     {this.state.linesList.map(item => (
-                        <div key={item.id} style={{background: 'white'}}>
+                        <div key={item.id} style={{background: 'white', padding: '1em 0', boxSizing: 'border-box' }}>
                             {this.viewLineInCarousel(item)}
                         </div>
                     ))}
             </Carousel>
             <p></p>
-            <h3 class="elements-type">Linie domyślne:</h3>
+            <h3 className="elements-type">Linie domyślne:</h3>
             <br></br>
             <Carousel 
                 swipeable={false}
@@ -249,7 +249,7 @@ class ViewLineContainer extends Component {
                 itemClass="carousel-item-padding-40-px carousel-item"
                 >
                     {this.state.defaultLinesList.map(item => (
-                        <div key={item.id} style={{background: 'white'}}>
+                        <div key={item.id} style={{background: 'white', padding: '1em 0', boxSizing: 'border-box' }}>
                             {this.viewLineInCarousel(item)}
                         </div>
                     ))}

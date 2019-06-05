@@ -37,4 +37,10 @@ public class ResourceService {
         }
         return outResources;
     }
+
+    public Resource getResourseByGusId(String gusId) {
+
+        return resourceRepository.findByGus(gusId);
+
+    }
 }

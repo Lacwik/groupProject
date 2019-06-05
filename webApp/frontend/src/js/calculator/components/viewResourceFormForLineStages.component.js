@@ -106,6 +106,18 @@ class ViewResourceFormForLineStages extends Component {
 
 
     renderViewResourceAndLeftoversForms() {
+        const { stagesOrder: order } = this.props.line;
+        
+        let stageModels = [];
+        if (order) {
+            const ids = order.split(';').filter(Boolean);
+            ids.forEach(id => {
+                stageModels.push(this.props.line.stageModels.find(stage => stage.id === id));
+            });
+        } else {
+            stageModels = this.props.line.stageModels;
+        }
+
 
         return this.props.line.stageModels.map(stage => (
             <li key={stage.id}>

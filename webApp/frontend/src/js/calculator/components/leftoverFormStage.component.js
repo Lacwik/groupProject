@@ -34,7 +34,7 @@ class LeftoverFormStage extends Component {
     render() {
         return (
             <React.Fragment>
-                <h3>Konfiguracja resztek</h3>
+                {this.state.leftovers.length > 0 ? <h3>Konfiguracja odpadów</h3> : ''}
                 {this.renderLeftovers()}
             </React.Fragment>
         )

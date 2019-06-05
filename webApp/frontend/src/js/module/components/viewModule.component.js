@@ -36,7 +36,7 @@ class ViewModule extends Component {
                     <li key="name-view-power">
                         <b>Moc:</b> <label className="items">{power} </label>
                     </li> 
-                    <li key="name-view-vegetables view-list">
+                    <li key="name-view-vegetables">
                     
                         <b>{"Warzywa:"}</b>
                         <ul>
@@ -47,7 +47,7 @@ class ViewModule extends Component {
                             ))}
                         </ul>
                     </li>
-                    <li key="name-view-resources view-list">
+                    <li key="name-view-resources">
                         <b>{"Zasoby:"}</b>
                         <ul>
                             {resources.map(item => (
@@ -57,7 +57,7 @@ class ViewModule extends Component {
                             ))}
                         </ul>
                     </li>
-                    <li key="name-view-leftovers view-list">
+                    <li key="name-view-leftovers">
                         <b>{"Odpady:"}</b>
                         <ul>
                             {leftovers.map(item => (
@@ -73,10 +73,10 @@ class ViewModule extends Component {
         return (
             <React.Fragment>
                 
-                <ul>
+                <ul style={{ width: '100%' }}>
 
                     <li key="name-view-module">
-                        <h1>{name}</h1>
+                        <h1 style={{ textAlign: 'center', width: '100%' }}>{name}</h1>
                     </li>
                     
                    
