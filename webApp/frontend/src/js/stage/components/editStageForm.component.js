@@ -36,6 +36,7 @@ class EditStageForm extends Component {
                 modulesModels: stageModel.modulesModels.map(v => ({ ...v, value: v.id, label: v.name })),
                 allModules: [...companyModules, ...defaultModules].map(v => ({ ...v, value: v.id, label: v.name })),
                 stageVegetables: stageVegetables,
+                modulesOrder: stageModel.modulesOrder,
             });
 
         })
@@ -81,8 +82,26 @@ class EditStageForm extends Component {
 
         const {
             name, 
-            modulesModels
         } = this.state;
+        var modulesModels = this.state.modulesModels;
+        const dbOrder = this.state.modulesOrder;
+
+        if(dbOrder){
+            if(dbOrder.length !== 0){
+                var sortedModulesModels = [];
+                var order = dbOrder.split(";");
+                order.pop();
+                order = order.map(Number);
+                var tempModule;
+                order.forEach( (value) => {
+                    tempModule = modulesModels.find(function(element){
+                        return element.id === value
+                    });
+                    sortedModulesModels.push(tempModule);
+                });
+                modulesModels = sortedModulesModels;
+            }
+        }
 
 
         return (

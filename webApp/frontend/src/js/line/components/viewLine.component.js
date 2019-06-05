@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import { ChevronRight, GroupWork } from '@material-ui/icons';
+import { GroupWork } from '@material-ui/icons';
 
 class ViewLine extends Component {
     constructor(props) {
@@ -14,6 +14,7 @@ class ViewLine extends Component {
 
         this.state = {
             line: any,
+            stagesOrder: '',
             full_info: false,
             dialog_show: false,
             activeStageId: undefined,
@@ -21,10 +22,15 @@ class ViewLine extends Component {
     }
 
     componentDidMount(){
-        lineRepository.getLineById(this.props.id).then(
-            response => this.setState({ line: response })
-        ).then(() => this.setState({full_info: this.props.full_info})
-        )
+        Promise.all([
+            lineRepository.getLineById(this.props.id),
+        ]).then( ([lineModel]) => {
+            this.setState({
+                stagesOrder: lineModel.stagesOrder,
+                full_info: this.props.full_info,
+                line: lineModel,
+            })
+        })
     }
 
     onCloseDialog = () => {
@@ -40,8 +46,26 @@ class ViewLine extends Component {
     render() {
 
         const name = this.state.line.name;
-        const stageModels = this.state.line.stageModels;
+        var stageModels = this.state.line.stageModels;
         const full_info = this.state.full_info;
+        const dbOrder = this.state.stagesOrder;
+
+        if(dbOrder){
+            if(dbOrder.length !== 0){
+                var sortedStagesModels = [];
+                var order = dbOrder.split(";");
+                order.pop();
+                order = order.map(Number);
+                var tempStage;
+                order.forEach( (value) => {
+                    tempStage = stageModels.find(function(element){
+                        return element.id === value
+                    });
+                    sortedStagesModels.push(tempStage);
+                });
+                stageModels = sortedStagesModels;
+            }
+        }
 
         let fullInfo;
         if (full_info) {
