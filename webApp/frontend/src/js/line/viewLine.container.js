@@ -63,21 +63,22 @@ class ViewLineContainer extends Component {
 
     onEditLine = (lineModel) => {
         return lineRepository.editLine(lineModel)
-            .then( window.location.reload() )
+            .then(() => window.location.reload() )
             .catch(err => this.setErrorMessage(err));
     }
 
 
     onCreateLine = (lineModel) => {
         return lineRepository.createLine(lineModel)
-            .then( window.location.reload() )
+            .then(() => window.location.reload() )
             .catch(err => this.setErrorMessage(err));
     }
 
 
     onDeleteLine = (id) => {
         return lineRepository.deleteLine(id)
-            .then( window.location.reload() )
+        
+            .then(() => window.location.reload() )
             .catch(err => this.setErrorMessage(err));
     }
 

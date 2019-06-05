@@ -65,14 +65,15 @@ class ViewModuleContainer extends Component {
 
     onEditModule = (moduleModel) => {
         return moduleRepository.editModule(moduleModel)
-            .then( window.location.reload() )
+            
+        .then(() => window.location.reload() )
             .catch(err => this.setErrorMessage(err));
     }
 
 
     onCreateModule = (moduleModel) => {
         return moduleRepository.createModule(moduleModel)
-            .then( window.location.reload() )
+            .then(() => window.location.reload() )
             .catch(err => this.setErrorMessage(err));
     }
 
