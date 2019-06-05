@@ -54,7 +54,7 @@ public class LineService {
     public LineModel editLine(CompanyIdentity companyIdentity, LineCreateModel lineCreateModel, Long lineId){
         Line line = getLineEntity(lineId);
 
-        if (line.getUsed()){
+        if (line.getUsed() || line.getOutsourced()){
             return createLine(companyIdentity, lineCreateModel, line.getCompany());
         }
 

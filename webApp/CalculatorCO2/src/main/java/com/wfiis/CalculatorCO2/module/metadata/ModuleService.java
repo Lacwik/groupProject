@@ -71,7 +71,7 @@ public class ModuleService {
     public String deleteModule(CompanyIdentity companyIdentity, Long moduleId) {
         Module module = getModuleEntity(moduleId);
 
-        if(module.getUsed() || module.getStages().size() != 0){
+        if(module.getUsed() || (module.getStages().size() != 0) || module.getOutsourced()){
             return "Module with id " + moduleId + " can not be deleted";
         }
 

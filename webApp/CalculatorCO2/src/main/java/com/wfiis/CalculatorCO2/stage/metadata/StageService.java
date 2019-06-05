@@ -56,7 +56,7 @@ public class StageService {
     public StageModel editStage(CompanyIdentity companyIdentity, StageCreateModel stageCreateModel, Long stageId) {
         Stage stage = getStageEntity(stageId);
 
-        if (stage.getUsed()) {
+        if (stage.getUsed() || stage.getOutsourced() || (stage.getLines().size() != 0)) {
             return createStage(companyIdentity, stageCreateModel, stage.getCompany());
         }
         List<Module> modules = new ArrayList<>();
