@@ -66,6 +66,7 @@ class CalculatorContainer extends Component {
             headers: this.getHeaders(),
         })
             .then(response => handleError(response))
+            .then(() => this.props.history.push('/statistics'))
             .catch(err => {
                 console.warn("Caught error while trying calculate carbon print. ", err);
                 return Promise.reject(err);
