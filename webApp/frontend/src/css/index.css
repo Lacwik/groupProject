@@ -69,7 +69,9 @@ ul h1 {
   float: right;
   margin: 10px;
 }
-
+#name-view-stage h1 {
+  margin-bottom: 40px;
+}
 #module-create-form {
   max-height: 450px;
 }
@@ -138,4 +140,10 @@ padding-top: 25px;
   margin: 10px;
   vertical-align: top;
   width: 290px;
+}
+.warning-comment {
+  color: #f50057;
+}
+#dialog-delete {
+  text-align: center;
 }
