@@ -169,7 +169,6 @@ class ViewStageContainer extends Component {
             onClose={this.onCloseDialog} 
             aria-labelledby="dialog-create-stage" 
             className="dialog"
-            fullScreen={true}
             >
                 <DialogTitle id="dialog-create-stage dialog-header">Nowy etap</DialogTitle>
                 <DialogContent>
