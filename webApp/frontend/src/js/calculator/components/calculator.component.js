@@ -44,7 +44,7 @@ class Calculator extends Component {
         this.fetchVegetablesForLine(id);
         this.fetchResourcesForLine(id);
     };
-   
+
     getLine = () => {
         return this.props.lines.find(line => line.id === this.state.currentLineId);
     }
@@ -82,7 +82,7 @@ class Calculator extends Component {
     componentWillUnmount() {
         document.removeEventListener('keydown', this.onKeyDown);
     }
-    
+
 
     onChangeVegetable = id => {
         this.setState(state => ({ ...state, currentVegetableId: id }));
@@ -107,18 +107,21 @@ class Calculator extends Component {
     }
 
     renderFormForChooseResourcesType = () => {
-        return this.state.lineResources.map(resource => (
+        return this.state.lineResources.map(resource => {
+            const gusCategory = this.filterGusById(resource.gus);
+
+            return (
                 <li key={resource.id} style={{ marginBottom: '.5em' }}>
                     <Select
                         required
-                        options={this.mapToSelect(this.filterGusById(resource.gus))}
+                        options={gusCategory ? this.mapToSelect(gusCategory) : []}
                         onChange={value => this.onChangeResource(resource.id, value)}
-                        noOptionsMessage={() => `Brak informacji w bazie wiedzy`}
+                        noOptionsMessage={() => `Brak informacji w bazie wiedzy o zasobie z numerem GUS: ${resource.gus}`}
                         placeholder={`Wybierz ${resource.name}`}
-                      />
+                    />
                 </li>
-
-            ));
+            );
+        })
     }
 
     onChangeDataInStage = stages => {
@@ -139,7 +142,7 @@ class Calculator extends Component {
             return Promise.all([
                 stageRepository.getLeftoversForStage(id),
                 stageRepository.getResourcesForStage(id),
-            ])        
+            ])
                 .then(([leftovers, resources]) => {
                     const stage = stages[id] || { leftovers: {}, resources: {} };
                     const filledStageLeftovers = stage.leftovers;
@@ -182,21 +185,21 @@ class Calculator extends Component {
         }
 
         return this.validateAllStages(state)
-                .catch(() => Alert.error('Uzupełnij wszystkie pola w etapach', this.options));
+            .catch(() => Alert.error('Uzupełnij wszystkie pola w etapach', this.options));
     }
 
-    onSubmit = (e = { preventDefault: () => {} }) => {
+    onSubmit = (e = { preventDefault: () => { } }) => {
         e.preventDefault();
 
         const state = { ...this.state };
         const { stages, currentLineId: lineId, currentVegetableId: vegetableId } = state;
-        
+
         const clearStages = {};
         Object.keys(stages).forEach(key => {
             const { leftovers, resources } = stages[key];
             Object.keys(leftovers).forEach((key) => (leftovers[key] === '') && delete leftovers[key])
             Object.keys(resources).forEach((key) => (resources[key] === '') && delete resources[key])
-            clearStages[key] = { 
+            clearStages[key] = {
                 ...stages[key],
                 leftovers,
                 resources,
@@ -207,7 +210,7 @@ class Calculator extends Component {
             ...state,
             stages: clearStages,
         };
-        
+
 
         this.validateForm(newState)
             .then(() => ({
@@ -251,7 +254,7 @@ class Calculator extends Component {
             vegetables,
             currentVegetableId,
         } = this.state;
-        
+
         return (
             <form onSubmit={e => this.onSubmit(e)} className="calculactor-wrapper">
                 <LineSelect lines={lines} onChange={id => this.onChangeLine(id)} />
@@ -272,21 +275,28 @@ class Calculator extends Component {
                             onChange={e => this.onChangeProduct(e.target.value)}
                         />
                         <p></p>
-                        {this.state.lineResources.length !== 0 ? (<label style={{ fontSize:17}}>Wybierz typy zasobów: </label>) : ''}
+                        {this.state.lineResources.length !== 0 ? (<label style={{ fontSize: 17 }}>Wybierz typy zasobów: </label>) : ''}
                         <ul style={{ padding: 0, margin: 0 }}>
                             {this.renderFormForChooseResourcesType()}
                         </ul>
-                        <ViewResourceFormForLineStages 
-                            line={this.getLine()}
-                            onChangeDataInStage={stages => this.onChangeDataInStage(stages)}
-                            gusCategory={this.state.gus}    
-                        />
-                        <Button variant="contained" color="primary" style={{ width: '25%', marginTop: '1em' }} onClick={() => this.onSubmit()}>
-                            Oblicz     
-                        </Button>
+                        {this.state.lineResources.length === Object.keys(this.state.resourcesType).length
+                            ? (
+                                <React.Fragment>
+                                    <ViewResourceFormForLineStages
+                                        line={this.getLine()}
+                                        onChangeDataInStage={stages => this.onChangeDataInStage(stages)}
+                                        gusCategory={this.state.gus}
+                                    />
+                                    <Button variant="contained" color="primary" style={{ width: '25%', marginTop: '1em' }} onClick={() => this.onSubmit()}>
+                                        Oblicz
+                                    </Button>
+                                </React.Fragment>
+                            )
+                            : ''}
+
                     </React.Fragment>
-                ) 
-                : ''}
+                )
+                    : ''}
             </form>
         );
     }

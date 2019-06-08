@@ -1,6 +1,6 @@
-package com.wfiis.CalculatorCO2.lineStatistics.metadata.repository;
+package com.wfiis.CalculatorCO2.statistics.metadata.repository;
 
-import com.wfiis.CalculatorCO2.lineStatistics.metadata.entity.LineStatistics;
+import com.wfiis.CalculatorCO2.statistics.metadata.entity.LineStatistics;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

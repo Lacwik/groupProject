@@ -28,7 +28,7 @@ class ResourceFormStage extends Component {
             return '';
         }
 
-        return gus.shortcut_unit;
+        return { id: gus.unit_id, name: gus.shortcut_unit };
     }
 
     findResourceId = gusId => {
@@ -43,8 +43,8 @@ class ResourceFormStage extends Component {
                 <TextField
                     type="number"
                     required
-                    label={`${resource.name} ${this.findUnitsForResource(resource.gus) ? `[${this.findUnitsForResource(resource.gus)}]` : ''}`}
-                    onChange={e => this.props.onChangeResource(this.props.stage.id, this.findResourceId(resource.gus), { value: e.target.value, unit: this.findUnitsForResource(resource.gus)})}
+                    label={`${resource.name} ${this.findUnitsForResource(resource.gus) ? `[${this.findUnitsForResource(resource.gus).name}]` : ''}`}
+                    onChange={e => this.props.onChangeResource(this.props.stage.id, this.findResourceId(resource.gus), { value: e.target.value, unitId: this.findUnitsForResource(resource.gus).id })}
                 />
             </div>
         ));

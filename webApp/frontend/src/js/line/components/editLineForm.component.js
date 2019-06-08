@@ -71,7 +71,8 @@ class EditLineForm extends Component {
     }
 
 
-    onSubmit = () => {
+    onSubmit = (e = { preventDefault: () => {} }) => {
+        e.preventDefault();
         const { name, stageModels, stagesOrder } = this.state;
 
         this.props.onSubmit({ name, stageModels, stagesOrder, id: this.props.id });
@@ -104,7 +105,7 @@ class EditLineForm extends Component {
         }
 
         return (
-            <form id="line-edit-form" className="line-edit-form" onSubmit={e => e.preventDefault()}>
+            <form id="line-edit-form" className="line-edit-form" onSubmit={e => this.onSubmit(e)}>
                 {this.props.errorMessage && <Paper className="error-box">{this.props.errorMessage}</Paper>}
 
                 <TextField
@@ -132,6 +133,7 @@ class EditLineForm extends Component {
                 <p></p>
                 
                 <Button 
+                    type="submit"
                     variant="contained"
                     color="primary"
                     className="line-edit__button"

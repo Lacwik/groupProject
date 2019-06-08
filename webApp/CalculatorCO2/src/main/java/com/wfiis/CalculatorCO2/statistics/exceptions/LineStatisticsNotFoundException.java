@@ -1,4 +1,4 @@
-package com.wfiis.CalculatorCO2.lineStatistics.exceptions;
+package com.wfiis.CalculatorCO2.statistics.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

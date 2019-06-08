@@ -15,6 +15,7 @@ class StatisticContainer extends Component {
 
         this.state = {
             statistic: props.statistics.find(({ id }) => id === parseInt(props.match.params.id)),
+            units: []
         }
     }
 
@@ -37,70 +38,84 @@ class StatisticContainer extends Component {
                     console.warn("Caught error while trying to get company's statistics. ", err);
                     return Promise.reject(err);
                 });
+
+            fetch('http://api.gabryelkamil.pl/unit')
+                .then(data => data.json())
+                .then(units => this.setState(state => ({ ...state, units })));
         }
 
 
     }
 
     renderResources(resources) {
-        const stageIds = resources.map(({ stage }) => stage.id);
+        return resources.map(resource => {
+            const unit = this.state.units.find(({ id }) => resource.unitId === id);
 
-
-        const ids = [...new Set(stageIds)];
-
-        const stages = [];
-        const uniqueResourcesPerStage = ids.map(id => {
-            const stagesResources = resources.filter(({ resources, stage, time, value }) => stage.id === id);
-            const time = stagesResources.length > 0 ? stagesResources[0].time : 0;
-            const name = stagesResources.length > 0 ? stagesResources[0].stage.name : 'Nieznana nazwa etapu';
-            const stage = {
-                time,
-                name,
-                resources: stagesResources.map(({ resource, value }) => ({ id: resource.id, name: resource.name, value, gus: resource.gus }))
-            }
-            stages.push(stage);
-
-        })
-
-        return stages.map(stage => {
             return (
-                <li key={stage.id} style={{ marginRight: '1em' }}>
-                    <div className="form-stage" style={{ paddingRight: '8em', position: 'relative' }}>
-                        <div className="icon" style={{ float: 'none', position: 'absolute', right: '.5em' }}><GroupWork style={{ color: '#66aaee', fontSize: "55px" }} fontSize="large" /></div>
-                        <h3>{stage.name}</h3>
-                        <div style={{ marginTop: '.5em' }} />
-                        {
-                            stage.resources.map(resource => (
-                                <div className="resource-form-mini" key={resource.id} style={{ marginBottom: '.5em' }}>
-                                    <TextField
-                                        type="number"
-                                        required
-                                        value={resource.value}
-                                        disabled
-                                        label={`${resource.name}`}
-                                    />
-                                </div>
-                            ))
-                        }
-                        <div style={{ marginTop: '.5em' }} />
-                    </div>
-                </li>
+                <div key={resource.id} style={{ marginBottom: '.5em' }}>
+                    <TextField
+                        type="number"
+                        required
+                        value={resource.value}
+                        disabled
+                        label={`${resource.gusName} [${unit ? unit.shortcut : 'Nieznana jednostka'}]`}
+                    />
+                </div>
             )
         })
     }
 
+    renderLeftovers(leftovers) {
+        return leftovers.map(leftover => {
+            return (
+                <div key={leftover.id} style={{ marginBottom: '.5em' }}>
+                    <TextField
+                        type="number"
+                        required
+                        value={leftover.value}
+                        disabled
+                        label={`${leftover.leftover.name} [kg]`}
+                    />
+                </div>
+            )
+        })
+    }
+
+    renderStatisticStage(statisticsStages) {
+        return statisticsStages.map(({ carbonPrint, stage, stageLeftovers, stageResources, time }) => {
+            const date = new Date(null);
+            date.setSeconds(time); // specify value for SECONDS here
+            const result = date.toISOString().substr(11, 8);
+            return (
+                <div key={stage.id} className="form-stage ">
+                <h2>Etap: {stage.name} </h2>
+                <div>
+                    <ul key={stage.id} >
+                        <li>Ślad węglowy: {carbonPrint}</li>
+                        <li>Czas działania etapu: {result}h</li>
+                        <li>Zasoby: {this.renderResources(stageResources)}</li>
+                        <li>Odpady: {this.renderLeftovers(stageLeftovers)}</li>
+                    </ul>
+                </div>
+                </div>
+            )
+        });
+    }
+
     renderStatistic() {
+        console.log({ state: this.state });
         if (this.state.statistic) {
-            console.log({ stat: this.state.statistic });
             const { statistic } = this.state;
-            const { line, vegetable, stageResourceValueCM, carbonPrint } = statistic;
+            const { line, vegetable, statisticsStages, productWeight, materialWeight, carbonPrint } = statistic;
 
             return (
                 <ul>
                     <li><h2>Linia: {line.name}</h2></li>
                     <li><h2>Warzywo: {vegetable.name}</h2></li>
                     <li><h2>Ślad węglowy: {carbonPrint}</h2></li>
-                    <li><ul style={{ display: 'flex' }}>{this.renderResources(stageResourceValueCM)}</ul></li>
+                    <li><h2>Surowiec: {materialWeight}kg</h2></li>
+                    <li><h2>Produkt: {productWeight}kg</h2></li>
+                    <li className="resource-mini-stage" style={{width: '100%'}}>{this.renderStatisticStage(statisticsStages)}</li>
                 </ul>
             )
         }

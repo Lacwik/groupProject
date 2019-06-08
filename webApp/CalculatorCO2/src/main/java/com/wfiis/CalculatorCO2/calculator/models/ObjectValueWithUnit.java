@@ -11,5 +11,5 @@ import lombok.ToString;
 @ToString
 public class ObjectValueWithUnit {
     private Float value;
-    private String unit;
+    private Long unitId;
 }
