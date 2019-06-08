@@ -32,7 +32,8 @@ class LoginForm extends Component {
         this.setState(state => ({ ...state, password }));
     }
 
-    onSubmit = () => {
+    onSubmit = (e = { preventDefault: () => {} }) => {
+        e.preventDefault();
         const { password, email } = this.state;
 
         this.props.onSubmit(email, password);
@@ -45,7 +46,7 @@ class LoginForm extends Component {
         } = this.state;
 
         return (
-            <form id="login-form" className="login-form" onSubmit={e => e.preventDefault()}>
+            <form id="login-form" className="login-form" onSubmit={e => this.onSubmit(e)}>
                 <h2 className="login-form__title">Zaloguj się</h2>
                 {this.props.errorMessage && <Paper className="error-box">{this.props.errorMessage}</Paper>}
                 <TextField
@@ -65,6 +66,7 @@ class LoginForm extends Component {
                 >Hasło
                 </TextField>
                 <Button 
+                    type="submit"
                     variant="contained"
                     color="primary"
                     className="form-login__button"

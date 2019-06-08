@@ -83,7 +83,8 @@ class EditModuleForm extends Component {
     }
 
 
-    onSubmit = () => {
+    onSubmit = (e = { preventDefault: () => {} }) => {
+        e.preventDefault();
         const { name, power, vegetables, resources, leftovers } = this.state;
 
         this.props.onSubmit({ name, power, vegetables, resources, leftovers, id: this.props.id });
@@ -101,7 +102,7 @@ class EditModuleForm extends Component {
         } = this.state;
 
         return (
-            <form id="module-edit-form" className="module-edit-form" onSubmit={e => e.preventDefault()}>
+            <form id="module-edit-form" className="module-edit-form" onSubmit={e => this.onSubmit(e)}>
                 {this.props.errorMessage && <Paper className="error-box">{this.props.errorMessage}</Paper>}
                 <TextField
                     label="Nazwa"
@@ -155,6 +156,7 @@ class EditModuleForm extends Component {
                     />
                 <p></p>
                 <Button 
+                    type="submit"
                     variant="contained"
                     color="primary"
                     className="module-edit__button"

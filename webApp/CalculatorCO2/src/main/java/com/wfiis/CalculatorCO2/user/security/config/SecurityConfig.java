@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/webjars/**").permitAll()
                 .antMatchers("/swagger-ui.html").permitAll()
                 .antMatchers("/request/**").hasAuthority(Role.SUPER_ADMIN.name())
-                .antMatchers("/stage/**").hasAuthority(Role.USER.name())
+                .antMatchers("/stage/**").hasAnyAuthority(Role.USER.name(), Role.SUPER_ADMIN.name())
                 .anyRequest().authenticated()
                 .and()
                 .apply(new BearerConfigurer(tokenProvider));

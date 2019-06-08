@@ -25,7 +25,7 @@ public class CalculatorController {
     public ResponseEntity<String> calc(UsernamePasswordAuthenticationToken authModel, @RequestBody CalendarFormModel calendarFormModel) {
         log.info("Calculating form model: {}", calendarFormModel);
 
-        final Float result = calculatorFacade.calculate(authModel, calendarFormModel);
+        final Float result = calculatorFacade.calculate(authModel, calendarFormModel).getCo2PerLine();
         log.info("Result: {}", result);
         return ResponseEntity.ok(result.toString());
     }

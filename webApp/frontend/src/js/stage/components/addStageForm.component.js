@@ -96,7 +96,8 @@ class AddStageForm extends Component {
     }
 
 
-    onSubmit = () => {
+    onSubmit = (e = { preventDefault: () => {} }) => {
+        e.preventDefault();
         const { name, modulesModels, modulesOrder } = this.state;
 
         this.props.onSubmit({ name, modulesModels, modulesOrder });
@@ -139,7 +140,7 @@ class AddStageForm extends Component {
         return (
 
 
-            <form id="stage-edit-form" className="stage-edit-form" onSubmit={e => e.preventDefault()}>
+            <form id="stage-edit-form" className="stage-edit-form" onSubmit={e => this.onSubmit(e)}>
                 {this.props.errorMessage && <Paper className="error-box">{this.props.errorMessage}</Paper>}
                 <TextField
                     label="Nazwa"
@@ -169,6 +170,7 @@ class AddStageForm extends Component {
     
 
                 <Button
+                    type="submit"
                     variant="contained"
                     color="primary"
                     className="stage-add__button"

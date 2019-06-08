@@ -80,7 +80,7 @@ class ViewModuleContainer extends Component {
 
     onDeleteModule = (id) => {
         return moduleRepository.deleteModule(id)
-            .then( window.location.reload() )
+            .then(() => window.location.reload() )
             .catch(err => this.setErrorMessage(err));
     }
 

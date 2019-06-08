@@ -96,7 +96,8 @@ class CreateLineForm extends Component {
     }
 
 
-    onSubmit = () => {
+    onSubmit = (e = { preventDefault: () => {} }) => {
+        e.preventDefault();
         const { name, stageModels, stagesOrder } = this.state;
 
         this.props.onSubmit({ name, stageModels, stagesOrder });
@@ -139,7 +140,7 @@ class CreateLineForm extends Component {
 
 
         return (
-            <form id="line-edit-form" className="line-edit-form" onSubmit={e => e.preventDefault()}>
+            <form id="line-edit-form" className="line-edit-form" onSubmit={e => this.onSubmit(e)}>
                 {this.props.errorMessage && <Paper className="error-box">{this.props.errorMessage}</Paper>}
                 <TextField
                     label="Nazwa"
@@ -168,6 +169,7 @@ class CreateLineForm extends Component {
                 {stagesByVegetable}
 
                 <Button 
+                    type="submit"
                     variant="contained"
                     color="primary"
                     className="line-create__button"

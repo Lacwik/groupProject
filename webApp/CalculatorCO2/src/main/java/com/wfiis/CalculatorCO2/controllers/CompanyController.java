@@ -4,10 +4,8 @@ import com.wfiis.CalculatorCO2.company.CompanyFacade;
 import com.wfiis.CalculatorCO2.company.model.CompanyIdentity;
 import com.wfiis.CalculatorCO2.company.model.CompanyMember;
 import com.wfiis.CalculatorCO2.company.model.CompanyModel;
-import com.wfiis.CalculatorCO2.lineStatistics.LineStatisticsFacade;
-import com.wfiis.CalculatorCO2.lineStatistics.metadata.entity.LineStatistics;
-import com.wfiis.CalculatorCO2.lineStatistics.model.LineStatisticsCreateModel;
-import com.wfiis.CalculatorCO2.user.model.CompanyRole;
+import com.wfiis.CalculatorCO2.statistics.LineStatisticsFacade;
+import com.wfiis.CalculatorCO2.statistics.metadata.entity.LineStatistics;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -16,10 +14,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -39,7 +35,7 @@ public class CompanyController {
     }
 
     @GetMapping(value = "/{id}/statistics", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<LineStatisticsCreateModel>> getCompanyStatistics(@PathVariable(name = "id") Long companyId) {
+    public ResponseEntity<List<LineStatistics>> getCompanyStatistics(@PathVariable(name = "id") Long companyId) {
         return ResponseEntity.ok(lineStatisticsFacade.getStatisticsForCompany(CompanyIdentity.of(companyId)));
     }
 

@@ -49,7 +49,8 @@ class RegisterCompanyForm extends Component {
         this.setState(state => ({ ...state, companyName }));
     }
 
-    onSubmit = () => {
+    onSubmit = (e = { preventDefault: () => {} }) => {
+        e.preventDefault();
         const { password, email, name, lastName, companyName } = this.state;
 
         this.props.onSubmit({ password, email, name, lastName, companyName});
@@ -81,7 +82,7 @@ class RegisterCompanyForm extends Component {
         } = this.state;
 
         return (
-            <form id="register-user-form" className="register-form" onSubmit={e => e.preventDefault()}>
+            <form id="register-user-form" className="register-form" onSubmit={e => this.onSubmit(e)}>
                 {this.renderErrorMessageIfExists()}
                 <TextField
                     label="Nazwa firmy"
@@ -124,6 +125,7 @@ class RegisterCompanyForm extends Component {
                 >Hasło
                 </TextField>
                 <Button 
+                    type="submit"
                     variant="contained"
                     color="primary"
                     className="register__button"

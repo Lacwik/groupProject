@@ -72,7 +72,8 @@ class AddModuleForm extends Component {
     }
 
 
-    onSubmit = () => {
+    onSubmit = (e = { preventDefault: () => {} }) => {
+        e.preventDefault();
         const { name, power, vegetables, resources, leftovers } = this.state;
 
         this.props.onSubmit({ name, power, vegetables, resources, leftovers });
@@ -90,7 +91,7 @@ class AddModuleForm extends Component {
         } = this.state;
 
         return (
-            <form id="module-create-form" className="module-create-form" onSubmit={e => e.preventDefault()}>
+            <form id="module-create-form" className="module-create-form" onSubmit={e => this.onSubmit(e)}>
                 {this.props.errorMessage && <Paper className="error-box">{this.props.errorMessage}</Paper>}
                 <TextField
                     label="Nazwa"
@@ -144,6 +145,7 @@ class AddModuleForm extends Component {
                     />
                 <p></p>
                 <Button 
+                    type="submit"
                     variant="contained"
                     color="primary"
                     className="module-edit__button"
