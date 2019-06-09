@@ -8,6 +8,7 @@ import com.wfiis.CalculatorCO2.calculator.models.ObjectValueWithUnit;
 import com.wfiis.CalculatorCO2.company.metadata.entity.Company;
 import com.wfiis.CalculatorCO2.leftover.metadata.LeftoverService;
 import com.wfiis.CalculatorCO2.line.metadata.LineService;
+import com.wfiis.CalculatorCO2.module.metadata.entity.Module;
 import com.wfiis.CalculatorCO2.resource.metadata.ResourceService;
 import com.wfiis.CalculatorCO2.resource.metadata.entity.Resource;
 import com.wfiis.CalculatorCO2.stage.metadata.StageService;
@@ -16,6 +17,7 @@ import com.wfiis.CalculatorCO2.statistics.metadata.LineStatisticsService;
 import com.wfiis.CalculatorCO2.statistics.metadata.entity.LineStatistics;
 import com.wfiis.CalculatorCO2.statistics.metadata.entity.StatisticsStage;
 import com.wfiis.CalculatorCO2.statistics.metadata.entity.StatisticsStageLeftover;
+import com.wfiis.CalculatorCO2.statistics.metadata.entity.StatisticsStageModule;
 import com.wfiis.CalculatorCO2.statistics.metadata.entity.StatisticsStageResource;
 import com.wfiis.CalculatorCO2.user.metadata.UserMetadataService;
 import com.wfiis.CalculatorCO2.user.model.UserAuthenticationPrincipal;
@@ -90,10 +92,22 @@ public class CalculatorFacade {
                 stageLeftovers.add(stageLeftover);
             }
 
+            List<StatisticsStageModule> statisticsStageModules = new LinkedList<>();
+
+            for (Module module : stage.getModules()) {
+                StatisticsStageModule statisticsStageModule = StatisticsStageModule.builder()
+                        .name(module.getName())
+                        .power(module.getPower())
+                        .build();
+
+                statisticsStageModules.add(statisticsStageModule);
+            }
+
             StatisticsStage statisticsStage = StatisticsStage.builder()
                     .stage(stage)
                     .stageLeftovers(stageLeftovers)
                     .stageResources(stageResources)
+                    .statisticsStageModules(statisticsStageModules)
                     .time(calculatorStage.getDuration().getSeconds())
                     .carbonPrint(co2FromResources.getCo2PerStage().get(calculatorStage.getId()))
                     .build();
