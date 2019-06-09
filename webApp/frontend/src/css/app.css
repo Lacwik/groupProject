@@ -47,3 +47,19 @@ body {
     margin-right: 1em;
     min-width: 40%;
 }
+
+.react-bootstrap-table thead > tr > th:first-child, 
+.react-bootstrap-table tbody > tr > td:first-child {
+    width: 5%;
+}
+
+.react-bootstrap-table thead {
+    text-align:center;
+}
+
+.react-bootstrap-table thead > tr > th:last-child button,
+.react-bootstrap-table tbody > tr > td:last-child button {
+    background: none;
+    border: none;
+    color: blue;
+}

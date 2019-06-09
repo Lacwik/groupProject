@@ -12,8 +12,15 @@ class StatisticContainer extends Component {
     constructor(props) {
         super(props);
 
+        console.log('Propsy container', { props });
+        const stats = [];
+        Object.keys(props.statistics).forEach(key => {
+            stats.push(...props.statistics[key]);
+        })
+
+        console.log({ stats }, "statysy");
         this.state = {
-            statistic: props.statistics.find(({ id }) => id === parseInt(props.match.params.id)),
+            statistic:stats.find(({ id }) => id === parseInt(props.match.params.id)),
             units: []
         }
     }
@@ -31,7 +38,33 @@ class StatisticContainer extends Component {
                 .then(response => response.json())
                 .then(statistics => {
                     this.setState({ alreadyFetch: true, statistic: statistics.find(({ id }) => id === parseInt(this.props.match.params.id)) });
-                    setStatistics(statistics);
+                })
+                .catch(err => {
+                    console.warn("Caught error while trying to get company's statistics. ", err);
+                    return Promise.reject(err);
+                });
+
+            fetch('http://api.gabryelkamil.pl/unit')
+                .then(data => data.json())
+                .then(units => this.setState(state => ({ ...state, units })));
+        }
+
+
+    }
+
+    componentDidMount() {
+        if (this.props.companyIdWorkingFor && !this.state.alreadyFetch) {
+            fetch(`http://localhost:8090/company/${this.props.companyIdWorkingFor}/statistics`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${this.props.JWT}`,
+                }
+            })
+                .then(response => handleError(response))
+                .then(response => response.json())
+                .then(statistics => {
+                    this.setState({ alreadyFetch: true, statistic: statistics.find(({ id }) => id === parseInt(this.props.match.params.id)) });
                 })
                 .catch(err => {
                     console.warn("Caught error while trying to get company's statistics. ", err);
@@ -49,7 +82,7 @@ class StatisticContainer extends Component {
     renderResources(resources) {
         return resources.map(resource => {
             const unit = this.state.units.find(({ id }) => resource.unitId === id);
-
+            console.log('resource: ', { resource });
             return (
                 <div key={resource.id} style={{ marginBottom: '.5em' }}>
                     <TextField
