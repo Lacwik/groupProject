@@ -5,7 +5,7 @@ import { BarChart } from '@material-ui/icons';
 import { handleError } from '../api/handleErrors.service';
 import BootstrapTable from 'react-bootstrap-table-next';
 import { setStatistics } from '../redux/app.service';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import { Button } from '@material-ui/core';
 
@@ -125,7 +125,7 @@ class StatisticsContainer extends Component {
                 leftoversSum: prepareDatesForLines.map(({ leftoversSum }) => leftoversSum).reduce((a, b) => a + b, 0).toFixed(2),
                 vegetable: '',
             }
-        ]
+        ];
 
         const columns = [{
             dataField: 'id',
