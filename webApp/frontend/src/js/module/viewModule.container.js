@@ -217,9 +217,9 @@ class ViewModuleContainer extends Component {
                 onClick={() => this.onClickModule_create()}
             ><AddIcon />
             </Fab>
+            <div className="carousel-div">
             <p></p>
            <h3 className="elements-type"> Moduły należące do firmy:</h3>
-            <br></br>
             <Carousel 
                 swipeable={false}
                 draggable={false}
@@ -228,19 +228,20 @@ class ViewModuleContainer extends Component {
                 slidesToSlide={2}
                 infinite={this.state.moduleList.length<3 ? false:true}
                 keyBoardControl={true}
-                containerClass="carousel-container"
+                containerClass="carousel-container carousel-modules"
                 deviceType={this.props.deviceType}
                 itemClass="carousel-item-padding-40-px carousel-item"
                 >
                     {this.state.moduleList.map(item => (
-                        <div key={item.id} style={{background: 'white', padding: '1em 0', boxSizing: 'border-box' }}>
+                        <div key={item.id} style={{padding: '1em 0', boxSizing: 'border-box' }}>
                             {this.viewModuleInCarousel(item)}
                         </div>
                     ))}
             </Carousel>
+            </div>
             <p></p>
+            <div className="carousel-div">
             <h3 className="elements-type">Moduły domyślne:</h3>
-            <br></br>
             <Carousel 
                 swipeable={false}
                 draggable={false}
@@ -249,17 +250,19 @@ class ViewModuleContainer extends Component {
                 slidesToSlide={2}
                 infinite={this.state.defaultModulesList.length<3 ? false:true}
                 keyBoardControl={true}
-                containerClass="carousel-container"
+                containerClass="carousel-container carousel-default-modules"
                 deviceType={this.props.deviceType}
                 itemClass="carousel-item-padding-40-px carousel-item"
                 >
                     {this.state.defaultModulesList.map(item => (
-                        <div key={item.id} style={{background: 'white', padding: '1em 0', boxSizing: 'border-box' }}>
+                        <div key={item.id} style={{ padding: '1em 0', boxSizing: 'border-box' }}>
                             {this.viewModuleInCarousel(item)}
                             
                         </div>
                     ))}
             </Carousel>
+            </div>
+
             <p></p>
             
             </React.Fragment>

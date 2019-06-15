@@ -121,6 +121,9 @@ class CreateLineForm extends Component {
             stagesByVegetable = (
                 <React.Fragment>
                     Dostępne etapy:
+                    <br></br>
+                    <p></p>
+                    <label className="warning-comment">*Kolejność dodawania ma znaczenie</label>
                     <Select
                         closeMenuOnSelect={false}
                         components={makeAnimated()}
@@ -131,8 +134,6 @@ class CreateLineForm extends Component {
                         placeholder = "Wybierz etapy.."
                         maxMenuHeight = {100}
                     />
-                    <br></br>
-                    <label className="warning-comment">*Kolejność dodawania ma znaczenie</label>
                     <p></p>
                 </React.Fragment>
             )
@@ -151,9 +152,8 @@ class CreateLineForm extends Component {
                     required
                 >Nazwa
                 </TextField>
-                
+                <label className="warning-comment">*Wprowadź unikalną nazwę</label>
                 <p></p>
-
                 <Select 
                     closeMenuOnSelect={false}
                     components={makeAnimated()}

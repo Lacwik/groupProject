@@ -214,8 +214,8 @@ class ViewLineContainer extends Component {
             ><AddIcon />
             </Fab>
             <p></p>
+            <div className="carousel-div">
             <h3 className="elements-type">Linie należące do firmy:</h3>
-            <br></br>
             <Carousel 
                 swipeable={false}
                 draggable={false}
@@ -224,7 +224,7 @@ class ViewLineContainer extends Component {
                 slidesToSlide={2}
                 infinite={this.state.linesList.length<3 ? false:true}
                 keyBoardControl={true}
-                containerClass="carousel-container"
+                containerClass="carousel-container carousel-line"
                 deviceType={this.props.deviceType}
                 itemClass="carousel-item-padding-40-px carousel-item"
                 >
@@ -234,9 +234,10 @@ class ViewLineContainer extends Component {
                         </div>
                     ))}
             </Carousel>
+            </div>
             <p></p>
+            <div className="carousel-div">
             <h3 className="elements-type">Linie domyślne:</h3>
-            <br></br>
             <Carousel 
                 swipeable={false}
                 draggable={false}
@@ -245,7 +246,7 @@ class ViewLineContainer extends Component {
                 slidesToSlide={2}
                 infinite={this.state.defaultLinesList.length<3 ? false:true}
                 keyBoardControl={true}
-                containerClass="carousel-container"
+                containerClass="carousel-container carousel-default-line"
                 deviceType={this.props.deviceType}
                 itemClass="carousel-item-padding-40-px carousel-item"
                 >
@@ -255,6 +256,7 @@ class ViewLineContainer extends Component {
                         </div>
                     ))}
             </Carousel>
+            </div>
             <p></p>
             </React.Fragment>
         );

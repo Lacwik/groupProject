@@ -120,6 +120,9 @@ class AddStageForm extends Component {
             modulesByVegetable = (
                 <React.Fragment>
                     Dostępne moduły:
+                    <br></br>
+                    <p></p>
+                    <label className="warning-comment">*Kolejność dodawania ma znaczenie</label>
                     <Select
                         closeMenuOnSelect={false}
                         components={makeAnimated()}
@@ -130,8 +133,6 @@ class AddStageForm extends Component {
                         placeholder = "Wybierz moduły.."
                         maxMenuHeight = {60}
                     />
-                    <br></br>
-                    <label className="warning-comment">*Kolejność dodawania ma znaczenie</label>
                     <p></p>
                 </React.Fragment>
             )
@@ -151,9 +152,8 @@ class AddStageForm extends Component {
                     required
                 >Nazwa
                 </TextField>
-                
+                <label className="warning-comment">*Wprowadź unikalną nazwę</label>
                 <p></p>
-
                 <Select 
                     closeMenuOnSelect={false}
                     components={makeAnimated()}

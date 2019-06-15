@@ -193,8 +193,8 @@ class StatisticContainer extends Component {
 
             return (
                 <ul>
-                    <li><h2>Linia: {line.name}</h2></li>
-                    <li><h2>Warzywo: {vegetable.name}</h2></li>
+                    <li><h2>Linia: <label  style={{ textTransform: 'uppercase'}}>{line.name}</label></h2></li>
+                    <li><h2>Warzywo:  <label  style={{ textTransform: 'uppercase'}}>{vegetable.name}</label></h2></li>
                     <li><h2>Ślad węglowy: {carbonPrint}</h2></li>
                     <li><h2>Surowiec: {materialWeight}kg</h2></li>
                     <li><h2>Produkt: {productWeight}kg</h2></li>
@@ -211,7 +211,7 @@ class StatisticContainer extends Component {
     render() {
         return (
             <div className="wrapper-content">
-                <div className="header-icon"><BarChart style={{ color: '#ffcc66', fontSize: "55px" }} fontSize="large" /></div>
+                <div className="header-icon"><BarChart style={{ color: '#f4428f', fontSize: "55px" }} fontSize="large" /></div>
                 <div className="header"> Statystyki </div>
                 {this.renderStatistic()}
             </div>
