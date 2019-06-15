@@ -25,3 +25,9 @@
     padding:0;
     text-align: center;
 }
+
+.MuiCard-root-98 {
+    overflow: hidden;
+    margin-right: 25px;
+    margin-top: 25px;
+}

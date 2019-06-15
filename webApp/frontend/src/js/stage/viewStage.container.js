@@ -235,17 +235,17 @@ class ViewStageContainer extends Component {
             ><AddIcon />
             </Fab>
             <p></p>
+            <div className="carousel-div">
             <h3 className="elements-type"> Etapy należące do firmy:</h3>
-            <br></br>
             <Carousel 
                 swipeable={false}
                 draggable={false}
                 responsive={responsive}
                 ssr={true}
                 slidesToSlide={2}
-                infinite={this.state.stageList.length<3 ? false:true}
+                infinite={this.state.stageList.length < 3 ? false:true}
                 keyBoardControl={true}
-                containerClass="carousel-container"
+                containerClass="carousel-container carousel-stage"
                 deviceType={this.props.deviceType}
                 itemClass="carousel-item-padding-40-px carousel-item"
                 >
@@ -255,9 +255,10 @@ class ViewStageContainer extends Component {
                         </div>
                     ))}
             </Carousel>
+            </div>
             <p></p>
+            <div className="carousel-div">
              <h3 className="elements-type">Etapy domyślne:</h3>
-            <br></br>
             <Carousel 
                 swipeable={false}
                 draggable={false}
@@ -266,7 +267,7 @@ class ViewStageContainer extends Component {
                 slidesToSlide={2}
                 infinite={this.state.defaultStageList.length<3 ? false:true}
                 keyBoardControl={true}
-                containerClass="carousel-container"
+                containerClass="carousel-container carousel-default-stage"
                 deviceType={this.props.deviceType}
                 itemClass="carousel-item-padding-40-px carousel-item"
                 >
@@ -276,6 +277,7 @@ class ViewStageContainer extends Component {
                         </div>
                     ))}
             </Carousel>
+            </div>
             <p></p>
 
 

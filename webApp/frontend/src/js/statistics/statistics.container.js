@@ -7,7 +7,9 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import { setStatistics } from '../redux/app.service';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+
 import { Button } from '@material-ui/core';
+import { LinearScale } from '@material-ui/icons';
 
 class StatisticsContainer extends Component {
     constructor() {
@@ -95,7 +97,7 @@ class StatisticsContainer extends Component {
 
     renderOpenStatisticButton(cell, row) {
         console.log({ row });
-        return row.id !== 'Suma' ? <button onClick={() => this.props.history.push(`/statistic/${row.statisticId}`)}>Szczegóły</button> : '';
+        return row.id !== 'Suma' ? <button style={{color:'#ff8866', cursor:'pointer', fontWeight:'600'}}onClick={() => this.props.history.push(`/statistic/${row.statisticId}`)}>Szczegóły</button> : '';
     }
 
     
@@ -134,7 +136,7 @@ class StatisticsContainer extends Component {
           }, {
             dataField: 'vegetable',
             align: 'center',
-            text: 'Warzywo'
+            text: 'Warzywo',
           }, {
             text: 'Produkt [kg]',
             align: 'center',
@@ -161,11 +163,13 @@ class StatisticsContainer extends Component {
           
 
         return (
-            <div>
-                Statystyki dla linii: {statistics[0].line.name}
-                
-
-                <BootstrapTable keyField='id' data={ prepareDatesForLines } columns={ columns } />
+            <div className="stats-div">
+                <div className="stats-header-icon"><LinearScale  style={{ color: '#aaddbb', fontSize:"55px", float:"right"}} fontSize="large" /></div>
+                <div className="stats-header">Statystyki dla linii:  <label style={{ textTransform: 'uppercase'}}> {statistics[0].line.name} </label></div>
+                <BootstrapTable 
+                striped
+                hover
+                keyField='id' className="stats-table table-striped" data={ prepareDatesForLines } columns={ columns } />
 
             </div>
         );
@@ -180,7 +184,7 @@ class StatisticsContainer extends Component {
     render() {
         return (
             <div className="wrapper-content">
-                <div className="header-icon"><BarChart style={{ color: '#ffcc66', fontSize: "55px" }} fontSize="large" /></div>
+                <div className="header-icon"><BarChart style={{ color: '#f4428f', fontSize: "55px" }} fontSize="large" /></div>
                 <div className="header"> Statystyki </div>
                 <ul>
                     {this.renderStatistics()}

@@ -102,12 +102,15 @@ class AddModuleForm extends Component {
                     required
                 >Nazwa
                 </TextField>
+                <label className="warning-comment">*Wprowadź unikalną nazwę</label>
+                <p></p>
                 <TextField
                     label="Moc"
                     value={power}
                     onChange={this.onChangePower}
                     type="text"
                     fullWidth
+                    // placeholder="0"
                 >Moc
                 </TextField>
                 <p></p>

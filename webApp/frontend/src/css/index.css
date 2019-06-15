@@ -12,6 +12,7 @@ nnpm startbody {
 body {
   color: #393939;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  background: #F7F7F8;
 }
 
 code {
@@ -122,7 +123,31 @@ padding-top: 25px;
 }
 .carousel-container {
   margin-top: 30px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  background: #ffffff;
 }
+.carousel-container.carousel-modules {
+  border-bottom: solid 2px #9988ff;
+}
+.carousel-container.carousel-stage {
+  border-bottom: solid 2px #66aaee;
+}
+.carousel-container.carousel-line {
+  border-bottom: solid 2px #aaddbb;
+}
+.carousel-container.carousel-default-modules,
+.carousel-container.carousel-default-stage,
+.carousel-container.carousel-default-line {
+  border-bottom: solid 2px #ff55bb;
+}
+.carousel-div {
+  background: #F7F7F8;
+  padding: 30px 15px 15px 15px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
 .carousel-container .carousel-item h1{
   font-size: 12px !important;
   text-align: center;
@@ -146,4 +171,48 @@ padding-top: 25px;
 }
 #dialog-delete {
   text-align: center;
+}
+
+.stats-div {
+  background: #F7F7F8;
+  margin-bottom: 30px;
+  padding: 15px;
+  border-radius: 10px;
+
+}
+
+.react-bootstrap-table {
+  background: #ffffff;
+  padding: 15px;
+  border-radius: 10px;
+ 
+}
+.stats-header {
+  font-size: 18.5px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.stats-header-icon {
+  margin-bottom: 50px;
+}
+
+td,
+th {
+  padding: 10px 15px 10px 15px;
+}
+
+th {
+  background: #ddffee;
+}
+
+/* tr {
+  background: #ddffee;
+} */
+tr:nth-child(even) {
+  background-color: #ddffee;
+}
+
+.last-row {
+  font-weight: 600;
 }
