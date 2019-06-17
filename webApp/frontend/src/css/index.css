@@ -216,3 +216,27 @@ tr:nth-child(even) {
 .last-row {
   font-weight: 600;
 }
+
+.MuiInputBase-input-55{
+  margin-top: 15px !important;
+  font-weight: 500 !important;
+}
+.stat-stage-header {
+  font-weight: 600;
+  margin-right: 10px;
+  line-height: 20px;
+
+}
+.MuiInputLabel-formControl-19 {
+  top: 5px !important;
+}
+.stage-name {
+  text-transform: uppercase;
+}
+.stage-header {
+  font-size: 20px;
+  font-weight: 600;
+}
+.stage-desc li{
+  margin: 5px 0px;
+}

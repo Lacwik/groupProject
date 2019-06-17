@@ -100,7 +100,8 @@ class StatisticContainer extends Component {
     renderLeftovers(leftovers) {
         return (
             <React.Fragment>
-                Odpady:
+
+                <label className="stat-stage-header">Odpady: </label>
                 {
                     leftovers.map(leftover => {
                         return (
@@ -163,12 +164,12 @@ class StatisticContainer extends Component {
             return (
                 <div key={stage.id} className="form-stage " style={{ display: 'flex' }}>
                     <div>
-                        <h2>Etap: {stage.name} </h2>
+                        <h2>Etap: <label className="stage-name">{stage.name}</label> </h2>
                         <div>
                             <ul key={stage.id} >
-                                <li>Ślad węglowy: {carbonPrint}</li>
-                                <li>Czas działania etapu: {result}h</li>
-                                <li>Zasoby: {this.renderResources(stageResources)}</li>
+                                <li><label className="stat-stage-header">Ślad węglowy: </label>{carbonPrint}</li>
+                                <li><label className="stat-stage-header">Czas działania etapu:</label> {result}h</li>
+                                <li><label className="stat-stage-header">Zasoby:</label> {this.renderResources(stageResources)}</li>
                                 <li>{stageLeftovers.length !== 0 ? this.renderLeftovers(stageLeftovers) : ''}</li>
                             </ul>
                         </div>
@@ -192,13 +193,13 @@ class StatisticContainer extends Component {
             const { line, vegetable, statisticsStages, productWeight, materialWeight, carbonPrint } = statistic;
 
             return (
-                <ul>
-                    <li><h2>Linia: <label  style={{ textTransform: 'uppercase'}}>{line.name}</label></h2></li>
-                    <li><h2>Warzywo:  <label  style={{ textTransform: 'uppercase'}}>{vegetable.name}</label></h2></li>
-                    <li><h2>Ślad węglowy: {carbonPrint}</h2></li>
-                    <li><h2>Surowiec: {materialWeight}kg</h2></li>
-                    <li><h2>Produkt: {productWeight}kg</h2></li>
-                    <li><h2>Suma odpadów: {this.sumLeftovers(statisticsStages)}kg</h2></li>
+                <ul className="stage-desc">
+                    <li><label className="stage-header">Linia: <label  style={{ textTransform: 'uppercase', padding:'0px 15px'}}>{line.name}</label></label></li>
+                    <li><label className="stage-header">Warzywo:  <label  style={{ textTransform: 'uppercase', padding:'0px 15px'}}>{vegetable.name}</label></label></li>
+                    <li><label className="stage-header">Ślad węglowy: <label  style={{ padding:'0px 15px'}}>{carbonPrint}</label></label></li>
+                    <li><label className="stage-header">Surowiec: <label  style={{ padding:'0px 15px'}}>{materialWeight} kg</label></label></li>
+                    <li><label className="stage-header">Produkt: <label  style={{ padding:'0px 15px'}}> {productWeight} kg</label></label></li>
+                    <li><label className="stage-header">Suma odpadów: <label  style={{ padding:'0px 15px'}}>{this.sumLeftovers(statisticsStages)} kg</label></label></li>
                     <li className="resource-mini-stage" style={{ width: '100%' }}>{this.renderStatisticStage(statisticsStages)}</li>
                 </ul>
             )
