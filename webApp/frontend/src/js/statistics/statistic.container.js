@@ -174,7 +174,7 @@ class StatisticContainer extends Component {
                             </ul>
                         </div>
                     </div>
-                    <div>{this.renderChart(statisticsStageModules, time, stageResources.find(({ resource }) => resource.gus === "024"))}</div>
+                    <div className="chart">{this.renderChart(statisticsStageModules, time, stageResources.find(({ resource }) => resource.gus === "024"))}</div>
 
                 </div>
             )
