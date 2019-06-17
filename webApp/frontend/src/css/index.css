@@ -240,3 +240,8 @@ tr:nth-child(even) {
 .stage-desc li{
   margin: 5px 0px;
 }
+
+.chart {
+  margin-top: 55px;
+  color: #eeaacc;
+}
