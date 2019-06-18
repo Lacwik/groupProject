@@ -7,6 +7,7 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import { setStatistics } from '../redux/app.service';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import { LinearScale } from '@material-ui/icons';
+import { endpoint } from '../constants/configuration.constants'
 
 class StatisticsContainer extends Component {
     constructor() {
@@ -18,12 +19,10 @@ class StatisticsContainer extends Component {
         };
     }
 
-    // endpoint = `http://172.30.149.96:8090`
-    endpoint = `http://localhost:8090`
 
     componentDidMount() {
         if (this.props.companyIdWorkingFor && !this.state.alreadyFetch) {
-            fetch(`${this.endpoint}/company/${this.props.companyIdWorkingFor}/statistics`, {
+            fetch(`${endpoint}/company/${this.props.companyIdWorkingFor}/statistics`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -57,7 +56,7 @@ class StatisticsContainer extends Component {
 
     componentDidUpdate() {
         if (this.props.companyIdWorkingFor && !this.state.alreadyFetch) {
-            fetch(`${this.endpoint}/company/${this.props.companyIdWorkingFor}/statistics`, {
+            fetch(`${endpoint}/company/${this.props.companyIdWorkingFor}/statistics`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

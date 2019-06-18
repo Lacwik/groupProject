@@ -1,12 +1,10 @@
 import { handleError } from './handleErrors.service';
+import { endpoint } from '../constants/configuration.constants'
 
 export default class CompanyRepository {
     constructor(store) {
         this.store = store;
     }
-
-    // endpoint = 'http://172.30.149.96:8090'
-    endpoint = `http://localhost:8090`
 
 
     getHeaders = () => {
@@ -17,7 +15,7 @@ export default class CompanyRepository {
     }
 
     addUserToCompany = (userId, role) => {
-        return fetch(`${this.endpoint}/company/${this.store.getState().companyWorkingFor.id}`, {
+        return fetch(`${endpoint}/company/${this.store.getState().companyWorkingFor.id}`, {
             method: 'POST',
             headers: this.getHeaders(),
             body: JSON.stringify({ userId, companyRole: role.toUpperCase() }),
@@ -27,7 +25,7 @@ export default class CompanyRepository {
     }
 
     createMemberToCompany = user => {
-        return fetch(`${this.endpoint}/user/member`, {
+        return fetch(`${endpoint}/user/member`, {
             method: 'POST',
             headers: this.getHeaders(),
             body: JSON.stringify({

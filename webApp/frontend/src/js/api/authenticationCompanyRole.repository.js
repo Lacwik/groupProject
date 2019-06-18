@@ -1,12 +1,10 @@
 import { handleError } from './handleErrors.service';
+import { endpoint } from '../constants/configuration.constants'
 
 export default class AuthenticationCompanyRoleRepository {
     constructor(store) {
         this.store = store;
     }
-
-    // endpoint = 'http://172.30.149.96:8090'
-    endpoint = `http://localhost:8090`
 
     getHeaders = () => {
         return {
@@ -16,7 +14,7 @@ export default class AuthenticationCompanyRoleRepository {
     }
 
     getAllCompanyRoles = company => {
-        return fetch(`${this.endpoint}/company-auth/`, {
+        return fetch(`${endpoint}/company-auth/`, {
             method: 'GET',
             headers: this.getHeaders(),
             body: JSON.stringify(company),
@@ -30,7 +28,7 @@ export default class AuthenticationCompanyRoleRepository {
     }
 
     loginUserAsCompanyRole = (companyId, role) => {
-        return fetch(`${this.endpoint}/company-auth/${companyId}?role=${role}`, {
+        return fetch(`${endpoint}/company-auth/${companyId}?role=${role}`, {
             method: 'PUT',
             headers: this.getHeaders(),
         })

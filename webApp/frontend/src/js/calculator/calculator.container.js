@@ -6,6 +6,7 @@ import { lineRepository } from '../factory/lineRepository.factory';
 import '../../css/calculator.css';
 import { handleError } from '../api/handleErrors.service';
 import { Exposure } from '@material-ui/icons';
+import { endpoint } from '../constants/configuration.constants'
 
 class CalculatorContainer extends Component {
     constructor(props) {
@@ -16,8 +17,6 @@ class CalculatorContainer extends Component {
         };
     }
 
-    // endpoint = 'http://172.30.149.96:8090'
-    endpoint = `http://localhost:8090`
    
     componentDidMount() {
         Promise.all([lineRepository.getCompanyLines(), lineRepository.getDefaultLines()])
@@ -50,7 +49,7 @@ class CalculatorContainer extends Component {
             ],
         }
 
-        return fetch(`${this.endpoint}/calculator`, {
+        return fetch(`${endpoint}/calculator`, {
             method: 'POST',
             body: JSON.stringify(m2),
             headers: this.getHeaders(),

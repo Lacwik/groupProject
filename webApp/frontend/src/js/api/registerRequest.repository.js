@@ -1,12 +1,10 @@
 import { handleError } from './handleErrors.service';
+import { endpoint } from '../constants/configuration.constants'
 
 export default class RegisterRequestRepository {
     constructor(store) {
         this.store = store;
     }
-
-    // endpoint = 'http://172.30.149.96:8090'
-    endpoint = `http://localhost:8090`
 
     getHeaders = () => {
         return {
@@ -17,7 +15,7 @@ export default class RegisterRequestRepository {
 
 
     getUserRegisterRequests = () => {
-        return fetch(`${this.endpoint}/request/user`, {
+        return fetch(`${endpoint}/request/user`, {
             method: 'GET',
             headers: this.getHeaders(),
         })
@@ -27,7 +25,7 @@ export default class RegisterRequestRepository {
     }
 
     getCompanyRegisterRequests = () => {
-        return fetch(`${this.endpoint}/request/company`, {
+        return fetch(`${endpoint}/request/company`, {
             method: 'GET',
             headers: this.getHeaders(),
         })
@@ -37,7 +35,7 @@ export default class RegisterRequestRepository {
     }
 
     activeUserRegisterRequest = id => {
-        return fetch(`${this.endpoint}/request/user/${id}`, {
+        return fetch(`${endpoint}/request/user/${id}`, {
             method: 'PUT',
             headers: this.getHeaders(),
         })
@@ -46,7 +44,7 @@ export default class RegisterRequestRepository {
     }
 
     activeCompanyRegisterRequest = id => {
-        return fetch(`${this.endpoint}/request/company/${id}`, {
+        return fetch(`${endpoint}/request/company/${id}`, {
             method: 'PUT',
             headers: this.getHeaders(),
         })

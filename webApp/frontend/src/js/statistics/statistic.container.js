@@ -5,6 +5,7 @@ import { BarChart } from '@material-ui/icons';
 import { handleError } from '../api/handleErrors.service';
 import { TextField } from '@material-ui/core';
 import PieChart from 'react-minimal-pie-chart';
+import { endpoint } from '../constants/configuration.constants'
 
 
 class StatisticContainer extends Component {
@@ -24,12 +25,10 @@ class StatisticContainer extends Component {
         }
     }
 
-    // endpoint = `http://172.30.149.96:8090`
-    endpoint = `http://localhost:8090`
 
     componentDidUpdate() {
         if (this.props.companyIdWorkingFor && !this.state.alreadyFetch) {
-            fetch(`${this.endpoint}/company/${this.props.companyIdWorkingFor}/statistics`, {
+            fetch(`${endpoint}/company/${this.props.companyIdWorkingFor}/statistics`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -56,7 +55,7 @@ class StatisticContainer extends Component {
 
     componentDidMount() {
         if (this.props.companyIdWorkingFor && !this.state.alreadyFetch) {
-            fetch(`${this.endpoint}/company/${this.props.companyIdWorkingFor}/statistics`, {
+            fetch(`${endpoint}/company/${this.props.companyIdWorkingFor}/statistics`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

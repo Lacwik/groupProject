@@ -1,13 +1,10 @@
 import { handleError } from './handleErrors.service';
+import { endpoint } from '../constants/configuration.constants'
 
 export default class LineRepository {
     constructor(store) {
         this.store = store;
     }
-
-    // endpoint = 'http://172.30.149.96:8090'
-    endpoint = `http://localhost:8090`
-
 
     getHeaders = () => {
         return {
@@ -17,7 +14,7 @@ export default class LineRepository {
     }
 
     createLine = line => {
-        return fetch(`${this.endpoint}/line`, {
+        return fetch(`${endpoint}/line`, {
             method: 'POST',
             headers: this.getHeaders(),
             body: JSON.stringify(line),
@@ -30,7 +27,7 @@ export default class LineRepository {
     }
 
     editLine = line => {
-        return fetch(`${this.endpoint}/line/${line.id}`, {
+        return fetch(`${endpoint}/line/${line.id}`, {
             method: 'PUT',
             headers: this.getHeaders(),
             body: JSON.stringify(line),
@@ -43,7 +40,7 @@ export default class LineRepository {
     }
 
     deleteLine = (id = '') => {
-        return fetch(`${this.endpoint}/line/${id}`, {
+        return fetch(`${endpoint}/line/${id}`, {
             method: 'DELETE',
             headers: this.getHeaders(),
         })
@@ -53,7 +50,7 @@ export default class LineRepository {
     }
 
     getLineById = (id = '') => {
-        return fetch(`${this.endpoint}/line/${id}`, {
+        return fetch(`${endpoint}/line/${id}`, {
             method: 'GET',
             headers: this.getHeaders(),
         })
@@ -63,7 +60,7 @@ export default class LineRepository {
     }
 
     getCompanyLines = () => {
-        return fetch(`${this.endpoint}/line/company`, {
+        return fetch(`${endpoint}/line/company`, {
             method: 'GET',
             headers: this.getHeaders(),
         })
@@ -73,7 +70,7 @@ export default class LineRepository {
     }
 
     getLineVegetables = lineId => {
-        return fetch(`${this.endpoint}/line/vegetables/${lineId}`, {
+        return fetch(`${endpoint}/line/vegetables/${lineId}`, {
                 method: 'GET',
                 headers: this.getHeaders(),
             })
@@ -83,7 +80,7 @@ export default class LineRepository {
     }
             
     getDefaultLines = () => {
-        return fetch(`${this.endpoint}/line/default`, {
+        return fetch(`${endpoint}/line/default`, {
             method: 'GET',
             headers: this.getHeaders(),
         })
@@ -93,7 +90,7 @@ export default class LineRepository {
     }
 
     getLineStages = (id = '') => {
-        return fetch(`${this.endpoint}/line/stages/${id}`, {
+        return fetch(`${endpoint}/line/stages/${id}`, {
             method: 'GET',
             headers: this.getHeaders(),
         })
@@ -103,7 +100,7 @@ export default class LineRepository {
     }
 
     getLineModules = (id = '') => {
-        return fetch(`${this.endpoint}/line/modules/${id}`, {
+        return fetch(`${endpoint}/line/modules/${id}`, {
             method: 'GET',
             headers: this.getHeaders(),
         })
@@ -115,7 +112,7 @@ export default class LineRepository {
     
     
     getResourcesForLine = lineId => {
-        return fetch(`${this.endpoint}/line/resources/${lineId}`, {
+        return fetch(`${endpoint}/line/resources/${lineId}`, {
             method: 'GET',
             headers: this.getHeaders(),
         })

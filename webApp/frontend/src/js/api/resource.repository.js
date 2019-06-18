@@ -1,12 +1,10 @@
 import { handleError } from './handleErrors.service';
+import { endpoint } from '../constants/configuration.constants'
 
 export default class ResourcesRepository {
     constructor(store) {
         this.store = store;
     }
-
-    // endpoint = 'http://172.30.149.96:8090'
-    endpoint = `http://localhost:8090`
 
 
     getHeaders = () => {
@@ -17,7 +15,7 @@ export default class ResourcesRepository {
     }
 
     getAllResources = () => {
-        return fetch(`${this.endpoint}/resource/all`, {
+        return fetch(`${endpoint}/resource/all`, {
             method: 'GET',
             headers: this.getHeaders(),
         })
@@ -27,7 +25,7 @@ export default class ResourcesRepository {
     }
 
     getResourceById = (id = '') => {
-        return fetch(`${this.endpoint}/resource/${id}`, {
+        return fetch(`${endpoint}/resource/${id}`, {
             method: 'GET',
             headers: this.getHeaders(),
         })

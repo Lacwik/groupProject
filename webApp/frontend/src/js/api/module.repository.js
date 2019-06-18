@@ -1,12 +1,10 @@
 import { handleError } from './handleErrors.service';
+import { endpoint } from '../constants/configuration.constants'
 
 export default class ModuleRepository {
     constructor(store) {
         this.store = store;
     }
-
-    // endpoint = 'http://172.30.149.96:8090'
-    endpoint = `http://localhost:8090`
 
 
     getHeaders = () => {
@@ -17,7 +15,7 @@ export default class ModuleRepository {
     }
 
     createModule = module => {
-        return fetch(`${this.endpoint}/module`, {
+        return fetch(`${endpoint}/module`, {
             method: 'POST',
             headers: this.getHeaders(),
             body: JSON.stringify(module),
@@ -30,7 +28,7 @@ export default class ModuleRepository {
     }
 
     editModule = module => {
-        return fetch(`${this.endpoint}/module/${module.id}`, {
+        return fetch(`${endpoint}/module/${module.id}`, {
             method: 'PUT',
             headers: this.getHeaders(),
             body: JSON.stringify(module),
@@ -43,7 +41,7 @@ export default class ModuleRepository {
     }
 
     deleteModule = (id = '') => {
-        return fetch(`${this.endpoint}/module/${id}`, {
+        return fetch(`${endpoint}/module/${id}`, {
             method: 'DELETE',
             headers: this.getHeaders(),
         })
@@ -53,7 +51,7 @@ export default class ModuleRepository {
     }
 
     getModuleById = (id = '') => {
-        return fetch(`${this.endpoint}/module/${id}`, {
+        return fetch(`${endpoint}/module/${id}`, {
             method: 'GET',
             headers: this.getHeaders(),
         })
@@ -63,7 +61,7 @@ export default class ModuleRepository {
     }
 
     getCompanyModules = () => {
-        return fetch(`${this.endpoint}/module/company`, {
+        return fetch(`${endpoint}/module/company`, {
             method: 'GET',
             headers: this.getHeaders(),
         })
@@ -73,7 +71,7 @@ export default class ModuleRepository {
     }
 
     getDefaultModules = () => {
-        return fetch(`${this.endpoint}/module/default`, {
+        return fetch(`${endpoint}/module/default`, {
             method: 'GET',
             headers: this.getHeaders(),
         })

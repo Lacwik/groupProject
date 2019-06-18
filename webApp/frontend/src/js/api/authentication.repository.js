@@ -1,13 +1,10 @@
 import { handleError } from './handleErrors.service';
+import { endpoint } from '../constants/configuration.constants'
 
 export default class AuthenticationRepository {
     constructor(store) {
         this.store = store;
     }
-
-
-    // endpoint = `http://172.30.149.96:8090`
-    endpoint = `http://localhost:8090`
 
     getHeaders = () => {
         return {
@@ -16,7 +13,7 @@ export default class AuthenticationRepository {
     }
 
     loginUser = (email, password) => {
-        return fetch(`${this.endpoint}/auth/login`, {
+        return fetch(`${endpoint}/auth/login`, {
             method: 'POST',
             headers: this.getHeaders(),
             body: JSON.stringify({
@@ -32,7 +29,7 @@ export default class AuthenticationRepository {
     }
 
     registerUser = user => {
-        return fetch(`${this.endpoint}/auth/register/user`, {
+        return fetch(`${endpoint}/auth/register/user`, {
             method: 'POST',
             headers: this.getHeaders(),
             body: JSON.stringify(user),

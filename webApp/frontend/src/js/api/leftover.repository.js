@@ -1,13 +1,10 @@
 import { handleError } from './handleErrors.service';
+import { endpoint } from '../constants/configuration.constants'
 
 export default class LeftoversRepository {
     constructor(store) {
         this.store = store;
     }
-
-    // endpoint = 'http://172.30.149.96:8090'
-    endpoint = `http://localhost:8090`
-
 
     getHeaders = () => {
         return {
@@ -17,7 +14,7 @@ export default class LeftoversRepository {
     }
 
     getAllLeftovers = () => {
-        return fetch(`${this.endpoint}/leftover/all`, {
+        return fetch(`${endpoint}/leftover/all`, {
             method: 'GET',
             headers: this.getHeaders(),
         })
@@ -27,7 +24,7 @@ export default class LeftoversRepository {
     }
 
     getLeftoverById = (id = '') => {
-        return fetch(`${this.endpoint}/leftover/${id}`, {
+        return fetch(`${endpoint}/leftover/${id}`, {
             method: 'GET',
             headers: this.getHeaders(),
         })
