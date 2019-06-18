@@ -5,6 +5,9 @@ export default class StageRepository {
         this.store = store;
     }
 
+    // endpoint = 'http://172.30.149.96:8090'
+    endpoint = `http://localhost:8090`
+
 
     getHeaders = () => {
         return {
@@ -14,7 +17,7 @@ export default class StageRepository {
     }
 
     createStage = stage => {
-        return fetch(`http://localhost:8090/stage`, {
+        return fetch(`${this.endpoint}/stage`, {
             method: 'POST',
             headers: this.getHeaders(),
             body: JSON.stringify(stage),
@@ -27,7 +30,7 @@ export default class StageRepository {
     }
 
     editStage = stage => {
-        return fetch(`http://localhost:8090/stage/${stage.id}`, {
+        return fetch(`${this.endpoint}/stage/${stage.id}`, {
             method: 'PUT',
             headers: this.getHeaders(),
             body: JSON.stringify(stage),
@@ -40,7 +43,7 @@ export default class StageRepository {
     }
 
     deleteStage = (id = '') => {
-        return fetch(`http://localhost:8090/stage/${id}`, {
+        return fetch(`${this.endpoint}/stage/${id}`, {
             method: 'DELETE',
             headers: this.getHeaders(),
             body: JSON.stringify(),
@@ -51,7 +54,7 @@ export default class StageRepository {
     }
 
     getStageById = (id = '') => {
-        return fetch(`http://localhost:8090/stage/${id}`, {
+        return fetch(`${this.endpoint}/stage/${id}`, {
             method: 'GET',
             headers: this.getHeaders(),
         })
@@ -61,7 +64,7 @@ export default class StageRepository {
     }
 
     getCompanyStages = () => {
-        return fetch(`http://localhost:8090/stage/company`, {
+        return fetch(`${this.endpoint}/stage/company`, {
             method: 'GET',
             headers: this.getHeaders(),
         })
@@ -71,7 +74,7 @@ export default class StageRepository {
     }
 
     getDefaultStages = () => {
-        return fetch(`http://localhost:8090/stage/default`, {
+        return fetch(`${this.endpoint}/stage/default`, {
             method: 'GET',
             headers: this.getHeaders(),
         })
@@ -82,7 +85,7 @@ export default class StageRepository {
 
     
     getLeftoversForStage = stageId => {
-        return fetch(`http://localhost:8090/stage/leftovers/${stageId}`, {
+        return fetch(`${this.endpoint}/stage/leftovers/${stageId}`, {
             method: 'GET',
             headers: this.getHeaders(),
         })
@@ -93,7 +96,7 @@ export default class StageRepository {
 
     
     getResourcesForStage = stageId => {
-        return fetch(`http://localhost:8090/stage/resources/${stageId}`, {
+        return fetch(`${this.endpoint}/stage/resources/${stageId}`, {
             method: 'GET',
             headers: this.getHeaders(),
         })
@@ -104,7 +107,7 @@ export default class StageRepository {
 
 
     getStageVegetables = stageId => {
-        return fetch(`http://localhost:8090/stage/vegetables/${stageId}`, {
+        return fetch(`${this.endpoint}/stage/vegetables/${stageId}`, {
             method: 'GET',
             headers: this.getHeaders(),
         })
@@ -115,7 +118,7 @@ export default class StageRepository {
 
 
     getModulesByVegetableList = vegetablesList => {
-        return fetch(`http://localhost:8090/module/vegetables/modules`, {
+        return fetch(`${this.endpoint}/module/vegetables/modules`, {
             method: 'POST',
             headers: this.getHeaders(),
             body: JSON.stringify(vegetablesList),
@@ -129,7 +132,7 @@ export default class StageRepository {
     }
 
     getStagesByVegetableList = vegetablesList => {
-        return fetch(`http://localhost:8090/stage/vegetables/stages`, {
+        return fetch(`${this.endpoint}/stage/vegetables/stages`, {
             method: 'POST',
             headers: this.getHeaders(),
             body: JSON.stringify(vegetablesList),

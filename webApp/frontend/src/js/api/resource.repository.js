@@ -5,6 +5,9 @@ export default class ResourcesRepository {
         this.store = store;
     }
 
+    // endpoint = 'http://172.30.149.96:8090'
+    endpoint = `http://localhost:8090`
+
 
     getHeaders = () => {
         return {
@@ -14,7 +17,7 @@ export default class ResourcesRepository {
     }
 
     getAllResources = () => {
-        return fetch(`http://localhost:8090/resource/all`, {
+        return fetch(`${this.endpoint}/resource/all`, {
             method: 'GET',
             headers: this.getHeaders(),
         })
@@ -24,7 +27,7 @@ export default class ResourcesRepository {
     }
 
     getResourceById = (id = '') => {
-        return fetch(`http://localhost:8090/resource/${id}`, {
+        return fetch(`${this.endpoint}/resource/${id}`, {
             method: 'GET',
             headers: this.getHeaders(),
         })

@@ -5,6 +5,9 @@ export default class ModuleRepository {
         this.store = store;
     }
 
+    // endpoint = 'http://172.30.149.96:8090'
+    endpoint = `http://localhost:8090`
+
 
     getHeaders = () => {
         return {
@@ -14,7 +17,7 @@ export default class ModuleRepository {
     }
 
     createModule = module => {
-        return fetch(`http://localhost:8090/module`, {
+        return fetch(`${this.endpoint}/module`, {
             method: 'POST',
             headers: this.getHeaders(),
             body: JSON.stringify(module),
@@ -27,7 +30,7 @@ export default class ModuleRepository {
     }
 
     editModule = module => {
-        return fetch(`http://localhost:8090/module/${module.id}`, {
+        return fetch(`${this.endpoint}/module/${module.id}`, {
             method: 'PUT',
             headers: this.getHeaders(),
             body: JSON.stringify(module),
@@ -40,7 +43,7 @@ export default class ModuleRepository {
     }
 
     deleteModule = (id = '') => {
-        return fetch(`http://localhost:8090/module/${id}`, {
+        return fetch(`${this.endpoint}/module/${id}`, {
             method: 'DELETE',
             headers: this.getHeaders(),
         })
@@ -50,7 +53,7 @@ export default class ModuleRepository {
     }
 
     getModuleById = (id = '') => {
-        return fetch(`http://localhost:8090/module/${id}`, {
+        return fetch(`${this.endpoint}/module/${id}`, {
             method: 'GET',
             headers: this.getHeaders(),
         })
@@ -60,7 +63,7 @@ export default class ModuleRepository {
     }
 
     getCompanyModules = () => {
-        return fetch(`http://localhost:8090/module/company`, {
+        return fetch(`${this.endpoint}/module/company`, {
             method: 'GET',
             headers: this.getHeaders(),
         })
@@ -70,7 +73,7 @@ export default class ModuleRepository {
     }
 
     getDefaultModules = () => {
-        return fetch(`http://localhost:8090/module/default`, {
+        return fetch(`${this.endpoint}/module/default`, {
             method: 'GET',
             headers: this.getHeaders(),
         })

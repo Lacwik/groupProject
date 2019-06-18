@@ -5,6 +5,9 @@ export default class LeftoversRepository {
         this.store = store;
     }
 
+    // endpoint = 'http://172.30.149.96:8090'
+    endpoint = `http://localhost:8090`
+
 
     getHeaders = () => {
         return {
@@ -14,7 +17,7 @@ export default class LeftoversRepository {
     }
 
     getAllLeftovers = () => {
-        return fetch(`http://localhost:8090/leftover/all`, {
+        return fetch(`${this.endpoint}/leftover/all`, {
             method: 'GET',
             headers: this.getHeaders(),
         })
@@ -24,7 +27,7 @@ export default class LeftoversRepository {
     }
 
     getLeftoverById = (id = '') => {
-        return fetch(`http://localhost:8090/leftover/${id}`, {
+        return fetch(`${this.endpoint}/leftover/${id}`, {
             method: 'GET',
             headers: this.getHeaders(),
         })

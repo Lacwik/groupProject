@@ -5,6 +5,9 @@ export default class AuthenticationCompanyRoleRepository {
         this.store = store;
     }
 
+    // endpoint = 'http://172.30.149.96:8090'
+    endpoint = `http://localhost:8090`
+
     getHeaders = () => {
         return {
             'Content-Type': 'application/json',
@@ -13,7 +16,7 @@ export default class AuthenticationCompanyRoleRepository {
     }
 
     getAllCompanyRoles = company => {
-        return fetch('http://localhost:8090/company-auth/', {
+        return fetch(`${this.endpoint}/company-auth/`, {
             method: 'GET',
             headers: this.getHeaders(),
             body: JSON.stringify(company),
@@ -27,7 +30,7 @@ export default class AuthenticationCompanyRoleRepository {
     }
 
     loginUserAsCompanyRole = (companyId, role) => {
-        return fetch(`http://localhost:8090/company-auth/${companyId}?role=${role}`, {
+        return fetch(`${this.endpoint}/company-auth/${companyId}?role=${role}`, {
             method: 'PUT',
             headers: this.getHeaders(),
         })

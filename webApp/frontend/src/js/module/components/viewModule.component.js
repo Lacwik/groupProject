@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes, { any } from 'prop-types';
 import { moduleRepository } from '../../factory/moduleRepository.factory';
 import { connect } from 'react-redux';
-import { Settings } from '@material-ui/icons';
 
 class ViewModule extends Component {
     constructor(props) {

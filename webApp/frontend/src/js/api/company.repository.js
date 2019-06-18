@@ -5,6 +5,9 @@ export default class CompanyRepository {
         this.store = store;
     }
 
+    // endpoint = 'http://172.30.149.96:8090'
+    endpoint = `http://localhost:8090`
+
 
     getHeaders = () => {
         return {
@@ -14,7 +17,7 @@ export default class CompanyRepository {
     }
 
     addUserToCompany = (userId, role) => {
-        return fetch(`http://localhost:8090/company/${this.store.getState().companyWorkingFor.id}`, {
+        return fetch(`${this.endpoint}/company/${this.store.getState().companyWorkingFor.id}`, {
             method: 'POST',
             headers: this.getHeaders(),
             body: JSON.stringify({ userId, companyRole: role.toUpperCase() }),
@@ -24,7 +27,7 @@ export default class CompanyRepository {
     }
 
     createMemberToCompany = user => {
-        return fetch(`http://localhost:8090/user/member`, {
+        return fetch(`${this.endpoint}/user/member`, {
             method: 'POST',
             headers: this.getHeaders(),
             body: JSON.stringify({
