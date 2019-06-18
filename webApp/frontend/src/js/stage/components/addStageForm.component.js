@@ -3,16 +3,11 @@ import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
 import { moduleRepository } from '../../factory/moduleRepository.factory';
 import { vegetableRepository } from '../../factory/vegetable.factory';
 import Select from 'react-select'
 import makeAnimated from 'react-select/lib/animated';
 import { stageRepository } from '../../factory/stageRepository.factory';
-import { Sort } from '@material-ui/icons';
 
 
 class AddStageForm extends Component {

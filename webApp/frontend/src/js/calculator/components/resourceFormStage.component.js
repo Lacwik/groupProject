@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Select from 'react-select';
 import { stageRepository } from '../../factory/stageRepository.factory';
 import { TextField } from '@material-ui/core';
 

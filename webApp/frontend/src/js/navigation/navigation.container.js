@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Home, GroupAdd, AccountBox, ExitToApp, List, Add, Settings, GroupWork, LinearScale, Build, Exposure, BarChart } from '@material-ui/icons';
+import { Home, GroupAdd, AccountBox, ExitToApp, List, Settings, GroupWork, LinearScale, Exposure, BarChart } from '@material-ui/icons';
 import '../../css/navigation.css';
 import { APPLICATION_ROLES } from '../constants/applicationRoles.constants';
-import { COMPANY_ROLES } from '../constants/companyRoles.constants';
 
 class NavigationContainer extends Component {
     renderLinksIfNotLogged() {
@@ -67,10 +66,7 @@ class NavigationContainer extends Component {
         const {
             isUserLogged,
             isWorkingForCompany,
-            companyWorkingFor,
         } = this.props;
-
-        const { role } = companyWorkingFor;
 
         return isUserLogged && isWorkingForCompany;
     }

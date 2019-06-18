@@ -96,7 +96,6 @@ class EditModuleForm extends Component {
         const {
             name, 
             power, 
-            vegetables, 
             resources, 
             leftovers
         } = this.state;
@@ -121,18 +120,6 @@ class EditModuleForm extends Component {
                 >Moc
                 </TextField>
                 <p></p>
-                {/* <Select 
-                    closeMenuOnSelect={false}
-                    components={makeAnimated()}
-                    value={vegetables}
-                    isMulti
-                    isDisabled
-                    options={this.state.allVegetables}
-                    onChange={this.onChangeVegetables}
-                    placeholder="Wybierz warzywa.."
-                    maxMenuHeight = {150}
-                    />
-                <p></p> */}
                 <Select 
                     closeMenuOnSelect={false}
                     components={makeAnimated()}

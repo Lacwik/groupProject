@@ -5,10 +5,7 @@ import { BarChart } from '@material-ui/icons';
 import { handleError } from '../api/handleErrors.service';
 import BootstrapTable from 'react-bootstrap-table-next';
 import { setStatistics } from '../redux/app.service';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
-
-import { Button } from '@material-ui/core';
 import { LinearScale } from '@material-ui/icons';
 
 class StatisticsContainer extends Component {
@@ -21,9 +18,12 @@ class StatisticsContainer extends Component {
         };
     }
 
+    // endpoint = `http://172.30.149.96:8090`
+    endpoint = `http://localhost:8090`
+
     componentDidMount() {
         if (this.props.companyIdWorkingFor && !this.state.alreadyFetch) {
-            fetch(`http://localhost:8090/company/${this.props.companyIdWorkingFor}/statistics`, {
+            fetch(`${this.endpoint}/company/${this.props.companyIdWorkingFor}/statistics`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ class StatisticsContainer extends Component {
 
     componentDidUpdate() {
         if (this.props.companyIdWorkingFor && !this.state.alreadyFetch) {
-            fetch(`http://localhost:8090/company/${this.props.companyIdWorkingFor}/statistics`, {
+            fetch(`${this.endpoint}/company/${this.props.companyIdWorkingFor}/statistics`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

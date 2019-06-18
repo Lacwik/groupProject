@@ -5,6 +5,10 @@ export default class AuthenticationRepository {
         this.store = store;
     }
 
+
+    // endpoint = `http://172.30.149.96:8090`
+    endpoint = `http://localhost:8090`
+
     getHeaders = () => {
         return {
             'Content-Type': 'application/json'
@@ -12,7 +16,7 @@ export default class AuthenticationRepository {
     }
 
     loginUser = (email, password) => {
-        return fetch('http://localhost:8090/auth/login', {
+        return fetch(`${this.endpoint}/auth/login`, {
             method: 'POST',
             headers: this.getHeaders(),
             body: JSON.stringify({
@@ -28,7 +32,7 @@ export default class AuthenticationRepository {
     }
 
     registerUser = user => {
-        return fetch('http://localhost:8090/auth/register/user', {
+        return fetch(`${this.endpoint}/auth/register/user`, {
             method: 'POST',
             headers: this.getHeaders(),
             body: JSON.stringify(user),
@@ -42,7 +46,7 @@ export default class AuthenticationRepository {
     }
 
     registerCompany = company => {
-        return fetch('http://localhost:8090/auth/register/company', {
+        return fetch(`${this.endpoint}/auth/register/company`, {
             method: 'POST',
             headers: this.getHeaders(),
             body: JSON.stringify(company),

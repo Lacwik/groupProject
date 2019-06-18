@@ -5,6 +5,9 @@ export default class UsersRepository {
         this.store = store;
     }
 
+    // endpoint = 'http://172.30.149.96:8090'
+    endpoint = `http://localhost:8090`
+
 
     getHeaders = () => {
         return {
@@ -14,7 +17,7 @@ export default class UsersRepository {
     }
 
     getUsersBy = (searchValue = '') => {
-        return fetch(`http://localhost:8090/user?search=${searchValue}&companyId=${this.store.getState().companyWorkingFor.id}`, {
+        return fetch(`${this.endpoint}/user?search=${searchValue}&companyId=${this.store.getState().companyWorkingFor.id}`, {
             method: 'GET',
             headers: this.getHeaders(),
         })

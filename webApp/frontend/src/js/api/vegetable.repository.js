@@ -5,6 +5,9 @@ export default class VegetablesRepository {
         this.store = store;
     }
 
+    // endpoint = 'http://172.30.149.96:8090'
+    endpoint = `http://localhost:8090`
+
 
     getHeaders = () => {
         return {
@@ -14,7 +17,7 @@ export default class VegetablesRepository {
     }
 
     getAllVegetables = () => {
-        return fetch(`http://localhost:8090/vegetable/all`, {
+        return fetch(`${this.endpoint}/vegetable/all`, {
             method: 'GET',
             headers: this.getHeaders(),
         })
@@ -24,7 +27,7 @@ export default class VegetablesRepository {
     }
 
     getVegetableById = (id = '') => {
-        return fetch(`http://localhost:8090/vegetable/${id}`, {
+        return fetch(`${this.endpoint}/vegetable/${id}`, {
             method: 'GET',
             headers: this.getHeaders(),
         })

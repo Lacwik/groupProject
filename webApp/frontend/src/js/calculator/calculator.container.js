@@ -15,6 +15,9 @@ class CalculatorContainer extends Component {
             lines: [],
         };
     }
+
+    // endpoint = 'http://172.30.149.96:8090'
+    endpoint = `http://localhost:8090`
    
     componentDidMount() {
         Promise.all([lineRepository.getCompanyLines(), lineRepository.getDefaultLines()])
@@ -47,7 +50,7 @@ class CalculatorContainer extends Component {
             ],
         }
 
-        return fetch('http://localhost:8090/calculator', {
+        return fetch(`${this.endpoint}/calculator`, {
             method: 'POST',
             body: JSON.stringify(m2),
             headers: this.getHeaders(),
