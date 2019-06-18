@@ -83,7 +83,7 @@ public class StageService {
     public String deleteStage(CompanyIdentity companyIdentity, Long stageId) {
         Stage stage = getStageEntity(stageId);
 
-        if (stage.getUsed() || stage.getLines().size() != 0) {
+        if (stage.getUsed() || stage.getLines().size() != 0 || stage.getOutsourced()) {
             return "Stage with id " + stageId + " can not be deleted";
         }
 

@@ -41,7 +41,6 @@ public class LineService {
     private final LineAssembler lineAssembler;
     private final StageAssembler stageAssembler;
     private final StageService stageService;
-    private final ModuleAssembler moduleAssembler;
 
     @SecureCompanyScope(role = CompanyRole.MEMBER)
     public LineModel createLine(CompanyIdentity companyIdentity, LineCreateModel lineCreateModel, Company company){
@@ -82,7 +81,7 @@ public class LineService {
     public String deleteLine(CompanyIdentity companyIdentity, Long lineId){
         Line line = getLineEntity(lineId);
 
-        if(line.getUsed()){
+        if(line.getUsed() || line.getOutsourced()){
             return "Line with id " + lineId + " can not be deleted";
         }
 

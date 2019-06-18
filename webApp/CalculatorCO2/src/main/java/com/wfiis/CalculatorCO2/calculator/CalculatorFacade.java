@@ -127,6 +127,14 @@ public class CalculatorFacade {
                 .materialWeight(calendarFormModel.getMaterial().getValue())
                 .build();
 
+        //used flags up
+        lineStatistics.getLine().setUsed(true);
+        for (Stage stage : lineStatistics.getLine().getStages()){
+            stage.setUsed(true);
+            for (Module module : stage.getModules()){
+                module.setUsed(true);
+            }
+        }
 
         return lineStatisticsService.createStatistic(lineStatistics);
     }

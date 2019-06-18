@@ -46,7 +46,7 @@ public class ModuleService {
     public ModuleModel editModule(CompanyIdentity companyIdentity, ModuleCreateModel moduleCreateModel, Long moduleId) {
         Module module = getModuleEntity(moduleId);
 
-        if (module.getUsed()) {
+        if (module.getUsed() || (module.getStages().size() != 0) || module.getOutsourced()) {
             return createModule(companyIdentity, moduleCreateModel, module.getCompany());
         }
 
