@@ -11,6 +11,8 @@ import Alert from 'react-s-alert';
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/slide.css';
 
+// bezcelowy komentarz
+
 ReactDOM.render(
         <Provider store={store}>
             <BrowserRouter>
