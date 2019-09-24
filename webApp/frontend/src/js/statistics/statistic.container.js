@@ -86,12 +86,13 @@ class StatisticContainer extends Component {
             const unit = this.state.units.find(({ id }) => resource.unitId === id);
             console.log('resource: ', { resource });
             return (
-                <div key={resource.id} style={{ marginBottom: '.5em' }}>
+                <div key={resource.id} style={{ marginBottom: '.5em', padding: '.5em' }}>
                     <TextField
                         type="number"
                         required
                         value={resource.value}
                         disabled
+                        style={{ marginBottom: '.5em', padding: '1.1em' }}
                         label={`${resource.gusName} [${unit ? unit.shortcut : 'Nieznana jednostka'}]`}
                     />
                 </div>
@@ -107,12 +108,13 @@ class StatisticContainer extends Component {
                 {
                     leftovers.map(leftover => {
                         return (
-                            <div key={leftover.id} style={{ marginBottom: '.5em' }}>
+                            <div key={leftover.id} style={{ marginBottom: '.5em', padding: '.5em' }}>
                                 <TextField
                                     type="number"
                                     required
                                     value={leftover.value}
                                     disabled
+                                    style={{ marginBottom: '.5em', padding: '1em' }}
                                     label={`${leftover.leftover.name} [kg]`}
                                 />
                             </div>
@@ -182,9 +184,30 @@ class StatisticContainer extends Component {
             )
         });
     }
-    sumLeftovers(statisticsStages) {
+    //odpad
+    sumLeftovers1(statisticsStages) {
         let sum = 0;
-        statisticsStages.forEach(({ stageLeftovers }) => stageLeftovers.forEach(({ value }) => sum += value));
+        statisticsStages.forEach(({ stageLeftovers }) => {
+            stageLeftovers.forEach(({ value, leftover }) => {
+                if (leftover.id === 1){
+                    sum += value
+                }
+            } )
+        });
+
+        return sum;
+    }
+
+    //odrzut
+    sumLeftovers2(statisticsStages) {
+        let sum = 0;
+        statisticsStages.forEach(({ stageLeftovers }) => {
+            stageLeftovers.forEach(({ value, leftover }) => {
+                if (leftover.id === 2){
+                    sum += value
+                }
+            } )
+        });
 
         return sum;
     }
@@ -201,7 +224,8 @@ class StatisticContainer extends Component {
                     <li><label className="stage-header">Ślad węglowy: <label  style={{ padding:'0px 15px'}}>{carbonPrint}</label></label></li>
                     <li><label className="stage-header">Surowiec: <label  style={{ padding:'0px 15px'}}>{materialWeight} kg</label></label></li>
                     <li><label className="stage-header">Produkt: <label  style={{ padding:'0px 15px'}}> {productWeight} kg</label></label></li>
-                    <li><label className="stage-header">Suma odpadów: <label  style={{ padding:'0px 15px'}}>{this.sumLeftovers(statisticsStages)} kg</label></label></li>
+                    <li><label className="stage-header">Suma odpadów: <label  style={{ padding:'0px 15px'}}>{this.sumLeftovers1(statisticsStages)} kg</label></label></li>
+                    <li><label className="stage-header">Suma odrzutu: <label  style={{ padding:'0px 15px'}}>{this.sumLeftovers2(statisticsStages)} kg</label></label></li>
                     <li className="resource-mini-stage" style={{ width: '100%' }}>{this.renderStatisticStage(statisticsStages)}</li>
                 </ul>
             )
