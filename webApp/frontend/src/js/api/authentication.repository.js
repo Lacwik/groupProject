@@ -6,8 +6,8 @@ export default class AuthenticationRepository {
     }
 
 
-    // endpoint = `http://172.30.149.96:8090`
-    endpoint = `http://localhost:8090`
+    endpoint = `http://172.30.149.96:8090`
+    // endpoint = `http://localhost:8090`
 
     getHeaders = () => {
         return {

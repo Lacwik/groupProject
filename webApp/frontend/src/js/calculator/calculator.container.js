@@ -16,8 +16,8 @@ class CalculatorContainer extends Component {
         };
     }
 
-    // endpoint = 'http://172.30.149.96:8090'
-    endpoint = `http://localhost:8090`
+    endpoint = 'http://172.30.149.96:8090'
+    // endpoint = `http://localhost:8090`
    
     componentDidMount() {
         Promise.all([lineRepository.getCompanyLines(), lineRepository.getDefaultLines()])
